@@ -1,0 +1,25 @@
+{
+	"name": "kanna",
+	"version": "1.0.0",
+	"description": "A Discord bot",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "mira",
+	"license": "ISC",
+	"dependencies": {
+		"ascii-table": "^0.0.9",
+		"axios": "^0.27.2",
+		"colors": "^1.4.0",
+		"common-tags": "^1.8.2",
+		"deepmerge": "^4.2.2",
+		"discord.js": "^13.7.0",
+		"dotenv": "^16.0.0",
+		"g-i-s": "^2.1.6",
+		"node-pretty-log": "^1.1.0",
+		"sequelize": "^6.19.0",
+		"serialize-javascript": "^6.0.0",
+		"sqlite3": "^5.0.6"
+	}
+}
