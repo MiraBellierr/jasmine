@@ -1,13 +1,10 @@
 [![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Kanna%27s%20Kawaii%20Klubhouse&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MiraBellierr/Jasmine?logo=github&style=plastic)
-![Contributor](https://img.shields.io/github/contributors/MiraBellierr/Jasmine?color=blue&logo=github&style=plastic)
-![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/Jasmine?color=blue&logo=github&style=plastic)<br>
-![License](https://img.shields.io/github/license/MiraBellierr/Jasmine?color=blue&logo=apache&style=plastic)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MiraBellierr/kanna?logo=github&style=plastic)
+![Contributor](https://img.shields.io/github/contributors/MiraBellierr/kanna?color=blue&logo=github&style=plastic)
+![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/kanna?color=blue&logo=github&style=plastic)<br>
 ![Donation](https://img.shields.io/github/sponsors/MiraBellierr?color=blue&label=Patreon&logo=patreon&style=plastic)
-![CodeFactor](https://img.shields.io/codefactor/grade/github/MiraBellierr/Jasmine?logo=github&style=plastic&color=blue)
-![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Fwww.kannacoco.me&style=plastic)
 
-<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="kanna" src="https://www.kannacoco.me/favicon.jpg">
+<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="kanna" src="https://cdn.discordapp.com/attachments/873441703330185250/981433272171130920/ezgif-5-fba1ecc958.jpg">
 
 # Kanna
 
