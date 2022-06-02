@@ -8,12 +8,12 @@ const table = new Ascii("Database");
 const schemas = require("./database/schemas");
 const log = require("node-pretty-log");
 const client = new Client({
-	allowedMentions: { parse: ["users"] },
-	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MEMBERS,
-		Intents.FLAGS.GUILD_MESSAGES,
-	],
+        allowedMentions: { parse: ["users"] },
+        intents: [
+                Intents.FLAGS.GUILDS,
+                Intents.FLAGS.GUILD_MEMBERS,
+                Intents.FLAGS.GUILD_MESSAGES,
+        ],
 });
 
 table.setHeading("Schema", "Status");
@@ -23,34 +23,34 @@ client.aliases = new Collection();
 client.categories = fs.readdirSync("src/commands/");
 client.prefixes = new Collection();
 client.giveawaysManager = new GiveawaysManager(client, {
-	storage: "./src/database/json/giveaways.json",
-	updateCountdownEvery: 5000,
-	default: {
-		botsCanWin: false,
-		embedColor: "#CD1C6C",
-		embedColorEnd: "#CD1C6C",
-		reaction: "🎉",
-	},
+        storage: "./src/database/json/giveaways.json",
+        updateCountdownEvery: 5000,
+        default: {
+                botsCanWin: false,
+                embedColor: "#CD1C6C",
+                embedColorEnd: "#CD1C6C",
+                reaction: "🎉",
+        },
 });
 
 fs.readdirSync("src/handler/").forEach((handler) =>
-	require(`./handler/${handler}`)(client)
+        require(`./handler/${handler}`)(client)
 );
 
 Object.keys(schemas).forEach((schema) => {
-	schemas[schema]();
+        schemas[schema]();
 
-	table.addRow(schema, "✅");
+        table.addRow(schema, "✅");
 });
 
 (async () => {
-	const Guilds = await schemas.guild().findAll();
+        const Guilds = await schemas.guild().findAll();
 
-	if (!Guild.length) return;
+        if (!Guild.length) return;
 
-	Guilds.forEach((guild) =>
-		client.prefixes.set(guild.dataValues.guildID, guild.dataValues.prefix)
-	);
+        Guilds.forEach((guild) =>
+                client.prefixes.set(guild.dataValues.guildID, guild.dataValues.prefix)
+        );
 })();
 
 log("info", "\n" + table.toString());
