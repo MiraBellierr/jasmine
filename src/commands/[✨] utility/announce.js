@@ -2,6 +2,7 @@ const Collector = require("../../utils/Collector");
 const Getter = require("../../utils/Getter");
 const { MessageEmbed } = require("discord.js");
 const Error = require("../../utils/Error");
+const Color = require("color");
 
 module.exports = {
 	name: "announce",
@@ -39,7 +40,7 @@ module.exports = {
 			if (authorName.error) return message.reply(`Error: ${authorName.error}`);
 
 			embed.setAuthor({ name: authorName.message });
-			content = `please provide a url or attachment for iconURL slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
+			content = `please provide a url or attachment for author iconURL slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
 
 			m.edit({
 				content,
@@ -63,11 +64,7 @@ module.exports = {
 						iconURL: authorIconURL.message,
 					});
 				}
-			} else {
-				// do nothing
 			}
-		} else {
-			// do nothing
 		}
 
 		content = `please provide a title for title slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
@@ -105,11 +102,7 @@ module.exports = {
 				} catch (e) {
 					message.reply("Error: Not a well formed URL!");
 				}
-			} else {
-				// do nothing
 			}
-		} else {
-			// do nothing
 		}
 
 		content = `please provide a description for description slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
@@ -129,8 +122,6 @@ module.exports = {
 				return message.reply(`Error : ${description.error}`);
 
 			embed.setDescription(description.message);
-		} else {
-			// do nothing
 		}
 
 		content = `please provide a text for footer slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
@@ -150,7 +141,7 @@ module.exports = {
 
 			embed.setFooter({ text: footerText.message });
 
-			content = `please provide a url or attachment for iconURL slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
+			content = `please provide a url or attachment for footer iconURL slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
 
 			m.edit({
 				content,
@@ -174,11 +165,7 @@ module.exports = {
 						iconURL: footerIconURL.message,
 					});
 				}
-			} else {
-				// do nothing
 			}
-		} else {
-			// do nothing
 		}
 
 		content = `please provide a url or attachment for thumbnail slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
@@ -199,8 +186,6 @@ module.exports = {
 			} else {
 				embed.setThumbnail(thumbnail.message);
 			}
-		} else {
-			// do nothing
 		}
 
 		content = `please provide a url or attachment for image slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
@@ -221,8 +206,22 @@ module.exports = {
 			} else {
 				embed.setImage(image.message);
 			}
-		} else {
-			// do nothing
+		}
+
+		content =
+			"What color do you want to use for the embed?\n`skip` to skip\n`stop` to stop";
+
+		m.edit({ content, embeds: [embed] });
+
+		const color = await new Collector(message).startCollector();
+
+		if (color.error === "stop")
+			return message.channel.send("I have stopped the command");
+
+		if (color.error !== "skip") {
+			const hexColor = Color(color.message.toLowerCase()).hex();
+
+			embed.setColor(hexColor);
 		}
 
 		content = `Is this okay? \`yes\` or \`no\`.\nchannel: ${channel}`;
