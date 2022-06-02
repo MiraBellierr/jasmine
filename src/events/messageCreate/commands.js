@@ -1,4 +1,4 @@
-const log = require("node-pretty-log");
+const signale = require("signale");
 
 module.exports = async (client, message) => {
 	if (!message.guild) return;
@@ -33,7 +33,7 @@ module.exports = async (client, message) => {
 		try {
 			command.run(client, message, args);
 		} catch (err) {
-			log("error", err);
+			signale.fatal(err);
 			message.reply(
 				"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
 			);
