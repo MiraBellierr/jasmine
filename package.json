@@ -17,9 +17,9 @@
 		"discord.js": "^13.7.0",
 		"dotenv": "^16.0.0",
 		"g-i-s": "^2.1.6",
-		"node-pretty-log": "^1.1.0",
 		"sequelize": "^6.19.0",
 		"serialize-javascript": "^6.0.0",
+		"signale": "^1.4.0",
 		"sqlite3": "^5.0.6"
 	}
 }
