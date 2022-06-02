@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const axios = require("axios");
 const { Paginate } = require("../../utils/pagination");
 const Error = require("../../utils/Error");
+const Util = require("../../utils/Util");
 
 module.exports = {
 	name: "country",
@@ -176,7 +177,13 @@ module.exports = {
 				iconURL: client.user.displayAvatarURL(),
 			})
 			.setTimestamp()
-			.addField("Translation", translations);
+			.addField(
+				"Translation",
+				new Util().splitMessage(translations, {
+					maxLength: 1024,
+					append: "...",
+				})[0]
+			);
 
 		const embed4 = new MessageEmbed()
 			.setAuthor({
