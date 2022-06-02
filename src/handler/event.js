@@ -1,5 +1,5 @@
 const fs = require("fs");
-const Signale = require('signale');
+const {Signale} = require('signale');
 const signale = require('signale');
 const Ascii = require("ascii-table");
 const table = new Ascii("Events");

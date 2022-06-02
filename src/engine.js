@@ -6,6 +6,7 @@ const { GiveawaysManager } = require("./utils/giveaway");
 const Ascii = require("ascii-table");
 const table = new Ascii("Database");
 const schemas = require("./database/schemas");
+const {Signale} = require('signale');
 const signale = require('signale');
 const client = new Client({
         allowedMentions: { parse: ["users"] },
@@ -15,6 +16,25 @@ const client = new Client({
                 Intents.FLAGS.GUILD_MESSAGES,
         ],
 });
+
+const options = {
+	disabled: false,
+	interactive: false,
+	logLevel: 'info',
+	scope: 'custom',
+	secrets: [],
+	stream: process.stdout,
+	types: {
+	  loading: {
+			badge: '↻',
+			color: 'yellow',
+			label: 'loading',
+			logLevel: 'info'
+	  }
+	}
+};
+
+const custom = new Signale(options);
 
 table.setHeading("Schema", "Status");
 
@@ -54,6 +74,6 @@ Object.keys(schemas).forEach((schema) => {
 })();
 console.log("=============================")
 signale.watch(`Loading DB`)
-signale.watch("\n" + table.toString());
+custom.loading("\n" + table.toString());
 
 client.login(process.env.TOKEN);

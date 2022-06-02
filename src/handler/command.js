@@ -1,8 +1,9 @@
 const fs = require("fs");
 const Ascii = require("ascii-table");
 const table = new Ascii("Commands");
-const Signale = require('signale');
+const {Signale} = require('signale');
 const signale = require('signale');
+
 
 table.setHeading("Command", "Status");
 
