@@ -6,7 +6,7 @@ const { GiveawaysManager } = require("./utils/giveaway");
 const Ascii = require("ascii-table");
 const table = new Ascii("Database");
 const schemas = require("./database/schemas");
-const log = require("node-pretty-log");
+const signale = require('signale');
 const client = new Client({
         allowedMentions: { parse: ["users"] },
         intents: [
@@ -53,6 +53,7 @@ Object.keys(schemas).forEach((schema) => {
         );
 })();
 
-log("info", "\n" + table.toString());
+signale.watch(`Loading DB`)
+signale.watch("\n" + table.toString());
 
 client.login(process.env.TOKEN);
