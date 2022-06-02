@@ -12,7 +12,14 @@ class Collector {
 			time: 30000,
 		});
 
-		if (!collector.size || collector.first().content.toLowerCase() === "stop") {
+		if (!collector.size)
+			return {
+				message: false,
+				error: "stop",
+				attachment: false,
+			};
+
+		if (collector.first().content.toLowerCase() === "stop") {
 			return {
 				message: collector.first().content,
 				error: "stop",
