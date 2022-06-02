@@ -52,7 +52,7 @@ Object.keys(schemas).forEach((schema) => {
                 client.prefixes.set(guild.dataValues.guildID, guild.dataValues.prefix)
         );
 })();
-
+console.log("=============================")
 signale.watch(`Loading DB`)
 signale.watch("\n" + table.toString());
 

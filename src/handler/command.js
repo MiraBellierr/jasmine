@@ -1,9 +1,30 @@
 const fs = require("fs");
-const log = require("node-pretty-log");
 const Ascii = require("ascii-table");
 const table = new Ascii("Commands");
+const Signale = require('signale');
+const signale = require('signale');
 
 table.setHeading("Command", "Status");
+
+const options = {
+	disabled: false,
+	interactive: false,
+	logLevel: 'info',
+	scope: 'custom',
+	secrets: [],
+	stream: process.stdout,
+	types: {
+	  loading: {
+			badge: '↻',
+			color: 'yellow',
+			label: 'loading',
+			logLevel: 'info'
+	  }
+	}
+};
+
+const custom = new Signale(options);
+
 
 module.exports = (client) => {
 	fs.readdirSync("src/commands/").forEach((dir) => {
@@ -26,6 +47,7 @@ module.exports = (client) => {
 				);
 		}
 	});
-
-	log("info", "\n" + table.toString());
+	console.log("=============================")
+	signale.watch(`Loading commands...`)
+	custom.loading( "\n" + table.toString());
 };
