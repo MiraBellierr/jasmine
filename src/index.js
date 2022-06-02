@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { ShardingManager } = require("discord.js");
-const log = require("node-pretty-log");
 const manager = new ShardingManager("src/engine.js", {
         token: process.env.TOKEN,
 });

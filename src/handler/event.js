@@ -1,9 +1,29 @@
 const fs = require("fs");
-const log = require("node-pretty-log");
+const {Signale} = require('signale');
+const signale = require('signale');
 const Ascii = require("ascii-table");
 const table = new Ascii("Events");
 
 table.setHeading("Event", "File", "Status");
+
+const options = {
+	disabled: false,
+	interactive: false,
+	logLevel: 'info',
+	scope: 'custom',
+	secrets: [],
+	stream: process.stdout,
+	types: {
+	  loading: {
+			badge: '↻',
+			color: 'yellow',
+			label: 'loading',
+			logLevel: 'info'
+	  }
+	}
+};
+
+const custom = new Signale(options);
 
 module.exports = (client) => {
 	const folders = fs.readdirSync("src/events/").forEach((dir) => {
@@ -17,6 +37,7 @@ module.exports = (client) => {
 			table.addRow(dir, file, "✅");
 		}
 	});
-
-	log("info", "\n" + table.toString());
+	console.log("=============================")
+	signale.watch(`Loading events...`)
+	custom.loading("\n" + table.toString());
 };
