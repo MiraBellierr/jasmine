@@ -1,29 +1,7 @@
 const { Signale } = require("signale");
+const constants = require("../../utils/constants");
 
-const options = {
-	disabled: false,
-	interactive: false,
-	logLevel: "info",
-	scope: "custom",
-	secrets: [],
-	stream: process.stdout,
-	types: {
-		rocket: {
-			badge: "🚀",
-			color: "red",
-			label: "rocket",
-			logLevel: "info",
-		},
-		loading: {
-			badge: "↻",
-			color: "yellow",
-			label: "loading",
-			logLevel: "info",
-		},
-	},
-};
-
-const custom = new Signale(options);
+const custom = new Signale(constants.options.ready);
 
 module.exports = async (client) => {
 	const guilds = await client.guilds.fetch();
