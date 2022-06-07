@@ -5,6 +5,7 @@ function Paginate(
 	client,
 	message,
 	pages,
+	page = 1,
 	options = {
 		time: 1000 * 60 * 3,
 	},
@@ -22,6 +23,7 @@ function Paginate(
 	this.client = client;
 	this.message = message;
 	this.pages = pages;
+	this.page = page;
 	this.options = options;
 	this.emojis = emojis;
 
@@ -83,7 +85,7 @@ function Paginate(
 
 			return msg;
 		} else {
-			let page = 1;
+			let page = this.page;
 			const row = new MessageActionRow().addComponents([
 				new MessageButton()
 					.setCustomId("backward")
@@ -142,18 +144,34 @@ function Paginate(
 
 			let msg;
 
-			if (typeof this.pages[page - 1] == "object") {
-				msg = await this.message.reply({
-					content: "ㅤ",
-					embeds: [this.pages[page - 1]],
-					components: [disabledBackward],
-				});
+			if (page === 1) {
+				if (typeof this.pages[page - 1] == "object") {
+					msg = await this.message.reply({
+						content: "ㅤ",
+						embeds: [this.pages[page - 1]],
+						components: [disabledBackward],
+					});
+				} else {
+					msg = await this.message.reply({
+						content: `${[this.pages[page - 1]]}`,
+						embeds: [],
+						components: [disabledBackward],
+					});
+				}
 			} else {
-				msg = await this.message.reply({
-					content: `${[this.pages[page - 1]]}`,
-					embeds: [],
-					components: [disabledBackward],
-				});
+				if (typeof this.pages[page - 1] == "object") {
+					msg = await this.message.reply({
+						content: "ㅤ",
+						embeds: [this.pages[page - 1]],
+						components: [row],
+					});
+				} else {
+					msg = await this.message.reply({
+						content: `${[this.pages[page - 1]]}`,
+						embeds: [],
+						components: [row],
+					});
+				}
 			}
 
 			const backwardFilter = (inter) =>
