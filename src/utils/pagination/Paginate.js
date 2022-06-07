@@ -184,21 +184,36 @@ function Paginate(
 			});
 
 			backward.on("collect", async (i) => {
-				if (page === 1) return;
 				page--;
 
-				if (typeof this.pages[page - 1] == "object") {
-					await i.update({
-						content: "ㅤ",
-						embeds: [this.pages[page - 1]],
-						components: [row],
-					});
+				if (page === 1) {
+					if (typeof this.pages[page - 1] == "object") {
+						await i.update({
+							content: "ㅤ",
+							embeds: [this.pages[page - 1]],
+							components: [disabledBackward],
+						});
+					} else {
+						await i.update({
+							content: this.pages[page - 1],
+							embeds: [],
+							components: [disabledBackward],
+						});
+					}
 				} else {
-					await i.update({
-						content: this.pages[page - 1],
-						embeds: [],
-						components: [row],
-					});
+					if (typeof this.pages[page - 1] == "object") {
+						await i.update({
+							content: "ㅤ",
+							embeds: [this.pages[page - 1]],
+							components: [row],
+						});
+					} else {
+						await i.update({
+							content: this.pages[page - 1],
+							embeds: [],
+							components: [row],
+						});
+					}
 				}
 			});
 
