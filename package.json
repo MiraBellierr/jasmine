@@ -23,6 +23,7 @@
 		"signale": "^1.4.0",
 		"sqlite3": "^5.0.6",
 		"urban-dictionary": "^3.0.2",
-		"weather-js2": "^2.0.2"
+		"weather-js2": "^2.0.2",
+		"yt-search": "^2.10.3"
 	}
 }
