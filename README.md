@@ -16,8 +16,8 @@ Kanna is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier fo
 
 ## 🧡 Features
 
-- :sparkles: **utility**: `giveaway`, `announce`, `poll`, `searchimage` and more!
-- ❤ **anime**: `anime`, `quote`, `topanime`
+- :sparkles: **Utility**: `giveaway`, `announce`, `poll`, `searchimage` and more!
+- ❤ **Anime**: `anime`, `quote`, `topanime`
 
 ## 🧡 Links
 
