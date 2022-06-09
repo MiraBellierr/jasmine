@@ -29,7 +29,7 @@ async function getAll(client, message) {
 	const embed = new MessageEmbed()
 		.setAuthor({
 			name: message.author.username,
-			iconURL: message.author.displayAvatarURL({ dynamic: true }),
+			iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 		})
 		.setColor("#CD1C6C")
 		.setDescription(
@@ -76,7 +76,7 @@ async function getAll(client, message) {
 		const commandEmbed = new MessageEmbed()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 			})
 			.setColor("#CD1C6C")
 			.addField(`${i.values[0]}`, `${commands(i.values[0])}`)
@@ -131,7 +131,7 @@ function getCMD(client, message, input) {
 				.setDescription(info)
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 				})
 				.setTimestamp(),
 		],

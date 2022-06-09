@@ -21,7 +21,7 @@ module.exports = {
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: message.author.username,
-							iconURL: message.author.displayAvatarURL({ dynamic: true }),
+							iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 						})
 						.setTitle(result[i].word)
 						.setURL(result[i].permalink)

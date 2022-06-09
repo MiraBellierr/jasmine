@@ -10,7 +10,7 @@ module.exports = {
 		const embed = new MessageEmbed()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 			})
 			.setColor("#CD1C6C")
 			.setTitle("🏓 Pong")
@@ -22,7 +22,7 @@ module.exports = {
 			.setTimestamp()
 			.setFooter({
 				text: client.user.tag,
-				iconURL: client.user.avatarURL({ dynamic: true }),
+				iconURL: client.user.avatarURL({ forceStatic: false }),
 			});
 
 		message.reply({ embeds: [embed] });

@@ -40,7 +40,7 @@ module.exports = {
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: "Anime Search",
-							iconURL: message.author.displayAvatarURL({ dynamic: true }),
+							iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 						})
 						.setTitle(anime.title)
 						.setURL(anime.url)
@@ -108,7 +108,7 @@ module.exports = {
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: "Character Search",
-							iconURL: message.author.displayAvatarURL({ dynamic: true }),
+							iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 						})
 						.setTitle(character.name)
 						.setURL(character.url)
@@ -147,7 +147,7 @@ module.exports = {
 					const embed = new Discord.MessageEmbed()
 						.setAuthor({
 							name: "Manga Search",
-							iconURL: message.author.displayAvatarURL({ dynamic: true }),
+							iconURL: message.author.displayAvatarURL({ forceStatic: false }),
 						})
 						.setTitle(manga.title)
 						.setURL(manga.url)
