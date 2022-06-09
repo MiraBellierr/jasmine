@@ -61,7 +61,7 @@ module.exports = {
 					100 - memInfo.freeMemPercentage
 				).toFixed(2)}%)\n**• Operating System:** ${osInfo}\n**• Processor:** ${
 					processor.manufacturer
-				} ${processor.brand}\n**• Ready At:** ${formatDate(
+				} ${processor.brand}\n**• Ready At:** ${new Util().formatDate(
 					client.readyAt
 				)}\n**• Uptime:** ${uptime}`
 			);
