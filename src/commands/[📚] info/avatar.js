@@ -1,5 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const Getter = require("../../utils/Getter");
+const Paginate = require("../../utils/pagination");
 
 module.exports = {
 	name: "avatar",
@@ -8,6 +9,7 @@ module.exports = {
 	description: "Shows user avatar",
 	usage: "[user]",
 	run: async (client, message, args) => {
+		const pages = [];
 		const user =
 			(await new Getter(message, args.join(" ")).getUser(client)) ||
 			message.author;
@@ -40,6 +42,74 @@ module.exports = {
 				iconURL: client.user.displayAvatarURL(),
 			});
 
-		message.reply({ embeds: [embed] });
+		pages.push(embed);
+
+		const member = await new Getter(message, user.id).getMember();
+
+		if (member) {
+			const embed = new MessageEmbed()
+				.setAuthor({
+					name: message.author.username,
+					iconURL: message.author.displayAvatarURL({ forceStatic: false }),
+				})
+				.setTitle(`${member.user.username}'s server avatar`)
+				.setColor("#CD1C6C")
+				.setDescription(
+					`[webp](${member.displayAvatarURL({
+						extension: "webp",
+					})}) | [png](${member.displayAvatarURL({
+						extension: "png",
+					})}) | [jpg](${member.displayAvatarURL({
+						extension: "jpg",
+					})}) | [jpeg](${member.displayAvatarURL({
+						extension: "jpeg",
+					})}) | [gif](${member.displayAvatarURL({
+						extension: "gif",
+						forceStatic: false,
+					})})`
+				)
+				.setImage(member.displayAvatarURL({ forceStatic: false, size: 4096 }))
+				.setTimestamp()
+				.setFooter({
+					text: client.user.tag,
+					iconURL: client.user.displayAvatarURL(),
+				});
+
+			pages.push(embed);
+		}
+
+		await user.fetch(true);
+
+		const banner = new MessageEmbed()
+			.setAuthor({
+				name: message.author.username,
+				iconURL: message.author.displayAvatarURL({ forceStatic: false }),
+			})
+			.setTitle(`${user.username}'s banner`)
+			.setColor("#CD1C6C")
+			.setDescription(
+				`[webp](${user.bannerURL({
+					extension: "webp",
+				})}) | [png](${user.bannerURL({
+					extension: "png",
+				})}) | [jpg](${user.bannerURL({
+					extension: "jpg",
+				})}) | [jpeg](${user.bannerURL({
+					extension: "jpeg",
+				})}) | [gif](${user.bannerURL({
+					extension: "gif",
+					forceStatic: false,
+				})})`
+			)
+			.setImage(user.bannerURL({ forceStatic: false, size: 4096 }))
+			.setTimestamp()
+			.setFooter({
+				text: client.user.tag,
+				iconURL: client.user.displayAvatarURL(),
+			});
+
+		pages.push(banner);
+
+		new Paginate.Paginate(client, message, pages).init();
 	},
 };
