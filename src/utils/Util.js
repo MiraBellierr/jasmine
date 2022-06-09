@@ -47,6 +47,27 @@ class Util {
 
 		return messages.concat(msg).filter((m) => m);
 	}
+
+	formatDate(date) {
+		const options = {
+			weekday: "long",
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+			timeZone: "UTC",
+		};
+
+		return new Intl.DateTimeFormat("en-US", options).format(date);
+	}
+
+	formatTime(date) {
+		const options = {
+			hour: "numeric",
+			minute: "numeric",
+			second: "numeric",
+		};
+		return new Intl.DateTimeFormat("en-US", options).format(date);
+	}
 }
 
 module.exports = Util;
