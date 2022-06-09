@@ -6,6 +6,35 @@ class Getter {
 		this.toFind = toFind;
 	}
 
+	async getUser(client) {
+		const toFind = this.toFind.toLowerCase();
+		let target = false;
+
+		try {
+			target = await client.users.fetch(toFind);
+		} catch {
+			if (!target) {
+				target = client.users.cache.get(toFind);
+			}
+
+			if (!target && this.message.mentions.users) {
+				target = this.message.mentions.users.first();
+			}
+
+			if (!target && toFind) {
+				const users = client.users.cache;
+
+				target = users.find(
+					(user) =>
+						user.username.toLowerCase().includes(toFind) ||
+						user.tag.toLowerCase().includes(toFind)
+				);
+			}
+		}
+
+		return target;
+	}
+
 	async getMember() {
 		const toFind = this.toFind.toLowerCase();
 		let target = false;
