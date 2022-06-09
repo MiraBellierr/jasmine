@@ -55,20 +55,20 @@ module.exports = {
 				.setTitle(`${member.user.username}'s server avatar`)
 				.setColor("#CD1C6C")
 				.setDescription(
-					`[webp](${member.displayAvatarURL({
+					`[webp](${member.avatarURL({
 						extension: "webp",
-					})}) | [png](${member.displayAvatarURL({
+					})}) | [png](${member.avatarURL({
 						extension: "png",
-					})}) | [jpg](${member.displayAvatarURL({
+					})}) | [jpg](${member.avatarURL({
 						extension: "jpg",
-					})}) | [jpeg](${member.displayAvatarURL({
+					})}) | [jpeg](${member.avatarURL({
 						extension: "jpeg",
-					})}) | [gif](${member.displayAvatarURL({
+					})}) | [gif](${member.avatarURL({
 						extension: "gif",
 						forceStatic: false,
 					})})`
 				)
-				.setImage(member.displayAvatarURL({ forceStatic: false, size: 4096 }))
+				.setImage(member.avatarURL({ forceStatic: false, size: 4096 }))
 				.setTimestamp()
 				.setFooter({
 					text: client.user.tag,
