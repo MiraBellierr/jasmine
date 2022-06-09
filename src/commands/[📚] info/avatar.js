@@ -46,7 +46,7 @@ module.exports = {
 
 		const member = await new Getter(message, user.id).getMember();
 
-		if (member) {
+		if (member && member.avatarURL()) {
 			const embed = new MessageEmbed()
 				.setAuthor({
 					name: message.author.username,
