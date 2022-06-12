@@ -9,11 +9,17 @@ table.setHeading("Schema", "Status");
 const custom = new signale.Signale(constants.options.handler);
 
 module.exports = async (client) => {
+	Object.keys(schemas).forEach((schema) => {
+		schemas[schema]();
+
+		table.addRow(schema, "✅");
+	});
+
 	const Guilds = await schemas.guild().findAll();
 	const WelcomeMessages = await schemas.welcomeMessage().findAll();
 	const LeaveMessages = await schemas.leaveMessage().findAll();
 	const Starboards = await schemas.starboard().findAll();
-	const Coins = await schemas.coins.findAll();
+	const Coins = await schemas.coins().findAll();
 
 	if (Guilds.length) {
 		Guilds.forEach((guild) =>
@@ -50,12 +56,6 @@ module.exports = async (client) => {
 			client.coins.set(coin.dataValues.userID, coin.dataValues)
 		);
 	}
-
-	Object.keys(schemas).forEach((schema) => {
-		schemas[schema]();
-
-		table.addRow(schema, "✅");
-	});
 
 	console.log("=============================");
 	signale.watch(`Loading DB`);
