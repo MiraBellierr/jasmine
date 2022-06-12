@@ -50,7 +50,7 @@ module.exports = {
 
 				new Paginate.Paginate(client, message, pages).init();
 			},
-			async (error) => {
+			async () => {
 				message.reply("I can't find the urban definition for that word");
 			}
 		);
