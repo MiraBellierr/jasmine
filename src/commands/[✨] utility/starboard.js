@@ -17,7 +17,7 @@ module.exports = {
 			const embed = new MessageEmbed()
 				.setAuthor({
 					name: `${client.user.username} Starboard`,
-					iconURL: client.user.displayAvatarURL({ forceStatic: false }),
+					iconURL: client.user.displayAvatarURL({ dynamic: true }),
 				})
 				.setColor("#CD1C6C")
 				.setDescription(

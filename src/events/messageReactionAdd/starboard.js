@@ -65,7 +65,7 @@ module.exports = async (client, messageReaction, user) => {
 			.setDescription(
 				`**[Jump to message!](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})**`
 			)
-			.setThumbnail(message.author.displayAvatarURL({ forceStatic: false }))
+			.setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
 			.addField("Author", message.author.toString(), true)
 			.addField("Channel", message.channel.toString(), true)
 			.setTimestamp()

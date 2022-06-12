@@ -21,13 +21,13 @@ module.exports = {
 			const embed = new MessageEmbed()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ forceStatic: false }),
+					iconURL: message.author.displayAvatarURL({ dynamic: true }),
 				})
 				.setColor("#CD1C6C")
 				.setTimestamp()
 				.setFooter({
 					text: client.user.tag,
-					iconURL: client.user.avatarURL({ forceStatic: false }),
+					iconURL: client.user.avatarURL({ dynamic: true }),
 				});
 
 			if (/<a:\D+:\d+>/gm.test(arg)) {

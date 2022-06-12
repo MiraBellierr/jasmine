@@ -15,11 +15,11 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ forceStatic: false }),
+				iconURL: message.author.displayAvatarURL({ dynamic: true }),
 			})
 			.setTitle("Server Icon")
 			.setColor("#CD1C6C")
-			.setImage(message.guild.iconURL({ forceStatic: false, size: 4096 }))
+			.setImage(message.guild.iconURL({ dynamic: true, size: 4096 }))
 			.setTimestamp()
 			.setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
 
@@ -29,11 +29,11 @@ module.exports = {
 			const banner = new Discord.MessageEmbed()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ forceStatic: false }),
+					iconURL: message.author.displayAvatarURL({ dynamic: true }),
 				})
 				.setTitle("Server Banner")
 				.setColor("#CD1C6C")
-				.setImage(message.guild.bannerURL({ forceStatic: false, size: 4096 }))
+				.setImage(message.guild.bannerURL({ dynamic: true, size: 4096 }))
 				.setTimestamp()
 				.setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
 
