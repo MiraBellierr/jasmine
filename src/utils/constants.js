@@ -38,3 +38,5 @@ module.exports.options = {
 		},
 	},
 };
+
+module.exports.coins = "https://miraiscute.com/img/Kabo.gif";
