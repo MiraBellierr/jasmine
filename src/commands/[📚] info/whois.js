@@ -37,7 +37,16 @@ module.exports = {
 					user.tag
 				}\n**• Mention:** ${user}\n**• Account Type:** ${
 					user.bot ? "Bot" : "Human"
-				}\n**• Account created at**: ${created}`,
+				}\n**• Account created at**: ${created}\n**• Flags:** ${user.flags
+					.toArray()
+					.map((flag) => flag.toLowerCase())
+					.map((flag) =>
+						flag
+							.split("_")
+							.map((f) => f.charAt(0).toUpperCase() + f.slice(1))
+							.join(" ")
+					)
+					.join(", ")}`,
 				true
 			);
 
