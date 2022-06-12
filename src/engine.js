@@ -5,12 +5,7 @@ const fs = require("fs");
 const { GiveawaysManager } = require("./utils/giveaway");
 const client = new Client({
 	allowedMentions: { parse: ["users"] },
-	intents: [
-		Intents.FLAGS.GUILDS,
-		Intents.FLAGS.GUILD_MEMBERS,
-		Intents.FLAGS.GUILD_MESSAGES,
-		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-	],
+	intents: Object.values(Intents.FLAGS),
 });
 
 client.commands = new Collection();
