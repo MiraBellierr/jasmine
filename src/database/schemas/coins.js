@@ -16,9 +16,11 @@ module.exports = () => {
 		},
 		pocket: {
 			type: Sequelize.BIGINT,
+			defaultValue: 0,
 		},
 		bank: {
 			type: Sequelize.BIGINT,
+			defaultValue: 0,
 		},
 	});
 
