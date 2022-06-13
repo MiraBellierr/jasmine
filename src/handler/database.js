@@ -19,7 +19,6 @@ module.exports = async (client) => {
 	const WelcomeMessages = await schemas.welcomeMessage().findAll();
 	const LeaveMessages = await schemas.leaveMessage().findAll();
 	const Starboards = await schemas.starboard().findAll();
-	const Coins = await schemas.coins().findAll();
 
 	if (Guilds.length) {
 		Guilds.forEach((guild) =>
@@ -48,12 +47,6 @@ module.exports = async (client) => {
 	if (Starboards.length) {
 		Starboards.forEach((starboard) =>
 			client.starboards.set(starboard.dataValues.guildID, starboard.dataValues)
-		);
-	}
-
-	if (Coins.length) {
-		Coins.forEach((coin) =>
-			client.coins.set(coin.dataValues.userID, coin.dataValues)
 		);
 	}
 
