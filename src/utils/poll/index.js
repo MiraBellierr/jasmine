@@ -36,7 +36,7 @@ const pollEmbed = async (
 	}
 	const usedEmojis = Object.keys(emojiInfo);
 
-	const poll = await msg.reply({
+	const poll = await msg.channel.send({
 		embeds: [embedBuilder(title, msg.author.tag, text)],
 	});
 	for (const emoji of usedEmojis) await poll.react(emoji);
