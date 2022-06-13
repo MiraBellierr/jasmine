@@ -22,6 +22,10 @@ module.exports = () => {
 			type: Sequelize.BIGINT,
 			defaultValue: 0,
 		},
+		maxDeposit: {
+			type: Sequelize.BIGINT,
+			defaultValue: 0,
+		},
 	});
 
 	Coins.sync();
