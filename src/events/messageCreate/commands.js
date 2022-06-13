@@ -28,7 +28,7 @@ module.exports = async (client, message) => {
 	if (!timer || timer - (Date.now() - cooldown) < 1) {
 		client.timer.set(message.author.id, Date.now());
 
-		const coins = await schemas.coins().findOne({
+		let coins = await schemas.coins().findOne({
 			where: { userID: message.author.id },
 		});
 
