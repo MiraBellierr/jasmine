@@ -15,6 +15,7 @@ client.prefixes = new Collection();
 client.welcomes = new Collection();
 client.leaves = new Collection();
 client.starboards = new Collection();
+client.timer = new Collection();
 client.giveawaysManager = new GiveawaysManager(client, {
 	storage: "./src/database/json/giveaways.json",
 	updateCountdownEvery: 5000,
