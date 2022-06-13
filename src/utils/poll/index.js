@@ -19,13 +19,15 @@ const pollEmbed = async (
 	options,
 	emojiList = defEmojiList.slice()
 ) => {
-	if (!msg && !msg.channel) return msg.reply("Channel is inaccessible.");
-	if (!title) return msg.reply("Poll title is not given.");
-	if (!options) return msg.reply("Poll options are not given.");
+	if (!msg && !msg.channel) return msg.channel.send("Channel is inaccessible.");
+	if (!title) return msg.channel.send("Poll title is not given.");
+	if (!options) return msg.channel.send("Poll options are not given.");
 	if (options.length < 2)
-		return msg.reply("Please provide more than one choice.");
+		return msg.channel.send("Please provide more than one choice.");
 	if (options.length > emojiList.length)
-		return msg.reply(`Please provide ${emojiList.length} or less choices.`);
+		return msg.channel.send(
+			`Please provide ${emojiList.length} or less choices.`
+		);
 
 	let text = "*To vote, react using the correspoding emoji.*\n\n";
 	const emojiInfo = {};
