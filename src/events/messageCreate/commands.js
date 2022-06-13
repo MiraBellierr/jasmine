@@ -1,4 +1,5 @@
 const signale = require("signale");
+const schemas = require("../../database/schemas");
 
 module.exports = async (client, message) => {
 	if (!message.guild) return;
@@ -20,6 +21,31 @@ module.exports = async (client, message) => {
 		);
 
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const timer = client.timer.get(message.author.id);
+	const cooldown = 60000;
+
+	if (!timer || timer - (Date.now() - cooldown) < 1) {
+		client.timer.set(message.author.id, Date.now());
+
+		const coins = await schemas.coins().findOne({
+			where: { userID: message.author.id },
+		});
+
+		if (!coins) {
+			coins = await schemas.coins().create({
+				userID: message.author.id,
+			});
+		}
+		const currentMaxDeposit = coins.get("maxDeposit");
+
+		schemas.coins().update(
+			{
+				maxDeposit: currentMaxDeposit + 1,
+			},
+			{ where: { userID: message.author.id } }
+		);
+	}
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 	const cmd = args.shift().toLowerCase();
