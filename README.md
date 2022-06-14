@@ -34,4 +34,5 @@ You may contribute to the Kannabotto repo. I would appreciate it if you do so an
 
 ## 💙 Credits
 
-- Z3RYX
+- 💕 **Z3RYX**: RPG optimization
+- 💕 **dchu**: Console and debugging
