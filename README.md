@@ -32,8 +32,8 @@ Kanna is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier fo
 
 You may contribute to the Kannabotto repo. I would appreciate it if you do so and help me with the development. ✨
 
-## 💙 People
+## 💙 Contributors
 
-- 💕 **[Z3RYX](https://github.com/Z3RYX)**: RPG optimization
-- 💕 **dchu**: Console and debugging
-- 💕 **Nemoisafish**: Assets, emotes and graphics
+- 💕 **[Z3RYX](https://github.com/Z3RYX)**: RPG Algorithms and Optimiser
+- 💕 **[dchu096](https://github.com/dchu096)**: Console and Output
+- 💕 **[nemoisafish](https://github.com/nemoisafish)**: Graphics Design and Business
