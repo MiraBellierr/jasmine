@@ -16,7 +16,7 @@ module.exports = {
 			);
 		if (!args[0]) return new Error(module.exports, client, message).argsError();
 
-		const channel = await getChannelFromArguments(message, args.join(""));
+		const channel = await getChannelFromArguments(message, args.join(" "));
 
 		if (!channel) return message.reply("Sorry, I couldn't find this channel.");
 
