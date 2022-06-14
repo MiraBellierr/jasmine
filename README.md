@@ -36,3 +36,4 @@ You may contribute to the Kannabotto repo. I would appreciate it if you do so an
 
 - 💕 **Z3RYX**: RPG optimization
 - 💕 **dchu**: Console and debugging
+- 💕 **Nemoisafish**: Assets, emotes and graphics
