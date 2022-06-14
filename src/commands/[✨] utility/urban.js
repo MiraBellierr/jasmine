@@ -61,9 +61,8 @@ function filter(words) {
 	let filtered = words;
 
 	for (const badword of badwords) {
-		filtered = filtered.replace(badword, "*".repeat(badword.length));
 		filtered = filtered.replace(
-			badword.toUpperCase(),
+			new RegExp(badword, "gi"),
 			"*".repeat(badword.length)
 		);
 	}
