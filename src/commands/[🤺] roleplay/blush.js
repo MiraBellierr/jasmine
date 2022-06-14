@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const Getter = require("../../utils/Getter");
-const Error = require("../../utils/Error");
 const Util = require("../../utils/Util");
 
 module.exports = {
