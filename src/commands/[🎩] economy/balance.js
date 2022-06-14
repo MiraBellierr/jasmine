@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getUserFromArguments } = require("../../utils/getters");
 const constants = require("../../utils/constants");
 const Economy = require("../../utils/Economy");
 
@@ -10,16 +10,16 @@ module.exports = {
 	category: "[🎩] economy",
 	usage: "[user]",
 	run: async (client, message, args) => {
-		const member =
-			(await new Getter(message, args.join(" ")).getMember()) || message.member;
+		const user =
+			(await getUserFromArguments(message, args.join())) || message.author;
 
-		const coins = await new Economy(client).getCoins(member.user);
+		const coins = await new Economy(client).getCoins(user);
 
 		const embed = new Discord.MessageEmbed()
 			.setAuthor({
-				name: `${member.user.username}'s balance`,
+				name: `${user.username}'s balance`,
 			})
-			.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+			.setThumbnail(user.displayAvatarURL({ dynamic: true }))
 			.setColor("#DA70D6")
 			.setFooter({
 				text: "https://patreon.com/kannacoco",
@@ -29,12 +29,12 @@ module.exports = {
 				`**Pocket:** ${constants.coins.emoji} ${coins
 					.get("pocket")
 					.toLocaleString()}\n**Bank:** ${constants.coins.emoji} ${coins
-					.get("bank")
-					.toLocaleString()}/${coins
-					.get("maxDeposit")
-					.toLocaleString()}\n**Total:** ${constants.coins.emoji} ${(
-					coins.get("pocket") + coins.get("bank")
-				).toLocaleString()}`
+						.get("bank")
+						.toLocaleString()}/${coins
+							.get("maxDeposit")
+							.toLocaleString()}\n**Total:** ${constants.coins.emoji} ${(
+								coins.get("pocket") + coins.get("bank")
+							).toLocaleString()}`
 			);
 
 		message.reply({ embeds: [embed] });

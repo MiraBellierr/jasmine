@@ -1,5 +1,5 @@
 const Collector = require("../../utils/Collector");
-const Getter = require("../../utils/Getter");
+const { getChannelFromArguments } = require("../../utils/getters");
 const { MessageEmbed } = require("discord.js");
 const Error = require("../../utils/Error");
 const Color = require("color");
@@ -16,7 +16,9 @@ module.exports = {
 			);
 		if (!args[0]) return new Error(module.exports, client, message).argsError();
 
-		const channel = await new Getter(message, args.join(" ")).getChannel();
+		const channel = await getChannelFromArguments(message, args.join(""));
+
+		if (!channel) return message.reply("Sorry, I couldn't find this channel.");
 
 		if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
 			return message.reply(

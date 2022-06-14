@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getUserFromArguments } = require("../../utils/getters");
 const Util = require("../../utils/Util");
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
 	usage: "[user]",
 	run: async (client, message, args) => {
 		const user =
-			(await new Getter(message, args.join(" ")).getUser(client)) ||
+			(await getUserFromArguments(message, args.join(" "))) ||
 			message.author;
 
 		const created = new Util().formatDate(user.createdTimestamp);
@@ -31,12 +31,9 @@ module.exports = {
 				`**• Avatar URL:** [Link](${user.displayAvatarURL({
 					dynamic: true,
 					size: 4096,
-				})})\n**• ID:** ${user.id}\n**• Discriminator:** ${
-					user.discriminator
-				}\n**• Username**: ${user.username}\n**• Tag:** ${
-					user.tag
-				}\n**• Mention:** ${user}\n**• Account Type:** ${
-					user.bot ? "Bot" : "Human"
+				})})\n**• ID:** ${user.id}\n**• Discriminator:** ${user.discriminator
+				}\n**• Username**: ${user.username}\n**• Tag:** ${user.tag
+				}\n**• Mention:** ${user}\n**• Account Type:** ${user.bot ? "Bot" : "Human"
 				}\n**• Account created at**: ${created}\n**• Flags:** ${user.flags
 					.toArray()
 					.map((flag) => flag.toLowerCase())
@@ -69,23 +66,17 @@ module.exports = {
 			);
 			embed.addField(
 				"Member Information:",
-				`**• Nickname:** ${
-					member.nickname === null ? "None" : member.nickname
-				}\n**• Display Name:** ${
-					member.displayName
-				}\n**• Display Hex Color:** ${member.displayHexColor.toUpperCase()}\n**• Manageable by this bot:** ${
-					member.manageable ? "Yes" : "No"
-				}\n**• bannable by this bot:** ${
-					member.bannable ? "Yes" : "No"
-				}\n**• Kickable by this bot:** ${
-					member.kickable ? "Yes" : "No"
-				}\n**• Nitro Booster Since:** ${
-					member.premiumSince === null ? "Not a Nitro Booster" : premiumSince
+				`**• Nickname:** ${member.nickname === null ? "None" : member.nickname
+				}\n**• Display Name:** ${member.displayName
+				}\n**• Display Hex Color:** ${member.displayHexColor.toUpperCase()}\n**• Manageable by this bot:** ${member.manageable ? "Yes" : "No"
+				}\n**• bannable by this bot:** ${member.bannable ? "Yes" : "No"
+				}\n**• Kickable by this bot:** ${member.kickable ? "Yes" : "No"
+				}\n**• Nitro Booster Since:** ${member.premiumSince === null ? "Not a Nitro Booster" : premiumSince
 				}\n**• Joined At:** ${joined}`,
 				true
 			);
 			embed.addField("**Roles**", roles);
-		} catch {}
+		} catch { }
 
 		message.reply({ embeds: [embed] });
 	},

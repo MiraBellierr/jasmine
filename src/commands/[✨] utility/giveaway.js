@@ -3,7 +3,7 @@
 const ms = require("ms");
 const Discord = require("discord.js");
 const Collector = require("../../utils/Collector");
-const Getter = require("../../utils/Getter");
+const { getChannelFromArguments } = require("../../utils/getters");
 
 module.exports = {
 	name: "giveaway",
@@ -57,10 +57,7 @@ module.exports = {
 			if (giveawayChannelinput.error === "stop") {
 				return message.channel.send("I have stopped the command.");
 			} else {
-				const channel = await new Getter(
-					message,
-					giveawayChannelinput.message
-				).getChannel();
+				const channel = await getChannelFromArguments(message, giveawayChannelinput.message);
 
 				if (!channel)
 					return message.channel.send(
@@ -180,8 +177,7 @@ module.exports = {
 
 			if (!args[1]) {
 				return message.reply(
-					`**${
-						message.author.username
+					`**${message.author.username
 					}**, The right syntax is \`${client.prefixes.get(
 						message.guild.id
 					)}giveaway end <message ID | prize>\`.`
@@ -204,8 +200,7 @@ module.exports = {
 				})
 				.then(() => {
 					message.reply(
-						`Giveaway will end in less than ${
-							client.giveawaysManager.options.updateCountdownEvery / 1000
+						`Giveaway will end in less than ${client.giveawaysManager.options.updateCountdownEvery / 1000
 						} seconds...`
 					);
 				})

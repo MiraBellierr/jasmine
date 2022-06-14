@@ -1,4 +1,4 @@
-const Getter = require("../../utils/Getter");
+const { getChannelFromArguments } = require("../../utils/getters");
 const Error = require("../../utils/Error");
 const schemas = require("../../database/schemas");
 const Collector = require("../../utils/Collector");
@@ -68,7 +68,7 @@ module.exports = {
 
 			message.channel.send("Welcome message has been turned off");
 		} else {
-			const channel = await new Getter(message, arg).getChannel();
+			const channel = await getChannelFromArguments(message, arg);
 
 			if (!channel)
 				return new Error(module.exports, client, message).argsError();

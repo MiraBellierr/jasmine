@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getMemberFromArguments } = require("../../utils/getters");
 const Util = require("../../utils/Util");
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 			return message.reply({ embeds: [embed] });
 		}
 
-		const target = await new Getter(message, args.join(" ")).getMember();
+		const target = await getMemberFromArguments(message, args.join(" "));
 
 		if (!target) return message.reply("I didn't found the user with this name");
 
