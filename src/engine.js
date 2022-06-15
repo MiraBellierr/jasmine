@@ -16,6 +16,7 @@ client.welcomes = new Collection();
 client.leaves = new Collection();
 client.starboards = new Collection();
 client.timer = new Collection();
+client.characters = new Collection();
 client.giveawaysManager = new GiveawaysManager(client, {
 	storage: "./src/database/json/giveaways.json",
 	updateCountdownEvery: 5000,
@@ -26,6 +27,12 @@ client.giveawaysManager = new GiveawaysManager(client, {
 		reaction: "🎉",
 	},
 });
+
+Object.values(require("./database/json/characters.json")).forEach(
+	(character) => {
+		client.characters.set(character.name, character);
+	}
+);
 
 fs.readdirSync("src/handler/").forEach((handler) =>
 	require(`./handler/${handler}`)(client)
