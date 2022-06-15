@@ -1,3 +1,4 @@
 node_modules
 .env
 database.sqlite
+src/database/json/giveaways.json
