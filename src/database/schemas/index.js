@@ -4,6 +4,7 @@ const welcomeMessage = require("./welcomeMessage");
 const starboard = require("./starboard");
 const coins = require("./coins");
 const timer = require("./timer");
+const character = require("./character");
 
 module.exports = {
 	guild,
@@ -12,4 +13,5 @@ module.exports = {
 	starboard,
 	coins,
 	timer,
+	character,
 };
