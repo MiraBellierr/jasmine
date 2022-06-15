@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const Error = require("../../utils/Error");
-const Getter = require("../../utils/Getter");
+const { argsError } = require("../../utils/errors");
+const { getRoleFromArguments } = require("../../utils/getters");
 
 module.exports = {
 	name: "roleinfo",
@@ -9,12 +9,11 @@ module.exports = {
 	description: "Returns role information",
 	usage: "<role>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
-		const role = await new Getter(message, args.join(" ")).getRole();
+		const role = await getRoleFromArguments(message, args.join(" "));
 
-		if (!role) return new Error(module.exports, client, message).argsError();
+		if (!role) return argsError(module.exports, client, message);
 
 		const guildMembers = await role.guild.members.fetch();
 		const memberCount = guildMembers.filter((member) =>

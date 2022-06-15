@@ -1,7 +1,7 @@
-const Getter = require("../../utils/Getter");
-const Error = require("../../utils/Error");
+const { getChannelFromArguments } = require("../../utils/getters");
+const { argsError } = require("../../utils/errors");
 const schemas = require("../../database/schemas");
-const Collector = require("../../utils/Collector");
+const { startCollector } = require("../../utils/collectors");
 const { MessageEmbed } = require("discord.js");
 const Color = require("color");
 
@@ -17,8 +17,7 @@ module.exports = {
 				"Sorry, you don't have manage channels permission to use this command."
 			);
 
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const arg = args.join(" ");
 		const LeaveMessage = schemas.leaveMessage();
@@ -64,10 +63,9 @@ module.exports = {
 
 			message.channel.send("Leave message has been turned off");
 		} else {
-			const channel = await new Getter(message, arg).getChannel();
+			const channel = await getChannelFromArguments(message, arg);
 
-			if (!channel)
-				return new Error(module.exports, client, message).argsError();
+			if (!channel) return argsError(module.exports, client, message);
 
 			if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
 				return message.channel.send(
@@ -97,7 +95,7 @@ module.exports = {
 
 			const m = await message.channel.send({ content, embeds: [embed] });
 
-			const authorName = await new Collector(message).startCollector(256);
+			const authorName = await startCollector(message, 256);
 
 			if (authorName.error === "stop")
 				return message.channel.send("I have stopped the command");
@@ -120,7 +118,7 @@ module.exports = {
 
 				m.edit({ content, embeds: [embed] });
 
-				const authorURL = await new Collector(message).startCollector();
+				const authorURL = await startCollector(message);
 
 				if (authorURL.error === "stop")
 					return message.channel.send("I have stopped the command");
@@ -148,7 +146,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const title = await new Collector(message).startCollector(256);
+			const title = await startCollector(message, 256);
 
 			if (title.error === "stop")
 				return message.channel.send("I have stopped the command");
@@ -170,7 +168,7 @@ module.exports = {
 
 				m.edit({ content, embeds: [embed] });
 
-				const titleURL = await new Collector(message).startCollector();
+				const titleURL = await startCollector(message);
 
 				if (titleURL.error === "stop")
 					return message.channel.send("I have stopped the command.");
@@ -190,7 +188,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const description = await new Collector(message).startCollector(2048);
+			const description = await startCollector(message, 2048);
 
 			if (description.error === "stop")
 				return message.channel.send("I have stopped the command.");
@@ -215,7 +213,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const footerText = await new Collector(message).startCollector(2048);
+			const footerText = await startCollector(message, 2048);
 
 			if (footerText.error === "stop")
 				return message.channel.send("I have stopped the command.");
@@ -238,7 +236,7 @@ module.exports = {
 
 				m.edit({ content, embeds: [embed] });
 
-				const footerURL = await new Collector(message).startCollector();
+				const footerURL = await startCollector(message);
 
 				if (footerURL.error === "stop")
 					return message.channel.send("I have stopped the command.");
@@ -266,7 +264,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const thumbnail = await new Collector(message).startCollector();
+			const thumbnail = await startCollector(message);
 
 			if (thumbnail.error === "stop")
 				return message.channel.send("I have stopped the command.");
@@ -287,7 +285,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const image = await new Collector(message).startCollector();
+			const image = await startCollector(message);
 
 			if (image.error === "stop")
 				return message.channel.send("I have stopped the command.");
@@ -309,7 +307,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const color = await new Collector(message).startCollector();
+			const color = await startCollector(message);
 
 			if (color.error === "stop")
 				return message.channel.send("I have stopped the command");
@@ -326,7 +324,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [embed] });
 
-			const confirmation = await new Collector(message).startCollector();
+			const confirmation = await startCollector(message);
 
 			if (confirmation.message === "yes") {
 				try {

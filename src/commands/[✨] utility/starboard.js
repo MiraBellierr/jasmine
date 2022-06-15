@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getChannelFromArguments } = require("../../utils/getters");
 const schemas = require("../../database/schemas");
 
 module.exports = {
@@ -21,14 +21,10 @@ module.exports = {
 				})
 				.setColor("#CD1C6C")
 				.setDescription(
-					`**Proper Usage:**\n• \`${client.prefixes.get(message.guild.id)}${
-						module.exports.name
-					} set <channel>\`\n• \`${client.prefixes.get(message.guild.id)}${
-						module.exports.name
-					} star <number>\`\n• \`${client.prefixes.get(message.guild.id)}${
-						module.exports.name
-					} on\`\n• \`${client.prefixes.get(message.guild.id)}${
-						module.exports.name
+					`**Proper Usage:**\n• \`${client.prefixes.get(message.guild.id)}${module.exports.name
+					} set <channel>\`\n• \`${client.prefixes.get(message.guild.id)}${module.exports.name
+					} star <number>\`\n• \`${client.prefixes.get(message.guild.id)}${module.exports.name
+					} on\`\n• \`${client.prefixes.get(message.guild.id)}${module.exports.name
 					} off\``
 				)
 				.setFooter({ text: "starboard command" })
@@ -42,12 +38,11 @@ module.exports = {
 		if (args[0] === "set") {
 			if (!args[1])
 				return message.reply(
-					`The right syntax is \`${client.prefixes.get(message.guild.id)}${
-						module.exports.name
+					`The right syntax is \`${client.prefixes.get(message.guild.id)}${module.exports.name
 					} set <channel>\``
 				);
 
-			const channel = await new Getter(message, args[1]).getChannel();
+			const channel = await getChannelFromArguments(message, args[1]);
 
 			if (!channel)
 				return message.reply("I didn't find any channel with this name");
@@ -96,8 +91,7 @@ module.exports = {
 		} else if (args[0] === "star") {
 			if (!args[1])
 				return message.reply(
-					`The right syntax is \`${client.prefixes.get(message.guild.id)}${
-						module.exports.name
+					`The right syntax is \`${client.prefixes.get(message.guild.id)}${module.exports.name
 					} star <number>\``
 				);
 

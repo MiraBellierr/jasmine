@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const ud = require("urban-dictionary");
 const Paginate = require("../../utils/pagination");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 const badwords = require("../../database/json/badwords.json");
 
 module.exports = {
@@ -11,8 +11,7 @@ module.exports = {
 	category: "[✨] utility",
 	usage: "<word>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		ud.define(args.join(" ")).then(
 			async (result) => {

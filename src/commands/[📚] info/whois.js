@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
-const Util = require("../../utils/Util");
+const { getUserFromArguments } = require("../../utils/getters");
+const utils = require("../../utils/utils");
 
 module.exports = {
 	name: "whois",
@@ -10,10 +10,9 @@ module.exports = {
 	usage: "[user]",
 	run: async (client, message, args) => {
 		const user =
-			(await new Getter(message, args.join(" ")).getUser(client)) ||
-			message.author;
+			(await getUserFromArguments(message, args.join(" "))) || message.author;
 
-		const created = new Util().formatDate(user.createdTimestamp);
+		const created = utils.formatDate(user.createdTimestamp);
 
 		const embed = new Discord.MessageEmbed()
 			.setAuthor({
@@ -53,8 +52,8 @@ module.exports = {
 		try {
 			const member = await message.guild.members.fetch(user.id);
 
-			const premiumSince = new Util().formatDate(member.premiumSince);
-			const joined = new Util().formatDate(member.joinedAt);
+			const premiumSince = utils.formatDate(member.premiumSince);
+			const joined = utils.formatDate(member.joinedAt);
 			const roles =
 				member.roles.cache
 					.filter((r) => r.id !== message.guild.id)

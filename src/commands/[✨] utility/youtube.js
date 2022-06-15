@@ -1,6 +1,6 @@
 const yts = require("yt-search");
 const Paginate = require("../../utils/pagination");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 
 module.exports = {
 	name: "youtube",
@@ -8,8 +8,7 @@ module.exports = {
 	description: "Search youtube videos",
 	usage: "<title>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const m = await message.channel.send("*Please wait...*");
 

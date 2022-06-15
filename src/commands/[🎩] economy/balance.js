@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getUserFromArguments } = require("../../utils/getters");
 const constants = require("../../utils/constants");
-const Economy = require("../../utils/Economy");
+const economy = require("../../utils/economies");
 
 module.exports = {
 	name: "balance",
@@ -10,16 +10,16 @@ module.exports = {
 	category: "[🎩] economy",
 	usage: "[user]",
 	run: async (client, message, args) => {
-		const member =
-			(await new Getter(message, args.join(" ")).getMember()) || message.member;
+		const user =
+			(await getUserFromArguments(message, args.join())) || message.author;
 
-		const coins = await new Economy(client).getCoins(member.user);
+		const coins = await economy.getCoins(user);
 
 		const embed = new Discord.MessageEmbed()
 			.setAuthor({
-				name: `${member.user.username}'s balance`,
+				name: `${user.username}'s balance`,
 			})
-			.setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+			.setThumbnail(user.displayAvatarURL({ dynamic: true }))
 			.setColor("#DA70D6")
 			.setFooter({
 				text: "https://patreon.com/kannacoco",

@@ -1,6 +1,6 @@
 const schemas = require("../../database/schemas");
-const Economy = require("../../utils/Economy");
-const Error = require("../../utils/Error");
+const economy = require("../../utils/economies");
+const { argsError } = require("../../utils/errors");
 const constants = require("../../utils/constants");
 
 module.exports = {
@@ -10,10 +10,9 @@ module.exports = {
 	category: "[🎩] economy",
 	usage: "<amount | all | max>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
-		const coins = await new Economy(client).getCoins(message.author);
+		const coins = await economy.getCoins(message.author);
 		const currentMaxDeposit = coins.get("maxDeposit");
 		const currentBank = coins.get("bank");
 		const currentPocket = coins.get("pocket");

@@ -1,5 +1,5 @@
 const schemas = require("../../database/schemas");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 
 module.exports = {
 	name: "prefix",
@@ -14,11 +14,10 @@ module.exports = {
 
 		const Guilds = await schemas.guild();
 
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		if (message.mentions.size > 0)
-			return new Error(module.exports, client, message).argsError();
+			return argsError(module.exports, client, message);
 
 		try {
 			await Guilds.create({

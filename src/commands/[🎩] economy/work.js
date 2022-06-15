@@ -1,5 +1,5 @@
 const schemas = require("../../database/schemas");
-const Economy = require("../../utils/Economy");
+const economy = require("../../utils/economies");
 const constants = require("../../utils/constants");
 const words = [
 	"I'm working for money.",
@@ -15,12 +15,8 @@ module.exports = {
 	description: "Work to earn coins",
 	category: "[🎩] economy",
 	run: async (client, message) => {
-		const coins = await new Economy(client).getCoins(message.author);
-		const timer = await new Economy(client).getCooldown(
-			message.author,
-			"work",
-			3.6e6
-		);
+		const coins = await economy.getCoins(message.author);
+		const timer = await economy.getCooldown(message.author, "work", 3.6e6);
 
 		if (timer) {
 			message.reply(
@@ -63,7 +59,7 @@ module.exports = {
 
 				const amount = `${constants.coins.emoji} ${gain}`;
 
-				message.reply(new Economy(client).getWork(amount));
+				message.reply(economy.getWork(amount));
 			} else {
 				message.channel.send("Poor effort. You lost the job.");
 			}

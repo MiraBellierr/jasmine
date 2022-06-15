@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getUserFromArguments, getMemberFromArguments } = require("../../utils/getters");
 const Paginate = require("../../utils/pagination");
 
 module.exports = {
@@ -11,8 +11,7 @@ module.exports = {
 	run: async (client, message, args) => {
 		const pages = [];
 		const user =
-			(await new Getter(message, args.join(" ")).getUser(client)) ||
-			message.author;
+			(await getUserFromArguments(message, args.join(" "))) || message.author;
 
 		const embed = new MessageEmbed()
 			.setAuthor({
@@ -44,7 +43,7 @@ module.exports = {
 
 		pages.push(embed);
 
-		const member = await new Getter(message, user.id).getMember();
+		const member = await getMemberFromArguments(message, user.id);
 
 		if (member && member.avatarURL()) {
 			const embed = new MessageEmbed()

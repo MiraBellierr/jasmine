@@ -1,7 +1,7 @@
 const gis = require("g-i-s");
 const Discord = require("discord.js");
 const { Paginate } = require("../../utils/pagination");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 
 function capitalize(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
@@ -19,8 +19,7 @@ module.exports = {
 				"This command can be used in nsfw channel only."
 			);
 
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const m = await message.channel.send("*Please wait...*");
 		const search = args.join(" ");

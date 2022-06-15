@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
-const Util = require("../../utils/Util");
+const { getMemberFromArguments } = require("../../utils/getters");
+const utils = require("../../utils/utils");
 
 module.exports = {
 	name: "blush",
 	description: "blush to someone",
 	category: "[🤺] roleplay",
 	run: async (client, message, args) => {
-		const url = await new Util().nekoapi(module.exports.name);
+		const url = await utils.nekoapi(module.exports.name);
 
 		if (!args.length) {
 			const embed = new Discord.MessageEmbed()
@@ -21,7 +21,7 @@ module.exports = {
 			return message.reply({ embeds: [embed] });
 		}
 
-		const target = await new Getter(message, args.join(" ")).getMember();
+		const target = await getMemberFromArguments(message, args.join(" "));
 
 		if (!target) return message.reply("I didn't found the user with this name");
 

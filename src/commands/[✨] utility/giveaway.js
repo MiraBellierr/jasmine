@@ -2,8 +2,8 @@
 
 const ms = require("ms");
 const Discord = require("discord.js");
-const Collector = require("../../utils/Collector");
-const Getter = require("../../utils/Getter");
+const { startCollector } = require("../../utils/collectors");
+const { getChannelFromArguments } = require("../../utils/getters");
 
 module.exports = {
 	name: "giveaway",
@@ -50,17 +50,15 @@ module.exports = {
 
 			const m = await message.reply({ content, embeds: [example] });
 
-			const giveawayChannelinput = await new Collector(
-				message
-			).startCollector();
+			const giveawayChannelinput = await startCollector(message);
 
 			if (giveawayChannelinput.error === "stop") {
 				return message.channel.send("I have stopped the command.");
 			} else {
-				const channel = await new Getter(
+				const channel = await getChannelFromArguments(
 					message,
 					giveawayChannelinput.message
-				).getChannel();
+				);
 
 				if (!channel)
 					return message.channel.send(
@@ -82,9 +80,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [example] });
 
-			const giveawayDurationinput = await new Collector(
-				message
-			).startCollector();
+			const giveawayDurationinput = await startCollector(message);
 
 			if (giveawayDurationinput.error === "stop") {
 				return message.channel.send("I have stopped the command");
@@ -102,9 +98,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [example] });
 
-			const numberOfWinnersInput = await new Collector(
-				message
-			).startCollector();
+			const numberOfWinnersInput = await startCollector(message);
 
 			if (numberOfWinnersInput.error === "stop") {
 				return message.channel.send("I have stopped the command");
@@ -125,7 +119,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [example] });
 
-			const giveawayPrizeInput = await new Collector(message).startCollector();
+			const giveawayPrizeInput = await startCollector(message);
 
 			if (giveawayPrizeInput.error === "stop") {
 				return message.channel.send("I have stopped the command");
@@ -139,7 +133,7 @@ module.exports = {
 
 			m.edit({ content, embeds: [example] });
 
-			const confirm = await new Collector(message).startCollector();
+			const confirm = await startCollector(message);
 
 			if (confirm.message === "yes") {
 				client.giveawaysManager.start(giveawayChannel, {
