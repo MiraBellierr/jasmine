@@ -34,6 +34,7 @@ You may contribute to the Kannabotto repo. I would appreciate it if you do so an
 
 ## 💙 Contributors
 
-- 💕 **[Z3RYX](https://github.com/Z3RYX)**: RPG Algorithms and Optimiser
+- 💕 **[Z3RYX](https://github.com/Z3RYX)**: RPG Algorithms and Optimization
+- 💕 **[ySnoopyDogy](https://github.com/ySnoopyDogy)**: Code Optimization
 - 💕 **[dchu096](https://github.com/dchu096)**: Console and Output
 - 💕 **[nemoisafish](https://github.com/nemoisafish)**: Graphics Design and Business
