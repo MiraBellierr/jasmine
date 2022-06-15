@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const axios = require("axios");
 const moment = require("moment");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 
 module.exports = {
 	name: "anime",
@@ -9,8 +9,7 @@ module.exports = {
 	category: "[❤️] anime",
 	usage: "<name> [--anime | --character | --manga]",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const m = await message.reply("*please wait...*");
 
@@ -199,7 +198,7 @@ module.exports = {
 
 					return message.reply({ embeds: [embed] });
 				} else {
-					return new Error(module.exports, client, message).argsError();
+					return argsError(module.exports, client, message);
 				}
 			},
 			() => {

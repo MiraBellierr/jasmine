@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Util = require("../../utils/Util");
+const utils = require("../../utils/utils");
 const osu = require("node-os-utils");
 const si = require("systeminformation");
 const sqlite = require("../../../node_modules/sqlite3/package.json");
@@ -45,7 +45,7 @@ module.exports = {
 				}\n**• Cached Members:** ${client.users.cache.size.toLocaleString()}\n**• Total Members:** ${client.guilds.cache
 					.map((guild) => guild.memberCount)
 					.reduce((accumulator, currentValue) => accumulator + currentValue)
-					.toLocaleString()}\n**• Total Servers:** ${client.guilds.cache.size.toLocaleString()}\n**• Total Shards:** ${client.shard.count.toLocaleString()}\n**• Total Channels:** ${client.channels.cache.size.toLocaleString()}\n**• Total Emojis:** ${client.emojis.cache.size.toLocaleString()}\n**• Created At:** ${new Util().formatDate(
+					.toLocaleString()}\n**• Total Servers:** ${client.guilds.cache.size.toLocaleString()}\n**• Total Shards:** ${client.shard.count.toLocaleString()}\n**• Total Channels:** ${client.channels.cache.size.toLocaleString()}\n**• Total Emojis:** ${client.emojis.cache.size.toLocaleString()}\n**• Created At:** ${utils.formatDate(
 					client.user.createdAt
 				)}\n**• Library:** Discord.js v${
 					Discord.version
@@ -61,7 +61,7 @@ module.exports = {
 					100 - memInfo.freeMemPercentage
 				).toFixed(2)}%)\n**• Operating System:** ${osInfo}\n**• Processor:** ${
 					processor.manufacturer
-				} ${processor.brand}\n**• Ready At:** ${new Util().formatDate(
+				} ${processor.brand}\n**• Ready At:** ${utils.formatDate(
 					client.readyAt
 				)}\n**• Uptime:** ${uptime}`
 			);

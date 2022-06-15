@@ -1,8 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 const axios = require("axios");
 const { Paginate } = require("../../utils/pagination");
-const Error = require("../../utils/Error");
-const Util = require("../../utils/Util");
+const { argsError } = require("../../utils/errors");
+const utils = require("../../utils/utils");
 
 module.exports = {
 	name: "country",
@@ -10,8 +10,7 @@ module.exports = {
 	category: "[✨] utility",
 	usage: "<country>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		let name = args.join(" ").toLowerCase();
 		let url = `https://restcountries.com/v3.1/name/${name}`;
@@ -179,7 +178,7 @@ module.exports = {
 			.setTimestamp()
 			.addField(
 				"Translation",
-				new Util().splitMessage(translations, {
+				utils.splitMessage(translations, {
 					maxLength: 1024,
 					append: "...",
 				})[0]

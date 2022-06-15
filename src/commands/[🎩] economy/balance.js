@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { getUserFromArguments } = require("../../utils/getters");
 const constants = require("../../utils/constants");
-const Economy = require("../../utils/Economy");
+const economy = require("../../utils/economies");
 
 module.exports = {
 	name: "balance",
@@ -13,7 +13,7 @@ module.exports = {
 		const user =
 			(await getUserFromArguments(message, args.join())) || message.author;
 
-		const coins = await new Economy(client).getCoins(user);
+		const coins = await economy.getCoins(user);
 
 		const embed = new Discord.MessageEmbed()
 			.setAuthor({
@@ -29,12 +29,12 @@ module.exports = {
 				`**Pocket:** ${constants.coins.emoji} ${coins
 					.get("pocket")
 					.toLocaleString()}\n**Bank:** ${constants.coins.emoji} ${coins
-						.get("bank")
-						.toLocaleString()}/${coins
-							.get("maxDeposit")
-							.toLocaleString()}\n**Total:** ${constants.coins.emoji} ${(
-								coins.get("pocket") + coins.get("bank")
-							).toLocaleString()}`
+					.get("bank")
+					.toLocaleString()}/${coins
+					.get("maxDeposit")
+					.toLocaleString()}\n**Total:** ${constants.coins.emoji} ${(
+					coins.get("pocket") + coins.get("bank")
+				).toLocaleString()}`
 			);
 
 		message.reply({ embeds: [embed] });

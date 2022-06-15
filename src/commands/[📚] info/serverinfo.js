@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Util = require("../../utils/Util");
+const utils = require("../../utils/utils");
 
 module.exports = {
 	name: "serverinfo",
@@ -22,7 +22,7 @@ module.exports = {
 
 		const guild = await client.guilds.fetch(message.guild.id);
 
-		const created = new Util().formatDate(message.guild.createdAt);
+		const created = utils.formatDate(message.guild.createdAt);
 
 		const embed = new Discord.MessageEmbed()
 			.setAuthor({

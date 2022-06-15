@@ -1,6 +1,6 @@
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
-const Getter = require("../../utils/Getter");
+const { getMemberFromArguments } = require("../../utils/getters");
 
 module.exports = {
 	name: "profile",
@@ -10,7 +10,7 @@ module.exports = {
 	usage: "<member>",
 	run: async (client, message, args) => {
 		const member =
-			(await new Getter(message, args.join(" ")).getMember()) || message.member;
+			(await getMemberFromArguments(message, args.join(" "))) || message.member;
 
 		if (!member)
 			return message.reply("I didn't found that member in this server.");

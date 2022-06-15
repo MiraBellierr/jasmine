@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { Paginate } = require("../../utils/pagination");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 
 module.exports = {
 	name: "emote",
@@ -9,8 +9,7 @@ module.exports = {
 	category: "[✨] utility",
 	usage: "<emote>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const emojis = [];
 

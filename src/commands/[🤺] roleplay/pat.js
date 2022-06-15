@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
-const Error = require("../../utils/Error");
-const Util = require("../../utils/Util");
+const { argsError } = require("../../utils/errors");
+const utils = require("../../utils/utils");
 
 module.exports = {
 	name: "pat",
@@ -9,14 +9,13 @@ module.exports = {
 	category: "[🤺] roleplay",
 	usage: "<member>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const target = await getMemberFromArguments(message, args.join(" "));
 
 		if (!target) return message.reply("I didn't found the user with this name");
 
-		const url = await new Util().nekoapi(module.exports.name);
+		const url = await utils.nekoapi(module.exports.name);
 
 		if (target.id === message.author.id) {
 			const embed = new Discord.MessageEmbed()

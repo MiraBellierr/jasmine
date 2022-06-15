@@ -1,5 +1,5 @@
 const classes = require("../../database/json/classes.json");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 

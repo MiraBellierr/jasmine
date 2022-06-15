@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 const { getRoleFromArguments } = require("../../utils/getters");
 
 module.exports = {
@@ -9,12 +9,11 @@ module.exports = {
 	description: "Returns role information",
 	usage: "<role>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		const role = await getRoleFromArguments(message, args.join(" "));
 
-		if (!role) return new Error(module.exports, client, message).argsError();
+		if (!role) return argsError(module.exports, client, message);
 
 		const guildMembers = await role.guild.members.fetch();
 		const memberCount = guildMembers.filter((member) =>
@@ -57,9 +56,12 @@ module.exports = {
 			})
 			.setTitle("Role Information")
 			.setDescription(
-				`**• ID:** ${role.id}\n**• Name:** ${role.name
-				}\n**• Mention:** ${role}\n**• Hex:** ${role.hexColor.toUpperCase()}\n**• Members with this role:** ${memberCount}\n**• Position:** ${role.position
-				}\n**• Hoisted status:** ${status[role.hoist]}\n**• Mentionable:** ${status[role.mentionable]
+				`**• ID:** ${role.id}\n**• Name:** ${
+					role.name
+				}\n**• Mention:** ${role}\n**• Hex:** ${role.hexColor.toUpperCase()}\n**• Members with this role:** ${memberCount}\n**• Position:** ${
+					role.position
+				}\n**• Hoisted status:** ${status[role.hoist]}\n**• Mentionable:** ${
+					status[role.mentionable]
 				}\n**• Permission:** ${permission}`
 			)
 			.setColor(role.hexColor)

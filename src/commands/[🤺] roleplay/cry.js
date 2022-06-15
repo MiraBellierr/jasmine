@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
-const Util = require("../../utils/Util");
+const utils = require("../../utils/utils");
 
 module.exports = {
 	name: "cry",
 	description: "cry on someone",
 	category: "[🤺] roleplay",
 	run: async (client, message, args) => {
-		const url = await new Util().nekoapi(module.exports.name);
+		const url = await utils.nekoapi(module.exports.name);
 
 		if (!args.length) {
 			const embed = new Discord.MessageEmbed()

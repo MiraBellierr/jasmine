@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const w = require("weather-js2");
-const Error = require("../../utils/Error");
+const { argsError } = require("../../utils/errors");
 const Paginate = require("../../utils/pagination");
 
 module.exports = {
@@ -9,8 +9,7 @@ module.exports = {
 	category: "[✨] utility",
 	usage: "<location>",
 	run: async (client, message, args) => {
-		if (!args.length)
-			return new Error(module.exports, client, message).argsError();
+		if (!args.length) return argsError(module.exports, client, message);
 
 		w.find(
 			{ search: args.join(" "), degreeType: "C", resCount: 1 },
