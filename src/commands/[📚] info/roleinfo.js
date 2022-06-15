@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const Error = require("../../utils/Error");
-const Getter = require("../../utils/Getter");
+const { getRoleFromArguments } = require("../../utils/getters");
 
 module.exports = {
 	name: "roleinfo",
@@ -12,7 +12,7 @@ module.exports = {
 		if (!args.length)
 			return new Error(module.exports, client, message).argsError();
 
-		const role = await new Getter(message, args.join(" ")).getRole();
+		const role = await getRoleFromArguments(message, args.join(" "));
 
 		if (!role) return new Error(module.exports, client, message).argsError();
 
@@ -57,12 +57,9 @@ module.exports = {
 			})
 			.setTitle("Role Information")
 			.setDescription(
-				`**• ID:** ${role.id}\n**• Name:** ${
-					role.name
-				}\n**• Mention:** ${role}\n**• Hex:** ${role.hexColor.toUpperCase()}\n**• Members with this role:** ${memberCount}\n**• Position:** ${
-					role.position
-				}\n**• Hoisted status:** ${status[role.hoist]}\n**• Mentionable:** ${
-					status[role.mentionable]
+				`**• ID:** ${role.id}\n**• Name:** ${role.name
+				}\n**• Mention:** ${role}\n**• Hex:** ${role.hexColor.toUpperCase()}\n**• Members with this role:** ${memberCount}\n**• Position:** ${role.position
+				}\n**• Hoisted status:** ${status[role.hoist]}\n**• Mentionable:** ${status[role.mentionable]
 				}\n**• Permission:** ${permission}`
 			)
 			.setColor(role.hexColor)
