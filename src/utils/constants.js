@@ -40,6 +40,6 @@ module.exports.options = {
 };
 
 module.exports.coins = {
-	link: "https://miraiscute.com/img/Kabo.gif",
-	emoji: "<a:Kabo:985550861071695882>",
+	link: "https://miraiscute.com/img/coins.gif",
+	emoji: "<a:Coins:987324624318648320>",
 };
