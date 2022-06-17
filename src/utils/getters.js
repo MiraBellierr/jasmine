@@ -1,4 +1,6 @@
 const getUserFromArguments = async (message, arguments) => {
+	if (!arguments) return null;
+
 	const userToFind = arguments.toLowerCase();
 
 	if (message.mentions.users.first()) return message.mentions.users.first();
@@ -19,6 +21,8 @@ const getUserFromArguments = async (message, arguments) => {
 };
 
 const getMemberFromArguments = async (message, arguments) => {
+	if (!arguments) return null;
+
 	const memberToFind = arguments.toLowerCase();
 
 	if (message.mentions.members.first()) return message.mentions.members.first();
@@ -39,6 +43,8 @@ const getMemberFromArguments = async (message, arguments) => {
 };
 
 const getChannelFromArguments = async (message, arguments) => {
+	if (!arguments) return null;
+
 	const channelToFind = arguments.toLowerCase();
 
 	if (message.mentions.channels.first())
@@ -57,6 +63,8 @@ const getChannelFromArguments = async (message, arguments) => {
 };
 
 const getRoleFromArguments = async (message, arguments) => {
+	if (!arguments) return null;
+
 	const roleToFind = arguments.toLowerCase();
 
 	if (message.mentions.roles.first()) return message.mentions.roles.first();
