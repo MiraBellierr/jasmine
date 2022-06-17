@@ -19,7 +19,16 @@ module.exports = async (client, member) => {
 			.replace("{membercount}", member.guild.memberCount);
 
 		if (leaveObj.authorURL) {
-			embed.setAuthor({ name: authorNameEmbed, iconURL: leaveObj.authorURL });
+			embed.setAuthor({
+				name: authorNameEmbed,
+				iconURL: leaveObj.authorURL
+					.replace(
+						"{user avatar}",
+						member.user.displayAvatarURL({ dynamic: true })
+					)
+					.replace("{kanna avatar}", client.user.displayAvatarURL())
+					.replace("{server icon}", member.guild.iconURL({ dynamic: true })),
+			});
 		} else {
 			embed.setAuthor({ name: authorNameEmbed });
 		}
@@ -44,7 +53,15 @@ module.exports = async (client, member) => {
 	}
 
 	if (leaveObj.thumbnail) {
-		embed.setThumbnail(leaveObj.thumbnail);
+		embed.setThumbnail(
+			leaveObj.thumbnail
+				.replace(
+					"{user avatar}",
+					member.user.displayAvatarURL({ dynamic: true })
+				)
+				.replace("{kanna avatar}", client.user.displayAvatarURL())
+				.replace("{server icon}", member.guild.iconURL({ dynamic: true }))
+		);
 	}
 
 	if (leaveObj.description) {
@@ -59,7 +76,15 @@ module.exports = async (client, member) => {
 	}
 
 	if (leaveObj.image) {
-		embed.setImage(leaveObj.image);
+		embed.setImage(
+			leaveObj.image
+				.replace(
+					"{user avatar}",
+					member.user.displayAvatarURL({ dynamic: true })
+				)
+				.replace("{kanna avatar}", client.user.displayAvatarURL())
+				.replace("{server icon}", member.guild.iconURL({ dynamic: true }))
+		);
 	}
 
 	if (leaveObj.footerText) {
@@ -70,7 +95,16 @@ module.exports = async (client, member) => {
 			.replace("{membercount}", member.guild.memberCount);
 
 		if (leaveObj.footerURL) {
-			embed.setFooter({ text: footerTextEmbed, iconURL: leaveObj.footerURL });
+			embed.setFooter({
+				text: footerTextEmbed,
+				iconURL: leaveObj.footerURL
+					.replace(
+						"{user avatar}",
+						member.user.displayAvatarURL({ dynamic: true })
+					)
+					.replace("{kanna avatar}", client.user.displayAvatarURL())
+					.replace("{server icon}", member.guild.iconURL({ dynamic: true })),
+			});
 		} else {
 			embed.setFooter({ text: footerTextEmbed });
 		}

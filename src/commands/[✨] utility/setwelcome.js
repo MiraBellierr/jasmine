@@ -118,9 +118,11 @@ module.exports = {
 
 				welcomeObj.authorName = authorName.message;
 
-				content = `please provide a url or attachment for author iconURL slot, \`skip\` to skip. \`stop\` to stop.\nChannel: ${channel}`;
+				content = `please provide a url or attachment for author iconURL slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - avatar of the joined member\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nChannel: ${channel}`;
 
-				m.edit({ content, embeds: [embed] });
+				m.edit({ content, embeds: [embed] }).catch(() => {
+					return message.channel.send("Invalid input");
+				});
 
 				const authorURL = await startCollector(message);
 
@@ -136,9 +138,34 @@ module.exports = {
 
 						welcomeObj.authorURL = authorURL.attachment;
 					} else {
+						let authorURLText = authorURL.message;
+
+						switch (authorURL.message) {
+							case "{user avatar}":
+								authorURLText = message.author.displayAvatarURL({
+									dynamic: true,
+								});
+								break;
+							case "{kanna avatar}":
+								authorURLText = client.user.displayAvatarURL();
+								break;
+							case "{server icon}":
+								authorURLText = message.guild.iconURL({ dynamic: true });
+								break;
+						}
+
+						if (
+							!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
+								authorURLText
+							)
+						)
+							return message.channel.send(
+								"Invalid input. I have stopped the command"
+							);
+
 						embed.setAuthor({
 							name: authorNameEmbed,
-							iconURL: authorURL.message,
+							iconURL: authorURLText,
 						});
 
 						welcomeObj.authorURL = authorURL.message;
@@ -170,7 +197,9 @@ module.exports = {
 
 				content = `please provide an URL for URL slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
 
-				m.edit({ content, embeds: [embed] });
+				m.edit({ content, embeds: [embed] }).catch(() => {
+					return message.channel.send("Invalid input");
+				});
 
 				const titleURL = await startCollector(message);
 
@@ -178,13 +207,18 @@ module.exports = {
 					return message.channel.send("I have stopped the command.");
 
 				if (titleURL.error !== "skip") {
-					try {
-						embed.setURL(titleURL.message);
+					if (
+						!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
+							titleURL.message
+						)
+					)
+						return message.channel.send(
+							"Not a well formed URL. I have stopped the command."
+						);
 
-						welcomeObj.titleURL = titleURL.message;
-					} catch (e) {
-						return message.channel.send("Error: Not a well formed URL!");
-					}
+					embed.setURL(titleURL.message);
+
+					welcomeObj.titleURL = titleURL.message;
 				}
 			}
 
@@ -236,9 +270,11 @@ module.exports = {
 
 				welcomeObj.footerText = footerText.message;
 
-				content = `please provide a url or attachment for footer iconURL slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
+				content = `please provide a url or attachment for footer iconURL slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - avatar of the joined member\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
-				m.edit({ content, embeds: [embed] });
+				m.edit({ content, embeds: [embed] }).catch(() => {
+					return message.channel.send("Invalid input");
+				});
 
 				const footerURL = await startCollector(message);
 
@@ -254,9 +290,34 @@ module.exports = {
 
 						welcomeObj.footerURL = footerURL.attachment;
 					} else {
+						let footerURLText = footerURL.message;
+
+						switch (footerURL.message) {
+							case "{user avatar}":
+								footerURLText = message.author.displayAvatarURL({
+									dynamic: true,
+								});
+								break;
+							case "{kanna avatar}":
+								footerURLText = client.user.displayAvatarURL();
+								break;
+							case "{server icon}":
+								footerURLText = message.guild.iconURL({ dynamic: true });
+								break;
+						}
+
+						if (
+							!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
+								footerURLText
+							)
+						)
+							return message.channel.send(
+								"Invalid input. I have stopped the command"
+							);
+
 						embed.setFooter({
 							text: footerEmbed,
-							iconURL: footerURL.message,
+							iconURL: footerURLText,
 						});
 
 						welcomeObj.footerURL = footerURL.message;
@@ -264,7 +325,7 @@ module.exports = {
 				}
 			}
 
-			content = `please provide a url or attachment for thumbnail slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
+			content = `please provide a url or attachment for thumbnail slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - avatar of the joined member\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
 			m.edit({ content, embeds: [embed] });
 
@@ -279,13 +340,38 @@ module.exports = {
 
 					welcomeObj.thumbnail = thumbnail.attachment;
 				} else {
-					embed.setThumbnail(thumbnail.message);
+					let thumbnailText = thumbnail.message;
+
+					switch (thumbnail.message) {
+						case "{user avatar}":
+							thumbnailText = message.author.displayAvatarURL({
+								dynamic: true,
+							});
+							break;
+						case "{kanna avatar}":
+							thumbnailText = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							thumbnailText = message.guild.iconURL({ dynamic: true });
+							break;
+					}
+
+					if (
+						!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
+							thumbnailText
+						)
+					)
+						return message.channel.send(
+							"Invalid input. I have stopped the command"
+						);
+
+					embed.setThumbnail(thumbnailText);
 
 					welcomeObj.thumbnail = thumbnail.message;
 				}
 			}
 
-			content = `please provide a url or attachment for image slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
+			content = `please provide a url or attachment for image slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - avatar of the joined member\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
 			m.edit({ content, embeds: [embed] });
 
@@ -300,7 +386,32 @@ module.exports = {
 
 					welcomeObj.image = image.attachment;
 				} else {
-					embed.setImage(image.message);
+					let imageText = image.message;
+
+					switch (image.message) {
+						case "{user avatar}":
+							imageText = message.author.displayAvatarURL({
+								dynamic: true,
+							});
+							break;
+						case "{kanna avatar}":
+							imageText = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							imageText = message.guild.iconURL({ dynamic: true });
+							break;
+					}
+
+					if (
+						!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
+							imageText
+						)
+					)
+						return message.channel.send(
+							"Invalid input. I have stopped the command"
+						);
+
+					embed.setImage(imageText);
 
 					welcomeObj.image = image.message;
 				}

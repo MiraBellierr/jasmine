@@ -19,7 +19,16 @@ module.exports = async (client, member) => {
 			.replace("{membercount}", member.guild.memberCount);
 
 		if (welcomeObj.authorURL) {
-			embed.setAuthor({ name: authorNameEmbed, iconURL: welcomeObj.authorURL });
+			embed.setAuthor({
+				name: authorNameEmbed,
+				iconURL: welcomeObj.authorURL
+					.replace(
+						"{user avatar}",
+						member.user.displayAvatarURL({ dynamic: true })
+					)
+					.replace("{kanna avatar}", client.user.displayAvatarURL())
+					.replace("{server icon}", member.guild.iconURL({ dynamic: true })),
+			});
 		} else {
 			embed.setAuthor({ name: authorNameEmbed });
 		}
@@ -44,7 +53,15 @@ module.exports = async (client, member) => {
 	}
 
 	if (welcomeObj.thumbnail) {
-		embed.setThumbnail(welcomeObj.thumbnail);
+		embed.setThumbnail(
+			welcomeObj.thumbnail
+				.replace(
+					"{user avatar}",
+					member.user.displayAvatarURL({ dynamic: true })
+				)
+				.replace("{kanna avatar}", client.user.displayAvatarURL())
+				.replace("{server icon}", member.guild.iconURL({ dynamic: true }))
+		);
 	}
 
 	if (welcomeObj.description) {
@@ -59,7 +76,15 @@ module.exports = async (client, member) => {
 	}
 
 	if (welcomeObj.image) {
-		embed.setImage(welcomeObj.image);
+		embed.setImage(
+			welcomeObj.image
+				.replace(
+					"{user avatar}",
+					member.user.displayAvatarURL({ dynamic: true })
+				)
+				.replace("{kanna avatar}", client.user.displayAvatarURL())
+				.replace("{server icon}", member.guild.iconURL({ dynamic: true }))
+		);
 	}
 
 	if (welcomeObj.footerText) {
@@ -70,7 +95,16 @@ module.exports = async (client, member) => {
 			.replace("{membercount}", member.guild.memberCount);
 
 		if (welcomeObj.footerURL) {
-			embed.setFooter({ text: footerTextEmbed, iconURL: welcomeObj.footerURL });
+			embed.setFooter({
+				text: footerTextEmbed,
+				iconURL: welcomeObj.footerURL
+					.replace(
+						"{user avatar}",
+						member.user.displayAvatarURL({ dynamic: true })
+					)
+					.replace("{kanna avatar}", client.user.displayAvatarURL())
+					.replace("{server icon}", member.guild.iconURL({ dynamic: true })),
+			});
 		} else {
 			embed.setFooter({ text: footerTextEmbed });
 		}
