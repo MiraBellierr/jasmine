@@ -54,15 +54,15 @@ module.exports = async (client, message) => {
 
 	let command = client.commands.get(cmd);
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
+	if (!command) return
 
-	if (command) {
-		try {
-			command.run(client, message, args);
-		} catch (err) {
-			signale.fatal(err);
-			message.reply(
-				"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
-			);
-		}
+	try {
+		command.run(client, message, args);
+	} catch (err) {
+		signale.fatal(err);
+		message.reply(
+			"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
+		);
 	}
+
 };
