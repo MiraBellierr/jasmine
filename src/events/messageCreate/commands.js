@@ -57,7 +57,7 @@ module.exports = async (client, message) => {
 	if (!command) return
 
 	try {
-		command.run(client, message, args);
+	        await command.run(client, message, args);
 	} catch (err) {
 		signale.fatal(err);
 		message.reply(
