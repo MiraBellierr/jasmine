@@ -1,5 +1,6 @@
 const signale = require("signale");
 const schemas = require("../../database/schemas");
+const contents = require("../../utils/constants");
 
 module.exports = async (client, message) => {
 	if (!message.guild) return;
@@ -63,5 +64,8 @@ module.exports = async (client, message) => {
 		message.reply(
 			"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
 		);
+		const channel = await client.channels.fetch(contents.errorChannel.id);
+
+		channel.send(`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``);
 	}
 };
