@@ -2,6 +2,7 @@ const signale = require("signale");
 const schemas = require("../../database/schemas");
 
 module.exports = async (client, message) => {
+	s;
 	if (!message.guild) return;
 
 	if (!client.prefixes.get(message.guild.id))
@@ -54,15 +55,14 @@ module.exports = async (client, message) => {
 
 	let command = client.commands.get(cmd);
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
-	if (!command) return
+	if (!command) return;
 
 	try {
-	        await command.run(client, message, args);
+		await command.run(client, message, args);
 	} catch (err) {
 		signale.fatal(err);
 		message.reply(
 			"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
 		);
 	}
-
 };
