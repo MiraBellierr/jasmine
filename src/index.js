@@ -1,4 +1,8 @@
+'use strict'
+
 require("dotenv").config();
+require("./antiCrash.js")()
+
 const { ShardingManager } = require("discord.js");
 const manager = new ShardingManager("src/engine.js", {
         token: process.env.TOKEN,
