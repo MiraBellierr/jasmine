@@ -34,13 +34,20 @@ module.exports = {
 				iconURL: member.user.displayAvatarURL({ dynamic: true }),
 			})
 			.setColor("#CD1C6C")
-			.setTitle(character.get("name"))
-			.setDescription(
-				`\`\`\`js\n• Level: ${character.get("level")}\n• HP: ${character.get(
+			.setTitle(`Level ${character.get("level")} ${character.get("name")}`)
+			.addField(
+				"__Stats__",
+				`**• <:class:880658124246237254> Class:** ${character.get(
+					"class"
+				)}\n**• <:xp:880655736261206036> XP:** ${character.get(
+					"xp"
+				)}/${character.get(
+					"xpNeeded"
+				)}\n**• <:health:880655864523014155> HP:** ${character.get(
 					"hp"
-				)}\n• STR: ${character.get("str")}\n• AGL: ${character.get(
-					"agl"
-				)}\n\`\`\``
+				)}\n**• <:pa:880665943959797811> STR:** ${character.get(
+					"str"
+				)}\n**• <:speed:880668456066891826> AGL:** ${character.get("agl")}`
 			)
 			.setImage(character.get("img"))
 			.setTimestamp()
