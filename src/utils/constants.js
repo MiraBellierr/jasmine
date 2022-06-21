@@ -43,3 +43,7 @@ module.exports.coins = {
 	link: "https://miraiscute.com/img/coins.gif",
 	emoji: "<a:Coins:987324624318648320>",
 };
+
+module.exports.errorChannel = {
+	id: "879702885670211595",
+};
