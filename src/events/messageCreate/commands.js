@@ -2,7 +2,6 @@ const signale = require("signale");
 const schemas = require("../../database/schemas");
 
 module.exports = async (client, message) => {
-	s;
 	if (!message.guild) return;
 
 	if (!client.prefixes.get(message.guild.id))
