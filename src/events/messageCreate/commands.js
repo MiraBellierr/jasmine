@@ -4,7 +4,7 @@ const contents = require("../../utils/constants");
 
 module.exports = async (client, message) => {
 	if (!message.guild) return;
-
+	s;
 	if (!client.prefixes.get(message.guild.id))
 		client.prefixes.set(message.guild.id, process.env.PREFIX);
 
@@ -60,12 +60,22 @@ module.exports = async (client, message) => {
 	try {
 		await command.run(client, message, args);
 	} catch (err) {
+		if (err.message.includes("Cannot send an empty message")) return;
+
 		signale.fatal(err);
 		message.reply(
 			"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
 		);
-		const channel = await client.channels.fetch(contents.errorChannel.id);
 
-		channel.send(`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``);
+		client.channels.fetch(contents.errorChannel.id).then(
+			(channel) => {
+				return channel.send(
+					`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``
+				);
+			},
+			() => {
+				return;
+			}
+		);
 	}
 };

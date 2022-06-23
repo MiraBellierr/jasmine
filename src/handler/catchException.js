@@ -4,9 +4,12 @@ module.exports = (client) => {
 	process.on("unhandledRejection", async (reason) => {
 		console.log(reason);
 
-		const channel = await client.channels.fetch(contants.errorChannel.id);
-
-		channel.send(`An error occured: \n\`\`\`js\n${reason.stack}\n\`\`\``);
+		client.channels.fetch(contants.errorChannel.id).then(
+			(channel) => {
+				channel.send(`An error occured: \n\`\`\`js\n${reason.stack}\n\`\`\``);
+			},
+			() => null
+		);
 
 		setTimeout(() => {
 			process.exit(1);
@@ -15,9 +18,12 @@ module.exports = (client) => {
 	process.on("uncaughtException", async (err) => {
 		console.log(err);
 
-		const channel = await client.channels.fetch(contants.errorChannel.id);
-
-		channel.send(`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``);
+		client.channels.fetch(contants.errorChannel.id).then(
+			(channel) => {
+				channel.send(`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``);
+			},
+			() => null
+		);
 
 		setTimeout(() => {
 			process.exit(1);
@@ -26,9 +32,12 @@ module.exports = (client) => {
 	process.on("uncaughtExceptionMonitor", async (err) => {
 		console.log(err);
 
-		const channel = await client.channels.fetch(contants.errorChannel.id);
-
-		channel.send(`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``);
+		client.channels.fetch(contants.errorChannel.id).then(
+			(channel) => {
+				channel.send(`An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``);
+			},
+			() => null
+		);
 
 		setTimeout(() => {
 			process.exit(1);
