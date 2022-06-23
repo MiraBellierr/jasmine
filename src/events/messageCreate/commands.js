@@ -4,7 +4,7 @@ const contents = require("../../utils/constants");
 
 module.exports = async (client, message) => {
 	if (!message.guild) return;
-	s;
+
 	if (!client.prefixes.get(message.guild.id))
 		client.prefixes.set(message.guild.id, process.env.PREFIX);
 
