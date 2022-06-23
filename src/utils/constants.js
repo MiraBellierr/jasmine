@@ -47,3 +47,9 @@ module.exports.coins = {
 module.exports.errorChannel = {
 	id: "879702885670211595",
 };
+
+module.exports.macs = {
+	message: "macs is cute",
+	isCute: true,
+	id: "724552867662528513",
+};
