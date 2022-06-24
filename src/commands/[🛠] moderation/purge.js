@@ -6,10 +6,22 @@ module.exports = {
 	description: "delete some messages",
 	usage: "<count>",
 	run: async (client, message, args) => {
+		if (!message.guild.me.permissions.has("MANAGE_MESSAGES"))
+			return message.channel.send(
+				"I do not have `MANAGE_MESSAGES` permission to be able to continue this command"
+			);
+
+		if (!message.member.permissions.has("MANAGE_MESSAGES"))
+			return message.channel.send(
+				"You don't have `MANAGE_MESSAGES` permission to use this command"
+			);
+
 		let messageCount = args[0];
 
 		if (!messageCount || isNaN(messageCount))
 			return message.channel.send(argsError(module.exports, client, message));
+
+		messageCount++;
 
 		if (messageCount > 100) {
 			messageCount = 100;
