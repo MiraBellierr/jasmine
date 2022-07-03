@@ -57,11 +57,27 @@ module.exports = async (client, message) => {
 	if (!command) command = client.commands.get(client.aliases.get(cmd));
 	if (!command) return;
 
+	if (
+		command.clientPermission &&
+		!message.guild.me.permissions.has(command.clientPermission)
+	) {
+		return message.channel.send(
+			`I do not have the \`${command.clientPermission}\` permission to be able to continue this command`
+		);
+	}
+
+	if (
+		command.memberPermission &&
+		!message.member.permissions.has(command.memberPermission)
+	) {
+		return message.channel.send(
+			`You don't have the \`${command.memberPermission}\` permission to use this command`
+		);
+	}
+
 	try {
 		await command.run(client, message, args);
 	} catch (err) {
-		if (err.message.includes("Cannot send an empty message")) return;
-
 		signale.fatal(err);
 		message.reply(
 			"There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"

@@ -8,12 +8,9 @@ module.exports = {
 	name: "announce",
 	category: "[✨] utility",
 	description: "Sends an announcement to the channel",
+	memberPermissions: "MANAGE_CHANNELS",
 	usage: "<channel>",
 	run: async (client, message, args) => {
-		if (!message.member.permissions.has("MANAGE_CHANNELS"))
-			return message.reply(
-				"Sorry, you don't have `MANAGE_CHANNELS` permission to use this command."
-			);
 		if (!args[0]) return argsError(module.exports, client, message);
 
 		const channel = await getChannelFromArguments(message, args.join(" "));

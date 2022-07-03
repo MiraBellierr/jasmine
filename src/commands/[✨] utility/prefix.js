@@ -5,13 +5,9 @@ module.exports = {
 	name: "prefix",
 	description: "change a prefix for your server",
 	category: "[✨] utility",
+	memberPermissions: "MANAGE_GUILD",
 	usage: "<new prefix>",
 	run: async (client, message, args) => {
-		if (!message.member.permissions.has("MANAGE_GUILD"))
-			return message.reply(
-				`**${message.author.username}**, Sorry you don't have manage server permission to use this command.`
-			);
-
 		const Guilds = await schemas.guild();
 
 		if (!args.length) return argsError(module.exports, client, message);

@@ -10,6 +10,7 @@ module.exports = {
 	aliases: ["sw"],
 	category: "[✨] utility",
 	description: "Welcome message configuration",
+	memberPermissions: "MANAGE_CHANNELS",
 	usage: "<channel | on | off>",
 	run: async (client, message, args) => {
 		if (!message.member.permissions.has("MANAGE_CHANNELS"))

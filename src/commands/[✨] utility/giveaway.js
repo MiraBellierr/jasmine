@@ -10,13 +10,9 @@ module.exports = {
 	aliases: ["giveaways"],
 	category: "[✨] utility",
 	description: "Set up a giveaway on your server",
+	memberPermissions: "MANAGE_CHANNELS",
 	usage: "<start | end | reroll",
 	run: async (client, message, args) => {
-		if (!message.member.permissions.has("MANAGE_CHANNELS"))
-			return message.reply(
-				"Sorry you don't have manage channels permission to use this command."
-			);
-
 		if (!args[0]) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor({
