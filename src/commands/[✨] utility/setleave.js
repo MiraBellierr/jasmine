@@ -13,11 +13,6 @@ module.exports = {
 	memberPermissions: "MANAGE_CHANNELS",
 	usage: "<channel | on | off>",
 	run: async (client, message, args) => {
-		if (!message.member.permissions.has("MANAGE_CHANNELS"))
-			return message.channel.send(
-				"Sorry, you don't have manage channels permission to use this command."
-			);
-
 		if (!args.length) return argsError(module.exports, client, message);
 
 		const arg = args.join(" ");

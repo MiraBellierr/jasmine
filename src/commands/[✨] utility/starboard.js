@@ -9,11 +9,6 @@ module.exports = {
 	memberPermissions: "MANAGE_CHANNELS",
 	usage: "<set | on | off | star>",
 	run: async (client, message, args) => {
-		if (!message.member.permissions.has("MANAGE_CHANNELS"))
-			return message.reply(
-				"Sorry, you don't have a manage channels permission to use this command"
-			);
-
 		if (!args.length) {
 			const embed = new MessageEmbed()
 				.setAuthor({
