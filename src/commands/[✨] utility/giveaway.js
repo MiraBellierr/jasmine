@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const ms = require("ms");
 const Discord = require("discord.js");
 const { startCollector } = require("../../utils/collectors");

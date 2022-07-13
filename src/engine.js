@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const { Client, Collection, Intents } = require("discord.js");
 const fs = require("fs");
 const { GiveawaysManager } = require("./utils/giveaway");
