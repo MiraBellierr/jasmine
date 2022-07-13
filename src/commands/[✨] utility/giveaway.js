@@ -11,7 +11,7 @@ module.exports = {
 	memberPermissions: "MANAGE_CHANNELS",
 	usage: "<start | end | reroll",
 	run: async (client, message, args) => {
-		if (!args[0]) {
+		if (!args[0] || !args[1]) {
 			const embed = new Discord.MessageEmbed()
 				.setAuthor({
 					name: `${client.user.username}'s giveaway commands`,
@@ -21,7 +21,7 @@ module.exports = {
 				.setDescription(
 					`**Proper Usage:**\n• ${client.prefixes.get(
 						message.guild.id
-					)}giveaway start\n• ${client.prefixes.get(
+					)}giveaway start \`<channel>\`\n• ${client.prefixes.get(
 						message.guild.id
 					)}giveaway end \`[message ID | prize]\`\n• ${client.prefixes.get(
 						message.guild.id
@@ -38,41 +38,28 @@ module.exports = {
 				numberOfWinners = "None",
 				giveawayPrize = "None";
 
-			const example = new Discord.MessageEmbed().setDescription("ㅤ");
-			let content =
-				"Mention a channel that you want the giveaway to be posted.\n\nType `stop` if you want to stop.";
+			const channel = await getChannelFromArguments(message, args[1]);
 
-			const m = await message.reply({ content, embeds: [example] });
-
-			const giveawayChannelinput = await startCollector(message);
-
-			if (giveawayChannelinput.error === "stop") {
-				return message.channel.send("I have stopped the command.");
-			} else {
-				const channel = await getChannelFromArguments(
-					message,
-					giveawayChannelinput.message
+			if (!channel)
+				return message.channel.send(
+					"I didn't found any channel with that name."
 				);
 
-				if (!channel)
-					return message.channel.send(
-						"I didn't found any channel with that name."
-					);
+			if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
+				return message.channel.send(
+					"I do not have a permission to send a message in that channel."
+				);
 
-				if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
-					return message.channel.send(
-						"I do not have a permission to send a message in that channel."
-					);
+			giveawayChannel = channel;
 
-				giveawayChannel = channel;
-
-				example.addField("Channel", `${channel}`);
-			}
+			const example = new Discord.MessageEmbed()
+				.setDescription("ㅤ")
+				.addField("Channel", channel.toString());
 
 			content =
 				"Please provide a duration how long it would be.(example:`10m`, `1h`, `2.5h`, `1d`)\n\nType `stop` if you want to stop.";
 
-			m.edit({ content, embeds: [example] });
+			const m = await message.reply({ content, embeds: [example] });
 
 			const giveawayDurationinput = await startCollector(message);
 
