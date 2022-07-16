@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const axios = require("axios");
+const request = require("request").defaults({ encoding: null });
 
 const splitMessage = (
 	text,
@@ -85,4 +86,22 @@ const nekoapi = async (endpoint) => {
 	return res.data.url;
 };
 
-module.exports = { splitMessage, formatDate, formatTime, nekoapi };
+const checkIfImage = (url) => {
+	request.get(url, (err, res) => {
+		if (err) return false;
+
+		if (res.headers["content-type"].includes("image")) {
+			return true;
+		}
+
+		return false;
+	});
+};
+
+module.exports = {
+	splitMessage,
+	formatDate,
+	formatTime,
+	nekoapi,
+	checkIfImage,
+};
