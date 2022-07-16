@@ -4,6 +4,8 @@ const schemas = require("../../database/schemas");
 const { startCollector } = require("../../utils/collectors");
 const { MessageEmbed } = require("discord.js");
 const Color = require("color");
+const { checkIfImage } = require("../../utils/utils");
+const validURL = require("valid-url");
 
 module.exports = {
 	name: "setleave",
@@ -122,6 +124,10 @@ module.exports = {
 					return message.channel.send("I have stopped the command");
 
 				if (authorURL.error !== "skip") {
+					if (!checkIfImage(authorURL.attachment)) {
+						return message.channel.send("Invalid image");
+					}
+
 					if (authorURL.attachment) {
 						embed.setAuthor({
 							name: authorNameEmbed,
@@ -146,14 +152,9 @@ module.exports = {
 								break;
 						}
 
-						if (
-							!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
-								authorURLText
-							)
-						)
-							return message.channel.send(
-								"Invalid input. I have stopped the command"
-							);
+						if (!checkIfImage(authorURLText)) {
+							return message.channel.send("Invalid image");
+						}
 
 						embed.setAuthor({
 							name: authorNameEmbed,
@@ -199,11 +200,7 @@ module.exports = {
 					return message.channel.send("I have stopped the command.");
 
 				if (titleURL.error !== "skip") {
-					if (
-						!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
-							titleURL.message
-						)
-					)
+					if (!validURL.isUri(titleURL.message))
 						return message.channel.send(
 							"Not a well formed URL. I have stopped the command."
 						);
@@ -275,6 +272,12 @@ module.exports = {
 
 				if (footerURL.error !== "skip") {
 					if (footerURL.attachment) {
+						if (!checkIfImage(footerURL.attachment)) {
+							return message.channel.send(
+								"Not a valid image. I have stopped the command."
+							);
+						}
+
 						embed.setFooter({
 							text: footerEmbed,
 							iconURL: footerURL.attachment,
@@ -298,14 +301,11 @@ module.exports = {
 								break;
 						}
 
-						if (
-							!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
-								footerURLText
-							)
-						)
+						if (!checkIfImage(footerURLText)) {
 							return message.channel.send(
-								"Invalid input. I have stopped the command"
+								"Not a valid image. I have stopped the command."
 							);
+						}
 
 						embed.setFooter({
 							text: footerEmbed,
@@ -328,6 +328,12 @@ module.exports = {
 
 			if (thumbnail.error !== "skip") {
 				if (thumbnail.attachment) {
+					if (!checkIfImage(thumbnail.attachment)) {
+						return message.channel.send(
+							"Not a valid image. I have stopped the command."
+						);
+					}
+
 					embed.setThumbnail(thumbnail.attachment);
 
 					leaveObj.thumbnail = thumbnail.attachment;
@@ -348,14 +354,11 @@ module.exports = {
 							break;
 					}
 
-					if (
-						!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
-							thumbnailText
-						)
-					)
+					if (!checkIfImage(thumbnailText)) {
 						return message.channel.send(
-							"Invalid input. I have stopped the command"
+							"Not a valid image. I have stopped the command."
 						);
+					}
 
 					embed.setThumbnail(thumbnailText);
 
@@ -374,6 +377,12 @@ module.exports = {
 
 			if (image.error !== "skip") {
 				if (image.attachment) {
+					if (!checkIfImage(image.attachment)) {
+						return message.channel.send(
+							"Not a valid image. I have stopped the command."
+						);
+					}
+
 					embed.setImage(image.attachment);
 
 					leaveObj.image = image.attachment;
@@ -394,14 +403,11 @@ module.exports = {
 							break;
 					}
 
-					if (
-						!/(?:(?:https?)+\:\/\/+[a-zA-Z0-9\/\._-]{1,})+(?:(?:jpe?g|png|gif|webp))/gims.test(
-							imageText
-						)
-					)
+					if (!checkIfImage(imageText)) {
 						return message.channel.send(
-							"Invalid input. I have stopped the command"
+							"Not a valid image. I have stopped the command."
 						);
+					}
 
 					embed.setImage(imageText);
 
