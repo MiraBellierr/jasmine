@@ -24,7 +24,7 @@
 		"sequelize": "^6.19.0",
 		"serialize-javascript": "^6.0.0",
 		"signale": "^1.4.0",
-		"sqlite3": "^5.0.6",
+		"sqlite3": "^5.0.9",
 		"systeminformation": "^5.12.1",
 		"urban-dictionary": "^3.0.2",
 		"weather-js2": "^2.0.2",
