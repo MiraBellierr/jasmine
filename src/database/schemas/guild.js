@@ -1,11 +1,16 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("database", "user", "password", {
-	host: "localhost",
-	logging: false,
-	dialect: "sqlite",
-	storage: "database.sqlite",
-});
+const sequelize = new Sequelize(
+	process.env.DB_NAME,
+	process.env.DB_USER,
+	process.env.DB_PASSWORD,
+	{
+		host: "localhost",
+		logging: false,
+		dialect: "sqlite",
+		storage: "database.sqlite",
+	}
+);
 
 module.exports = () => {
 	const Guild = sequelize.define("guild", {
