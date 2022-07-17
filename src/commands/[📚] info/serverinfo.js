@@ -100,7 +100,7 @@ module.exports = {
 			.setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
 
 		if (message.guild.features.size > 0) {
-			serverembed.addField(
+			embed.addField(
 				`Server Features [${guild.premiumTier}]`,
 				`${message.guild.features.map((f) => `**• ${f}**`).join("\n")}`
 			);
