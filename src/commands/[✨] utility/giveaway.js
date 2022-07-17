@@ -56,7 +56,7 @@ module.exports = {
 				.setDescription("ㅤ")
 				.addField("Channel", channel.toString());
 
-			content =
+			let content =
 				"Please provide a duration how long it would be.(example:`10m`, `1h`, `2.5h`, `1d`)\n\nType `stop` if you want to stop.";
 
 			const m = await message.reply({ content, embeds: [example] });
