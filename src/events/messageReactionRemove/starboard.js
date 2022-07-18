@@ -22,23 +22,27 @@ module.exports = async (client, messageReaction) => {
 
 		const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.content);
 		const foundStar = stars.embeds[0];
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setColor(foundStar.color)
 			.setThumbnail(foundStar.thumbnail.url)
 			.setDescription(foundStar.description)
-			.addField(
-				`${foundStar.fields[0].name}`,
-				`${foundStar.fields[0].value}`,
-				true
-			)
-			.addField(
-				`${foundStar.fields[1].name}`,
-				`${foundStar.fields[1].value}`,
-				true
-			)
+			.addFields([
+				{
+					name: `${foundStar.fields[0].name}`,
+					value: `${foundStar.fields[0].value}`,
+					inline: true,
+				},
+				{
+					name: `${foundStar.fields[1].name}`,
+					value: `${foundStar.fields[1].value}`,
+					inline: true,
+				},
+			])
 			.setTimestamp(foundStar.timestamp);
 		if (foundStar.fields[2])
-			embed.addField(foundStar.fields[2].name, foundStar.fields[2].value);
+			embed.addFields([
+				{ name: foundStar.fields[2].name, value: foundStar.fields[2].value },
+			]);
 		if (foundStar.image) embed.setImage(foundStar.image.url);
 
 		const starMsg = await starboardChannel.messages.fetch(stars.id);

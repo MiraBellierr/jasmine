@@ -1,6 +1,6 @@
 const { startCollector } = require("../../utils/collectors");
 const { getChannelFromArguments } = require("../../utils/getters");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 const { argsError } = require("../../utils/errors");
 const Color = require("color");
 const { checkIfImage } = require("../../utils/utils");
@@ -10,7 +10,7 @@ module.exports = {
 	name: "announce",
 	category: "[✨] utility",
 	description: "Sends an announcement to the channel",
-	memberPermissions: "MANAGE_CHANNELS",
+	memberPermissions: PermissionsBitField.Flags.ManageChannels,
 	usage: "<channel>",
 	run: async (client, message, args) => {
 		if (!args[0]) return argsError(module.exports, client, message);
@@ -19,12 +19,16 @@ module.exports = {
 
 		if (!channel) return message.reply("Sorry, I couldn't find this channel.");
 
-		if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
+		if (
+			!message.guild.members.me
+				.permissionsIn(channel)
+				.has(PermissionsBitField.Flags.SendMessages)
+		)
 			return message.reply(
 				"I do not have permission in that channel to send an announcement."
 			);
 
-		const embed = new MessageEmbed().setDescription("ㅤ");
+		const embed = new EmbedBuilder().setDescription("ㅤ");
 		let content = `please provide a name for author slot, \`skip\` to skip. \`stop\` to stop.\nchannel: ${channel}`;
 
 		const m = await message.reply({
@@ -55,7 +59,7 @@ module.exports = {
 
 			if (authorIconURL.error !== "skip") {
 				if (authorIconURL.attachment) {
-					if (!checkIfImage(authorIconURL.attachment)) {
+					if (!(await checkIfImage(authorIconURL.attachment))) {
 						return message.reply("That's not an image.");
 					}
 
@@ -80,7 +84,7 @@ module.exports = {
 							break;
 					}
 
-					if (!checkIfImage(authorIconURLText)) {
+					if (!(await checkIfImage(authorIconURLText))) {
 						return message.reply("That's not an image.");
 					}
 
@@ -181,7 +185,7 @@ module.exports = {
 
 			if (footerIconURL.error !== "skip") {
 				if (footerIconURL.attachment) {
-					if (!checkIfImage(footerIconURL.attachment)) {
+					if (!(await checkIfImage(footerIconURL.attachment))) {
 						return message.reply("That's not an image.");
 					}
 
@@ -206,7 +210,7 @@ module.exports = {
 							break;
 					}
 
-					if (!checkIfImage(footerIconURLText)) {
+					if (!(await checkIfImage(footerIconURLText))) {
 						return message.reply("That's not an image.");
 					}
 
@@ -232,7 +236,7 @@ module.exports = {
 
 		if (thumbnail.error !== "skip") {
 			if (thumbnail.attachment) {
-				if (!checkIfImage(thumbnail.attachment)) {
+				if (!(await checkIfImage(thumbnail.attachment))) {
 					return message.reply("That's not an image.");
 				}
 
@@ -254,7 +258,7 @@ module.exports = {
 						break;
 				}
 
-				if (!checkIfImage(thumbnailText)) {
+				if (!(await checkIfImage(thumbnailText))) {
 					return message.reply("That's not an image.");
 				}
 
@@ -276,7 +280,7 @@ module.exports = {
 
 		if (image.error !== "skip") {
 			if (image.attachment) {
-				if (!checkIfImage(image.attachment)) {
+				if (!(await checkIfImage(image.attachment))) {
 					return message.reply("That's not an image.");
 				}
 
@@ -298,7 +302,7 @@ module.exports = {
 						break;
 				}
 
-				if (!checkIfImage(imageText)) {
+				if (!(await checkIfImage(imageText))) {
 					return message.reply("That's not an image.");
 				}
 

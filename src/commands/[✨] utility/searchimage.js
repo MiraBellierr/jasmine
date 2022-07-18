@@ -40,7 +40,7 @@ module.exports = {
 			console.log(res);
 
 			for (let i = 0; i < res.length; i++) {
-				const values = new Discord.MessageEmbed()
+				const values = new Discord.EmbedBuilder()
 					.setTitle(title)
 					.setColor("#CD1C6C")
 					.setImage(res[i].url)

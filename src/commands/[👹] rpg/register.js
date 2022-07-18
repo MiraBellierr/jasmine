@@ -10,7 +10,7 @@ module.exports = {
 	usage: "<class>",
 	run: async (client, message, args) => {
 		if (!args.length || !Object.keys(classes).includes(args[0].toLowerCase())) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -24,10 +24,12 @@ module.exports = {
 				.setColor("#CD1C6C");
 
 			Object.keys(classes).forEach((c) => {
-				embed.addField(
-					`${c.charAt(0).toUpperCase() + c.slice(1)}`,
-					`\`\`\`js\n• Level: 1\n• HP: ${classes[c].hp}\n• STR: ${classes[c].str}\n• AGL: ${classes[c].agl}\n\`\`\``
-				);
+				embed.addFields([
+					{
+						name: `${c.charAt(0).toUpperCase() + c.slice(1)}`,
+						value: `\`\`\`js\n• Level: 1\n• HP: ${classes[c].hp}\n• STR: ${classes[c].str}\n• AGL: ${classes[c].agl}\n\`\`\``,
+					},
+				]);
 			});
 
 			return message.reply({ embeds: [embed] });

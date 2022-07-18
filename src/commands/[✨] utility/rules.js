@@ -1,11 +1,11 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
 	name: "rules",
 	description: "Rules to use Kanna",
 	category: "[✨] utility",
 	run: async (client, message) => {
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -18,7 +18,7 @@ module.exports = {
 					message.guild.id
 				)}report\` to report a user that you found is breaking these rules.`
 			)
-			.addFields(
+			.addFields([
 				{
 					name: "**1️⃣ Userbots, spamming, and macros**",
 					value:
@@ -43,8 +43,8 @@ module.exports = {
 					name: "**5️⃣ Discord TOS and guidelines**",
 					value:
 						"------ The Discord TOS and Discord Community Guidelines also are enforcable through our bot.",
-				}
-			)
+				},
+			])
 			.setTimestamp();
 
 		message.reply({ embeds: [embed] });

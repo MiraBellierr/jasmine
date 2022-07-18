@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 const { getChannelFromArguments } = require("../../utils/getters");
 const schemas = require("../../database/schemas");
 
@@ -6,11 +6,11 @@ module.exports = {
 	name: "starboard",
 	category: "[✨] utility",
 	description: "A :star: starboard channel for your server",
-	memberPermissions: "MANAGE_CHANNELS",
+	memberPermissions: PermissionsBitField.Flags.ManageChannels,
 	usage: "<set | on | off | star>",
 	run: async (client, message, args) => {
 		if (!args.length) {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: `${client.user.username} Starboard`,
 					iconURL: client.user.displayAvatarURL({ dynamic: true }),
@@ -48,7 +48,11 @@ module.exports = {
 			if (!channel)
 				return message.reply("I didn't find any channel with this name");
 
-			if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
+			if (
+				!message.guild.members.me
+					.permissionsIn(channel)
+					.has(PermissionsBitField.Flags.SendMessages)
+			)
 				return message.reply(
 					"I don't have a permission to send a message to that channel"
 				);
@@ -79,7 +83,7 @@ module.exports = {
 				client.starboards.set(message.guild.id, guildStarboard);
 			}
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor("#CD1C6C")
 				.setDescription(`Starboard channel set to ${channel}`)
 				.setTimestamp()
@@ -118,7 +122,7 @@ module.exports = {
 
 			client.starboards.set(message.guild.id, starboardObj);
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor("#CD1C6C")
 				.setDescription(`Starboard star set to ${input}`)
 				.setTimestamp()
@@ -145,7 +149,7 @@ module.exports = {
 
 			client.starboards.set(message.guild.id, starboardObj);
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor("#CD1C6C")
 				.setDescription(`Starboard has been set to **on**`)
 				.setTimestamp()
@@ -172,7 +176,7 @@ module.exports = {
 
 			client.starboards.set(message.guild.id, starboardObj);
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setColor("#CD1C6C")
 				.setDescription(`Starboard has been set to **off**`)
 				.setTimestamp()

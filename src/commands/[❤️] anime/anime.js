@@ -36,7 +36,7 @@ module.exports = {
 						"dddd, MMMM Do YYYY, h:mm:ss a"
 					);
 
-					const embed = new Discord.MessageEmbed()
+					const embed = new Discord.EmbedBuilder()
 						.setAuthor({
 							name: "Anime Search",
 							iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -104,7 +104,7 @@ module.exports = {
 						.map((manga2) => `${manga2.name}`)
 						.join(", ");
 
-					const embed = new Discord.MessageEmbed()
+					const embed = new Discord.EmbedBuilder()
 						.setAuthor({
 							name: "Character Search",
 							iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -143,7 +143,7 @@ module.exports = {
 						"dddd, MMMM Do YYYY, h:mm:ss a"
 					);
 
-					const embed = new Discord.MessageEmbed()
+					const embed = new Discord.EmbedBuilder()
 						.setAuthor({
 							name: "Manga Search",
 							iconURL: message.author.displayAvatarURL({ dynamic: true }),

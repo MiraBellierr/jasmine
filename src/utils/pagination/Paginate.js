@@ -1,5 +1,11 @@
 require("colors");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const {
+	ActionRowBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	ActionRow,
+	ComponentType,
+} = require("discord.js");
 
 function Paginate(
 	client,
@@ -86,59 +92,59 @@ function Paginate(
 			return msg;
 		} else {
 			let page = this.page;
-			const row = new MessageActionRow().addComponents([
-				new MessageButton()
+			const row = new ActionRowBuilder().addComponents([
+				new ButtonBuilder()
 					.setCustomId("backward")
 					.setLabel("Back")
-					.setStyle("PRIMARY")
+					.setStyle(ButtonStyle.Primary)
 					.setEmoji(this.emojis.backward),
-				new MessageButton()
+				new ButtonBuilder()
 					.setCustomId("stop")
 					.setLabel("Stop")
-					.setStyle("DANGER")
+					.setStyle(ButtonStyle.Danger)
 					.setEmoji(this.emojis.stop),
-				new MessageButton()
+				new ButtonBuilder()
 					.setCustomId("forward")
 					.setLabel("Next")
-					.setStyle("PRIMARY")
+					.setStyle(ButtonStyle.Primary)
 					.setEmoji(this.emojis.forward),
 			]);
 
-			const disabledForward = new MessageActionRow().addComponents([
-				new MessageButton()
+			const disabledForward = new ActionRowBuilder().addComponents([
+				new ButtonBuilder()
 					.setCustomId("backward")
 					.setLabel("Back")
-					.setStyle("PRIMARY")
+					.setStyle(ButtonStyle.Primary)
 					.setEmoji(this.emojis.backward),
-				new MessageButton()
+				new ButtonBuilder()
 					.setCustomId("stop")
 					.setLabel("Stop")
-					.setStyle("DANGER")
+					.setStyle(ButtonStyle.Danger)
 					.setEmoji(this.emojis.stop),
-				new MessageButton()
+				new ButtonBuilder()
 					.setCustomId("forward")
 					.setLabel("Next")
-					.setStyle("PRIMARY")
+					.setStyle(ButtonStyle.Primary)
 					.setDisabled(true)
 					.setEmoji(this.emojis.forward),
 			]);
 
-			const disabledBackward = new MessageActionRow().addComponents([
-				new MessageButton()
+			const disabledBackward = new ActionRowBuilder().addComponents([
+				new ButtonBuilder()
 					.setCustomId("backward")
 					.setLabel("Back")
-					.setStyle("PRIMARY")
+					.setStyle(ButtonStyle.Primary)
 					.setDisabled(true)
 					.setEmoji(this.emojis.backward),
-				new MessageButton()
+				new ButtonBuilder()
 					.setCustomId("stop")
 					.setLabel("Stop")
-					.setStyle("DANGER")
+					.setStyle(ButtonStyle.Danger)
 					.setEmoji(this.emojis.stop),
-				new MessageButton()
+				new ButtonBuilder()
 					.setCustomId("forward")
 					.setLabel("Next")
-					.setStyle("PRIMARY")
+					.setStyle(ButtonStyle.Primary)
 					.setEmoji(this.emojis.forward),
 			]);
 
@@ -186,19 +192,19 @@ function Paginate(
 			const backward = msg.createMessageComponentCollector({
 				filter: backwardFilter,
 				time: this.options.time,
-				type: "BUTTON",
+				type: ComponentType.Button,
 			});
 
 			const stop = msg.createMessageComponentCollector({
 				filter: stopFilter,
 				time: this.options.time,
-				componentType: "BUTTON",
+				componentType: ComponentType.Button,
 			});
 
 			const forward = msg.createMessageComponentCollector({
 				filter: forwardFilter,
 				time: this.options.time,
-				componentType: "BUTTON",
+				componentType: ComponentType.Button,
 			});
 
 			backward.on("collect", async (i) => {

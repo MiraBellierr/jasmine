@@ -22,21 +22,21 @@ module.exports = {
 
 		let permission;
 		const moderatorPermissions = [
-			"KICK_MEMBERS",
-			"BAN_MEMBERS",
-			"MANAGE_CHANNELS",
-			"MANAGE_GUILD",
-			"MANAGE_MESSAGES",
-			"MUTE_MEMBERS",
-			"DEAFEN_MEMBERS",
-			"MOVE_MEMBERS",
-			"MANAGE_NICKNAMES",
-			"MANAGE_ROLES",
-			"MANAGE_WEBHOOKS",
-			"MANAGE_EMOJIS_AND_STICKERS",
+			Discord.PermissionsBitField.Flags.KickMembers,
+			Discord.PermissionsBitField.Flags.BanMembers,
+			Discord.PermissionsBitField.Flags.ManageChannels,
+			Discord.PermissionsBitField.Flags.ManageGuild,
+			Discord.PermissionsBitField.Flags.ManageMessages,
+			Discord.PermissionsBitField.Flags.MuteMembers,
+			Discord.PermissionsBitField.Flags.DeafenMembers,
+			Discord.PermissionsBitField.Flags.MoveMembers,
+			Discord.PermissionsBitField.Flags.ManageNicknames,
+			Discord.PermissionsBitField.Flags.ManageRoles,
+			Discord.PermissionsBitField.Flags.ManageWebhooks,
+			Discord.PermissionsBitField.Flags.ManageEmojisAndStickers,
 		];
 
-		if (role.permissions.has("ADMINISTRATOR")) {
+		if (role.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
 			permission = "Administrator";
 		} else if (role.permissions.any(moderatorPermissions, false)) {
 			permission = "Moderator";
@@ -49,7 +49,7 @@ module.exports = {
 			true: "Yes",
 		};
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),

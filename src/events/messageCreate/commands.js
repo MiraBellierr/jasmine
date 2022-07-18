@@ -1,3 +1,4 @@
+const { PermissionsBitField } = require("discord.js");
 const signale = require("signale");
 const schemas = require("../../database/schemas");
 const contents = require("../../utils/constants");
@@ -11,8 +12,12 @@ module.exports = async (client, message) => {
 	const prefix = client.prefixes.get(message.guild.id);
 
 	if (
-		!message.guild.me.permissions.has("SEND_MESSAGES") ||
-		!message.guild.me.permissionsIn(message.channel).has("SEND_MESSAGES")
+		!message.guild.members.me.permissions.has(
+			PermissionsBitField.Flags.SendMessages
+		) ||
+		!message.guild.members.me
+			.permissionsIn(message.channel)
+			.has(PermissionsBitField.Flags.SendMessages)
 	)
 		return;
 
@@ -59,7 +64,7 @@ module.exports = async (client, message) => {
 
 	if (
 		command.clientPermission &&
-		!message.guild.me.permissions.has(command.clientPermission)
+		!message.guild.members.me.permissions.has(command.clientPermission)
 	) {
 		return message.channel.send(
 			`I do not have the \`${command.clientPermission}\` permission to be able to continue this command`

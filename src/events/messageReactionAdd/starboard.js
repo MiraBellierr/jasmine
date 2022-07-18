@@ -7,7 +7,11 @@ module.exports = async (client, messageReaction, user) => {
 	if (!starboardObj || !starboardObj.switch) return;
 	if (messageReaction.emoji.name !== "⭐") return;
 
-	if (message.guild.me.permissions.has("MANAGE_MESSAGES")) {
+	if (
+		message.guild.members.me.permissions.has(
+			Discord.PermissionsBitField.Flags.ManageMessages
+		)
+	) {
 		if (user.id === message.author.id) {
 			messageReaction.users.remove(user);
 		}
@@ -33,23 +37,27 @@ module.exports = async (client, messageReaction, user) => {
 	if (stars) {
 		const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.content);
 		const foundStar = stars.embeds[0];
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setColor(foundStar.color)
 			.setThumbnail(foundStar.thumbnail.url)
 			.setDescription(foundStar.description)
-			.addField(
-				`${foundStar.fields[0].name}`,
-				`${foundStar.fields[0].value}`,
-				true
-			)
-			.addField(
-				`${foundStar.fields[1].name}`,
-				`${foundStar.fields[1].value}`,
-				true
-			)
+			.addFields([
+				{
+					name: `${foundStar.fields[0].name}`,
+					value: `${foundStar.fields[0].value}`,
+					inline: true,
+				},
+				{
+					name: `${foundStar.fields[1].name}`,
+					value: `${foundStar.fields[1].value}`,
+					inline: true,
+				},
+			])
 			.setTimestamp(foundStar.timestamp);
 		if (foundStar.fields[2])
-			embed.addField(foundStar.fields[2].name, foundStar.fields[2].value);
+			embed.addFields([
+				{ name: foundStar.fields[2].name, value: foundStar.fields[2].value },
+			]);
 		if (foundStar.image) embed.setImage(foundStar.image.url);
 
 		const starMsg = await starboardChannel.messages.fetch(stars.id);
@@ -60,18 +68,20 @@ module.exports = async (client, messageReaction, user) => {
 	} else {
 		if (messageReaction.emoji.reaction.count < starboardObj.star) return;
 		if (image === "" && message.cleanContent.length < 1) return;
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setColor("#CD1C6C")
 			.setDescription(
 				`**[Jump to message!](https://discordapp.com/channels/${message.guild.id}/${message.channel.id}/${message.id})**`
 			)
 			.setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
-			.addField("Author", message.author.toString(), true)
-			.addField("Channel", message.channel.toString(), true)
+			.addFields([
+				{ name: "Author", value: message.author.toString(), inline: true },
+				{ name: "Channel", value: message.channel.toString(), inline: true },
+			])
 			.setTimestamp()
 			.setImage(image);
 		if (message.cleanContent.length > 0)
-			embed.addField("message", message.cleanContent);
+			embed.addFields([{ name: "message", value: message.cleanContent }]);
 
 		starboardChannel.send({
 			content: `⭐ ${messageReaction.emoji.reaction.count} | ${message.id}`,

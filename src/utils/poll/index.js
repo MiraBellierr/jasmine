@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 const defEmojiList = [
 	"\u0031\u20E3",
@@ -45,7 +45,7 @@ const pollEmbed = async (
 };
 
 const embedBuilder = (title, author, text) => {
-	return new MessageEmbed()
+	return new EmbedBuilder()
 		.setColor("#CD1C6C")
 		.setTitle(`Poll - ${title}`)
 		.setFooter({ text: `Poll created by ${author}` })

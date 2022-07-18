@@ -51,10 +51,10 @@ class GiveawaysManager extends EventEmitter {
 	 * Generate an embed displayed when a giveaway is running (with the remaining time)
 	 * @param {Giveaway} giveaway The giveaway the embed needs to be generated for
 	 * @param {boolean} lastChanceEnabled Whether or not to include the last chance text
-	 * @returns {Discord.MessageEmbed} The generated embed
+	 * @returns {Discord.EmbedBuilder} The generated embed
 	 */
 	generateMainEmbed(giveaway, lastChanceEnabled) {
-		const embed = new Discord.MessageEmbed();
+		const embed = new Discord.EmbedBuilder();
 		embed
 			.setAuthor({ name: giveaway.prize })
 			.setColor(
@@ -73,7 +73,7 @@ class GiveawaysManager extends EventEmitter {
 						? giveaway.messages.hostedBy.replace("{user}", giveaway.hostedBy)
 						: "")
 			)
-			.setTimestamp(new Date(giveaway.endAt).toISOString());
+			.setTimestamp(new Date(giveaway.endAt));
 		return embed;
 	}
 
@@ -81,7 +81,7 @@ class GiveawaysManager extends EventEmitter {
 	 * Generate an embed displayed when a giveaway is ended (with the winners list)
 	 * @param {Giveaway} giveaway The giveaway the embed needs to be generated for
 	 * @param {Discord.GuildMember[]} winners The giveaway winners
-	 * @returns {Discord.MessageEmbed} The generated embed
+	 * @returns {Discord.EmbedBuilder} The generated embed
 	 */
 	generateEndEmbed(giveaway, winners) {
 		let formattedWinners = winners.map((w) => `<@${w.id}>`).join(", ");
@@ -115,23 +115,23 @@ class GiveawaysManager extends EventEmitter {
 				formattedWinners.substr(0, formattedWinners.lastIndexOf(", <@")) +
 				`, ${i} more`;
 
-		const embed = new Discord.MessageEmbed();
+		const embed = new Discord.EmbedBuilder();
 		embed
 			.setAuthor({ name: giveaway.prize })
 			.setColor(giveaway.embedColorEnd)
 			.setFooter({ text: giveaway.messages.endedAt })
 			.setDescription(descriptionString(formattedWinners))
-			.setTimestamp(new Date(giveaway.endAt).toISOString());
+			.setTimestamp(new Date(giveaway.endAt));
 		return embed;
 	}
 
 	/**
 	 * Generate an embed displayed when a giveaway is ended and when there is no valid participant
 	 * @param {Giveaway} giveaway The giveaway the embed needs to be generated for
-	 * @returns {Discord.MessageEmbed} The generated embed
+	 * @returns {Discord.EmbedBuilder} The generated embed
 	 */
 	generateNoValidParticipantsEndEmbed(giveaway) {
-		const embed = new Discord.MessageEmbed();
+		const embed = new Discord.EmbedBuilder();
 		embed
 			.setAuthor({ name: giveaway.prize })
 			.setColor(giveaway.embedColorEnd)

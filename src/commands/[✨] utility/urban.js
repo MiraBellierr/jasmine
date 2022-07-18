@@ -26,7 +26,7 @@ module.exports = {
 						result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
 					);
 
-					const embed = new Discord.MessageEmbed()
+					const embed = new Discord.EmbedBuilder()
 						.setAuthor({
 							name: message.author.username,
 							iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -34,9 +34,15 @@ module.exports = {
 						.setTitle(result[i].word)
 						.setURL(result[i].permalink)
 						.setColor("#CD1C6C")
-						.setDescription(Discord.Util.escapeMarkdown(definition))
-						.addField("example", `${Discord.Util.escapeMarkdown(example)}`)
-						.addField("Upvotes", `${result[i].thumbs_up}`, true)
+						.setDescription(Discord.escapeMarkdown(definition))
+						.addFields([
+							{ name: "example", value: `${Discord.escapeMarkdown(example)}` },
+							{
+								name: "Upvotes",
+								value: `${result[i].thumbs_up}`,
+								inline: true,
+							},
+						])
 						.setFooter({
 							text: `Written by ${result[i].author} | Page ${i + 1}/${
 								result.length

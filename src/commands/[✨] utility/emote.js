@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { Paginate } = require("../../utils/pagination");
 const { argsError } = require("../../utils/errors");
 
@@ -17,7 +17,7 @@ module.exports = {
 			const emoji = arg.replace(/\D+/gm, "");
 			const check = /<(a)?:\D+:\d+>/gm.test(arg);
 
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),

@@ -1,5 +1,8 @@
-const { MessageEmbed } = require("discord.js");
-const { getUserFromArguments, getMemberFromArguments } = require("../../utils/getters");
+const { EmbedBuilder } = require("discord.js");
+const {
+	getUserFromArguments,
+	getMemberFromArguments,
+} = require("../../utils/getters");
 const Paginate = require("../../utils/pagination");
 
 module.exports = {
@@ -13,7 +16,7 @@ module.exports = {
 		const user =
 			(await getUserFromArguments(message, args.join(" "))) || message.author;
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -46,7 +49,7 @@ module.exports = {
 		const member = await getMemberFromArguments(message, user.id);
 
 		if (member && member.avatarURL()) {
-			const embed = new MessageEmbed()
+			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -79,7 +82,7 @@ module.exports = {
 
 		await user.fetch(true);
 
-		const banner = new MessageEmbed()
+		const banner = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),

@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
 	name: "ping",
@@ -7,18 +7,25 @@ module.exports = {
 	run: async (client, message) => {
 		const msg = await message.reply("🏓 Pinging....");
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
 			})
 			.setColor("#CD1C6C")
 			.setTitle("🏓 Pong")
-			.addField(
-				"Latency",
-				`${Math.floor(msg.createdTimestamp - message.createdTimestamp)}ms`
-			)
-			.addField("API Latency", `${Math.round(client.ws.ping)}ms`)
+			.addFields([
+				{
+					name: "Latency",
+					value: `${Math.floor(
+						msg.createdTimestamp - message.createdTimestamp
+					)}ms`,
+				},
+				{
+					name: "API Latency",
+					value: `${Math.floor(client.ws.ping)}ms`,
+				},
+			])
 			.setTimestamp()
 			.setFooter({
 				text: client.user.tag,

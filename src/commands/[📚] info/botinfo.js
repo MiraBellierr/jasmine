@@ -21,7 +21,11 @@ module.exports = {
 
 		const cpuCount = cpu.count();
 		const cpuUsagePercentage = await cpu.usage();
-		const driveInfo = await drive.info();
+		const driveInfo = await drive.info().catch(() => {
+			return {
+				usedGb: undefined,
+			};
+		});
 		const memInfo = await mem.info();
 		const osInfo = await os.oos();
 		const processor = await si.cpu();
@@ -35,7 +39,7 @@ module.exports = {
 
 		m.delete();
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setAuthor({ name: "Bot Information" })
 			.setThumbnail(client.user.avatarURL())
 			.setColor("#DA70D6")

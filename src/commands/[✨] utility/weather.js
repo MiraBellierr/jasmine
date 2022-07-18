@@ -19,7 +19,7 @@ module.exports = {
 				const result = results[0];
 				const currentDay = result.current.date.slice(8);
 
-				const current = new Discord.MessageEmbed()
+				const current = new Discord.EmbedBuilder()
 					.setAuthor({
 						name: result.location.name,
 					})
@@ -46,7 +46,7 @@ module.exports = {
 
 					const day = checkDay(dif);
 
-					const embed = new Discord.MessageEmbed()
+					const embed = new Discord.EmbedBuilder()
 						.setAuthor({ name: result.location.name })
 						.setTitle(day)
 						.setDescription(

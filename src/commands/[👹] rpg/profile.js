@@ -28,27 +28,29 @@ module.exports = {
 				)}register <class>\` to register`
 			);
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: `${member.user.username}'s profile`,
 				iconURL: member.user.displayAvatarURL({ dynamic: true }),
 			})
 			.setColor("#CD1C6C")
 			.setTitle(`Level ${character.get("level")} ${character.get("name")}`)
-			.addField(
-				"__Stats__",
-				`**• <:class:880658124246237254> Class:** ${character.get(
-					"class"
-				)}\n**• <:xp:880655736261206036> XP:** ${character.get(
-					"xp"
-				)}/${character.get(
-					"xpNeeded"
-				)}\n**• <:health:880655864523014155> HP:** ${character.get(
-					"hp"
-				)}\n**• <:pa:880665943959797811> STR:** ${character.get(
-					"str"
-				)}\n**• <:speed:880668456066891826> AGL:** ${character.get("agl")}`
-			)
+			.addFields([
+				{
+					name: "__Stats__",
+					value: `**• <:class:880658124246237254> Class:** ${character.get(
+						"class"
+					)}\n**• <:xp:880655736261206036> XP:** ${character.get(
+						"xp"
+					)}/${character.get(
+						"xpNeeded"
+					)}\n**• <:health:880655864523014155> HP:** ${character.get(
+						"hp"
+					)}\n**• <:pa:880665943959797811> STR:** ${character.get(
+						"str"
+					)}\n**• <:speed:880668456066891826> AGL:** ${character.get("agl")}`,
+				},
+			])
 			.setImage(character.get("img"))
 			.setTimestamp()
 			.setFooter({

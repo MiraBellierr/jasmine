@@ -2,7 +2,11 @@ const { getChannelFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const schemas = require("../../database/schemas");
 const { startCollector } = require("../../utils/collectors");
-const { MessageEmbed } = require("discord.js");
+const {
+	EmbedBuilder,
+	PermissionsBitField,
+	ChannelType,
+} = require("discord.js");
 const Color = require("color");
 const { checkIfImage } = require("../../utils/utils");
 const validURL = require("valid-url");
@@ -12,7 +16,7 @@ module.exports = {
 	aliases: ["sl"],
 	category: "[✨] utility",
 	description: "Leave message configuration",
-	memberPermissions: "MANAGE_CHANNELS",
+	memberPermissions: PermissionsBitField.Flags.ManageChannels,
 	usage: "<channel | on | off>",
 	run: async (client, message, args) => {
 		if (!args.length) return argsError(module.exports, client, message);
@@ -65,12 +69,16 @@ module.exports = {
 
 			if (!channel) return argsError(module.exports, client, message);
 
-			if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
+			if (
+				!message.guild.members.me
+					.permissionsIn(channel)
+					.has(PermissionsBitField.Flags.SendMessages)
+			)
 				return message.channel.send(
 					"I do not have a permission to send a message in that channel"
 				);
 
-			if (channel.type !== "GUILD_TEXT")
+			if (channel.type !== ChannelType.GuildText)
 				return message.channel.send("Only guild text channel is accepted");
 
 			const leaveObj = {
@@ -88,7 +96,7 @@ module.exports = {
 				color: null,
 			};
 
-			const embed = new MessageEmbed().setDescription("ㅤ");
+			const embed = new EmbedBuilder().setDescription("ㅤ");
 			let content = `Please provide a name for \`author\` slot\n\`skip\` to skip\n\`stop\` to stop\n\`{username}\` - username of the joined member\n\`{tag}\` - user tag of the joined member\n\`{server}\` - your server name\n\`{membercount}\` - your server member count\nChannel: ${channel}`;
 
 			const m = await message.channel.send({ content, embeds: [embed] });
@@ -124,11 +132,11 @@ module.exports = {
 					return message.channel.send("I have stopped the command");
 
 				if (authorURL.error !== "skip") {
-					if (!checkIfImage(authorURL.attachment)) {
-						return message.channel.send("Invalid image");
-					}
-
 					if (authorURL.attachment) {
+						if (!(await checkIfImage(authorURL.attachment))) {
+							return message.channel.send("Invalid image");
+						}
+
 						embed.setAuthor({
 							name: authorNameEmbed,
 							iconURL: authorURL.attachment,
@@ -152,7 +160,7 @@ module.exports = {
 								break;
 						}
 
-						if (!checkIfImage(authorURLText)) {
+						if (!(await checkIfImage(authorURLText))) {
 							return message.channel.send("Invalid image");
 						}
 
@@ -272,7 +280,7 @@ module.exports = {
 
 				if (footerURL.error !== "skip") {
 					if (footerURL.attachment) {
-						if (!checkIfImage(footerURL.attachment)) {
+						if (!(await checkIfImage(footerURL.attachment))) {
 							return message.channel.send(
 								"Not a valid image. I have stopped the command."
 							);
@@ -301,7 +309,7 @@ module.exports = {
 								break;
 						}
 
-						if (!checkIfImage(footerURLText)) {
+						if (!(await checkIfImage(footerURLText))) {
 							return message.channel.send(
 								"Not a valid image. I have stopped the command."
 							);
@@ -328,7 +336,7 @@ module.exports = {
 
 			if (thumbnail.error !== "skip") {
 				if (thumbnail.attachment) {
-					if (!checkIfImage(thumbnail.attachment)) {
+					if (!(await checkIfImage(thumbnail.attachment))) {
 						return message.channel.send(
 							"Not a valid image. I have stopped the command."
 						);
@@ -354,7 +362,7 @@ module.exports = {
 							break;
 					}
 
-					if (!checkIfImage(thumbnailText)) {
+					if (!(await checkIfImage(thumbnailText))) {
 						return message.channel.send(
 							"Not a valid image. I have stopped the command."
 						);
@@ -377,7 +385,7 @@ module.exports = {
 
 			if (image.error !== "skip") {
 				if (image.attachment) {
-					if (!checkIfImage(image.attachment)) {
+					if (!(await checkIfImage(image.attachment))) {
 						return message.channel.send(
 							"Not a valid image. I have stopped the command."
 						);
@@ -403,7 +411,7 @@ module.exports = {
 							break;
 					}
 
-					if (!checkIfImage(imageText)) {
+					if (!(await checkIfImage(imageText))) {
 						return message.channel.send(
 							"Not a valid image. I have stopped the command."
 						);

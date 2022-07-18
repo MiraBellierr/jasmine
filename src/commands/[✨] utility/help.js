@@ -1,7 +1,9 @@
 const {
-	MessageEmbed,
-	MessageActionRow,
-	MessageSelectMenu,
+	EmbedBuilder,
+	SelectMenuBuilder,
+	ActionRowBuilder,
+	ComponentType,
+	Colors,
 } = require("discord.js");
 
 module.exports = {
@@ -26,7 +28,7 @@ async function getAll(client, message) {
 			.map((cmd) => " " + `\`${cmd.name}\``);
 	};
 
-	const embed = new MessageEmbed()
+	const embed = new EmbedBuilder()
 		.setAuthor({
 			name: message.author.username,
 			iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -45,11 +47,13 @@ async function getAll(client, message) {
 	const options = [];
 
 	client.categories.forEach((category) => {
-		embed.addField(
-			`${category}`,
-			`List of the ${category.slice(4)} commands`,
-			true
-		);
+		embed.addFields([
+			{
+				name: `${category}`,
+				value: `List of the ${category.slice(4)} commands`,
+				inline: true,
+			},
+		]);
 
 		options.push({
 			label: category,
@@ -58,28 +62,33 @@ async function getAll(client, message) {
 		});
 	});
 
-	const selectMenu = new MessageSelectMenu()
+	const selectMenu = new SelectMenuBuilder()
 		.setCustomId("helpMenu")
 		.setPlaceholder("Nothing Selected")
-		.setOptions(options);
+		.addOptions(options);
 
-	const row = new MessageActionRow().addComponents(selectMenu);
+	const row = new ActionRowBuilder().addComponents([selectMenu]);
 
-	const m = await message.channel.send({ embeds: [embed], components: [row] });
+	const m = await message.channel.send({
+		embeds: [embed],
+		components: [row],
+	});
 
 	const collector = m.createMessageComponentCollector({
-		componentType: "SELECT_MENU",
+		componentType: ComponentType.SelectMenu,
 		time: 30000,
 	});
 
 	collector.on("collect", (i) => {
-		const commandEmbed = new MessageEmbed()
+		const commandEmbed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
 			})
 			.setColor("#CD1C6C")
-			.addField(`${i.values[0]}`, `${commands(i.values[0])}`)
+			.addFields([
+				{ name: `${i.values[0]}`, value: `${commands(i.values[0])}` },
+			])
 			.setDescription(
 				"<:discord:885340297733746798> [Invite Kanna](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:kanna:885340978834198608> [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc)"
 			)
@@ -95,7 +104,7 @@ async function getAll(client, message) {
 }
 
 function getCMD(client, message, input) {
-	const embed = new MessageEmbed();
+	const embed = new EmbedBuilder();
 
 	const cmd =
 		client.commands.get(input.toLowerCase()) ||
@@ -127,7 +136,7 @@ function getCMD(client, message, input) {
 	return message.reply({
 		embeds: [
 			embed
-				.setColor("GREEN")
+				.setColor(Colors.Green)
 				.setDescription(info)
 				.setAuthor({
 					name: message.author.username,

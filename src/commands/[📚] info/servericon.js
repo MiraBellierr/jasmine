@@ -12,7 +12,7 @@ module.exports = {
 
 		const pages = [];
 
-		const iconEmbed = new Discord.MessageEmbed()
+		const iconEmbed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -45,7 +45,7 @@ module.exports = {
 		pages.push(iconEmbed);
 
 		if (message.guild.splashURL()) {
-			const splashEmbed = new Discord.MessageEmbed()
+			const splashEmbed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -79,7 +79,7 @@ module.exports = {
 		}
 
 		if (message.guild.bannerURL()) {
-			const bannerEmbed = new Discord.MessageEmbed()
+			const bannerEmbed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -113,7 +113,7 @@ module.exports = {
 		}
 
 		if (message.guild.discoverySplashURL()) {
-			const discoverySplashEmbed = new Discord.MessageEmbed()
+			const discoverySplashEmbed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),

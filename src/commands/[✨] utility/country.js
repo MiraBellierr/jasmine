@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const axios = require("axios");
 const { Paginate } = require("../../utils/pagination");
 const { argsError } = require("../../utils/errors");
@@ -78,7 +78,7 @@ module.exports = {
 			gini = gini.concat(" ", `**• ${key}:** ${data.gini[key]}\n`);
 		});
 
-		const embed = new MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -92,33 +92,38 @@ module.exports = {
 				iconURL: client.user.displayAvatarURL(),
 			})
 			.setTimestamp()
-			.addField(
-				"Name",
-				`**• Common:** ${data.name.common}\n**• Official:** ${data.name.official}`
-			)
-			.addField("Native Name", `${nativeNames}`)
-			.addField(
-				"Country Information",
-				`**• Top Level Domain:** ${tlds}\n**• Country Code Alpha 2:** ${
-					data.cca2
-				}\n**• Country Code Alpha 3:** ${
-					data.cca3
-				}\n**• Country Code Numeric 3:** ${
-					data.ccn3
-				}\n**• Country International Olympic Committee:** ${
-					data.cioc
-				}\n**• Independent:** ${
-					data.independent ? "Yes" : "No"
-				}\n**• Status:** ${data.status}\n**• United Nations Member:** ${
-					data.unMember ? "Yes" : "No"
-				}\n**• Capital:** ${data.capital.join(
-					", "
-				)}\n**• Alternative Spellings:** ${data.altSpellings.join(
-					", "
-				)}\n**• Region:** ${data.region}`
-			);
+			.addFields([
+				{
+					name: "Name",
+					value: `**• Common:** ${data.name.common}\n**• Official:** ${data.name.official}`,
+				},
+				{
+					name: "Native Names",
+					value: nativeNames,
+				},
+				{
+					name: "Country Information",
+					value: `**• Top Level Domain:** ${tlds}\n**• Country Code Alpha 2:** ${
+						data.cca2
+					}\n**• Country Code Alpha 3:** ${
+						data.cca3
+					}\n**• Country Code Numeric 3:** ${
+						data.ccn3
+					}\n**• Country International Olympic Committee:** ${
+						data.cioc
+					}\n**• Independent:** ${
+						data.independent ? "Yes" : "No"
+					}\n**• Status:** ${data.status}\n**• United Nations Member:** ${
+						data.unMember ? "Yes" : "No"
+					}\n**• Capital:** ${data.capital.join(
+						", "
+					)}\n**• Alternative Spellings:** ${data.altSpellings.join(
+						", "
+					)}\n**• Region:** ${data.region}`,
+				},
+			]);
 
-		const embed2 = new MessageEmbed()
+		const embed2 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -132,37 +137,44 @@ module.exports = {
 				iconURL: client.user.displayAvatarURL(),
 			})
 			.setTimestamp()
-			.addField(
-				"Country Information 2",
-				`**• Sub Region:** ${data.subregion}\n**• Languages:** ${Object.values(
-					data.languages
-				).join(", ")}\n**• Coordinates:** (${data.latlng[0]}, ${
-					data.latlng[1]
-				})\n**• Land Locked:** ${
-					data.landlocked ? "Yes" : "No"
-				}\n**• Borders:** ${data.borders.join(
-					", "
-				)}\n**• Area:** ${data.area.toLocaleString()} km2\n**• Population:** ${data.population.toLocaleString()}\n**• Fifa:** ${
-					data.fifa
-				}\n**• Timezones:** ${data.timezones.join(
-					", "
-				)}\n**• Continents:** ${data.continents.join(
-					", "
-				)}\n**• Start of Week:** ${
-					data.startOfWeek
-				}\n**• Capital Coordinates:** (${data.capitalInfo.latlng[0]}, ${
-					data.capitalInfo.latlng[1]
-				})`
-			)
-			.addField("Currencies", currencies)
-			.addField(
-				"International Direct Dialing",
-				`**• Root:** ${data.idd.root}\n**• Suffixes:** ${data.idd.suffixes.join(
-					", "
-				)}`
-			);
+			.addFields([
+				{
+					name: "Country Information 2",
+					value: `**• Sub Region:** ${
+						data.subregion
+					}\n**• Languages:** ${Object.values(data.languages).join(
+						", "
+					)}\n**• Coordinates:** (${data.latlng[0]}, ${
+						data.latlng[1]
+					})\n**• Land Locked:** ${
+						data.landlocked ? "Yes" : "No"
+					}\n**• Borders:** ${data.borders.join(
+						", "
+					)}\n**• Area:** ${data.area.toLocaleString()} km2\n**• Population:** ${data.population.toLocaleString()}\n**• Fifa:** ${
+						data.fifa
+					}\n**• Timezones:** ${data.timezones.join(
+						", "
+					)}\n**• Continents:** ${data.continents.join(
+						", "
+					)}\n**• Start of Week:** ${
+						data.startOfWeek
+					}\n**• Capital Coordinates:** (${data.capitalInfo.latlng[0]}, ${
+						data.capitalInfo.latlng[1]
+					})`,
+				},
+				{
+					name: "Currencies",
+					value: currencies,
+				},
+				{
+					name: "International Direct Dialing",
+					value: `**• Root:** ${
+						data.idd.root
+					}\n**• Suffixes:** ${data.idd.suffixes.join(", ")}`,
+				},
+			]);
 
-		const embed3 = new MessageEmbed()
+		const embed3 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -176,15 +188,17 @@ module.exports = {
 				iconURL: client.user.displayAvatarURL(),
 			})
 			.setTimestamp()
-			.addField(
-				"Translation",
-				utils.splitMessage(translations, {
-					maxLength: 1024,
-					append: "...",
-				})[0]
-			);
+			.addFields([
+				{
+					name: "Translation",
+					value: utils.splitMessage(translations, {
+						maxLength: 1024,
+						append: "...",
+					})[0],
+				},
+			]);
 
-		const embed4 = new MessageEmbed()
+		const embed4 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -197,20 +211,22 @@ module.exports = {
 				text: client.user.username,
 				iconURL: client.user.displayAvatarURL(),
 			})
-			.addField("Demonyms", demonyms)
-			.addField("Gini Index", gini)
-			.addField(
-				"Car",
-				`**• Signs:** ${data.car.signs.join(", ")}\n**• Side:** ${
-					data.car.side
-				}`
-			)
-			.addField(
-				"Postal Code",
-				`**• Format:** ${data.postalCode.format}\n**• Regex:** ${data.postalCode.regex}`
-			);
+			.addFields([
+				{ name: "Demonyms", value: demonyms },
+				{ name: "Gini Index", value: gini },
+				{
+					name: "car",
+					value: `**• Signs:** ${data.car.signs.join(", ")}\n**• Side:** ${
+						data.car.side
+					}`,
+				},
+				{
+					name: "Postal Code",
+					value: `**• Format:** ${data.postalCode.format}\n**• Regex:** ${data.postalCode.regex}`,
+				},
+			]);
 
-		const embed5 = new MessageEmbed()
+		const embed5 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -225,7 +241,7 @@ module.exports = {
 			})
 			.setImage(data.flags.png);
 
-		const embed6 = new MessageEmbed()
+		const embed6 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),

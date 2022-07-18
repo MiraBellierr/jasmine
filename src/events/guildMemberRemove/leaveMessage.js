@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
 module.exports = async (client, member) => {
 	if (
@@ -9,7 +9,7 @@ module.exports = async (client, member) => {
 
 	const leaveObj = client.leaves.get(member.guild.id);
 
-	const embed = new MessageEmbed();
+	const embed = new EmbedBuilder();
 
 	if (leaveObj.authorName) {
 		const authorNameEmbed = leaveObj.authorName
@@ -112,7 +112,12 @@ module.exports = async (client, member) => {
 
 	const channel = await member.guild.channels.fetch(leaveObj.channelID);
 
-	if (!channel || !member.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
+	if (
+		!channel ||
+		!member.guild.members.me
+			.permissionsIn(channel)
+			.has(PermissionsBitField.Flags.SendMessages)
+	)
 		return;
 
 	channel.send({ embeds: [embed] });

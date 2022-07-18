@@ -28,7 +28,7 @@ module.exports = {
 				.map((anime, i) => `**[${i + 1}] - [${anime.title}](${anime.url})**`)
 				.join("\n");
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),

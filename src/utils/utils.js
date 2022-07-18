@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const axios = require("axios");
 const request = require("request").defaults({ encoding: null });
 
@@ -6,7 +5,7 @@ const splitMessage = (
 	text,
 	{ maxLength = 2_000, char = "\n", prepend = "", append = "" } = {}
 ) => {
-	text = Discord.Util.verifyString(text);
+	text = `${text}`;
 
 	if (text.length <= maxLength) return [text];
 
@@ -87,14 +86,14 @@ const nekoapi = async (endpoint) => {
 };
 
 const checkIfImage = (url) => {
-	request.get(url, (err, res) => {
-		if (err) return false;
+	return new Promise((resolve) => {
+		request(url, (err, res) => {
+			if (err) resolve(false);
+			if (res.statusCode !== 200) resolve(false);
+			if (res.headers["content-type"].startsWith("image")) resolve(true);
 
-		if (res.headers["content-type"].includes("image")) {
-			return true;
-		}
-
-		return false;
+			resolve(false);
+		});
 	});
 };
 

@@ -8,11 +8,11 @@ module.exports = {
 	aliases: ["giveaways"],
 	category: "[✨] utility",
 	description: "Set up a giveaway on your server",
-	memberPermissions: "MANAGE_CHANNELS",
+	memberPermissions: Discord.PermissionsBitField.Flags.ManageChannels,
 	usage: "<start | end | reroll",
 	run: async (client, message, args) => {
 		if (!args[0] || !args[1]) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: `${client.user.username}'s giveaway commands`,
 					iconURL: client.user.avatarURL(),
@@ -45,16 +45,20 @@ module.exports = {
 					"I didn't found any channel with that name."
 				);
 
-			if (!message.guild.me.permissionsIn(channel).has("SEND_MESSAGES"))
+			if (
+				!message.guild.members.me
+					.permissionsIn(channel)
+					.has(Discord.PermissionsBitField.Flags.SendMessages)
+			)
 				return message.channel.send(
 					"I do not have a permission to send a message in that channel."
 				);
 
 			giveawayChannel = channel;
 
-			const example = new Discord.MessageEmbed()
+			const example = new Discord.EmbedBuilder()
 				.setDescription("ㅤ")
-				.addField("Channel", channel.toString());
+				.addFields([{ name: "Channel", value: channel.toString() }]);
 
 			let content =
 				"Please provide a duration how long it would be.(example:`10m`, `1h`, `2.5h`, `1d`)\n\nType `stop` if you want to stop.";
@@ -71,7 +75,7 @@ module.exports = {
 
 				giveawayDuration = giveawayDurationinput.message;
 
-				example.addField("Duration", `${giveawayDuration}`);
+				example.addFields([{ name: "Duration", value: `${giveawayDuration}` }]);
 			}
 
 			content =
@@ -92,7 +96,12 @@ module.exports = {
 
 				numberOfWinners = parseInt(numberOfWinnersInput.message);
 
-				example.addField("Number Of Winners", `${numberOfWinners}`);
+				example.addFields([
+					{
+						name: "Number Of Winners",
+						value: `${numberOfWinners}`,
+					},
+				]);
 			}
 
 			content =
@@ -107,7 +116,7 @@ module.exports = {
 			} else {
 				giveawayPrize = giveawayPrizeInput.message;
 
-				example.addField("Prize", `${giveawayPrize}`);
+				example.addFields([{ name: "Prize", value: `${giveawayPrize}` }]);
 			}
 
 			content = "Is this okay? (yes or no)";

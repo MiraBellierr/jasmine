@@ -10,7 +10,7 @@ module.exports = {
 		const url = await utils.nekoapi(module.exports.name);
 
 		if (!args.length) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: `${message.author.username} ${module.exports.name}es!`,
 					iconURL: message.author.displayAvatarURL({ dynamic: true }),
@@ -26,7 +26,7 @@ module.exports = {
 		if (!target) return message.reply("I didn't found the user with this name");
 
 		if (target.id === message.author.id) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: `${client.user.username} ${module.exports.name}es at ${target.user.username}!`,
 					iconURL: client.user.displayAvatarURL(),
@@ -37,7 +37,7 @@ module.exports = {
 			return message.reply({ embeds: [embed] });
 		}
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: `${message.author.username} ${module.exports.name}es at ${target.user.username}`,
 				iconURL: message.author.displayAvatarURL({ dynamic: true }),
