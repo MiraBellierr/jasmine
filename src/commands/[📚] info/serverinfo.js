@@ -27,7 +27,7 @@ module.exports = {
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setTitle(guild.name)
 			.addFields([
@@ -70,7 +70,6 @@ module.exports = {
 					value: `**• Name Acronym:** ${
 						guild.nameAcronym
 					}\n**• Icon URL:** [Link](${guild.iconURL({
-						dynamic: true,
 						size: 4096,
 					})})\n**• Large Server:** ${
 						guild.large ? "Yes" : "No"
@@ -101,8 +100,8 @@ module.exports = {
 				},
 			])
 			.setColor("0ED4DA")
-			.setThumbnail(guild.iconURL({ dynamic: true }))
-			.setImage(guild.bannerURL({ dynamic: true, size: 4096 }))
+			.setThumbnail(guild.iconURL())
+			.setImage(guild.bannerURL({ size: 4096 }))
 			.setTimestamp()
 			.setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
 

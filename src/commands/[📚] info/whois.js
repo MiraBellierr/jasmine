@@ -37,19 +37,18 @@ module.exports = {
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setFooter({
 				text: client.user.username,
 				iconURL: client.user.displayAvatarURL(),
 			})
-			.setThumbnail(user.displayAvatarURL({ dynamic: true }))
+			.setThumbnail(user.displayAvatarURL())
 			.setColor("#CD1C6C")
 			.addFields([
 				{
 					name: "User Information:",
 					value: `**• Avatar URL:** [Link](${user.displayAvatarURL({
-						dynamic: true,
 						size: 4096,
 					})})\n**• ID:** ${user.id}\n**• Discriminator:** ${
 						user.discriminator

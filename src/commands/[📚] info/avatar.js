@@ -19,25 +19,29 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setTitle(`${user.username}'s avatar`)
 			.setColor("#CD1C6C")
 			.setDescription(
 				`[webp](${user.displayAvatarURL({
-					format: "webp",
+					size: 4096,
+					extension: "webp",
 				})}) | [png](${user.displayAvatarURL({
-					format: "png",
+					size: 4096,
+					extension: "png",
 				})}) | [jpg](${user.displayAvatarURL({
-					format: "jpg",
+					size: 4096,
+					extension: "jpg",
 				})}) | [jpeg](${user.displayAvatarURL({
-					format: "jpeg",
+					size: 4096,
+					extension: "jpeg",
 				})}) | [gif](${user.displayAvatarURL({
-					format: "gif",
-					dynamic: true,
+					size: 4096,
+					extension: "gif",
 				})})`
 			)
-			.setImage(user.displayAvatarURL({ dynamic: true, size: 4096 }))
+			.setImage(user.displayAvatarURL({ size: 4096 }))
 			.setTimestamp()
 			.setFooter({
 				text: client.user.tag,
@@ -52,25 +56,29 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setTitle(`${member.user.username}'s server avatar`)
 				.setColor("#CD1C6C")
 				.setDescription(
 					`[webp](${member.avatarURL({
-						format: "webp",
+						size: 4096,
+						extension: "webp",
 					})}) | [png](${member.avatarURL({
-						format: "png",
+						size: 4096,
+						extension: "png",
 					})}) | [jpg](${member.avatarURL({
-						format: "jpg",
+						size: 4096,
+						extension: "jpg",
 					})}) | [jpeg](${member.avatarURL({
-						format: "jpeg",
+						size: 4096,
+						extension: "jpeg",
 					})}) | [gif](${member.avatarURL({
-						format: "gif",
-						dynamic: true,
+						size: 4096,
+						extension: "gif",
 					})})`
 				)
-				.setImage(member.avatarURL({ dynamic: true, size: 4096 }))
+				.setImage(member.avatarURL({ size: 4096 }))
 				.setTimestamp()
 				.setFooter({
 					text: client.user.tag,
@@ -85,25 +93,29 @@ module.exports = {
 		const banner = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setTitle(`${user.username}'s banner`)
 			.setColor("#CD1C6C")
 			.setDescription(
 				`[webp](${user.bannerURL({
-					format: "webp",
+					size: 4096,
+					extension: "webp",
 				})}) | [png](${user.bannerURL({
-					format: "png",
+					size: 4096,
+					extension: "png",
 				})}) | [jpg](${user.bannerURL({
-					format: "jpg",
+					size: 4096,
+					extension: "jpg",
 				})}) | [jpeg](${user.bannerURL({
-					format: "jpeg",
+					size: 4096,
+					extension: "jpeg",
 				})}) | [gif](${user.bannerURL({
-					format: "gif",
-					dynamic: true,
+					size: 4096,
+					extension: "gif",
 				})})`
 			)
-			.setImage(user.bannerURL({ dynamic: true, size: 4096 }))
+			.setImage(user.bannerURL({ size: 4096 }))
 			.setTimestamp()
 			.setFooter({
 				text: client.user.tag,

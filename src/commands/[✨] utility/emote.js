@@ -20,13 +20,13 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setColor("#CD1C6C")
 				.setTimestamp()
 				.setFooter({
 					text: client.user.tag,
-					iconURL: client.user.avatarURL({ dynamic: true }),
+					iconURL: client.user.avatarURL(),
 				});
 
 			if (/<a:\D+:\d+>/gm.test(arg)) {

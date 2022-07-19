@@ -13,7 +13,7 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: `${client.user.username} Starboard`,
-					iconURL: client.user.displayAvatarURL({ dynamic: true }),
+					iconURL: client.user.displayAvatarURL(),
 				})
 				.setColor("#CD1C6C")
 				.setDescription(

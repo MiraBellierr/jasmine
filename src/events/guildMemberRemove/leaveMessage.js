@@ -22,12 +22,9 @@ module.exports = async (client, member) => {
 			embed.setAuthor({
 				name: authorNameEmbed,
 				iconURL: leaveObj.authorURL
-					.replace(
-						"{user avatar}",
-						member.user.displayAvatarURL({ dynamic: true })
-					)
+					.replace("{user avatar}", member.user.displayAvatarURL())
 					.replace("{kanna avatar}", client.user.displayAvatarURL())
-					.replace("{server icon}", member.guild.iconURL({ dynamic: true })),
+					.replace("{server icon}", member.guild.iconURL()),
 			});
 		} else {
 			embed.setAuthor({ name: authorNameEmbed });
@@ -55,12 +52,9 @@ module.exports = async (client, member) => {
 	if (leaveObj.thumbnail) {
 		embed.setThumbnail(
 			leaveObj.thumbnail
-				.replace(
-					"{user avatar}",
-					member.user.displayAvatarURL({ dynamic: true })
-				)
+				.replace("{user avatar}", member.user.displayAvatarURL())
 				.replace("{kanna avatar}", client.user.displayAvatarURL())
-				.replace("{server icon}", member.guild.iconURL({ dynamic: true }))
+				.replace("{server icon}", member.guild.iconURL())
 		);
 	}
 
@@ -78,12 +72,9 @@ module.exports = async (client, member) => {
 	if (leaveObj.image) {
 		embed.setImage(
 			leaveObj.image
-				.replace(
-					"{user avatar}",
-					member.user.displayAvatarURL({ dynamic: true })
-				)
+				.replace("{user avatar}", member.user.displayAvatarURL())
 				.replace("{kanna avatar}", client.user.displayAvatarURL())
-				.replace("{server icon}", member.guild.iconURL({ dynamic: true }))
+				.replace("{server icon}", member.guild.iconURL())
 		);
 	}
 
@@ -98,12 +89,9 @@ module.exports = async (client, member) => {
 			embed.setFooter({
 				text: footerTextEmbed,
 				iconURL: leaveObj.footerURL
-					.replace(
-						"{user avatar}",
-						member.user.displayAvatarURL({ dynamic: true })
-					)
+					.replace("{user avatar}", member.user.displayAvatarURL())
 					.replace("{kanna avatar}", client.user.displayAvatarURL())
-					.replace("{server icon}", member.guild.iconURL({ dynamic: true })),
+					.replace("{server icon}", member.guild.iconURL()),
 			});
 		} else {
 			embed.setFooter({ text: footerTextEmbed });

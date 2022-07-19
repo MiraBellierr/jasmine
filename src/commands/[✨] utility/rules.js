@@ -8,11 +8,11 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setTitle("Kanna Rules")
 			.setColor("#CD1C6C")
-			.setThumbnail(client.user.avatarURL({ dynamic: true }))
+			.setThumbnail(client.user.avatarURL())
 			.setDescription(
 				`By using Kanna, you agree to these rules. If you break any rules, we reserve the right to blacklist you from Kanna. Use \`${client.prefixes.get(
 					message.guild.id

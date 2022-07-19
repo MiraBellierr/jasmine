@@ -81,7 +81,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setThumbnail(flag)
 			.setColor("#CD1C6C")
@@ -126,7 +126,7 @@ module.exports = {
 		const embed2 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setThumbnail(flag)
 			.setColor("#CD1C6C")
@@ -177,7 +177,7 @@ module.exports = {
 		const embed3 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setThumbnail(flag)
 			.setColor("#CD1C6C")
@@ -201,7 +201,7 @@ module.exports = {
 		const embed4 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setThumbnail(flag)
 			.setColor("#CD1C6C")
@@ -229,7 +229,7 @@ module.exports = {
 		const embed5 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setThumbnail(flag)
 			.setColor("#CD1C6C")
@@ -244,7 +244,7 @@ module.exports = {
 		const embed6 = new EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setThumbnail(flag)
 			.setColor("#CD1C6C")

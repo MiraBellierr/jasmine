@@ -31,7 +31,7 @@ module.exports = {
 			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setTitle(`Top 10 ${type}`)
 				.setDescription(board)

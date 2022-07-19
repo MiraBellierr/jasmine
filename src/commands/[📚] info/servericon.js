@@ -15,7 +15,7 @@ module.exports = {
 		const iconEmbed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setTitle("Server Icon")
 			.setColor("#CD1C6C")
@@ -33,12 +33,11 @@ module.exports = {
 					format: "jpeg",
 					size: 4096,
 				})}) | [gif](${message.guild.iconURL({
-					dynamic: true,
 					size: 4096,
 					format: "gif",
 				})})`
 			)
-			.setImage(message.guild.iconURL({ dynamic: true, size: 4096 }))
+			.setImage(message.guild.iconURL({ size: 4096 }))
 			.setTimestamp()
 			.setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
 
@@ -48,11 +47,11 @@ module.exports = {
 			const splashEmbed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setTitle("Server Splash")
 				.setColor("#CD1C6C")
-				.setImage(message.guild.splashURL({ dynamic: true, size: 4096 }))
+				.setImage(message.guild.splashURL({ size: 4096 }))
 				.setDescription(
 					`[webp](${message.guild.splashURL({
 						format: "webp",
@@ -67,7 +66,6 @@ module.exports = {
 						format: "jpeg",
 						size: 4096,
 					})}) | [gif](${message.guild.splashURL({
-						dynamic: true,
 						size: 4096,
 						format: "gif",
 					})})`
@@ -82,11 +80,11 @@ module.exports = {
 			const bannerEmbed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setTitle("Server Banner")
 				.setColor("#CD1C6C")
-				.setImage(message.guild.bannerURL({ dynamic: true, size: 4096 }))
+				.setImage(message.guild.bannerURL({ size: 4096 }))
 				.setDescription(
 					`[webp](${message.guild.bannerURL({
 						format: "webp",
@@ -101,7 +99,6 @@ module.exports = {
 						format: "jpeg",
 						size: 4096,
 					})}) | [gif](${message.guild.bannerURL({
-						dynamic: true,
 						size: 4096,
 						format: "gif",
 					})})`
@@ -116,13 +113,11 @@ module.exports = {
 			const discoverySplashEmbed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setTitle("Server Splash (Discovery)")
 				.setColor("#CD1C6C")
-				.setImage(
-					message.guild.discoverySplashURL({ dynamic: true, size: 4096 })
-				)
+				.setImage(message.guild.discoverySplashURL({ size: 4096 }))
 				.setDescription(
 					`[webp](${message.guild.discoverySplashURL({
 						format: "webp",
@@ -137,7 +132,6 @@ module.exports = {
 						format: "jpeg",
 						size: 4096,
 					})}) | [gif](${message.guild.discoverySplashURL({
-						dynamic: true,
 						size: 4096,
 						format: "gif",
 					})})`

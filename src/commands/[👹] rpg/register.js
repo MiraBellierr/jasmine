@@ -13,7 +13,7 @@ module.exports = {
 			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: message.author.username,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setDescription(
 					`To begin play, please choose one of these class with the \`${client.prefixes.get(

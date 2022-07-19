@@ -52,7 +52,7 @@ module.exports = {
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: message.author.username,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setTitle("Role Information")
 			.setDescription(
@@ -65,7 +65,7 @@ module.exports = {
 				}\n**• Permission:** ${permission}`
 			)
 			.setColor(role.hexColor)
-			.setThumbnail(role.guild.iconURL({ dynamic: true }))
+			.setThumbnail(role.guild.iconURL())
 			.setTimestamp()
 			.setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
 

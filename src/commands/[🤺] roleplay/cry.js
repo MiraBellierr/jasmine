@@ -13,7 +13,7 @@ module.exports = {
 			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
 					name: `${message.author.username} cries!`,
-					iconURL: message.author.displayAvatarURL({ dynamic: true }),
+					iconURL: message.author.displayAvatarURL(),
 				})
 				.setImage(url)
 				.setColor("#CD1C6C");
@@ -40,7 +40,7 @@ module.exports = {
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: `${message.author.username} cries on ${target.user.username}`,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setImage(url)
 			.setColor("#CD1C6C");

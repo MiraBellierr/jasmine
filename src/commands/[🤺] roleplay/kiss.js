@@ -32,7 +32,7 @@ module.exports = {
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: `${message.author.username} ${module.exports.name}es ${target.user.username}`,
-				iconURL: message.author.displayAvatarURL({ dynamic: true }),
+				iconURL: message.author.displayAvatarURL(),
 			})
 			.setImage(url)
 			.setColor("#CD1C6C");

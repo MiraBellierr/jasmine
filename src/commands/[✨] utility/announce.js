@@ -72,15 +72,13 @@ module.exports = {
 
 					switch (authorIconURL.message) {
 						case "{user avatar}":
-							authorIconURLText = message.author.displayAvatarURL({
-								dynamic: true,
-							});
+							authorIconURLText = message.author.displayAvatarURL();
 							break;
 						case "{kanna avatar}":
 							authorIconURLText = client.user.displayAvatarURL();
 							break;
 						case "{server icon}":
-							authorIconURLText = message.guild.iconURL({ dynamic: true });
+							authorIconURLText = message.guild.iconURL();
 							break;
 					}
 
@@ -198,15 +196,13 @@ module.exports = {
 
 					switch (footerIconURL.message) {
 						case "{user avatar}":
-							footerIconURLText = message.author.displayAvatarURL({
-								dynamic: true,
-							});
+							footerIconURLText = message.author.displayAvatarURL();
 							break;
 						case "{kanna avatar}":
 							footerIconURLText = client.user.displayAvatarURL();
 							break;
 						case "{server icon}":
-							footerIconURLText = message.guild.iconURL({ dynamic: true });
+							footerIconURLText = message.guild.iconURL();
 							break;
 					}
 
@@ -246,15 +242,13 @@ module.exports = {
 
 				switch (thumbnail.message) {
 					case "{user avatar}":
-						thumbnailText = message.author.displayAvatarURL({
-							dynamic: true,
-						});
+						thumbnailText = message.author.displayAvatarURL();
 						break;
 					case "{kanna avatar}":
 						thumbnailText = client.user.displayAvatarURL();
 						break;
 					case "{server icon}":
-						thumbnailText = message.guild.iconURL({ dynamic: true });
+						thumbnailText = message.guild.iconURL();
 						break;
 				}
 
@@ -290,15 +284,13 @@ module.exports = {
 
 				switch (image.message) {
 					case "{user avatar}":
-						imageText = message.author.displayAvatarURL({
-							dynamic: true,
-						});
+						imageText = message.author.displayAvatarURL();
 						break;
 					case "{kanna avatar}":
 						imageText = client.user.displayAvatarURL();
 						break;
 					case "{server icon}":
-						imageText = message.guild.iconURL({ dynamic: true });
+						imageText = message.guild.iconURL();
 						break;
 				}
 

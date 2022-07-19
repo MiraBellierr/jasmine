@@ -19,7 +19,7 @@ module.exports = {
 			.setAuthor({
 				name: `${user.username}'s balance`,
 			})
-			.setThumbnail(user.displayAvatarURL({ dynamic: true }))
+			.setThumbnail(user.displayAvatarURL())
 			.setColor("#DA70D6")
 			.setFooter({
 				text: "https://patreon.com/kannacoco",

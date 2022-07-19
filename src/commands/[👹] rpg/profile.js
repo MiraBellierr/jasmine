@@ -31,7 +31,7 @@ module.exports = {
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: `${member.user.username}'s profile`,
-				iconURL: member.user.displayAvatarURL({ dynamic: true }),
+				iconURL: member.user.displayAvatarURL(),
 			})
 			.setColor("#CD1C6C")
 			.setTitle(`Level ${character.get("level")} ${character.get("name")}`)
