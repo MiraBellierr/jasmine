@@ -3,7 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = async (client, channel) => {
 	const logging = client.loggings.get(channel.guild.id);
 
-	if (!logging.channelDeletion) return;
+	if (!logging || !logging.channelDeletion) return;
 
 	if (logging.ignoredChannels) {
 		const ignoredChannels = logging.ignoredChannels.split("|");
