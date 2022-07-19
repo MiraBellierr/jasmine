@@ -128,8 +128,6 @@ module.exports = {
 				...events
 			} = logging;
 
-			console.log(logging);
-
 			Object.keys(events).forEach((event) => {
 				logging[event] = set;
 			});
