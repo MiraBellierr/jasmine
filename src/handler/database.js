@@ -19,6 +19,13 @@ module.exports = async (client) => {
 	const WelcomeMessages = await schemas.welcomeMessage().findAll();
 	const LeaveMessages = await schemas.leaveMessage().findAll();
 	const Starboards = await schemas.starboard().findAll();
+	const Loggings = await schemas.logging().findAll();
+
+	if (Loggings.length) {
+		Loggings.forEach((lg) =>
+			client.loggings.set(lg.dataValues.guildID, lg.dataValues)
+		);
+	}
 
 	if (Guilds.length) {
 		Guilds.forEach((guild) =>

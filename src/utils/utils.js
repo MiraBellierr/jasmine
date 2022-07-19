@@ -1,11 +1,22 @@
 const axios = require("axios");
 const request = require("request").defaults({ encoding: null });
+const Discord = require("discord.js");
+
+// delete element in array
+const deleteElement = (array, element) => {
+	const index = array.indexOf(element);
+	if (index !== -1) {
+		array.splice(index, 1);
+	}
+
+	return array;
+};
 
 const splitMessage = (
 	text,
 	{ maxLength = 2_000, char = "\n", prepend = "", append = "" } = {}
 ) => {
-	text = `${text}`;
+	text = Discord.verifyString(text);
 
 	if (text.length <= maxLength) return [text];
 
@@ -103,4 +114,5 @@ module.exports = {
 	formatTime,
 	nekoapi,
 	checkIfImage,
+	deleteElement,
 };
