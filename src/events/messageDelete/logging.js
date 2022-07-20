@@ -1,6 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, message) => {
+	if (message.author.bot) return;
+
 	const logging = client.loggings.get(message.guild.id);
 
 	if (!logging || !logging.messageDeletion) return;
@@ -31,13 +33,7 @@ module.exports = async (client, message) => {
 		.setFooter({ text: `userid: ${message.author.id}` })
 		.setTimestamp();
 
-	let channel;
-
-	if (logging.serverLogChannel) {
-		channel = await message.guild.channels.fetch(logging.serverLogChannel);
-	} else {
-		channel = await message.guild.channels.fetch(logging.defaultLogChannel);
-	}
+	let channel = await message.guild.channels.fetch(logging.defaultLogChannel);
 
 	channel.send({ embeds: [embed] });
 };
