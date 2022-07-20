@@ -5,7 +5,9 @@ module.exports = async (client, message) => {
 
 	const logging = client.loggings.get(message.guild.id);
 
-	if (!logging || !logging.messageDeletion) return;
+	if (!logging || !logging.defaultLogChannel) return;
+
+	if (!logging.messageDeletion) return;
 
 	if (logging.ignoredChannels) {
 		const ignoredChannels = logging.ignoredChannels.split("|");
@@ -22,7 +24,7 @@ module.exports = async (client, message) => {
 		})
 		.setColor("#CD1C6C")
 		.setDescription(
-			`**User:** ${message.author}\n**Channel:** ${message.channel}`
+			`**Member:** ${message.author}\n**Channel:** ${message.channel}`
 		)
 		.addFields([
 			{
@@ -30,7 +32,7 @@ module.exports = async (client, message) => {
 				value: `${message.cleanContent}`,
 			},
 		])
-		.setFooter({ text: `userid: ${message.author.id}` })
+		.setFooter({ text: `memberid: ${message.author.id}` })
 		.setTimestamp();
 
 	let channel = await message.guild.channels.fetch(logging.defaultLogChannel);

@@ -3,7 +3,9 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = async (client, oldGuild, newGuild) => {
 	const logging = client.loggings.get(newGuild.id);
 
-	if (!logging || !logging.serverUpdate) return;
+	if (!logging || !logging.defaultLogChannel) return;
+
+	if (!logging.serverUpdate) return;
 
 	const differences = Object.keys(oldGuild).filter(
 		(key) =>

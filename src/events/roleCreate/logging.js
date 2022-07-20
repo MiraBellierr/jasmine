@@ -3,7 +3,9 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = async (client, role) => {
 	const logging = client.loggings.get(role.guild.id);
 
-	if (!logging || !logging.roleCreation) return;
+	if (!logging || !logging.defaultLogChannel) return;
+
+	if (!logging.roleCreation) return;
 
 	const embed = new EmbedBuilder()
 		.setAuthor({
@@ -11,7 +13,7 @@ module.exports = async (client, role) => {
 			iconURL: role.guild.iconURL(),
 		})
 		.setColor("#CD1C6C")
-		.setDescription(`Role: ${role}`)
+		.setDescription(`**Role:** ${role}`)
 		.setFooter({ text: `roleid: ${role.id}` })
 		.setTimestamp();
 

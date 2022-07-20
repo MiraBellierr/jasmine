@@ -4,7 +4,9 @@ const Color = require("color");
 module.exports = async (client, oldRole, newRole) => {
 	const logging = client.loggings.get(newRole.guild.id);
 
-	if (!logging || !logging.roleUpdate) return;
+	if (!logging || !logging.defaultLogChannel) return;
+
+	if (!logging.roleUpdate) return;
 
 	const differences = Object.keys(oldRole).filter(
 		(key) => oldRole[key] !== newRole[key] && typeof oldRole[key] !== "object"

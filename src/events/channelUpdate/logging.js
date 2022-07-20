@@ -3,7 +3,9 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = async (client, oldChannel, newChannel) => {
 	const logging = client.loggings.get(newChannel.guild.id);
 
-	if (!logging || !logging.channelUpdate) return;
+	if (!logging || !logging.defaultLogChannel) return;
+
+	if (!logging.channelUpdate) return;
 
 	if (logging.ignoredChannels) {
 		const ignoredChannels = logging.ignoredChannels.split("|");
