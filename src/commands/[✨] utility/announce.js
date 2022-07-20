@@ -10,7 +10,7 @@ module.exports = {
 	name: "announce",
 	category: "[✨] utility",
 	description: "Sends an announcement to the channel",
-	memberPermissions: PermissionsBitField.Flags.ManageChannels,
+	memberPermission: "ManageChannels",
 	usage: "<channel>",
 	run: async (client, message, args) => {
 		if (!args[0]) return argsError(module.exports, client, message);

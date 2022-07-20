@@ -1,12 +1,11 @@
 const { argsError } = require("../../utils/errors");
-const { PermissionsBitField } = require("discord.js");
 
 module.exports = {
 	name: "purge",
 	category: "[🛠] moderation",
 	description: "delete some messages",
-	clientPermissions: PermissionsBitField.Flags.ManageMessages,
-	memberPermissions: PermissionsBitField.Flags.ManageMessages,
+	clientPermission: "ManageMessages",
+	memberPermission: "ManageMessages",
 	usage: "[bot] <count>",
 	run: async (client, message, args) => {
 		if (message.deletable) message.delete();

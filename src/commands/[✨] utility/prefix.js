@@ -1,12 +1,11 @@
 const schemas = require("../../database/schemas");
 const { argsError } = require("../../utils/errors");
-const { PermissionsBitField } = require("discord.js");
 
 module.exports = {
 	name: "prefix",
 	description: "change a prefix for your server",
 	category: "[✨] utility",
-	memberPermissions: PermissionsBitField.Flags.ManageGuild,
+	memberPermission: "ManageGuild",
 	usage: "<new prefix>",
 	run: async (client, message, args) => {
 		const Guilds = await schemas.guild();

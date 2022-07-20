@@ -6,7 +6,7 @@ module.exports = {
 	name: "starboard",
 	category: "[✨] utility",
 	description: "A :star: starboard channel for your server",
-	memberPermissions: PermissionsBitField.Flags.ManageChannels,
+	memberPermission: "ManageChannels",
 	usage: "<set | on | off | star>",
 	run: async (client, message, args) => {
 		if (!args.length) {

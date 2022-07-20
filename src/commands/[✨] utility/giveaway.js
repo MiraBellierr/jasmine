@@ -8,7 +8,7 @@ module.exports = {
 	aliases: ["giveaways"],
 	category: "[✨] utility",
 	description: "Set up a giveaway on your server",
-	memberPermissions: Discord.PermissionsBitField.Flags.ManageChannels,
+	memberPermission: "ManageChannels",
 	usage: "<start | end | reroll",
 	run: async (client, message, args) => {
 		if (!args[0] || !args[1]) {

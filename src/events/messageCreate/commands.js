@@ -64,7 +64,9 @@ module.exports = async (client, message) => {
 
 	if (
 		command.clientPermission &&
-		!message.guild.members.me.permissions.has(command.clientPermission)
+		!message.guild.members.me.permissions.has(
+			PermissionsBitField.Flags[command.clientPermission]
+		)
 	) {
 		return message.channel.send(
 			`I do not have the \`${command.clientPermission}\` permission to be able to continue this command`
@@ -73,7 +75,9 @@ module.exports = async (client, message) => {
 
 	if (
 		command.memberPermission &&
-		!message.member.permissions.has(command.memberPermission)
+		!message.member.permissions.has(
+			PermissionsBitField.Flags[command.memberPermission]
+		)
 	) {
 		return message.channel.send(
 			`You don't have the \`${command.memberPermission}\` permission to use this command`

@@ -9,8 +9,8 @@ module.exports = {
 	name: "logging",
 	description: "Toggles logging for certain events.",
 	category: "[🛠] moderation",
-	clientPermissions: PermissionsBitField.Flags.ManageMessages,
-	memberPermissions: PermissionsBitField.Flags.ManageMessages,
+	clientPermission: "ManageGuild",
+	memberPermission: "ManageMessages",
 	usage: "<event> <enable|disable> | <channelLogOption> <channel>",
 	run: async (client, message, args) => {
 		let logging = client.loggings.get(message.guild.id);

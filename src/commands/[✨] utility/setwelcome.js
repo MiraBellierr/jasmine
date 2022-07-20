@@ -16,7 +16,7 @@ module.exports = {
 	aliases: ["sw"],
 	category: "[✨] utility",
 	description: "Welcome message configuration",
-	memberPermissions: PermissionsBitField.Flags.ManageChannels,
+	memberPermission: "ManageChannels",
 	usage: "<channel | on | off>",
 	run: async (client, message, args) => {
 		if (!args.length) return argsError(module.exports, client, message);
