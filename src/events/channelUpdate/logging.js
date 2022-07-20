@@ -14,45 +14,42 @@ module.exports = async (client, oldChannel, newChannel) => {
 	}
 
 	const differences = Object.keys(oldChannel).filter(
-		(key) => oldChannel[key] !== newChannel[key]
+		(key) =>
+			oldChannel[key] !== newChannel[key] && typeof newChannel[key] !== "object"
 	);
 
 	differences.forEach(async (diff) => {
-		if (diff !== "permissionOverwrites") {
-			const embed = new EmbedBuilder()
-				.setAuthor({
-					name: `Channel ${
-						diff.charAt(0).toUpperCase() + diff.slice(1)
-					} Updated`,
-					iconURL: newChannel.guild.iconURL(),
-				})
-				.setColor("#CD1C6C")
-				.addFields([
-					{
-						name: "Before",
-						value: `${oldChannel[diff] ? oldChannel[diff] : "N/A"}`,
-					},
-					{
-						name: "After",
-						value: `${newChannel[diff] ? newChannel[diff] : "N/A"}`,
-					},
-				])
-				.setFooter({ text: `channelid: ${newChannel.id}` })
-				.setTimestamp();
+		const embed = new EmbedBuilder()
+			.setAuthor({
+				name: `Channel ${diff.charAt(0).toUpperCase() + diff.slice(1)} Updated`,
+				iconURL: newChannel.guild.iconURL(),
+			})
+			.setColor("#CD1C6C")
+			.addFields([
+				{
+					name: "Before",
+					value: `${oldChannel[diff] ? oldChannel[diff] : "N/A"}`,
+				},
+				{
+					name: "After",
+					value: `${newChannel[diff] ? newChannel[diff] : "N/A"}`,
+				},
+			])
+			.setFooter({ text: `channelid: ${newChannel.id}` })
+			.setTimestamp();
 
-			let logChannel;
+		let logChannel;
 
-			if (logging.serverLogChannel) {
-				logChannel = await newChannel.guild.channels.fetch(
-					logging.serverLogChannel
-				);
-			} else {
-				logChannel = await newChannel.guild.channels.fetch(
-					logging.defaultLogChannel
-				);
-			}
-
-			logChannel.send({ embeds: [embed] });
+		if (logging.serverLogChannel) {
+			logChannel = await newChannel.guild.channels.fetch(
+				logging.serverLogChannel
+			);
+		} else {
+			logChannel = await newChannel.guild.channels.fetch(
+				logging.defaultLogChannel
+			);
 		}
+
+		logChannel.send({ embeds: [embed] });
 	});
 };
