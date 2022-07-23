@@ -10,7 +10,7 @@ module.exports = async (client, invite) => {
 	const embed = new EmbedBuilder()
 		.setAuthor({
 			name: "Invite Created",
-			iconURL: invite.inviter.displayAvatarURL(),
+			iconURL: invite.guild.iconURL(),
 		})
 		.setColor("#CD1C6C")
 		.setDescription(
