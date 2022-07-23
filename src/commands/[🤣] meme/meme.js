@@ -1,6 +1,5 @@
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const axios = require("axios");
-const request = require("request").defaults({ encoding: null });
 
 module.exports = {
 	name: "meme",
