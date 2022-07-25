@@ -22,6 +22,12 @@ module.exports = () => {
 		work: {
 			type: Sequelize.DATE,
 		},
+		beg: {
+			type: Sequelize.DATE,
+		},
+		crime: {
+			type: Sequelize.DATE,
+		},
 	});
 
 	Timers.sync();
