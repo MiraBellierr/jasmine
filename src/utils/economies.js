@@ -229,4 +229,126 @@ const getWork = (coins) => {
 	return work;
 };
 
-module.exports = { getCoins, getTimer, getCooldown, getWork };
+const getCrimeSuccess = (coins) => {
+	const crimes = [
+		`You sell your first mixtape and earn ${coins}`,
+		`You sell cellular phones for a whopping ${coins}`,
+		`You stole a car and sold it for ${coins}`,
+		`You successfully take furniture from the Furniture Store and sell it online for ${coins}!`,
+		`You stole a dog and sold it to the old lady next door for ${coins}`,
+		`You ransacked your manager's home, found his prized alarm clock, and sold it for ${coins}`,
+		`You work for a hacking association and earn ${coins}`,
+		`You hacked your parent's bank account and made ${coins}.`,
+		`You do a heist on the EU bank for ${coins}`,
+		`You were a hacker and stole robux ${coins}`,
+		`You kill a guard with a sickle and steal ${coins} from his dead, bloated corpse.`,
+		`You mugged a bunch of nuns for ${coins}`,
+		`As you exit your backyard, a dog from down the street bites your leg leaving you with deep cuts on your calf. You stumble with pain and kick the dog into your backyard before closing the gate. Later that day a Lost Dog poster is seen on the street offering a reward. You return the dog, only after receiving your ${coins} reward. He shouldn't have bit you on your own property.`,
+		`You mug a hobo on the street and manage to get ${coins}`,
+		`You rob a liquor store for ${coins}`,
+		`You steal change from the homeless. You got ${coins}`,
+		`You work for a Mexican cartel and make ${coins}`,
+		`You find some farming tools and steal a few when people aren't looking and sell them to a farmer for ${coins}`,
+		`What me? No, I didn't commit crime. Crime-who? Crime-what? Acquire ${coins} for something that definitely wasn't illegal`,
+		`You find a wallet on the ground containing ${coins}. You pick it up and look at the ID inside. You see the man on the ID card running around frantically looking for said wallet. You pocket the wallet and walk away.`,
+		`You stole a prized diamond from the nearby bank vault, selling it for ${coins}.`,
+		`You travel back in time to before the Gold Rush began and take all the gold. You travel back to the present and trade it in for ${coins}.`,
+		`The Russian government pays you ${coins} after you successfully blow up an arms depot.`,
+		`You hack into the government's economy system and manage to steal ${coins}.`,
+		`You steal ${coins} from your baby sister's allowance money from her sparkly pink piggy bank.`,
+		`You manage to slip some gemstones into your pockets when the store owner isn't looking, selling them later for ${coins}.`,
+		`You hacked into a terrorist's computer, and managed to earn ${coins}`,
+		`You download and repost an art tutorial on YouTube that gets a lot of hits, ${coins} arrives in the mail the next day.`,
+		`You set up a fake kickstarter for a game and end up stealing ${coins} from unsuspecting investors.`,
+		`You broke into the Warden's office and stole his chair. You managed to sell it for ${coins}.`,
+		`You stole Justin Bieber's wallet and found ${coins} in it.`,
+		`You rob an orphanage for ${coins}`,
+		`On Highway 9 you come across a courier heading to New Tulsa. You have a small conversation and figure out he is transporting a shipment of scavenged poker chips. Filled with greed you put a bullet in his gut and loot the package. When returning to New Tulsa you sneak the chips into the Hard Rock and cash them in for ${coins}. No one found out... thank God.`,
+		`You help an old lady cross the road, ${coins} falls out of her purse and you take it!`,
+		`Being the criminal mastermind you are, you decide to rob the next person you see. An old lady approaches, here's your chance! You threaten her & demand money. The poor old lady gives you ${coins} in sheer terror.`,
+		`You assassinate an actor for ${coins}`,
+		`You bombed Antarctica and received ${coins}`,
+		`You call a few friends and raid a newspaper shop with machetes. The operation is successful, and from the loot you earn ${coins}.`,
+		`You assassinate a high priority target. Your client pays you ${coins}.`,
+		`You robbed ${coins} from a convenience store.`,
+		`Your hacker friend wires you ${coins}. Good payroll today gamers.`,
+		`You smuggle pugs across the Mexican border for a cool ${coins}.`,
+		`You infiltrate the FBI HQ and make out with the secret plans to sell for ${coins}`,
+		`You break into Discord Headquarters, you steal ${coins} and escape unnoticed!`,
+		`You rob a McDonald's and take ${coins}.`,
+		`You steal a painting of a mustached man and sell it for ${coins}.`,
+		`You steal the Queen's crown and sell it on the black market for ${coins}`,
+		`You pickpocket a passing noble, guess crime does pay after all. You manage to steal ${coins}`,
+		`You invaded a hangout party and stole ${coins}`,
+		`The "Don't Step on the Grass" sign in the park was taunting you, so you pranced all over the grassy fields before picking the pocket of the nearby patrolling traffic officer, you were able to nab ${coins} from their pockets.`,
+		`You successfully created a pyramid scheme making ${coins} in the process.`,
+		`You pickpocket someone successfully and steal the money out of their wallet, there was ${coins} in it`,
+		`You steal a hobo's money jar for ${coins}`,
+		`You milk your videos with clickbait and giveaway-videos, earning ${coins}`,
+		`You find a trading vulnerability in a game and duplicate inventory for which you sell and earn ${coins}`,
+		`You decided to embrace your inner dark side, and promptly massacre an entire nation, netting you ${coins}`,
+		`You steal lamps for ${coins}`,
+		`You killed a man and liked it, you got ${coins}`,
+		`You break into a builder's workshop and manage to steal ${coins}`,
+	];
+
+	const crime = crimes[Math.floor(Math.random() * crimes.length)];
+
+	return crime;
+};
+
+const getCrimeFail = (coins) => {
+	const crimes = [
+		`You attempt to rob the peasant's village. You don't find any valuable assets, and you get fined ${coins}.`,
+		`You got caught stealing cheese wheels and are fined ${coins}`,
+		`Dude, you just duped, and got banned. Sorry you lose ${coins}`,
+		`You failed stealing candy from a kid and got fined ${coins}`,
+		`You choked on a Twinkie and had to pay a hospital fine of ${coins}.`,
+		`You sneak into the theatre and try to steal tickets but you get caught and thrown out with a fine of ${coins}`,
+		`You hit someone with a rock and they sued you for ${coins}`,
+		`The old lady you tried to rob turned out to be a 6'4'' police officer in prime condition. You got the shit beaten out of you and were fined ${coins}`,
+		`You have been caught hacking your neighbours wifi, and have been fined a total of ${coins}`,
+		`You fail to pickpocket a noble. He summons the guards and they fine you ${coins}`,
+		`You eat pizza with pineapple. Disgrace. Fined ${coins}`,
+		`During the escape, the police catch up with your gang and confiscate ${coins} from you.`,
+		`The cops start chasing you, and ${coins} falls out of your pocket!`,
+		`You were caught vaping in the bathroom and have been given a ${coins} fine.`,
+		`You attempt to steal, but the person stabs you. You pay ${coins} in hospital expenses...`,
+		`You have been fined ${coins} because you ate during work hours.`,
+		`You were caught in the act, and fined ${coins}`,
+		`Stealing candy from a baby didn't turn out to be as easy as you'd think, you've been fined ${coins}`,
+		`You try to mug a rich kid, but end up failing and get fined ${coins}.`,
+		`You posted in the wrong Discord channel and have been fined ${coins}.`,
+		`You tripped on one of Patrick's Pet Rocks, off to the slammer for you, and you have to pay for injuring his rock, Patrick demands a fine of ${coins}!`,
+		`Police did a strip search and found stolen toys, they fined you ${coins}`,
+		`You attempt to rob a body builder, you get your ass kicked. Pay ${coins}`,
+		`You got caught stealing from a donations jar and in return you get fined ${coins}`,
+		`You got caught speeding, your ticket comes to ${coins}`,
+		`You did a crime and refuse to do the time. You lose ${coins}.`,
+		`Your friend bet you that you couldn't beat him in Madden. He won ${coins}.`,
+		`You tripped while running from the cops after robbing a bank. Good job! You lost ${coins}.`,
+		`You were caught trying to scam people, and have been given a ${coins} fine!`,
+		`You were caught trying to smuggle illegal aliens across the border and have been fined ${coins}`,
+		`You try to snipe someone, but get your calculations off, hitting a random guy next to your target, losing you ${coins} in payment for a cleaner.`,
+		`You attempted to rob the local bank and got caught by the police. You are fined ${coins}`,
+		`You are caught jaywalking while stealing a purse and are fined ${coins}`,
+		`You tried to trip an old man and he beats you with a stick. The police then arrive on scene and fine you ${coins} for attempted murder.`,
+		`You threaten a police officer, wasn't a smart idea. You got arrested and was fined ${coins}`,
+		`During an armed assault, you are knocked unconscious by an old geezer. Afterwards, it seems that you are missing ${coins} when you wake up.`,
+		`Steal an extra gram of cocaine from your dealer, Sarah, and get caught. Pay her back ${coins} to dodge death.`,
+		`You unsuccessfully bribed a cop. See ya in prison, buddy. You lost ${coins}`,
+	];
+
+	const crime = crimes[Math.floor(Math.random() * crimes.length)];
+
+	return crime;
+};
+
+module.exports = {
+	getCoins,
+	getTimer,
+	getCooldown,
+	getWork,
+	getCrimeSuccess,
+	getCrimeFail,
+};
