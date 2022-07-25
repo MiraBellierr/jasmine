@@ -10,7 +10,7 @@ module.exports = async (client, oldState, newState) => {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: "Member Joined Voice Channel",
-					iconURL: newState.user.displayAvatarURL(),
+					iconURL: newState.member.displayAvatarURL(),
 				})
 				.setColor("#CD1C6C")
 				.setDescription(
@@ -39,7 +39,7 @@ module.exports = async (client, oldState, newState) => {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: "Member Moved Voice Channel",
-					iconURL: newState.user.displayAvatarURL(),
+					iconURL: newState.member.displayAvatarURL(),
 				})
 				.setColor("#CD1C6C")
 				.setDescription(`**Member:** ${newState.member}`)
@@ -76,7 +76,7 @@ module.exports = async (client, oldState, newState) => {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: "Member Left Voice Channel",
-					iconURL: newState.user.displayAvatarURL(),
+					iconURL: newState.member.displayAvatarURL(),
 				})
 				.setColor("#CD1C6C")
 				.setDescription(
