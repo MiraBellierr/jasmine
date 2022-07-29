@@ -27,7 +27,7 @@ module.exports = {
 				embed.addFields([
 					{
 						name: `${c.charAt(0).toUpperCase() + c.slice(1)}`,
-						value: `\`\`\`js\n• Level: 1\n• HP: ${classes[c].hp}\n• STR: ${classes[c].str}\n• AGL: ${classes[c].agl}\n\`\`\``,
+						value: `\`\`\`js\n• Level: 1\n• HP: ${classes[c].hp}\n• STR: ${classes[c].str}\n• AGL: ${classes[c].agl}\n• ATT: ${classes[c].att}\n• DEF: ${classes[c].def}\n\`\`\``,
 					},
 				]);
 			});
@@ -47,6 +47,8 @@ module.exports = {
 				hp: chaClass.hp,
 				str: chaClass.str,
 				agl: chaClass.agl,
+				att: chaClass.att,
+				def: chaClass.def,
 				img: character.image,
 			});
 

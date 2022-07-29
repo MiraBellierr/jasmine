@@ -1,6 +1,7 @@
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
+const constants = require("../../utils/constants");
 
 module.exports = {
 	name: "profile",
@@ -38,17 +39,22 @@ module.exports = {
 			.addFields([
 				{
 					name: "__Stats__",
-					value: `**• <:class:880658124246237254> Class:** ${character.get(
-						"class"
-					)}\n**• <:xp:880655736261206036> XP:** ${character.get(
+					value: `**• ${constants.assets.class.emoji} Class:** ${
+						character.get("class").charAt(0).toUpperCase() +
+						character.get("class").slice(1)
+					}\n**• ${constants.assets.xp.emoji} XP:** ${character.get(
 						"xp"
-					)}/${character.get(
-						"xpNeeded"
-					)}\n**• <:health:880655864523014155> HP:** ${character.get(
-						"hp"
-					)}\n**• <:pa:880665943959797811> STR:** ${character.get(
-						"str"
-					)}\n**• <:speed:880668456066891826> AGL:** ${character.get("agl")}`,
+					)}/${character.get("xpNeeded")}\n**• ${
+						constants.assets.hp.emoji
+					} HP:** ${character.get("hp")}\n**• ${
+						constants.assets.str.emoji
+					} STR:** ${character.get("str")}\n**• ${
+						constants.assets.agl.emoji
+					} AGL:** ${character.get("agl")}\n**• ${
+						constants.assets.att.emoji
+					} ATT:** ${character.get("att")}\n**• ${
+						constants.assets.def.emoji
+					} DEF:** ${character.get("def")}`,
 				},
 			])
 			.setImage(character.get("img"))
