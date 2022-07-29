@@ -108,6 +108,17 @@ const checkIfImage = (url) => {
 	});
 };
 
+const getProgBar = (current, max, length) => {
+	const curBer = Math.floor((current / max) * length);
+	let str = "";
+
+	for (let i = 0; i < length; i++) {
+		str += i < curBer ? "■" : "□";
+	}
+
+	return str;
+};
+
 module.exports = {
 	splitMessage,
 	formatDate,
@@ -115,4 +126,5 @@ module.exports = {
 	nekoapi,
 	checkIfImage,
 	deleteElement,
+	getProgBar,
 };
