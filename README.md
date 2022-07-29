@@ -39,3 +39,7 @@ You may contribute to the Kannabotto repo. I would appreciate it if you do so an
 - 💕 **[dchu096](https://github.com/dchu096)**: Console and Output
 - 💕 **[nemoisafish](https://github.com/nemoisafish)**: Graphics Design and Business
 - 💕 **[devYamato](https://github.com/devYamato)**: Website Developer
+
+## 📚 Assets
+
+- [Shikasi's Fantasy Icons Pack](https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack)
