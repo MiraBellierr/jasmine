@@ -28,6 +28,9 @@ module.exports = () => {
 		crime: {
 			type: Sequelize.DATE,
 		},
+		daily: {
+			type: Sequelize.DATE,
+		},
 	});
 
 	Timers.sync();
