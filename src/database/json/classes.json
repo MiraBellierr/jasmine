@@ -2,16 +2,22 @@
 	"warrior": {
 		"hp": 35,
 		"str": 10,
-		"agl": 8
+		"agl": 8,
+		"att": 5,
+		"def": 0
 	},
 	"thief": {
 		"hp": 30,
 		"str": 5,
-		"agl": 15
+		"agl": 15,
+		"att": 2,
+		"def": 0
 	},
 	"monk": {
 		"hp": 33,
 		"str": 12,
-		"agl": 5
+		"agl": 5,
+		"att": 14,
+		"def": 5
 	}
 }
