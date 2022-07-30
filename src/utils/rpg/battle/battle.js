@@ -159,7 +159,7 @@ class Battle {
 		let aglGain = 0;
 		let attGain = 0;
 		let staGain = 0;
-		let accGain;
+		let accGain = 0;
 
 		switch (this.character.class) {
 			case "warrior":
@@ -170,6 +170,9 @@ class Battle {
 				break;
 			case "monk":
 				accGain = 3;
+				break;
+			default:
+				accGain = 0;
 				break;
 		}
 
@@ -193,7 +196,16 @@ class Battle {
 			attr.str += strGain;
 			attr.agl += aglGain;
 			attr.sta += staGain;
-			attr.acc += accGain;
+
+			if (attr.acc < 100) {
+				if (Math.random() < 0.125) {
+					attr.acc += accGain;
+				} else {
+					accGain = 0;
+				}
+			} else {
+				attr.acc = 99;
+			}
 
 			schemas.character().update(attr, { where: { userID: this.user.id } });
 
