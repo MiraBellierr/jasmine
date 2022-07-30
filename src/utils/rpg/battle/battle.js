@@ -229,7 +229,7 @@ class Battle {
 				(this.character.att + this.opponent.def)
 		);
 
-		const playerDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc);
+		const playerDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc) + 1;
 
 		const opponentSuccess = Math.random() < this.opponent.eva / 100;
 
@@ -257,7 +257,7 @@ class Battle {
 				(this.opponent.att + this.character.def)
 		);
 
-		const opponentDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc);
+		const opponentDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc) + 1;
 
 		const playerSuccess = Math.random() < this.character.eva / 100;
 
