@@ -16,6 +16,11 @@ class Battle {
 			},
 		});
 
+		if (!character)
+			return this.message.channel.send(
+				`You havent registered a character yet!`
+			);
+
 		return character.toJSON();
 	}
 
@@ -296,11 +301,83 @@ class Battle {
 							20
 						)}`,
 					},
-				])
-				.setFooter({ text: "You Win!" });
+				]);
+
+			const xpGain = await this.updateXP();
+
+			battleEmbed.setFooter({ text: `You Win! You gained ${xpGain} XP!` });
 
 			this.battleMessage.edit({ embeds: [battleEmbed] });
 		}
+	}
+
+	async updateXP() {
+		// formular: 1 * (5 * (O - P) / P + 4)
+
+		let { id, userID, createdAt, updatedAt, ...character } =
+			await this.getCharacter();
+
+		const xpGain = Math.floor(
+			1 *
+				((5 * (this.opponent.level - this.character.level)) /
+					this.character.level +
+					4)
+		);
+
+		character.xp += xpGain;
+
+		schemas.character().update(
+			{
+				xp: character.xp,
+			},
+			{ where: { userID: this.user.id } }
+		);
+
+		let { xp, ...attr } = character;
+
+		let hpGain = 0;
+		let strGain = 0;
+		let aglGain = 0;
+		let attGain = 0;
+
+		while (character.xp > attr.xpNeeded) {
+			attr.level++;
+			attr.xpNeeded += 10;
+
+			hpGain += Math.floor(Math.random() * 5) + 1;
+			strGain += Math.floor(Math.random() * 2) + 1;
+			aglGain += Math.floor(Math.random() * 2) + 1;
+
+			if (attr.class === "monk") attr.att = attr.str + 2;
+			else attr.att = attr.str / 2;
+
+			if (this.character.att !== attr.att)
+				attGain = attr.att - this.character.att;
+		}
+
+		if (this.character.level !== attr.level) {
+			attr.hp += hpGain;
+			attr.str += strGain;
+			attr.agl += aglGain;
+
+			schemas.character().update(attr, { where: { userID: this.user.id } });
+
+			const embed = new Discord.EmbedBuilder()
+				.setAuthor({
+					name: this.user.username,
+					iconURL: this.user.displayAvatarURL(),
+				})
+				.setColor("#DDA0DD")
+				.setTitle("Level Up!")
+				.setThumbnail(this.character.img)
+				.setDescription(
+					`Your character has leveled up to level ${character.level}!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• ATT:** +${attGain}`
+				);
+
+			this.battleMessage.channel.send({ embeds: [embed] });
+		}
+
+		return xpGain;
 	}
 }
 
