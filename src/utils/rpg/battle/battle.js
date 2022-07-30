@@ -2,6 +2,8 @@ const schemas = require("../../../database/schemas");
 const Discord = require("discord.js");
 const constants = require("../../../utils/constants");
 const { getProgBar } = require("../../../utils/utils");
+const set = new Set();
+const { setTimeout } = require("timers/promises");
 
 class Battle {
 	constructor(message, user) {
@@ -35,6 +37,11 @@ class Battle {
 		if (!this.character)
 			return this.message.channel.send("You haven't registered yet!");
 
+		if (set.has(this.user.id))
+			return this.message.reply("You are already in a battle!");
+
+		set.add(this.user.id);
+
 		this.opponent = await this.getRandomOpponent();
 		this.character.maxHp = this.character.hp;
 		this.opponent.maxHp = this.opponent.hp;
@@ -44,64 +51,13 @@ class Battle {
 			this.opponent.agl += Math.random();
 		}
 
-		const battleEmbed = new Discord.EmbedBuilder()
-			.setAuthor({
-				name: this.message.author.username,
-				iconURL: this.message.author.displayAvatarURL(),
-			})
-			.setImage(this.opponent.img)
-			.setThumbnail(this.character.img)
-			.setColor("#DDA0DD")
-			.addFields([
-				{
-					name: `${this.character.name}`,
-					value: `**• ${constants.assets.xp.emoji} Level:** ${
-						this.character.level
-					}\n**• :emoji: Weapon:** None\n**• ${
-						constants.assets.hp.emoji
-					} HP:** ${this.character.hp}\n**• ${
-						constants.assets.str.emoji
-					} STR:** ${this.character.str}\n**• ${
-						constants.assets.agl.emoji
-					} AGL:** ${Math.floor(this.character.agl)}\n**• ${
-						constants.assets.att.emoji
-					} ATT:** ${this.character.att}\n**• ${
-						constants.assets.def.emoji
-					} DEF:** ${this.character.def}\n${getProgBar(
-						this.character.hp,
-						this.character.maxHp,
-						20
-					)}`,
-				},
-				{
-					name: `${this.opponent.name}`,
-					value: `**• ${constants.assets.xp.emoji} Level:** ${
-						this.opponent.level
-					}\n**• :emoji: Weapon:** None\n**• ${
-						constants.assets.hp.emoji
-					} HP:** ${this.opponent.hp}\n**• ${
-						constants.assets.str.emoji
-					} STR:** ${this.opponent.str}\n**• ${
-						constants.assets.agl.emoji
-					} AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
-						constants.assets.att.emoji
-					} ATT:** ${this.opponent.att}\n**• ${
-						constants.assets.def.emoji
-					} DEF:** ${this.opponent.def}\n${getProgBar(
-						this.opponent.hp,
-						this.opponent.maxHp,
-						20
-					)}`,
-				},
-			]);
-
 		this.battleMessage = await this.message.channel.send({
-			embeds: [battleEmbed],
+			embeds: [this.battleEmbed()],
 		});
 
-		setTimeout(() => {
-			this.battle();
-		}, 2000);
+		setTimeout(2000);
+
+		this.battle();
 	}
 
 	async battle() {
@@ -113,196 +69,62 @@ class Battle {
 
 			if (this.opponent.hp < 1) return this.end();
 
+			await setTimeout(1500);
+
+			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
+
 			this.character.hp -= Math.floor(
 				(this.opponent.att * this.opponent.att) /
 					(this.opponent.att + this.character.def)
 			);
 
+			await setTimeout(1500);
+
 			if (this.character.hp < 1) return this.end();
+
+			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
 		} else {
 			this.character.hp -= Math.floor(
 				(this.opponent.att * this.opponent.att) /
 					(this.opponent.att + this.character.def)
 			);
 
+			await setTimeout(1500);
+
 			if (this.character.hp < 1) return this.end();
+
+			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
 
 			this.opponent.hp -= Math.floor(
 				(this.character.att * this.character.att) /
 					(this.character.att + this.opponent.def)
 			);
 
+			await setTimeout(1500);
+
 			if (this.opponent.hp < 1) return this.end();
+
+			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
 		}
 
-		const battleEmbed = new Discord.EmbedBuilder()
-			.setAuthor({
-				name: this.message.author.username,
-				iconURL: this.message.author.displayAvatarURL(),
-			})
-			.setImage(this.opponent.img)
-			.setThumbnail(this.character.img)
-			.setColor("#DDA0DD")
-			.addFields([
-				{
-					name: `${this.character.name}`,
-					value: `**• ${constants.assets.xp.emoji} Level:** ${
-						this.character.level
-					}\n**• :emoji: Weapon:** None\n**• ${
-						constants.assets.hp.emoji
-					} HP:** ${this.character.hp}\n**• ${
-						constants.assets.str.emoji
-					} STR:** ${this.character.str}\n**• ${
-						constants.assets.agl.emoji
-					} AGL:** ${Math.floor(this.character.agl)}\n**• ${
-						constants.assets.att.emoji
-					} ATT:** ${this.character.att}\n**• ${
-						constants.assets.def.emoji
-					} DEF:** ${this.character.def}\n${getProgBar(
-						this.character.hp,
-						this.character.maxHp,
-						20
-					)}`,
-				},
-				{
-					name: `${this.opponent.name}`,
-					value: `**• ${constants.assets.xp.emoji} Level:** ${
-						this.opponent.level
-					}\n**• :emoji: Weapon:** None\n**• ${
-						constants.assets.hp.emoji
-					} HP:** ${this.opponent.hp}\n**• ${
-						constants.assets.str.emoji
-					} STR:** ${this.opponent.str}\n**• ${
-						constants.assets.agl.emoji
-					} AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
-						constants.assets.att.emoji
-					} ATT:** ${this.opponent.att}\n**• ${
-						constants.assets.def.emoji
-					} DEF:** ${this.opponent.def}\n${getProgBar(
-						this.opponent.hp,
-						this.opponent.maxHp,
-						20
-					)}`,
-				},
-			]);
-
-		this.battleMessage.edit({ embeds: [battleEmbed] });
-
-		setTimeout(() => {
-			this.battle();
-		}, 2000);
+		this.battle();
 	}
 
 	async end() {
 		if (this.character.hp < 1) {
+			set.delete(this.user.id);
+
 			this.character.hp = 0;
 
-			const battleEmbed = new Discord.EmbedBuilder()
-				.setAuthor({
-					name: this.message.author.username,
-					iconURL: this.message.author.displayAvatarURL(),
-				})
-				.setImage(this.opponent.img)
-				.setThumbnail(this.character.img)
-				.setColor("#DDA0DD")
-				.addFields([
-					{
-						name: `${this.character.name}`,
-						value: `**• ${constants.assets.xp.emoji} Level:** ${
-							this.character.level
-						}\n**• :emoji: Weapon:** None\n**• ${
-							constants.assets.hp.emoji
-						} HP:** ${this.character.hp}\n**• ${
-							constants.assets.str.emoji
-						} STR:** ${this.character.str}\n**• ${
-							constants.assets.agl.emoji
-						} AGL:** ${Math.floor(this.character.agl)}\n**• ${
-							constants.assets.att.emoji
-						} ATT:** ${this.character.att}\n**• ${
-							constants.assets.def.emoji
-						} DEF:** ${this.character.def}\n${getProgBar(
-							this.character.hp,
-							this.character.maxHp,
-							20
-						)}`,
-					},
-					{
-						name: `${this.opponent.name}`,
-						value: `**• ${constants.assets.xp.emoji} Level:** ${
-							this.opponent.level
-						}\n**• :emoji: Weapon:** None\n**• ${
-							constants.assets.hp.emoji
-						} HP:** ${this.opponent.hp}\n**• ${
-							constants.assets.str.emoji
-						} STR:** ${this.opponent.str}\n**• ${
-							constants.assets.agl.emoji
-						} AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
-							constants.assets.att.emoji
-						} ATT:** ${this.opponent.att}\n**• ${
-							constants.assets.def.emoji
-						} DEF:** ${this.opponent.def}\n${getProgBar(
-							this.opponent.hp,
-							this.opponent.maxHp,
-							20
-						)}`,
-					},
-				])
-				.setFooter({ text: "You lost!" });
+			const battleEmbed = this.battleEmbed().setFooter({ text: "You lost!" });
 
 			this.battleMessage.edit({ embeds: [battleEmbed] });
 		} else {
+			set.delete(this.user.id);
+
 			this.opponent.hp = 0;
 
-			const battleEmbed = new Discord.EmbedBuilder()
-				.setAuthor({
-					name: this.message.author.username,
-					iconURL: this.message.author.displayAvatarURL(),
-				})
-				.setImage(this.opponent.img)
-				.setThumbnail(this.character.img)
-				.setColor("#DDA0DD")
-				.addFields([
-					{
-						name: `${this.character.name}`,
-						value: `**• ${constants.assets.xp.emoji} Level:** ${
-							this.character.level
-						}\n**• :emoji: Weapon:** None\n**• ${
-							constants.assets.hp.emoji
-						} HP:** ${this.character.hp}\n**• ${
-							constants.assets.str.emoji
-						} STR:** ${this.character.str}\n**• ${
-							constants.assets.agl.emoji
-						} AGL:** ${Math.floor(this.character.agl)}\n**• ${
-							constants.assets.att.emoji
-						} ATT:** ${this.character.att}\n**• ${
-							constants.assets.def.emoji
-						} DEF:** ${this.character.def}\n${getProgBar(
-							this.character.hp,
-							this.character.maxHp,
-							20
-						)}`,
-					},
-					{
-						name: `${this.opponent.name}`,
-						value: `**• ${constants.assets.xp.emoji} Level:** ${
-							this.opponent.level
-						}\n**• :emoji: Weapon:** None\n**• ${
-							constants.assets.hp.emoji
-						} HP:** ${this.opponent.hp}\n**• ${
-							constants.assets.str.emoji
-						} STR:** ${this.opponent.str}\n**• ${
-							constants.assets.agl.emoji
-						} AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
-							constants.assets.att.emoji
-						} ATT:** ${this.opponent.att}\n**• ${
-							constants.assets.def.emoji
-						} DEF:** ${this.opponent.def}\n${getProgBar(
-							this.opponent.hp,
-							this.opponent.maxHp,
-							20
-						)}`,
-					},
-				]);
+			const battleEmbed = this.battleEmbed();
 
 			const xpGain = await this.updateXP();
 
@@ -349,8 +171,7 @@ class Battle {
 			strGain += Math.floor(Math.random() * 2) + 1;
 			aglGain += Math.floor(Math.random() * 2) + 1;
 
-			if (attr.class === "monk") attr.att = attr.str + 2;
-			else attr.att = attr.str / 2;
+			attr.att = attr.str / 2;
 
 			if (this.character.att !== attr.att)
 				attGain = attr.att - this.character.att;
@@ -372,13 +193,66 @@ class Battle {
 				.setTitle("Level Up!")
 				.setThumbnail(this.character.img)
 				.setDescription(
-					`Your character has leveled up to level ${character.level}!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• ATT:** +${attGain}`
+					`Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• ATT:** +${attGain}`
 				);
 
-			this.battleMessage.channel.send({ embeds: [embed] });
+			this.message.channel.send({ embeds: [embed] });
 		}
 
 		return xpGain;
+	}
+
+	battleEmbed() {
+		return new Discord.EmbedBuilder()
+			.setAuthor({
+				name: this.message.author.username,
+				iconURL: this.message.author.displayAvatarURL(),
+			})
+			.setImage(this.opponent.img)
+			.setThumbnail(this.character.img)
+			.setColor("#DDA0DD")
+			.addFields([
+				{
+					name: `${this.character.name}`,
+					value: `**• ${constants.assets.xp.emoji} Level:** ${
+						this.character.level
+					}\n**• ${constants.assets.weapon.emoji} Weapon:** None\n**• ${
+						constants.assets.hp.emoji
+					} HP:** ${this.character.hp}\n**• ${
+						constants.assets.str.emoji
+					} STR:** ${this.character.str}\n**• ${
+						constants.assets.agl.emoji
+					} AGL:** ${Math.floor(this.character.agl)}\n**• ${
+						constants.assets.att.emoji
+					} ATT:** ${this.character.att}\n**• ${
+						constants.assets.def.emoji
+					} DEF:** ${this.character.def}\n${getProgBar(
+						this.character.hp,
+						this.character.maxHp,
+						20
+					)}`,
+				},
+				{
+					name: `${this.opponent.name}`,
+					value: `**• ${constants.assets.xp.emoji} Level:** ${
+						this.opponent.level
+					}\n**• ${constants.assets.weapon.emoji} Weapon:** None\n**• ${
+						constants.assets.hp.emoji
+					} HP:** ${this.opponent.hp}\n**• ${
+						constants.assets.str.emoji
+					} STR:** ${this.opponent.str}\n**• ${
+						constants.assets.agl.emoji
+					} AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
+						constants.assets.att.emoji
+					} ATT:** ${this.opponent.att}\n**• ${
+						constants.assets.def.emoji
+					} DEF:** ${this.opponent.def}\n${getProgBar(
+						this.opponent.hp,
+						this.opponent.maxHp,
+						20
+					)}`,
+				},
+			]);
 	}
 }
 

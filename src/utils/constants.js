@@ -83,4 +83,8 @@ module.exports.assets = {
 		path: "/assets/rpg-icons/65.png",
 		emoji: "<:def:1002192083387416626>",
 	},
+	weapon: {
+		path: "/assets/rpg-icons/31.png",
+		emoji: "<:weapon:1002846528827834399>",
+	},
 };
