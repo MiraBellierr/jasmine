@@ -37,7 +37,7 @@ module.exports = () => {
 		},
 		xpNeeded: {
 			type: Sequelize.BIGINT,
-			defaultValue: 100,
+			defaultValue: 10,
 		},
 		hp: {
 			type: Sequelize.BIGINT,
