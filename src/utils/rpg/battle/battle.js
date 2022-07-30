@@ -16,15 +16,12 @@ class Battle {
 			},
 		});
 
-		if (!character)
-			return this.message.channel.send(
-				`You havent registered a character yet!`
-			);
+		if (!character) return null;
 
 		return character.toJSON();
 	}
 
-	async getrandomOpponent() {
+	async getRandomOpponent() {
 		const allCharacter = await schemas.character().findAll();
 		const randomCharacter =
 			allCharacter[Math.floor(Math.random() * allCharacter.length)];
@@ -34,7 +31,11 @@ class Battle {
 
 	async startRandom() {
 		this.character = await this.getCharacter();
-		this.opponent = await this.getrandomOpponent();
+
+		if (!this.character)
+			return this.message.channel.send("You haven't registered yet!");
+
+		this.opponent = await this.getRandomOpponent();
 		this.character.maxHp = this.character.hp;
 		this.opponent.maxHp = this.opponent.hp;
 
