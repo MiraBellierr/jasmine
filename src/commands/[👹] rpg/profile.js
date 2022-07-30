@@ -51,6 +51,12 @@ module.exports = {
 					} STR:** ${character.get("str")}\n**• ${
 						constants.assets.agl.emoji
 					} AGL:** ${character.get("agl")}\n**• ${
+						constants.assets.sta.emoji
+					} STA:** ${character.get("sta")}\n**• ${
+						constants.assets.acc.emoji
+					} ACC:** ${character.get("acc")}\n**• ${
+						constants.assets.eva.emoji
+					} EVA:** ${character.get("eva")}\n**• ${
 						constants.assets.att.emoji
 					} ATT:** ${character.get("att")}\n**• ${
 						constants.assets.def.emoji

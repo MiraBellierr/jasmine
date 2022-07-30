@@ -75,9 +75,21 @@ module.exports.assets = {
 		path: "/assets/rpg-icons/36.png",
 		emoji: "<:agl:1002191334335062117>",
 	},
+	sta: {
+		path: "/assets/rpg-icons/13.png",
+		emoji: "<:stamina:1002901119841882142>",
+	},
 	att: {
 		path: "/assets/rpg-icons/64.png",
 		emoji: "<:att:1002191699310825582>",
+	},
+	acc: {
+		path: "/assets/rpg-icons/28.png",
+		emoji: "<:accuracy:1002901834102493195>",
+	},
+	eva: {
+		path: "/assets/rpg-icons/36.png",
+		emoji: "<:evasion:1002902155537162310>",
 	},
 	def: {
 		path: "/assets/rpg-icons/65.png",

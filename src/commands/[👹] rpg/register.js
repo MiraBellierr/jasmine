@@ -44,12 +44,8 @@ module.exports = {
 				name: character.name,
 				class: args[0].toLowerCase(),
 				level: 1,
-				hp: chaClass.hp,
-				str: chaClass.str,
-				agl: chaClass.agl,
-				att: chaClass.att,
-				def: chaClass.def,
 				img: character.image,
+				...chaClass,
 			});
 
 			message.reply(

@@ -51,6 +51,18 @@ module.exports = () => {
 			type: Sequelize.BIGINT,
 			allowNull: false,
 		},
+		sta: {
+			type: Sequelize.BIGINT,
+			allowNull: false,
+		},
+		acc: {
+			type: Sequelize.BIGINT,
+			allowNull: false,
+		},
+		eva: {
+			type: Sequelize.BIGINT,
+			allowNull: false,
+		},
 		att: {
 			type: Sequelize.BIGINT,
 			allowNull: false,

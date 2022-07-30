@@ -4,11 +4,13 @@ const constants = require("../../../utils/constants");
 const { getProgBar } = require("../../../utils/utils");
 const set = new Set();
 const { setTimeout } = require("timers/promises");
+const classes = require("../../../database/json/classes.json");
 
 class Battle {
 	constructor(message, user) {
 		this.user = user;
 		this.message = message;
+		this.actions = ["battle started"];
 	}
 
 	async getCharacter() {
@@ -61,22 +63,18 @@ class Battle {
 	}
 
 	async battle() {
-		if (this.character.agl > this.opponent.agl) {
-			this.opponent.hp -= Math.floor(
-				(this.character.att * this.character.att) /
-					(this.character.att + this.opponent.def)
-			);
+		// DMG = ATT * ATT / (ATT + DEF)
 
-			if (this.opponent.hp < 1) return this.end();
+		if (this.character.agl > this.opponent.agl) {
+			this.playerAttack();
 
 			await setTimeout(1500);
 
+			if (this.opponent.hp < 1) return this.end();
+
 			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
 
-			this.character.hp -= Math.floor(
-				(this.opponent.att * this.opponent.att) /
-					(this.opponent.att + this.character.def)
-			);
+			this.opponentAttack();
 
 			await setTimeout(1500);
 
@@ -84,10 +82,7 @@ class Battle {
 
 			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
 		} else {
-			this.character.hp -= Math.floor(
-				(this.opponent.att * this.opponent.att) /
-					(this.opponent.att + this.character.def)
-			);
+			this.opponentAttack();
 
 			await setTimeout(1500);
 
@@ -95,10 +90,7 @@ class Battle {
 
 			this.battleMessage.edit({ embeds: [this.battleEmbed()] });
 
-			this.opponent.hp -= Math.floor(
-				(this.character.att * this.character.att) /
-					(this.character.att + this.opponent.def)
-			);
+			this.playerAttack();
 
 			await setTimeout(1500);
 
@@ -116,7 +108,9 @@ class Battle {
 
 			this.character.hp = 0;
 
-			const battleEmbed = this.battleEmbed().setFooter({ text: "You lost!" });
+			const battleEmbed = this.battleEmbed()
+				.setFooter({ text: "You lost!" })
+				.setDescription(`\`\`\`\nBattle ended!\n\`\`\``);
 
 			this.battleMessage.edit({ embeds: [battleEmbed] });
 		} else {
@@ -128,7 +122,9 @@ class Battle {
 
 			const xpGain = await this.updateXP();
 
-			battleEmbed.setFooter({ text: `You Win! You gained ${xpGain} XP!` });
+			battleEmbed
+				.setFooter({ text: `You Win! You gained ${xpGain} XP!` })
+				.setDescription(`\`\`\`\nBattle ended!\n\`\`\``);
 
 			this.battleMessage.edit({ embeds: [battleEmbed] });
 		}
@@ -162,14 +158,29 @@ class Battle {
 		let strGain = 0;
 		let aglGain = 0;
 		let attGain = 0;
+		let staGain = 0;
+		let accGain;
+
+		switch (this.character.class) {
+			case "warrior":
+				accGain = 3;
+				break;
+			case "thief":
+				accGain = 5;
+				break;
+			case "monk":
+				accGain = 3;
+				break;
+		}
 
 		while (character.xp > attr.xpNeeded) {
 			attr.level++;
 			attr.xpNeeded += 10;
 
-			hpGain += Math.floor(Math.random() * 5) + 1;
+			hpGain += Math.floor(character.sta / 4) + 1;
 			strGain += Math.floor(Math.random() * 2) + 1;
 			aglGain += Math.floor(Math.random() * 2) + 1;
+			staGain += Math.floor(Math.random() * 2) + 1;
 
 			attr.att = attr.str / 2;
 
@@ -181,6 +192,8 @@ class Battle {
 			attr.hp += hpGain;
 			attr.str += strGain;
 			attr.agl += aglGain;
+			attr.sta += staGain;
+			attr.acc += accGain;
 
 			schemas.character().update(attr, { where: { userID: this.user.id } });
 
@@ -193,7 +206,7 @@ class Battle {
 				.setTitle("Level Up!")
 				.setThumbnail(this.character.img)
 				.setDescription(
-					`Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• ATT:** +${attGain}`
+					`Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}\n**• ACC:** +${accGain}\n**• ATT:** +${attGain}`
 				);
 
 			this.message.channel.send({ embeds: [embed] });
@@ -202,7 +215,67 @@ class Battle {
 		return xpGain;
 	}
 
+	playerAttack() {
+		const acc = Math.floor(
+			(this.character.acc / 100) *
+				Math.floor(
+					(this.character.att * this.character.att) /
+						(this.character.att + this.opponent.def)
+				)
+		);
+
+		const dmg = Math.floor(
+			(this.character.att * this.character.att) /
+				(this.character.att + this.opponent.def)
+		);
+
+		const playerDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc);
+
+		const opponentSuccess = Math.random() < this.opponent.eva / 100;
+
+		if (opponentSuccess) {
+			this.opponent.hp -= playerDmg;
+			this.actions.push(
+				`${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage!`
+			);
+		} else {
+			this.actions.push(`${this.opponent.name} avoided the attack!`);
+		}
+	}
+
+	opponentAttack() {
+		const acc = Math.floor(
+			(this.opponent.acc / 100) *
+				Math.floor(
+					(this.opponent.att * this.opponent.att) /
+						(this.opponent.att + this.opponent.def)
+				)
+		);
+
+		const dmg = Math.floor(
+			(this.opponent.att * this.opponent.att) /
+				(this.opponent.att + this.character.def)
+		);
+
+		const opponentDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc);
+
+		const playerSuccess = Math.random() < this.character.eva / 100;
+
+		if (playerSuccess) {
+			this.character.hp -= opponentDmg;
+			this.actions.push(
+				`${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage!`
+			);
+		} else {
+			this.actions.push(`${this.character.name} avoided the attack!`);
+		}
+	}
+
 	battleEmbed() {
+		let actionShow = `${this.actions.length} - ${
+			this.actions[this.actions.length - 1]
+		}`;
+
 		return new Discord.EmbedBuilder()
 			.setAuthor({
 				name: this.message.author.username,
@@ -211,6 +284,7 @@ class Battle {
 			.setImage(this.opponent.img)
 			.setThumbnail(this.character.img)
 			.setColor("#DDA0DD")
+			.setDescription(`\`\`\`\n${actionShow}\n\`\`\``)
 			.addFields([
 				{
 					name: `${this.character.name}`,
@@ -223,7 +297,13 @@ class Battle {
 					} STR:** ${this.character.str}\n**• ${
 						constants.assets.agl.emoji
 					} AGL:** ${Math.floor(this.character.agl)}\n**• ${
-						constants.assets.att.emoji
+						constants.assets.sta.emoji
+					} STA:** ${this.character.sta}\n**• ${
+						constants.assets.acc.emoji
+					} ACC:** ${this.character.acc}\n**• ${
+						constants.assets.eva.emoji
+					} EVA:** ${this.character.sta}\n**• ${
+						constants.assets.eva.emoji
 					} ATT:** ${this.character.att}\n**• ${
 						constants.assets.def.emoji
 					} DEF:** ${this.character.def}\n${getProgBar(
@@ -243,6 +323,12 @@ class Battle {
 					} STR:** ${this.opponent.str}\n**• ${
 						constants.assets.agl.emoji
 					} AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
+						constants.assets.sta.emoji
+					} STA:** ${this.opponent.sta}\n**• ${
+						constants.assets.acc.emoji
+					} ACC:** ${this.opponent.acc}\n**• ${
+						constants.assets.eva.emoji
+					} EVA:** ${this.opponent.eva}\n**• ${
 						constants.assets.att.emoji
 					} ATT:** ${this.opponent.att}\n**• ${
 						constants.assets.def.emoji
