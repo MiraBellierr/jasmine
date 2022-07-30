@@ -27,8 +27,13 @@ class Battle {
 
 	async getRandomOpponent() {
 		const allCharacter = await schemas.character().findAll();
-		const randomCharacter =
+		let randomCharacter =
 			allCharacter[Math.floor(Math.random() * allCharacter.length)];
+
+		while (randomCharacter.get("userID") === this.user.id) {
+			randomCharacter =
+				allCharacter[Math.floor(Math.random() * allCharacter.length)];
+		}
 
 		return randomCharacter.toJSON();
 	}
@@ -323,6 +328,7 @@ class Battle {
 						this.character.maxHp,
 						20
 					)}`,
+					inline: true,
 				},
 				{
 					name: `${this.opponent.name}`,
@@ -349,6 +355,7 @@ class Battle {
 						this.opponent.maxHp,
 						20
 					)}`,
+					inline: true,
 				},
 			]);
 	}
