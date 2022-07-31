@@ -95,8 +95,36 @@ module.exports.assets = {
 		path: "/assets/rpg-icons/65.png",
 		emoji: "<:def:1002192083387416626>",
 	},
-	weapon: {
+	equipments: {
 		path: "/assets/rpg-icons/31.png",
-		emoji: "<:weapon:1002846528827834399>",
+		emoji: "<:equipments:1002846528827834399>",
+	},
+	weapon: {
+		path: "/assets/rpg-icons/58.png",
+		emoji: "<:weapon:1003118482361176064>",
+	},
+	shield: {
+		path: "/assets/rpg-icons/65.png",
+		emoji: "<:shield:1003118590704226304>",
+	},
+	helmet: {
+		path: "/assets/rpg-icons/78.png",
+		emoji: "<:helmet:1003118752256249866>",
+	},
+	armor: {
+		path: "/assets/rpg-icons/82.png",
+		emoji: "<:armor:1003118943004790864>",
+	},
+	gloves: {
+		path: "/assets/rpg-icons/93.png",
+		emoji: "<:glove:1003118988601077780>",
+	},
+	knife: {
+		path: "/assets/rpg-icons/285.png",
+		emoji: "<:knife:1002925143493976174>",
+	},
+	leatherShield: {
+		path: "/assets/rpg-icons/286.png",
+		emoji: "<:leatherShield:1003081424313778196>",
 	},
 };
