@@ -8,6 +8,12 @@ module.exports = {
 	category: "[🎩] economy",
 	run: async (client, message) => {
 		const coins = await economies.getCoins(message.author);
+
+		if (!coins)
+			return message.reply(
+				`You haven't registered yet! Please use \`${constants.prefix}register <class>\` to register.`
+			);
+
 		const timer = await economies.getCooldown(message.author, "daily", 864e5);
 
 		if (timer)
@@ -24,7 +30,7 @@ module.exports = {
 
 		schemas.coins().update(
 			{
-				pocket: coins.get("pocket") + 100,
+				wallet: coins.get("wallet") + 100,
 			},
 			{ where: { userID: message.author.id } }
 		);

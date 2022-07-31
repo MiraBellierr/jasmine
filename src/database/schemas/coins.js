@@ -19,15 +19,7 @@ module.exports = () => {
 			unique: true,
 			allowNull: false,
 		},
-		pocket: {
-			type: Sequelize.BIGINT,
-			defaultValue: 0,
-		},
-		bank: {
-			type: Sequelize.BIGINT,
-			defaultValue: 0,
-		},
-		maxDeposit: {
+		wallet: {
 			type: Sequelize.BIGINT,
 			defaultValue: 0,
 		},

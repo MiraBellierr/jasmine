@@ -4,8 +4,8 @@ const constants = require("../../utils/constants");
 const economy = require("../../utils/economies");
 
 module.exports = {
-	name: "balance",
-	aliases: ["bal", "money", "cash"],
+	name: "wallet",
+	aliases: ["bal", "money", "cash", "balance"],
 	description: "Shows user balance",
 	category: "[🎩] economy",
 	usage: "[user]",
@@ -14,6 +14,11 @@ module.exports = {
 			(await getUserFromArguments(message, args.join())) || message.author;
 
 		const coins = await economy.getCoins(user);
+
+		if (!coins)
+			return message.reply(
+				`${user.username} hasn't registered yet! Use \`${constants.prefix}register <class>\` to register.`
+			);
 
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
@@ -26,15 +31,9 @@ module.exports = {
 				iconURL: client.user.displayAvatarURL(),
 			})
 			.setDescription(
-				`**Pocket:** ${constants.coins.emoji} ${coins
-					.get("pocket")
-					.toLocaleString()}\n**Bank:** ${constants.coins.emoji} ${coins
-					.get("bank")
-					.toLocaleString()}/${coins
-					.get("maxDeposit")
-					.toLocaleString()}\n**Total:** ${constants.coins.emoji} ${(
-					coins.get("pocket") + coins.get("bank")
-				).toLocaleString()}`
+				`**Wallet:** ${constants.coins.emoji} ${coins
+					.get("wallet")
+					.toLocaleString()}`
 			);
 
 		message.reply({ embeds: [embed] });
