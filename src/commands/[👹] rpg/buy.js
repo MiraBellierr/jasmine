@@ -15,14 +15,14 @@ module.exports = {
 			.character()
 			.findOne({ where: { userID: message.author.id } });
 
-		const coins = await economies.getCoins(message.author);
-
 		if (!character)
 			return message.reply(
 				"You are not registered yet. Please type `" +
 					client.prefixes.get(message.guild.id) +
 					"register <class>` to register"
 			);
+
+		const coins = await economies.getCoins(message.author);
 
 		if (args.length < 1)
 			return errors.argsError(module.exports, client, message);
@@ -92,12 +92,12 @@ module.exports = {
 			return errors.argsError(module.exports, client, message);
 
 		if (weapon) {
-			if (coins.get("pocket") < weapon.cost)
+			if (coins.get("wallet") < weapon.cost)
 				return message.reply("You don't have enough coins to buy this");
 
 			schemas.coins().update(
 				{
-					pocket: coins.get("pocket") - weapon.cost,
+					wallet: coins.get("wallet") - weapon.cost,
 				},
 				{ where: { userID: message.author.id } }
 			);
@@ -112,12 +112,12 @@ module.exports = {
 				`You bought ${name} for ${constants.coins.emoji} ${weapon.cost}!`
 			);
 		} else if (shield) {
-			if (coins.get("pocket") < shield.cost)
+			if (coins.get("wallet") < shield.cost)
 				return message.reply("You don't have enough coins to buy this");
 
 			schemas.coins().update(
 				{
-					pocket: coins.get("pocket") - shield.cost,
+					wallet: coins.get("wallet") - shield.cost,
 				},
 				{ where: { userID: message.author.id } }
 			);
@@ -132,12 +132,12 @@ module.exports = {
 				`You bought ${name} for ${constants.coins.emoji} ${shield.cost}!`
 			);
 		} else if (helmett) {
-			if (coins.get("pocket") < helmett.cost)
+			if (coins.get("wallet") < helmett.cost)
 				return message.reply("You don't have enough coins to buy this");
 
 			schemas.coins().update(
 				{
-					pocket: coins.get("pocket") - helmett.cost,
+					wallet: coins.get("wallet") - helmett.cost,
 				},
 				{ where: { userID: message.author.id } }
 			);
@@ -152,12 +152,12 @@ module.exports = {
 				`You bought ${name} for ${constants.coins.emoji} ${helmett.cost}!`
 			);
 		} else if (armort) {
-			if (coins.get("pocket") < armort.cost)
+			if (coins.get("wallet") < armort.cost)
 				return message.reply("You don't have enough coins to buy this");
 
 			schemas.coins().update(
 				{
-					pocket: coins.get("pocket") - armort.cost,
+					wallet: coins.get("wallet") - armort.cost,
 				},
 				{ where: { userID: message.author.id } }
 			);
@@ -172,12 +172,12 @@ module.exports = {
 				`You bought ${name} for ${constants.coins.emoji} ${armort.cost}!`
 			);
 		} else if (glove) {
-			if (coins.get("pocket") < glove.cost)
+			if (coins.get("wallet") < glove.cost)
 				return message.reply("You don't have enough coins to buy this");
 
 			schemas.coins().update(
 				{
-					pocket: coins.get("pocket") - glove.cost,
+					wallet: coins.get("wallet") - glove.cost,
 				},
 				{ where: { userID: message.author.id } }
 			);
