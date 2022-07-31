@@ -45,6 +45,28 @@ module.exports = {
 				class: args[0].toLowerCase(),
 				level: 1,
 				img: character.image,
+				equipments: JSON.stringify({
+					weapons: {
+						equipped: "",
+						inventory: [],
+					},
+					shields: {
+						equipped: "",
+						inventory: [],
+					},
+					helmet: {
+						equipped: "",
+						inventory: [],
+					},
+					armor: {
+						equipped: "",
+						inventory: [],
+					},
+					gloves: {
+						equipped: "",
+						inventory: [],
+					},
+				}),
 				...chaClass,
 			});
 
