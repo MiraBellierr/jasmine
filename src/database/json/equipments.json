@@ -1,0 +1,72 @@
+{
+    "weapons": {
+        "knife": {
+            "attr": {
+                "att": 5,
+                "acc": 10,
+                "crit": 2
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 5
+        }
+    },
+    "shields": {
+        "leatherShield": {
+            "attr": {
+                "def": 2
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 15
+        }
+    },
+    "helmet": {
+        "leatherCap": {
+            "attr": {
+                "def": 1,
+                "eva": -1
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 1,
+            "cost": 80
+        }
+    },
+    "armor": {
+        "clothes": {
+            "attr": {
+                "def": 1,
+                "eva": -2
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 2,
+            "cost": 10
+        }
+    },
+    "gloves": {
+        "leatherGloves": {
+            "attr": {
+                "def": 1,
+                "eva": -1
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 1,
+            "cost": 60
+        }
+    }
+}
