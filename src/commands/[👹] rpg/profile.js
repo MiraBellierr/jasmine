@@ -29,6 +29,8 @@ module.exports = {
 				)}register <class>\` to register`
 			);
 
+		const equipments = JSON.parse(character.get("equipments"));
+
 		const embed = new Discord.EmbedBuilder()
 			.setAuthor({
 				name: `${member.user.username}'s profile`,
@@ -61,6 +63,22 @@ module.exports = {
 					} ATT:** ${character.get("att")}\n**• ${
 						constants.assets.def.emoji
 					} DEF:** ${character.get("def")}`,
+					inline: true,
+				},
+				{
+					name: "__Equipments__",
+					value: `**• ${constants.assets.weapon.emoji} Weapon:** ${
+						equipments.weapons.equipped ? equipments.weapons.equipped : "None"
+					}\n**• ${constants.assets.shield.emoji} Shield:** ${
+						equipments.shields.equipped ? equipments.shields.equipped : "None"
+					}\n**• ${constants.assets.helmet.emoji} Helmet:** ${
+						equipments.helmet.equipped ? equipments.helmet.equipped : "None"
+					}\n**• ${constants.assets.armor.emoji} Armor:** ${
+						equipments.armor.equipped ? equipments.armor.equipped : "None"
+					}\n**• ${constants.assets.gloves.emoji} Gloves:** ${
+						equipments.gloves.equipped ? equipments.gloves.equipped : "None"
+					}`,
+					inline: true,
 				},
 			])
 			.setImage(character.get("img"))
