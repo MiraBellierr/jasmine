@@ -75,6 +75,9 @@ module.exports = () => {
 			type: Sequelize.STRING,
 			allowNull: false,
 		},
+		equipments: {
+			type: Sequelize.TEXT,
+		},
 	});
 
 	Character.sync();
