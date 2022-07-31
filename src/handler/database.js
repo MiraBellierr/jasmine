@@ -3,13 +3,16 @@ const Ascii = require("ascii-table");
 const table = new Ascii("Database");
 const constants = require("../utils/constants");
 const signale = require("signale");
+const utils = require("../utils/utils");
+const { setTimeout } = require("timers/promises");
 
 table.setHeading("Schema", "Status");
 
 const custom = new signale.Signale(constants.options.handler);
 
 module.exports = async (client) => {
-	Object.keys(schemas).forEach((schema) => {
+	await utils.asyncForEach(Object.keys(schemas), async (schema) => {
+		await setTimeout(10);
 		schemas[schema]();
 
 		table.addRow(schema, "✅");

@@ -1,6 +1,7 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
 const { GiveawaysManager } = require("./utils/giveaway");
+const utils = require("./utils/utils");
 const client = new Client({
 	allowedMentions: { parse: ["users"] },
 	intents: [
@@ -44,8 +45,13 @@ Object.values(require("./database/json/characters.json")).forEach(
 	}
 );
 
-fs.readdirSync("src/handler/").forEach((handler) =>
-	require(`./handler/${handler}`)(client)
-);
+async function start() {
+	await utils.asyncForEach(
+		fs.readdirSync("src/handler/"),
+		async (handler) => await require(`./handler/${handler}`)(client)
+	);
 
-client.login(process.env.TOKEN);
+	client.login(process.env.TOKEN);
+}
+
+start();
