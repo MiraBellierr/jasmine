@@ -11,6 +11,283 @@
                 "thief"
             ],
             "cost": 5
+        },
+        "dagger": {
+            "attr": {
+                "att": 7,
+                "acc": 10,
+                "crit": 10
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 175
+        },
+        "mythrilKnife": {
+            "attr": {
+                "att": 10,
+                "acc": 15,
+                "crit": 16
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 800
+        },
+        "mageMasher": {
+            "attr": {
+                "att": 20,
+                "acc": 30,
+                "crit": 25
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 69700
+        },
+        "gladius": {
+            "attr": {
+                "att": 23,
+                "acc": 30,
+                "eva": 10,
+                "crit": 26
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 73900
+        },
+        "rapier": {
+            "attr": {
+                "att": 9,
+                "acc": 5,
+                "crit": 4
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 10
+        },
+        "saber": {
+            "attr": {
+                "att": 13,
+                "acc": 5,
+                "crit": 12
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 450
+        },
+        "broadSword": {
+            "attr": {
+                "att": 15,
+                "acc": 10,
+                "crit": 6
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 550
+        },
+        "longsword": {
+            "attr": {
+                "att": 20,
+                "acc": 10,
+                "crit": 13
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 1500
+        },
+        "mythrilSword": {
+            "attr": {
+                "att": 23,
+                "acc": 15,
+                "crit": 17
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 4000
+        },
+        "duelRapier": {
+            "attr": {
+                "att": 27,
+                "acc": 30,
+                "eva": 80,
+                "crit": 26
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 75900
+        },
+        "scimitar": {
+            "attr": {
+                "att": 10,
+                "acc": 10,
+                "crit": 8
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 200
+        },
+        "falchion": {
+            "attr": {
+                "att": 15,
+                "acc": 10,
+                "crit": 15
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 450
+        },
+        "kotetsu": {
+            "attr": {
+                "att": 22,
+                "acc": 20,
+                "crit": 21
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 55900
+        },
+        "nunchaku": {
+            "attr": {
+                "att": 12,
+                "crit": 1
+            },
+            "classes": [
+                "monk"
+            ],
+            "cost": 10
+        },
+        "ironNunchaku": {
+            "attr": {
+                "att": 16,
+                "crit": 9
+            },
+            "classes": [
+                "monk"
+            ],
+            "cost": 200
+        },
+        "battleAxe": {
+            "attr": {
+                "att": 16,
+                "acc": 5,
+                "crit": 7
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 550
+        },
+        "mythrilAxe": {
+            "attr": {
+                "att": 25,
+                "acc": 10,
+                "crit": 19
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 4500
+        },
+        "lightAxe": {
+            "attr": {
+                "att": 28,
+                "acc": 15,
+                "crit": 29
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 10000
+        },
+        "vikingAxe": {
+            "attr": {
+                "att": 25,
+                "acc": 10,
+                "crit": 16
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 10,
+            "cost": 43300
+        },
+        "ogrekiller": {
+            "attr": {
+                "att": 30,
+                "acc": 0,
+                "crit": 20
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 37100
+        },
+        "hammer": {
+            "attr": {
+                "att": 9,
+                "acc": 0,
+                "crit": 5
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 10
+        },
+        "mythrilHammer": {
+            "attr": {
+                "att": 12,
+                "acc": 5,
+                "crit": 18
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 2500
+        },
+        "staff": {
+            "attr": {
+                "att": 6,
+                "acc": 0,
+                "crit": 3
+            },
+            "classes": [
+                "warrior",
+                "monk"
+            ],
+            "cost": 5
+        },
+        "crosier": {
+            "attr": {
+                "att": 14,
+                "acc": 0,
+                "crit": 11
+            },
+            "classes": [
+                "warrior",
+                "monk"
+            ],
+            "cost": 200
         }
     },
     "shields": {
@@ -22,13 +299,74 @@
                 "warrior"
             ],
             "cost": 15
+        },
+        "buckler": {
+            "attr": {
+                "def": 2
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "cost": 2500
+        },
+        "ironShield": {
+            "attr": {
+                "def": 4
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 100
+        },
+        "mythrilShield": {
+            "attr": {
+                "def": 8
+            },
+            "classes": [
+                "warrior"
+            ],
+            "cost": 2500
+        },
+        "protectCloak": {
+            "attr": {
+                "def": 8
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "weight": 2,
+            "cost": 20000
+        },
+        "zephyrCape": {
+            "attr": {
+                "def": 4,
+                "eva": 9
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "weight": 1,
+            "cost": 51000
+        },
+        "elvenCloak": {
+            "attr": {
+                "def": 9
+            },
+            "classes": [
+                "warrior",
+                "thief"
+            ],
+            "weight": 1,
+            "cost": 55800
         }
     },
     "helmet": {
         "leatherCap": {
             "attr": {
-                "def": 1,
-                "eva": -1
+                "def": 1
             },
             "classes": [
                 "warrior",
@@ -37,13 +375,42 @@
             ],
             "weight": 1,
             "cost": 80
+        },
+        "helm": {
+            "attr": {
+                "def": 3
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 3,
+            "cost": 100
+        },
+        "greatHelm": {
+            "attr": {
+                "def": 5
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 5,
+            "cost": 450
+        },
+        "mythrilHelm": {
+            "attr": {
+                "def": 6
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 3,
+            "cost": 2500
         }
     },
     "armor": {
         "clothes": {
             "attr": {
-                "def": 1,
-                "eva": -2
+                "def": 1
             },
             "classes": [
                 "warrior",
@@ -52,13 +419,102 @@
             ],
             "weight": 2,
             "cost": 10
+        },
+        "leatherArmor": {
+            "attr": {
+                "def": 4
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 8,
+            "cost": 50
+        },
+        "chainMail": {
+            "attr": {
+                "def": 15
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 15,
+            "cost": 7500
+        },
+        "ironArmor": {
+            "attr": {
+                "def": 24
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 24,
+            "cost": 800
+        },
+        "knight'sArmor": {
+            "attr": {
+                "def": 34
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 33,
+            "cost": 45000
+        },
+        "copperArmlet": {
+            "attr": {
+                "def": 4
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 1,
+            "cost": 1000
+        },
+        "silverArmlet": {
+            "attr": {
+                "def": 24
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 1,
+            "cost": 5000
+        },
+        "rubyArmlet": {
+            "attr": {
+                "def": 34
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 1,
+            "cost": 50000
+        },
+        "bard'sTunic": {
+            "attr": {
+                "def": 20
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 3,
+            "cost": 67300
         }
     },
     "gloves": {
         "leatherGloves": {
             "attr": {
-                "def": 1,
-                "eva": -1
+                "def": 1
             },
             "classes": [
                 "warrior",
@@ -67,6 +523,48 @@
             ],
             "weight": 1,
             "cost": 60
+        },
+        "bronzeGloves": {
+            "attr": {
+                "def": 2
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 3,
+            "cost": 200
+        },
+        "steelGloves": {
+            "attr": {
+                "def": 4
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 5,
+            "cost": 750
+        },
+        "mythrilGloves": {
+            "attr": {
+                "def": 6
+            },
+            "classes": [
+                "warrior"
+            ],
+            "weight": 3,
+            "cost": 2500
+        },
+        "protectRing": {
+            "attr": {
+                "def": 8
+            },
+            "classes": [
+                "warrior",
+                "thief",
+                "monk"
+            ],
+            "weight": 1,
+            "cost": 20000
         }
     }
 }
