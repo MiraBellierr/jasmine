@@ -29,7 +29,6 @@ module.exports = {
 
 		const playerClass = character.get("class");
 		const playerEquipments = JSON.parse(character.get("equipments"));
-		console.log(playerEquipments);
 
 		const weapons = Object.fromEntries(
 			Object.entries(equipments.weapons).filter(
