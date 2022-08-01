@@ -28,14 +28,16 @@ module.exports = {
 			{ where: { userID: message.author.id } }
 		);
 
+		const reward = 100;
+
 		schemas.coins().update(
 			{
-				wallet: coins.get("wallet") + 50,
+				wallet: coins.get("wallet") + reward,
 			},
 			{ where: { userID: message.author.id } }
 		);
 
-		const amount = `${constants.coins.emoji} 100`;
+		const amount = `${constants.coins.emoji} ${reward}`;
 
 		return message.reply(`You claimed your daily and got ${amount}!`);
 	},
