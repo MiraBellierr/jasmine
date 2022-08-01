@@ -194,9 +194,9 @@ module.exports = {
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-									.join(" ")} (${Object.keys(shield.attr)
-									.map((a) => `${a.toUpperCase()}: ${shield.attr[a]}`)
-									.join(" | ")})** - ${constants.coins.emoji} ${shield.cost}`
+									.join(" ")}** \`${Object.keys(shield.attr)
+									.map((a) => `${a}:${shield.attr[a]}`)
+									.join("|")}\` - ${constants.coins.emoji} ${shield.cost}`
 							);
 						}
 
@@ -236,9 +236,9 @@ module.exports = {
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-									.join(" ")} (${Object.keys(helmett.attr)
-									.map((a) => `${a.toUpperCase()}: ${helmett.attr[a]}`)
-									.join(" | ")})** - ${constants.coins.emoji} ${helmett.cost}`
+									.join(" ")}** \`${Object.keys(helmett.attr)
+									.map((a) => `${a}:${helmett.attr[a]}`)
+									.join("|")}\` - ${constants.coins.emoji} ${helmett.cost}`
 							);
 						}
 
@@ -278,9 +278,9 @@ module.exports = {
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-									.join(" ")} (${Object.keys(armort.attr)
-									.map((a) => `${a.toUpperCase()}: ${armort.attr[a]}`)
-									.join(" | ")})** - ${constants.coins.emoji} ${armort.cost}`
+									.join(" ")}** \`${Object.keys(armort.attr)
+									.map((a) => `${a}:${armort.attr[a]}`)
+									.join("|")}\` - ${constants.coins.emoji} ${armort.cost}`
 							);
 						}
 
@@ -320,9 +320,9 @@ module.exports = {
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-									.join(" ")} (${Object.keys(glove.attr)
-									.map((a) => `${a.toUpperCase()}: ${glove.attr[a]}`)
-									.join(" | ")})** - ${constants.coins.emoji} ${glove.cost}`
+									.join(" ")}** \`${Object.keys(glove.attr)
+									.map((a) => `${a}:${glove.attr[a]}`)
+									.join("|")}\` - ${constants.coins.emoji} ${glove.cost}`
 							);
 						}
 
