@@ -30,7 +30,7 @@ module.exports = {
 
 		schemas.coins().update(
 			{
-				wallet: coins.get("wallet") + 100,
+				wallet: coins.get("wallet") + 50,
 			},
 			{ where: { userID: message.author.id } }
 		);
