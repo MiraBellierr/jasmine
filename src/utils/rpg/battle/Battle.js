@@ -140,13 +140,13 @@ class Battle {
 
 			const battleEmbed = this.battleEmbed();
 
-			const xpGain = await this.updateXP();
+			const xpGain = await this.registerXP();
 
 			const rewardGained = await this.registerReward();
 
 			battleEmbed
 				.setFooter({
-					text: `You Win! You gained ${xpGain} XP and ${rewardGained.toLocaleString()}!`,
+					text: `You Win! You gained ${xpGain} XP and ${rewardGained.toLocaleString()} coins!`,
 				})
 				.setDescription(`\`\`\`\nBattle ended!\n\`\`\``);
 
@@ -154,7 +154,7 @@ class Battle {
 		}
 	}
 
-	async updateXP() {
+	async registerXP() {
 		// formular: 1 * (5 * (O - P) / P + 4)
 
 		let { id, userID, createdAt, updatedAt, ...character } =
@@ -348,7 +348,9 @@ class Battle {
 	async registerReward() {
 		const wallet = await economies.getCoins(this.user);
 
-		const reward = Math.ceil(Math.random() * 10);
+		const reward =
+			Math.ceil(Math.random() * 10) *
+			Math.max(1, this.opponent.level - this.character.level);
 
 		schemas.coins().update(
 			{
