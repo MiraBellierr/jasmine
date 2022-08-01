@@ -149,8 +149,14 @@ module.exports = {
 			return message.channel.send(
 				`Successfully ${set ? "enabled" : "disabled"} all logging.`
 			);
-		} else if (logging.hasOwnProperty(args[0])) {
-			const option = args[0];
+		} else if (
+			Object.keys(logging).find(
+				(a) => a.toLowerCase() === args[0].toLowerCase()
+			)
+		) {
+			const option = Object.keys(logging).find(
+				(a) => a.toLowerCase() === args[0].toLowerCase()
+			);
 			let set = false;
 
 			if (!args[1]) return argsError(module.exports, client, message);
