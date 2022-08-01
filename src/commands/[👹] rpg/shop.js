@@ -24,43 +24,53 @@ module.exports = {
 		const playerEquipments = JSON.parse(character.get("equipments"));
 
 		const weapons = Object.fromEntries(
-			Object.entries(equipments.weapons).filter(
-				([name, weapon]) =>
-					weapon.classes.includes(playerClass) &&
-					!playerEquipments.weapons.inventory.includes(name)
-			)
+			Object.entries(equipments.weapons)
+				.filter(
+					([name, weapon]) =>
+						weapon.classes.includes(playerClass) &&
+						!playerEquipments.weapons.inventory.includes(name)
+				)
+				.sort((a, b) => a[1].cost - b[1].cost)
 		);
 
 		const shields = Object.fromEntries(
-			Object.entries(equipments.shields).filter(
-				([name, shield]) =>
-					shield.classes.includes(playerClass) &&
-					!playerEquipments.shields.inventory.includes(name)
-			)
+			Object.entries(equipments.shields)
+				.filter(
+					([name, shield]) =>
+						shield.classes.includes(playerClass) &&
+						!playerEquipments.shields.inventory.includes(name)
+				)
+				.sort((a, b) => a[1].cost - b[1].cost)
 		);
 
 		const helmet = Object.fromEntries(
-			Object.entries(equipments.helmet).filter(
-				([name, helmet]) =>
-					helmet.classes.includes(playerClass) &&
-					!playerEquipments.helmet.inventory.includes(name)
-			)
+			Object.entries(equipments.helmet)
+				.filter(
+					([name, helmet]) =>
+						helmet.classes.includes(playerClass) &&
+						!playerEquipments.helmet.inventory.includes(name)
+				)
+				.sort((a, b) => a[1].cost - b[1].cost)
 		);
 
 		const armor = Object.fromEntries(
-			Object.entries(equipments.armor).filter(
-				([name, armor]) =>
-					armor.classes.includes(playerClass) &&
-					!playerEquipments.armor.inventory.includes(name)
-			)
+			Object.entries(equipments.armor)
+				.filter(
+					([name, armor]) =>
+						armor.classes.includes(playerClass) &&
+						!playerEquipments.armor.inventory.includes(name)
+				)
+				.sort((a, b) => a[1].cost - b[1].cost)
 		);
 
 		const gloves = Object.fromEntries(
-			Object.entries(equipments.gloves).filter(
-				([name, gloves]) =>
-					gloves.classes.includes(playerClass) &&
-					!playerEquipments.gloves.inventory.includes(name)
-			)
+			Object.entries(equipments.gloves)
+				.filter(
+					([name, gloves]) =>
+						gloves.classes.includes(playerClass) &&
+						!playerEquipments.gloves.inventory.includes(name)
+				)
+				.sort((a, b) => a[1].cost - b[1].cost)
 		);
 
 		const row = new Discord.ActionRowBuilder().addComponents(
@@ -141,9 +151,9 @@ module.exports = {
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-									.join(" ")} (${Object.keys(weapon.attr)
-									.map((a) => `${a.toUpperCase()}: ${weapon.attr[a]}`)
-									.join(" | ")})** - ${constants.coins.emoji} ${weapon.cost}`
+									.join(" ")}** \`${Object.keys(weapon.attr)
+									.map((a) => `${a}:${weapon.attr[a]}`)
+									.join("|")}\` - ${constants.coins.emoji} ${weapon.cost}`
 							);
 						}
 
