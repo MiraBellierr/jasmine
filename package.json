@@ -16,7 +16,7 @@
 		"colors": "^1.4.0",
 		"common-tags": "^1.8.2",
 		"deepmerge": "^4.2.2",
-		"discord.js": "^14.0.3",
+		"discord.js": "^14.1.2",
 		"dotenv": "^16.0.1",
 		"g-i-s": "^2.1.6",
 		"moment": "^2.29.4",
