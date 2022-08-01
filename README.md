@@ -42,4 +42,4 @@ You may contribute to the Kannabotto repo. I would appreciate it if you do so an
 
 ## 📚 Assets
 
-- [Shikasi's Fantasy Icons Pack](https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack)
+- [Shikashi's Fantasy Icons Pack](https://cheekyinkling.itch.io/shikashis-fantasy-icons-pack)
