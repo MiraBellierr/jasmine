@@ -1,3 +1,3 @@
-const Battle = require("./battle/battle");
+const Battle = require("./battle/Battle");
 
 module.exports = Battle;

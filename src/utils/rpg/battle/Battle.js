@@ -1,11 +1,12 @@
 const schemas = require("../../../database/schemas");
 const Discord = require("discord.js");
-const constants = require("../../../utils/constants");
-const { getProgBar } = require("../../../utils/utils");
+const constants = require("../../constants");
+const { getProgBar } = require("../../utils");
 const set = new Set();
 const { setTimeout } = require("timers/promises");
 const classes = require("../../../database/json/classes.json");
 const equipments = require("../../../database/json/equipments.json");
+const economies = require("../../../utils/economies");
 
 class Battle {
 	constructor(message, user) {
@@ -141,8 +142,12 @@ class Battle {
 
 			const xpGain = await this.updateXP();
 
+			const rewardGained = await this.registerReward();
+
 			battleEmbed
-				.setFooter({ text: `You Win! You gained ${xpGain} XP!` })
+				.setFooter({
+					text: `You Win! You gained ${xpGain} XP and ${rewardGained.toLocaleString()}!`,
+				})
 				.setDescription(`\`\`\`\nBattle ended!\n\`\`\``);
 
 			this.battleMessage.edit({ embeds: [battleEmbed] });
@@ -338,6 +343,23 @@ class Battle {
 					equipments.gloves[opponentEquipments.gloves.equipped].weight;
 			}
 		}
+	}
+
+	async registerReward() {
+		const wallet = await economies.getCoins(this.user);
+
+		const reward = Math.ceil(Math.random() * 10);
+
+		schemas.coins().update(
+			{
+				wallet: wallet.get("wallet") + reward,
+			},
+			{
+				where: { userID: this.user.id },
+			}
+		);
+
+		return reward;
 	}
 
 	playerAttack() {
