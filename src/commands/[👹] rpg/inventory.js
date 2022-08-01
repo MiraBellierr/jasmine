@@ -1,6 +1,7 @@
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 const constants = require("../../utils/constants");
+const equipments = require("../../database/json/equipments.json");
 
 module.exports = {
 	name: "inventory",
@@ -96,12 +97,18 @@ module.exports = {
 						let weaponsText = [];
 
 						weapons.forEach((weapon) => {
+							const w = equipments.weapons[weapon].attr;
+
+							let attr = [];
+
+							Object.keys(w).forEach((a) => attr.push(`${a}:${w[a]}`));
+
 							weaponsText.push(
-								`• ${weapon
+								`• **${weapon
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-									.join(" ")}`
+									.join(" ")}** - \`${attr.join("|")}\``
 							);
 						});
 
@@ -134,12 +141,18 @@ module.exports = {
 						let shieldsText = [];
 
 						shields.forEach((shield) => {
+							const s = equipments.shields[shield].attr;
+
+							let attr = [];
+
+							Object.keys(s).forEach((a) => attr.push(`${a}:${s[a]}`));
+
 							shieldsText.push(
 								`• ${shield
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-									.join(" ")}`
+									.join(" ")} - \`${attr.join("|")}\``
 							);
 						});
 
@@ -172,12 +185,18 @@ module.exports = {
 						let helmetText = [];
 
 						helmet.forEach((helmet) => {
+							const h = equipments.helmet[helmet].attr;
+
+							let attr = [];
+
+							Object.keys(h).forEach((a) => attr.push(`${a}:${h[a]}`));
+
 							helmetText.push(
 								`• ${helmet
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-									.join(" ")}`
+									.join(" ")} - \`${attr.join("|")}\``
 							);
 						});
 
@@ -210,12 +229,18 @@ module.exports = {
 						let armorText = [];
 
 						armor.forEach((armort) => {
+							const a = equipments.armor[armort].attr;
+
+							let attr = [];
+
+							Object.keys(a).forEach((b) => attr.push(`${b}:${a[b]}`));
+
 							armorText.push(
 								`• ${armort
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-									.join(" ")}`
+									.join(" ")} - \`${attr.join("|")}\``
 							);
 						});
 
@@ -248,12 +273,18 @@ module.exports = {
 						let glovesText = [];
 
 						gloves.forEach((glove) => {
+							const g = equipments.gloves[glove].attr;
+
+							let attr = [];
+
+							Object.keys(g).forEach((a) => attr.push(`${a}:${g[a]}`));
+
 							glovesText.push(
 								`• ${glove
 									.replace(/([A-Z])/g, " $1")
 									.split(" ")
 									.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-									.join(" ")}`
+									.join(" ")} - \`${attr.join("|")}\``
 							);
 						});
 
