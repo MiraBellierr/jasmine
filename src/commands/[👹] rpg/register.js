@@ -2,6 +2,7 @@ const classes = require("../../database/json/classes.json");
 const { argsError } = require("../../utils/errors");
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
+const characterImage = require("../../database/json/img.json");
 
 module.exports = {
 	name: "register",
@@ -36,15 +37,15 @@ module.exports = {
 		}
 
 		try {
-			const character = client.characters.random();
 			const chaClass = classes[args[0].toLowerCase()];
+			const img = characterImage[args[0].toLowerCase()];
 
 			await schemas.character().create({
 				userID: message.author.id,
-				name: character.name,
+				name: message.author.username,
 				class: args[0].toLowerCase(),
 				level: 1,
-				img: character.image,
+				img,
 				equipments: JSON.stringify({
 					weapons: {
 						equipped: "",
