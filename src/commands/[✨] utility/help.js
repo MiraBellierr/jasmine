@@ -74,33 +74,37 @@ async function getAll(client, message) {
 		components: [row],
 	});
 
-	const collector = m.createMessageComponentCollector({
-		componentType: ComponentType.SelectMenu,
-		time: 30000,
-	});
+	collector();
 
-	collector.on("collect", (i) => {
-		const commandEmbed = new EmbedBuilder()
-			.setAuthor({
-				name: message.author.username,
-				iconURL: message.author.displayAvatarURL(),
-			})
-			.setColor("#CD1C6C")
-			.addFields([
-				{ name: `${i.values[0]}`, value: `${commands(i.values[0])}` },
-			])
-			.setDescription(
-				"<:discord:885340297733746798> [Invite Kanna](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:kanna:885340978834198608> [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc)"
-			)
-			.setThumbnail(client.user.displayAvatarURL())
-			.setTimestamp()
-			.setFooter({
-				text: "Please select the category in the select menu to see the command list",
-				iconURL: client.user.displayAvatarURL(),
-			});
+	function collector() {
+		m.awaitMessageComponent({
+			componentType: ComponentType.SelectMenu,
+			time: 30000,
+		}).then((i) => {
+			const commandEmbed = new EmbedBuilder()
+				.setAuthor({
+					name: message.author.username,
+					iconURL: message.author.displayAvatarURL(),
+				})
+				.setColor("#CD1C6C")
+				.addFields([
+					{ name: `${i.values[0]}`, value: `${commands(i.values[0])}` },
+				])
+				.setDescription(
+					"<:discord:885340297733746798> [Invite Kanna](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:kanna:885340978834198608> [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc)"
+				)
+				.setThumbnail(client.user.displayAvatarURL())
+				.setTimestamp()
+				.setFooter({
+					text: "Please select the category in the select menu to see the command list",
+					iconURL: client.user.displayAvatarURL(),
+				});
 
-		i.reply({ embeds: [commandEmbed], ephemeral: true });
-	});
+			i.update({ embeds: [commandEmbed] });
+
+			collector();
+		});
+	}
 }
 
 function getCMD(client, message, input) {
