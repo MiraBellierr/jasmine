@@ -16,30 +16,34 @@ module.exports = async (client, oldMessage, newMessage) => {
 	}
 
 	if (oldMessage.cleanContent !== newMessage.cleanContent) {
-		const embed = new EmbedBuilder()
-			.setAuthor({
-				name: `Message Edited`,
-				iconURL: newMessage.author.displayAvatarURL(),
-			})
-			.setColor("#CD1C6C")
-			.setDescription(`**Member:** ${newMessage.member}`)
-			.addFields([
-				{
-					name: "Before",
-					value: `${oldMessage.cleanContent}`,
-				},
-				{
-					name: "After",
-					value: `${newMessage.cleanContent}`,
-				},
-			])
-			.setFooter({ text: `messageid: ${newMessage.id}` })
-			.setTimestamp();
+		try {
+			const embed = new EmbedBuilder()
+				.setAuthor({
+					name: `Message Edited`,
+					iconURL: newMessage.author.displayAvatarURL(),
+				})
+				.setColor("#CD1C6C")
+				.setDescription(`**Member:** ${newMessage.member}`)
+				.addFields([
+					{
+						name: "Before",
+						value: `${oldMessage.cleanContent}`,
+					},
+					{
+						name: "After",
+						value: `${newMessage.cleanContent}`,
+					},
+				])
+				.setFooter({ text: `messageid: ${newMessage.id}` })
+				.setTimestamp();
 
-		const logChannel = await newMessage.guild.channels.fetch(
-			logging.defaultLogChannel
-		);
+			const logChannel = await newMessage.guild.channels.fetch(
+				logging.defaultLogChannel
+			);
 
-		logChannel.send({ embeds: [embed] });
+			logChannel.send({ embeds: [embed] });
+		} catch {
+			return null;
+		}
 	}
 };
