@@ -12,7 +12,7 @@ Jasmine is a Discord bot written in Javascript developed by Mirabellier just for
 
 ## ❤️ About
 
-Jasmine is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
+Jasmine is a simple RPG Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
 
 ## 🧡 Features
 
@@ -20,9 +20,9 @@ Jasmine is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier 
 - ❤ **Anime**: `anime`, `quote`, `topanime`
 - 📚 **Info**: `avatar`, `botinfo`, `roleinfo`, `servericon` and more!
 - 🤺 **Roleplay**: `bite`, `blush`, `clap`, `cry` and more!
-- [🤣] **meme**: `meme`
-- [👹] **rpg**: `register`, `battle`, `profile` and more!
-- [🛠] **moderation**: `logging`, `purge`
+- 🤣 **meme**: `meme`
+- 👹 **rpg**: `register`, `battle`, `profile` and more!
+- 🛠 **moderation**: `logging`, `purge`
 
 ## 🧡 Links
 
