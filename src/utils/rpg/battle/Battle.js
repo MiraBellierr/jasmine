@@ -242,7 +242,7 @@ class Battle {
 				.setTitle("Level Up!")
 				.setThumbnail(this.character.img)
 				.setDescription(
-					`Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}\n**• ACC:** +${accGain}\n**• ATT:** +${attGain}`
+					`Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}\n**• ACC:** +${accGain}`
 				);
 
 			this.message.channel.send({ embeds: [embed] });
@@ -471,7 +471,7 @@ class Battle {
 						constants.assets.eva.emoji
 					} EVA:** ${this.character.eva}\n**• ${
 						constants.assets.eva.emoji
-					} ATT:** ${this.character.att}\n**• ${
+					} ATT:** ${Math.floor(this.character.att)}\n**• ${
 						constants.assets.def.emoji
 					} DEF:** ${this.character.def}\n${getProgBar(
 						this.character.hp,
@@ -496,7 +496,7 @@ class Battle {
 						constants.assets.eva.emoji
 					} EVA:** ${this.opponent.eva}\n**• ${
 						constants.assets.att.emoji
-					} ATT:** ${this.opponent.att}\n**• ${
+					} ATT:** ${Math.floor(this.opponent.att)}\n**• ${
 						constants.assets.def.emoji
 					} DEF:** ${this.opponent.def}\n${getProgBar(
 						this.opponent.hp,
