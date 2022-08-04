@@ -1,5 +1,6 @@
 const { Signale } = require("signale");
 const constants = require("../../utils/constants");
+const Discord = require("discord.js");
 
 const custom = new Signale(constants.options.ready);
 
@@ -9,11 +10,10 @@ module.exports = async (client) => {
 	client.user.setPresence({
 		activities: [
 			{
-				name: `${guilds.size.toLocaleString()} servers ✨ | Ping me for an info about me!`,
-				type: "WATCHING",
+				name: "with you because you are fun to play with ^-^",
 			},
 		],
-		status: "idle",
+		status: Discord.PresenceUpdateStatus.Idle,
 	});
 
 	console.log("=============================");
