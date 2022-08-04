@@ -4,7 +4,7 @@
 ![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/kanna?color=blue&logo=github&style=plastic)<br>
 ![Donation](https://img.shields.io/github/sponsors/MiraBellierr?color=blue&label=Patreon&logo=patreon&style=plastic)
 
-<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="kanna" src="https://cdn.discordapp.com/attachments/873441703330185250/981433272171130920/ezgif-5-fba1ecc958.jpg">
+<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="kanna" src="https://cdn.discordapp.com/attachments/873441703330185250/1004738366912348210/d8f6a7c57082620bb61ab4fdf5cc671a.jpg">
 
 # Jasmine
 
