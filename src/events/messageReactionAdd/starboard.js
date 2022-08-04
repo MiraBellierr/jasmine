@@ -53,7 +53,7 @@ module.exports = async (client, messageReaction, user) => {
 					inline: true,
 				},
 			])
-			.setTimestamp(foundStar.timestamp);
+			.setTimestamp(Date.now(foundStar.timestamp));
 		if (foundStar.fields[2])
 			embed.addFields([
 				{ name: foundStar.fields[2].name, value: foundStar.fields[2].value },
@@ -67,7 +67,7 @@ module.exports = async (client, messageReaction, user) => {
 		});
 	} else {
 		if (messageReaction.emoji.reaction.count < starboardObj.star) return;
-		if (image === "" && message.cleanContent.length < 1) return;
+		if (!image && message.cleanContent.length < 1) return;
 		const embed = new Discord.EmbedBuilder()
 			.setColor("#CD1C6C")
 			.setDescription(
@@ -78,8 +78,10 @@ module.exports = async (client, messageReaction, user) => {
 				{ name: "Author", value: message.author.toString(), inline: true },
 				{ name: "Channel", value: message.channel.toString(), inline: true },
 			])
-			.setTimestamp()
-			.setImage(image);
+			.setTimestamp();
+
+		if (image) embed.setImage(image);
+
 		if (message.cleanContent.length > 0)
 			embed.addFields([{ name: "message", value: message.cleanContent }]);
 
