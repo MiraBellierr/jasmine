@@ -35,7 +35,11 @@ module.exports = async (client, oldState, newState) => {
 	}
 
 	if (logging.moveBetweenVoiceChannels) {
-		if (oldState.channelId !== null && newState.channelId !== null) {
+		if (
+			oldState.channelId !== null &&
+			newState.channelId !== null &&
+			oldState.channelId !== newState.channelId
+		) {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: "Member Moved Voice Channel",
