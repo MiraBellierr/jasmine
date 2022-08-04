@@ -1,10 +1,10 @@
-[![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Kanna%27s%20Kawaii%20Klubhouse&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MiraBellierr/kanna?logo=github&style=plastic)
-![Contributor](https://img.shields.io/github/contributors/MiraBellierr/kanna?color=blue&logo=github&style=plastic)
-![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/kanna?color=blue&logo=github&style=plastic)<br>
+[![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Jasmine%27s%20Jolly%20Joyhouse&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MiraBellierr/jasmine?logo=github&style=plastic)
+![Contributor](https://img.shields.io/github/contributors/MiraBellierr/jasmine?color=blue&logo=github&style=plastic)
+![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/jasmine?color=blue&logo=github&style=plastic)<br>
 ![Donation](https://img.shields.io/github/sponsors/MiraBellierr?color=blue&label=Patreon&logo=patreon&style=plastic)
 
-<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="kanna" src="https://cdn.discordapp.com/attachments/873441703330185250/1004738366912348210/d8f6a7c57082620bb61ab4fdf5cc671a.jpg">
+<img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="jasmine" src="https://cdn.discordapp.com/attachments/873441703330185250/1004738366912348210/d8f6a7c57082620bb61ab4fdf5cc671a.jpg">
 
 # Jasmine
 
@@ -12,7 +12,7 @@ Jasmine is a Discord bot written in Javascript developed by Mirabellier just for
 
 ## ❤️ About
 
-Jasmine is a simple RPG Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
+Jasmine is a simple RPG Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
 
 ## 🧡 Features
 

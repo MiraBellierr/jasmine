@@ -1,5 +1,5 @@
 {
-	"name": "kanna",
+	"name": "jasmine",
 	"version": "1.0.0",
 	"description": "A Discord bot",
 	"main": "src/index.js",

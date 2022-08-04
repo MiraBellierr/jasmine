@@ -45,7 +45,7 @@ module.exports = {
 			if (authorName.error) return message.reply(`Error: ${authorName.error}`);
 
 			embed.setAuthor({ name: authorName.message });
-			content = `please provide a url or attachment for author iconURL slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
+			content = `please provide a url or attachment for author iconURL slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{jasmine avatar}\` - avatar of jasmine\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
 			m.edit({
 				content,
@@ -74,7 +74,7 @@ module.exports = {
 						case "{user avatar}":
 							authorIconURLText = message.author.displayAvatarURL();
 							break;
-						case "{kanna avatar}":
+						case "{jasmine avatar}":
 							authorIconURLText = client.user.displayAvatarURL();
 							break;
 						case "{server icon}":
@@ -169,7 +169,7 @@ module.exports = {
 
 			embed.setFooter({ text: footerText.message });
 
-			content = `please provide a url or attachment for footer iconURL slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
+			content = `please provide a url or attachment for footer iconURL slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{jasmine avatar}\` - avatar of jasmine\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
 			m.edit({
 				content,
@@ -198,7 +198,7 @@ module.exports = {
 						case "{user avatar}":
 							footerIconURLText = message.author.displayAvatarURL();
 							break;
-						case "{kanna avatar}":
+						case "{jasmine avatar}":
 							footerIconURLText = client.user.displayAvatarURL();
 							break;
 						case "{server icon}":
@@ -218,7 +218,7 @@ module.exports = {
 			}
 		}
 
-		content = `please provide a url or attachment for thumbnail slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
+		content = `please provide a url or attachment for thumbnail slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{jasmine avatar}\` - avatar of jasmine\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
 		m.edit({
 			content,
@@ -244,7 +244,7 @@ module.exports = {
 					case "{user avatar}":
 						thumbnailText = message.author.displayAvatarURL();
 						break;
-					case "{kanna avatar}":
+					case "{jasmine avatar}":
 						thumbnailText = client.user.displayAvatarURL();
 						break;
 					case "{server icon}":
@@ -260,7 +260,7 @@ module.exports = {
 			}
 		}
 
-		content = `please provide a url or attachment for image slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{kanna avatar}\` - avatar of kanna\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
+		content = `please provide a url or attachment for image slot,\n\`skip\` to skip.\n\`stop\` to stop.\n\`{user avatar}\` - your avatar\n\`{jasmine avatar}\` - avatar of jasmine\n\`{server icon}\` - the icon of this server\nchannel: ${channel}`;
 
 		m.edit({
 			content,
@@ -286,7 +286,7 @@ module.exports = {
 					case "{user avatar}":
 						imageText = message.author.displayAvatarURL();
 						break;
-					case "{kanna avatar}":
+					case "{jasmine avatar}":
 						imageText = client.user.displayAvatarURL();
 						break;
 					case "{server icon}":

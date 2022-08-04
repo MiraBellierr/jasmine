@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
 	name: "rules",
-	description: "Rules to use Kanna",
+	description: "Rules to use Jasmine",
 	category: "[✨] utility",
 	run: async (client, message) => {
 		const embed = new EmbedBuilder()
@@ -10,11 +10,11 @@ module.exports = {
 				name: message.author.username,
 				iconURL: message.author.displayAvatarURL(),
 			})
-			.setTitle("Kanna Rules")
+			.setTitle("Jasmine Rules")
 			.setColor("#CD1C6C")
 			.setThumbnail(client.user.avatarURL())
 			.setDescription(
-				`By using Kanna, you agree to these rules. If you break any rules, we reserve the right to blacklist you from Kanna. Use \`${client.prefixes.get(
+				`By using Jasmine, you agree to these rules. If you break any rules, we reserve the right to blacklist you from Jasmine. Use \`${client.prefixes.get(
 					message.guild.id
 				)}report\` to report a user that you found is breaking these rules.`
 			)
@@ -27,7 +27,7 @@ module.exports = {
 				{
 					name: "**2️⃣ Sharing exploits**",
 					value:
-						"------ Sharing exploits/bugs with other users is forbidden. Please report all bugs to staff on Kanna's Support Server (Kanna Headquarter) so we can fix it as soon as possible.",
+						"------ Sharing exploits/bugs with other users is forbidden. Please report all bugs to staff on Jasmine's Support Server (Jasmine Jolly Joyhouse) so we can fix it as soon as possible.",
 				},
 				{
 					name: "**3️⃣ Coins storage account/farming account**",

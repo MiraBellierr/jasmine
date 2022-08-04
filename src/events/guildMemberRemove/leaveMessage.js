@@ -23,7 +23,7 @@ module.exports = async (client, member) => {
 				name: authorNameEmbed,
 				iconURL: leaveObj.authorURL
 					.replace("{user avatar}", member.user.displayAvatarURL())
-					.replace("{kanna avatar}", client.user.displayAvatarURL())
+					.replace("{jasmine avatar}", client.user.displayAvatarURL())
 					.replace("{server icon}", member.guild.iconURL()),
 			});
 		} else {
@@ -53,7 +53,7 @@ module.exports = async (client, member) => {
 		embed.setThumbnail(
 			leaveObj.thumbnail
 				.replace("{user avatar}", member.user.displayAvatarURL())
-				.replace("{kanna avatar}", client.user.displayAvatarURL())
+				.replace("{jasmine avatar}", client.user.displayAvatarURL())
 				.replace("{server icon}", member.guild.iconURL())
 		);
 	}
@@ -73,7 +73,7 @@ module.exports = async (client, member) => {
 		embed.setImage(
 			leaveObj.image
 				.replace("{user avatar}", member.user.displayAvatarURL())
-				.replace("{kanna avatar}", client.user.displayAvatarURL())
+				.replace("{jasmine avatar}", client.user.displayAvatarURL())
 				.replace("{server icon}", member.guild.iconURL())
 		);
 	}
@@ -90,7 +90,7 @@ module.exports = async (client, member) => {
 				text: footerTextEmbed,
 				iconURL: leaveObj.footerURL
 					.replace("{user avatar}", member.user.displayAvatarURL())
-					.replace("{kanna avatar}", client.user.displayAvatarURL())
+					.replace("{jasmine avatar}", client.user.displayAvatarURL())
 					.replace("{server icon}", member.guild.iconURL()),
 			});
 		} else {
