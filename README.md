@@ -6,13 +6,13 @@
 
 <img width="120" height="120" align="left" style="float: left; margin: 0 10px 0 0;" alt="kanna" src="https://cdn.discordapp.com/attachments/873441703330185250/981433272171130920/ezgif-5-fba1ecc958.jpg">
 
-# Kanna
+# Jasmine
 
-Kanna is a Discord bot written in Javascript developed by Mirabellier just for fun. 🍄<br>Containing over 100+ commands from different categories (soon). 🌼
+Jasmine is a Discord bot written in Javascript developed by Mirabellier just for fun. 🍄<br>Containing over 100+ commands from different categories (soon). 🌼
 
 ## ❤️ About
 
-Kanna is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
+Jasmine is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Kanna's Kawaii Klubhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
 
 ## 🧡 Features
 
@@ -27,12 +27,12 @@ Kanna is an Anime RPG and Economy Discord bot ⚔️ developed by Mirabellier fo
 ## 🧡 Links
 
 - **[Discord](https://discord.gg/NcPeGuNEdc)** - My Discord server
-- **[Invite](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)** - Invite Kanna to your server
+- **[Invite](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)** - Invite Jasmine to your server
 - **[Donation](https://www.patreon.com/kannacoco)** - help me with funding
 
 ## 💛 Contributing
 
-You may contribute to the Kannabotto repo. I would appreciate it if you do so and help me with the development. ✨
+You may contribute to the jasmine repo. I would appreciate it if you do so and help me with the development. ✨
 
 ## 💙 Thanks To
 
