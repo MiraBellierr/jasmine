@@ -3,7 +3,6 @@ const {
 	ActionRowBuilder,
 	ButtonBuilder,
 	ButtonStyle,
-	ActionRow,
 	ComponentType,
 } = require("discord.js");
 
@@ -32,6 +31,10 @@ function Paginate(
 	this.page = page;
 	this.options = options;
 	this.emojis = emojis;
+
+	if (!this.message.author) {
+		this.message.author = this.message.user;
+	}
 
 	if (!this.message)
 		throw new TypeError("Specify the message to be processed on.");
