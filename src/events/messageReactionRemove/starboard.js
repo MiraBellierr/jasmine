@@ -38,7 +38,7 @@ module.exports = async (client, messageReaction) => {
 					inline: true,
 				},
 			])
-			.setTimestamp(foundStar.timestamp);
+			.setTimestamp(Date.now(foundStar.timestamp));
 		if (foundStar.fields[2])
 			embed.addFields([
 				{ name: foundStar.fields[2].name, value: foundStar.fields[2].value },
