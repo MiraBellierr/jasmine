@@ -19,6 +19,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+client.interactions = new Collection();
 client.aliases = new Collection();
 client.categories = fs.readdirSync("src/commands/");
 client.prefixes = new Collection();
@@ -46,10 +47,10 @@ Object.values(require("./database/json/characters.json")).forEach(
 );
 
 async function start() {
-	await utils.asyncForEach(
-		fs.readdirSync("src/handler/"),
-		async (handler) => await require(`./handler/${handler}`)(client)
-	);
+	await utils.asyncForEach(fs.readdirSync("src/handler/"), async (handler) => {
+		if (handler !== "interaction.js")
+			await require(`./handler/${handler}`)(client);
+	});
 
 	client.login(process.env.TOKEN);
 }
