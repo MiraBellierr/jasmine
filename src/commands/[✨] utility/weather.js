@@ -36,7 +36,7 @@ module.exports = {
 				const forecasts = result.forecast;
 				const pages = [];
 
-				pages[2] = current;
+				pages[1] = current;
 
 				for (let i = 0; i < forecasts.length; i++) {
 					const forecast = forecasts[i];
@@ -59,17 +59,15 @@ module.exports = {
 						.setFooter({ text: forecast.date });
 
 					if (dif === 1) {
-						pages[1] = embed;
-					} else if (dif === 2) {
 						pages[0] = embed;
 					} else if (dif === -1) {
-						pages[3] = embed;
+						pages[2] = embed;
 					} else if (dif === -2) {
-						pages[4] = embed;
+						pages[3] = embed;
 					}
 				}
 
-				new Paginate.Paginate(client, message, pages, 3).init();
+				new Paginate.Paginate(client, message, pages, 2).init();
 			}
 		);
 	},
