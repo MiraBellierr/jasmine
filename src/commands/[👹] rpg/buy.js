@@ -108,7 +108,9 @@ module.exports = {
 			playerEquipments.weapons.inventory.push(name);
 
 			message.reply(
-				`You bought ${name} for ${constants.coins.emoji} ${weapon.cost}!`
+				`You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
+					constants.coins.emoji
+				} ${weapon.cost}!`
 			);
 		} else if (shield) {
 			if (coins.get("wallet") < shield.cost)
@@ -128,7 +130,9 @@ module.exports = {
 			playerEquipments.shields.inventory.push(name);
 
 			message.reply(
-				`You bought ${name} for ${constants.coins.emoji} ${shield.cost}!`
+				`You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
+					constants.coins.emoji
+				} ${shield.cost}!`
 			);
 		} else if (helmett) {
 			if (coins.get("wallet") < helmett.cost)
@@ -148,7 +152,9 @@ module.exports = {
 			playerEquipments.helmet.inventory.push(name);
 
 			message.reply(
-				`You bought ${name} for ${constants.coins.emoji} ${helmett.cost}!`
+				`You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
+					constants.coins.emoji
+				} ${helmett.cost}!`
 			);
 		} else if (armort) {
 			if (coins.get("wallet") < armort.cost)
@@ -168,7 +174,9 @@ module.exports = {
 			playerEquipments.armor.inventory.push(name);
 
 			message.reply(
-				`You bought ${name} for ${constants.coins.emoji} ${armort.cost}!`
+				`You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
+					constants.coins.emoji
+				} ${armort.cost}!`
 			);
 		} else if (glove) {
 			if (coins.get("wallet") < glove.cost)
@@ -188,7 +196,9 @@ module.exports = {
 			playerEquipments.gloves.inventory.push(name);
 
 			message.reply(
-				`You bought ${name} for ${constants.coins.emoji} ${glove.cost}!`
+				`You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
+					constants.coins.emoji
+				} ${glove.cost}!`
 			);
 		}
 

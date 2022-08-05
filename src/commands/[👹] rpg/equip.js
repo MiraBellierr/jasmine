@@ -56,7 +56,7 @@ module.exports = {
 			return message.reply({ embeds: [embed] });
 		}
 
-		const prompt = args.join(" ").toLowerCase();
+		const prompt = args.join("").toLowerCase();
 
 		const weapon = playerEquipments.weapons.inventory.find(
 			(a) => a.toLowerCase() === prompt
