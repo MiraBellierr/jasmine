@@ -1,6 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, oldMessage, newMessage) => {
+	if (newMessage.author.bot) return;
+
 	const logging = client.loggings.get(newMessage.guild.id);
 
 	if (!logging || !logging.defaultLogChannel) return;
