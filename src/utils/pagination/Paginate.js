@@ -244,12 +244,20 @@ function Paginate(
 				}
 			});
 
-			stop.on("collect", async () => {
+			stop.on("collect", async (i) => {
 				backward.stop("ENDED");
 				forward.stop("ENDED");
 				stop.stop("ENDED");
 
-				await msg.delete();
+				try {
+					await msg.delete();
+				} catch {
+					await i.update({
+						content: "Interaction for this message has been stopped.",
+						embeds: [],
+						components: [],
+					});
+				}
 			});
 
 			forward.on("collect", async (i) => {
