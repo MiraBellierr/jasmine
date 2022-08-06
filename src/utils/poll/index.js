@@ -28,6 +28,7 @@ const pollEmbed = async (
 		return msg.channel.send(
 			`Please provide ${emojiList.length} or less choices.`
 		);
+	if (!msg.author) msg.author = msg.user;
 
 	let text = "*To vote, react using the correspoding emoji.*\n\n";
 	const emojiInfo = {};
