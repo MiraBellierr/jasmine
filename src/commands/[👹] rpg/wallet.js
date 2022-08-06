@@ -27,7 +27,7 @@ module.exports = {
 			.setThumbnail(user.displayAvatarURL())
 			.setColor("#DA70D6")
 			.setFooter({
-				text: "https://patreon.com/kannacoco",
+				text: "https://patreon.com/jasminebot",
 				iconURL: client.user.displayAvatarURL(),
 			})
 			.setDescription(

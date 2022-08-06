@@ -28,7 +28,7 @@ Jasmine is a simple RPG Discord bot ⚔️ developed by Mirabellier for fun. You
 
 - **[Discord](https://discord.gg/NcPeGuNEdc)** - My Discord server
 - **[Invite](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)** - Invite Jasmine to your server
-- **[Donation](https://www.patreon.com/kannacoco)** - help me with funding
+- **[Donation](https://www.patreon.com/jasminebot)** - help me with funding
 
 ## 💛 Contributing
 

@@ -119,7 +119,7 @@ module.exports = {
 			.setImage(character.get("img"))
 			.setTimestamp()
 			.setFooter({
-				text: "https://patreon.com/kannacoco",
+				text: "https://patreon.com/jasminebot",
 				iconURL: client.user.displayAvatarURL(),
 			});
 
