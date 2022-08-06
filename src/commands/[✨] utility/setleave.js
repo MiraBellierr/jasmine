@@ -488,4 +488,427 @@ module.exports = {
 			}
 		}
 	},
+	interaction: {
+		data: {
+			name: "setleave",
+			description: "sets the leave message",
+			type: 1,
+			default_member_permissions:
+				PermissionsBitField.Flags.ManageChannels.toString(),
+			options: [
+				{
+					name: "set",
+					description: "creates the leave message",
+					type: 1,
+					default_member_permissions:
+						PermissionsBitField.Flags.ManageChannels.toString(),
+					options: [
+						{
+							name: "channel",
+							description: "the channel to send the leave message to",
+							type: 7,
+							required: true,
+							channel_types: [ChannelType.GuildText],
+						},
+
+						{
+							name: "author_name",
+							description: "the author name",
+							type: 3,
+						},
+						{
+							name: "author_url",
+							description: "the author url",
+							type: 3,
+						},
+						{
+							name: "title",
+							description: "the title",
+							type: 3,
+						},
+						{
+							name: "url",
+							description: "the title url",
+							type: 3,
+						},
+						{
+							name: "description",
+							description: "the description",
+							type: 3,
+						},
+						{
+							name: "thumbnail",
+							description: "the thumbnail",
+							type: 3,
+						},
+						{
+							name: "image",
+							description: "the image",
+							type: 3,
+						},
+						{
+							name: "footer_text",
+							description: "the footer text",
+							type: 3,
+						},
+						{
+							name: "footer_url",
+							description: "the footer url",
+							type: 3,
+						},
+						{
+							name: "color",
+							description: "the color",
+							type: 3,
+						},
+					],
+				},
+				{
+					name: "on",
+					description: "turns the leave message on",
+					type: 1,
+				},
+				{
+					name: "off",
+					description: "turns the leave message off",
+					type: 1,
+				},
+				{
+					name: "preview",
+					description: "previews the leave message",
+					type: 1,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const arg = interaction.options.getSubcommand();
+			const LeaveMessage = schemas.leaveMessage();
+
+			if (arg === "on") {
+				const leaveMessage = await LeaveMessage.findOne({
+					where: { guildID: interaction.guild.id },
+				});
+
+				if (!leaveMessage)
+					return interaction.reply("You haven't set up a leave message yet.");
+
+				LeaveMessage.update(
+					{ switch: true },
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				const leaveObj = client.leaves.get(interaction.guild.id);
+
+				leaveObj.switch = true;
+
+				client.leaves.set(interaction.guild.id, leaveObj);
+
+				interaction.reply("Leave message has been turned on");
+			} else if (arg === "off") {
+				const leaveMessage = await LeaveMessage.findOne({
+					where: { guildID: interaction.guild.id },
+				});
+
+				if (!leaveMessage)
+					return interaction.reply("You haven't set up a leave message yet.");
+
+				LeaveMessage.update(
+					{ switch: false },
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				const leaveObj = client.leaves.get(interaction.guild.id);
+
+				leaveObj.switch = false;
+
+				client.leaves.set(interaction.guild.id, leaveObj);
+
+				interaction.reply("Leave message has been turned off");
+			} else if (arg === "preview") {
+				const leaveMessage = client.leaves.get(interaction.guild.id);
+
+				if (!leaveMessage)
+					return interaction.reply("You haven't set up a leave message yet.");
+
+				const leaveObj = client.leaves.get(interaction.guild.id);
+
+				const embed = new EmbedBuilder();
+
+				if (leaveObj.authorName) {
+					const authorNameEmbed = leaveObj.authorName
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					if (leaveObj.authorURL) {
+						embed.setAuthor({
+							name: authorNameEmbed,
+							iconURL: leaveObj.authorURL
+								.replace("{user avatar}", interaction.user.displayAvatarURL())
+								.replace("{jasmine avatar}", client.user.displayAvatarURL())
+								.replace("{server icon}", interaction.guild.iconURL()),
+						});
+					} else {
+						embed.setAuthor({ name: authorNameEmbed });
+					}
+				}
+
+				if (leaveObj.title) {
+					const titleEmbed = leaveObj.title
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					embed.setTitle(titleEmbed);
+
+					if (leaveObj.titleURL) {
+						embed.setURL(leaveObj.titleURL);
+					}
+				}
+
+				if (leaveObj.color) {
+					embed.setColor(leaveObj.color);
+				}
+
+				if (leaveObj.thumbnail) {
+					embed.setThumbnail(
+						leaveObj.thumbnail
+							.replace("{user avatar}", interaction.user.displayAvatarURL())
+							.replace("{jasmine avatar}", client.user.displayAvatarURL())
+							.replace("{server icon}", interaction.guild.iconURL())
+					);
+				}
+
+				if (leaveObj.description) {
+					const descriptionEmbed = leaveObj.description
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{mention}", interaction.user)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					embed.setDescription(descriptionEmbed);
+				}
+
+				if (leaveObj.image) {
+					embed.setImage(
+						leaveObj.image
+							.replace("{user avatar}", interaction.user.displayAvatarURL())
+							.replace("{jasmine avatar}", client.user.displayAvatarURL())
+							.replace("{server icon}", interaction.guild.iconURL())
+					);
+				}
+
+				if (leaveObj.footerText) {
+					const footerTextEmbed = leaveObj.footerText
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					if (leaveObj.footerURL) {
+						embed.setFooter({
+							text: footerTextEmbed,
+							iconURL: leaveObj.footerURL
+								.replace("{user avatar}", interaction.user.displayAvatarURL())
+								.replace("{jasmine avatar}", client.user.displayAvatarURL())
+								.replace("{server icon}", interaction.guild.iconURL()),
+						});
+					} else {
+						embed.setFooter({ text: footerTextEmbed });
+					}
+				}
+
+				interaction.reply({ embeds: [embed] });
+			} else {
+				const channel = interaction.options.getChannel("channel");
+
+				if (
+					!interaction.guild.members.me
+						.permissionsIn(channel)
+						.has(PermissionsBitField.Flags.SendMessages)
+				)
+					return interaction.reply(
+						"I do not have a permission to send a message in that channel"
+					);
+
+				const leaveObj = {
+					channelID: channel.id,
+					switch: false,
+					authorName: null,
+					authorURL: null,
+					title: null,
+					titleURL: null,
+					thumbnail: null,
+					description: null,
+					image: null,
+					footerText: null,
+					footerURL: null,
+					color: null,
+				};
+
+				const authorName = interaction.options.getString("author_name");
+				let authorURL = interaction.options.getString("author_url");
+				const title = interaction.options.getString("title");
+				const titleURL = interaction.options.getString("url");
+				let thumbnail = interaction.options.getString("thumbnail");
+				const description = interaction.options.getString("description");
+				let image = interaction.options.getString("image");
+				const footerText = interaction.options.getString("footer_text");
+				let footerURL = interaction.options.getString("footer_url");
+				const color = interaction.options.getString("color");
+
+				if (authorName) {
+					leaveObj.authorName = authorName;
+
+					if (authorURL) {
+						switch (authorURL) {
+							case "{user avatar}":
+								authorURL = interaction.user.displayAvatarURL();
+								break;
+							case "{jasmine avatar}":
+								authorURL = client.user.displayAvatarURL();
+								break;
+							case "{server icon}":
+								authorURL = interaction.guild.iconURL();
+								break;
+						}
+
+						if (!(await checkIfImage(authorURL))) {
+							return interaction.reply("`author_url` - Invalid image");
+						}
+
+						leaveObj.authorURL = authorURL.message;
+					}
+				}
+
+				if (title) {
+					leaveObj.title = title;
+
+					if (titleURL) {
+						if (!validURL.isUri(titleURL))
+							return interaction.reply("`url` - Not a well formed URL.");
+
+						leaveObj.titleURL = titleURL.message;
+					}
+				}
+
+				if (description) {
+					leaveObj.description = description;
+				}
+
+				if (footerText) {
+					leaveObj.footerText = footerText;
+
+					if (footerURL) {
+						switch (footerURL) {
+							case "{user avatar}":
+								footerURL = interaction.user.displayAvatarURL();
+								break;
+							case "{jasmine avatar}":
+								footerURL = client.user.displayAvatarURL();
+								break;
+							case "{server icon}":
+								footerURL = interaction.guild.iconURL();
+								break;
+						}
+
+						if (!(await checkIfImage(footerURL))) {
+							return interaction.reply("`footer_url` - Not a valid image.");
+						}
+
+						leaveObj.footerURL = footerURL;
+					}
+				}
+
+				if (thumbnail) {
+					switch (thumbnail) {
+						case "{user avatar}":
+							thumbnail = interaction.user.displayAvatarURL();
+							break;
+						case "{jasmine avatar}":
+							thumbnail = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							thumbnail = interaction.guild.iconURL();
+							break;
+					}
+
+					if (!(await checkIfImage(thumbnail))) {
+						return interaction.reply("`thumbnail` - Not a valid image.");
+					}
+
+					leaveObj.thumbnail = thumbnail;
+				}
+
+				if (image) {
+					switch (image) {
+						case "{user avatar}":
+							image = interaction.user.displayAvatarURL();
+							break;
+						case "{jasmine avatar}":
+							image = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							image = interaction.guild.iconURL();
+							break;
+					}
+
+					if (!(await checkIfImage(image))) {
+						return interaction.reply("`image` - Not a valid image.");
+					}
+
+					leaveObj.image = image;
+				}
+
+				if (color) {
+					const hexColor = Color(color.toLowerCase()).hex();
+
+					leaveObj.color = hexColor;
+				}
+
+				try {
+					await LeaveMessage.create({
+						guildID: interaction.guild.id,
+						channelID: channel.id,
+						switch: false,
+						authorName: leaveObj.authorName,
+						authorURL: leaveObj.authorURL,
+						title: leaveObj.title,
+						titleURL: leaveObj.titleURL,
+						thumbnail: leaveObj.thumbnail,
+						description: leaveObj.description,
+						image: leaveObj.image,
+						footerText: leaveObj.footerText,
+						footerURL: leaveObj.footerURL,
+						color: leaveObj.color,
+					});
+				} catch {
+					await LeaveMessage.update(
+						{
+							channelID: channel.id,
+							switch: false,
+							authorName: leaveObj.authorName,
+							authorURL: leaveObj.authorURL,
+							title: leaveObj.title,
+							titleURL: leaveObj.titleURL,
+							thumbnail: leaveObj.thumbnail,
+							description: leaveObj.description,
+							image: leaveObj.image,
+							footerText: leaveObj.footerText,
+							footerURL: leaveObj.footerURL,
+							color: leaveObj.color,
+						},
+						{ where: { guildID: interaction.guild.id } }
+					);
+				}
+
+				client.leaves.set(interaction.guild.id, leaveObj);
+
+				interaction.reply(`Leave message has been set!`);
+			}
+		},
+	},
 };

@@ -1,6 +1,10 @@
 const { startCollector } = require("../../utils/collectors");
 const { getChannelFromArguments } = require("../../utils/getters");
-const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const {
+	EmbedBuilder,
+	PermissionsBitField,
+	SlashCommandBuilder,
+} = require("discord.js");
 const { argsError } = require("../../utils/errors");
 const Color = require("color");
 const { checkIfImage } = require("../../utils/utils");
@@ -335,5 +339,195 @@ module.exports = {
 		} else {
 			message.channel.send("I have stopped the command.");
 		}
+	},
+	interaction: {
+		data: {
+			name: "announce",
+			type: 1,
+			description: "Announce a message to a channel",
+			default_member_permissions:
+				PermissionsBitField.Flags.ManageChannels.toString(),
+			options: [
+				{
+					name: "channel",
+					type: 7,
+					description: "The channel to announce to",
+					required: true,
+					channel_types: [0],
+				},
+				{
+					name: "author_text",
+					type: 3,
+					description: "The text to use for the author",
+				},
+				{
+					name: "author_icon",
+					type: 3,
+					description: "The icon to use for the author",
+				},
+				{
+					name: "title",
+					type: 3,
+					description: "The title of the embed",
+				},
+				{
+					name: "url",
+					type: 3,
+					description: "The url of the embed",
+				},
+				{
+					name: "description",
+					type: 3,
+					description: "The description of the embed",
+				},
+				{
+					name: "thumbnail",
+					type: 3,
+					description: "The thumbnail of the embed",
+				},
+				{
+					name: "image",
+					type: 3,
+					description: "The image of the embed",
+				},
+				{
+					name: "color",
+					type: 3,
+					description: "The color of the embed",
+				},
+				{
+					name: "footer_text",
+					type: 3,
+					description: "The text of the footer",
+				},
+				{
+					name: "footer_icon",
+					type: 3,
+					description: "The icon of the footer",
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const channel = interaction.options.getChannel("channel");
+			const authorText = interaction.options.getString("author_text");
+			let authorIcon = interaction.options.getString("author_icon");
+			const title = interaction.options.getString("title");
+			const url = interaction.options.getString("url");
+			const description = interaction.options.getString("description");
+			let thumbnail = interaction.options.getString("thumbnail");
+			let image = interaction.options.getString("image");
+			const color = interaction.options.getString("color");
+			const footerText = interaction.options.getString("footer_text");
+			let footerIcon = interaction.options.getString("footer_icon");
+
+			const embed = new EmbedBuilder();
+
+			if (authorText) {
+				embed.setAuthor({ name: authorText });
+
+				if (authorIcon) {
+					switch (authorIcon) {
+						case "{user avatar}":
+							authorIcon = interaction.user.displayAvatarURL();
+							break;
+						case "{jasmine avatar}":
+							authorIcon = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							authorIcon = interaction.guild.iconURL();
+							break;
+					}
+
+					if (!(await checkIfImage(authorIcon)))
+						return interaction.reply("`author_icon` input is not an image.");
+
+					embed.setAuthor({ name: authorText, iconURL: authorIcon });
+				}
+			}
+
+			if (title) {
+				embed.setTitle(title);
+
+				if (url) {
+					if (!validURL.isUri(url))
+						return interaction.reply("`url` input is not a valid url.");
+
+					embed.setURL(url);
+				}
+			}
+
+			if (description) embed.setDescription(description);
+
+			if (thumbnail) {
+				switch (thumbnail) {
+					case "{user avatar}":
+						thumbnail = interaction.user.displayAvatarURL();
+						break;
+					case "{jasmine avatar}":
+						thumbnail = client.user.displayAvatarURL();
+						break;
+					case "{server icon}":
+						thumbnail = interaction.guild.iconURL();
+						break;
+				}
+
+				if (!(await checkIfImage(thumbnail)))
+					return interaction.reply("`thumbnail` input is not an image.");
+
+				embed.setThumbnail(thumbnail);
+			}
+
+			if (image) {
+				switch (image) {
+					case "{user avatar}":
+						image = interaction.user.displayAvatarURL();
+						break;
+					case "{jasmine avatar}":
+						image = client.user.displayAvatarURL();
+						break;
+					case "{server icon}":
+						image = interaction.guild.iconURL();
+						break;
+				}
+
+				if (!(await checkIfImage(image)))
+					return interaction.reply("`image` input is not an image.");
+
+				embed.setImage(image);
+			}
+
+			if (color) {
+				const hexColor = Color(color.toLowerCase()).hex();
+
+				embed.setColor(hexColor);
+			}
+
+			if (footerText) {
+				embed.setFooter({ text: footerText });
+
+				if (footerIcon) {
+					switch (footerIcon) {
+						case "{user avatar}":
+							footerIcon = interaction.user.displayAvatarURL();
+							break;
+						case "{jasmine avatar}":
+							footerIcon = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							footerIcon = interaction.guild.iconURL();
+							break;
+					}
+
+					if (!(await checkIfImage(footerIcon)))
+						return interaction.reply("`footer_icon` input is not an image.");
+
+					embed.setFooter({ text: footerText, iconURL: footerIcon });
+				}
+			}
+
+			channel.send({ embeds: [embed] });
+
+			interaction.reply("I have posted your announcement!");
+		},
 	},
 };

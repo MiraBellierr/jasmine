@@ -2,6 +2,7 @@ const ms = require("ms");
 const Discord = require("discord.js");
 const { startCollector } = require("../../utils/collectors");
 const { getChannelFromArguments } = require("../../utils/getters");
+const { ChannelType } = require("discord.js");
 
 module.exports = {
 	name: "giveaway",
@@ -247,5 +248,192 @@ module.exports = {
 					}
 				});
 		}
+	},
+	interaction: {
+		data: {
+			name: "giveaway",
+			description: "Create a giveaway",
+			type: 1,
+			default_member_permissions:
+				Discord.PermissionsBitField.Flags.ManageChannels.toString(),
+			options: [
+				{
+					name: "create",
+					description: "Create a giveaway",
+					type: 1,
+					options: [
+						{
+							name: "duration",
+							description: "Duration of the giveaway",
+							type: 3,
+							required: true,
+						},
+						{
+							name: "prize",
+							description: "Prize of the giveaway",
+							type: 3,
+							required: true,
+						},
+						{
+							name: "channel",
+							description: "Channel of the giveaway",
+							type: 7,
+							required: true,
+							channel_types: [ChannelType.GuildText],
+						},
+						{
+							name: "winners",
+							description: "Number of winners of the giveaway",
+							type: 4,
+							required: true,
+						},
+					],
+				},
+				{
+					name: "end",
+					description: "End a giveaway",
+					type: 1,
+					options: [
+						{
+							name: "message_id",
+							description: "message_id of the giveaway",
+							type: 3,
+							required: true,
+						},
+					],
+				},
+				{
+					name: "reroll",
+					description: "Reroll a giveaway",
+					type: 1,
+					options: [
+						{
+							name: "message_id",
+							description: "message_id of the giveaway",
+							type: 3,
+						},
+					],
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const subcommand = interaction.options.getSubcommand();
+			if (subcommand === "create") {
+				const duration = interaction.options.getString("duration");
+				const prize = interaction.options.getString("prize");
+				const channel = interaction.options.getChannel("channel");
+				const winners = interaction.options.getInteger("winners");
+
+				if (isNaN(ms(duration)))
+					return interaction.reply("`duration` - Invalid Input");
+
+				client.giveawaysManager.start(channel, {
+					time: ms(duration),
+					prize,
+					winnerCount: winners,
+					hostedBy: interaction.user,
+					messages: {
+						giveaway: "🎉 **GIVEAWAY** 🎉",
+						giveawayEnded: "🎉 **GIVEAWAY ENDED** 🎉",
+						timeRemaining: "Time remaining: **{duration}**!",
+						inviteToParticipate: "React with 🎉 to participate!",
+						winMessage:
+							"Congratulations, {winners}! You won 🎉 **{prize}**! 🎉",
+						embedFooter: "Giveaways",
+						noWinner: "Giveaway cancelled, no valid participations.",
+						hostedBy: "Hosted by: {user}",
+						winners: "winner(s)",
+						endedAt: "Ended at",
+						units: {
+							seconds: "seconds",
+							minutes: "minutes",
+							hours: "hours",
+							days: "days",
+							pluralS: false,
+						},
+					},
+				});
+
+				interaction.reply(`Giveaway started in ${channel}!`);
+			} else if (subcommand === "end") {
+				const messageId = interaction.options.getString("message_id");
+
+				const giveawayGuild = client.giveawaysManager.giveaways.filter(
+					(g) => g.guildID === interaction.guild.id
+				);
+
+				const giveaway = giveawayGuild.find((g) => g.messageID === messageId);
+
+				if (!giveaway) {
+					return interaction.reply(
+						`Unable to find a giveaway for \`${messageId}\`.`
+					);
+				}
+
+				client.giveawaysManager
+					.edit(giveaway.messageID, {
+						setEndTimestamp: Date.now(),
+					})
+					.then(() => {
+						interaction.reply(
+							`Giveaway will end in less than ${
+								client.giveawaysManager.options.updateCountdownEvery / 1000
+							} seconds...`
+						);
+					})
+					.catch((e) => {
+						if (
+							e.startsWith(
+								`Giveaway with message ID ${giveaway.messageID} is already ended.`
+							)
+						) {
+							interaction.reply("This giveaway is already ended!");
+						} else {
+							console.error(e);
+
+							interaction.reply("An error occured...");
+						}
+					});
+			} else {
+				const messageId = interaction.options.getString("message_id");
+				let giveaway;
+				const giveawayGuild = client.giveawaysManager.giveaways.filter(
+					(g) => g.guildID === interaction.guild.id
+				);
+
+				if (!messageId) {
+					giveaway = giveawayGuild[giveawayGuild.length - 1];
+				}
+
+				if (messageId) {
+					giveaway = giveawayGuild.find((g) => g.messageID === messageId);
+				}
+
+				if (!giveaway) {
+					return interaction.reply(
+						"Unable to find a giveaway for `" + messageId + "`."
+					);
+				}
+
+				client.giveawaysManager
+					.reroll(giveaway.messageID)
+					.then(() => {
+						interaction.reply("Giveaway rerolled!");
+					})
+					.catch((e) => {
+						if (
+							e.startsWith(
+								`Giveaway with message ID ${giveaway.messageID} is not ended.`
+							)
+						) {
+							interaction.reply("This giveaway is not ended!");
+						} else {
+							console.error(e);
+
+							interaction.reply("An error occured...");
+						}
+					});
+			}
+		},
 	},
 };

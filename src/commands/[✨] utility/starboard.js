@@ -1,4 +1,8 @@
-const { EmbedBuilder, PermissionsBitField } = require("discord.js");
+const {
+	EmbedBuilder,
+	PermissionsBitField,
+	ChannelType,
+} = require("discord.js");
 const { getChannelFromArguments } = require("../../utils/getters");
 const schemas = require("../../database/schemas");
 
@@ -187,5 +191,190 @@ module.exports = {
 
 			message.reply({ embeds: [embed] });
 		}
+	},
+	interaction: {
+		data: {
+			name: "starboard",
+			type: 1,
+			description: "Set the starboard channel",
+			default_member_permissions:
+				PermissionsBitField.Flags.ManageChannels.toString(),
+			options: [
+				{
+					name: "set",
+					description: "Set the starboard channel",
+					type: 1,
+					options: [
+						{
+							name: "channel",
+							description: "The channel to set the starboard to",
+							type: 7,
+							channel_types: [ChannelType.GuildText],
+							required: true,
+						},
+					],
+				},
+				{
+					name: "star",
+					description: "Set the starboard star",
+					type: 1,
+					options: [
+						{
+							name: "amount",
+							description: "The amount of stars to set the starboard to",
+							type: 4,
+							required: true,
+						},
+					],
+				},
+				{
+					name: "on",
+					description: "Enable the starboard",
+					type: 1,
+				},
+				{
+					name: "off",
+					description: "Disable the starboard",
+					type: 1,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const Starboard = schemas.starboard();
+			const subcommand = interaction.options.getSubcommand();
+
+			if (subcommand === "set") {
+				const channel = interaction.options.getChannel("channel");
+
+				if (
+					!interaction.guild.members.me
+						.permissionsIn(channel)
+						.has(PermissionsBitField.Flags.SendMessages)
+				)
+					return interaction.reply(
+						"I don't have a permission to send a message to that channel"
+					);
+
+				const starboardObj = {
+					guildID: interaction.guild.id,
+					channelID: channel.id,
+					switch: true,
+					star: 1,
+				};
+
+				try {
+					await Starboard.create(starboardObj);
+
+					client.starboards.set(interaction.guild.id, starboardObj);
+				} catch {
+					await Starboard.update(
+						{
+							channelID: channel.id,
+						},
+						{ where: { guildID: interaction.guild.id } }
+					);
+
+					const guildStarboard = client.starboards.get(interaction.guild.id);
+
+					guildStarboard.channelID = channel.id;
+
+					client.starboards.set(interaction.guild.id, guildStarboard);
+				}
+
+				const embed = new EmbedBuilder()
+					.setColor("#CD1C6C")
+					.setDescription(`Starboard channel set to ${channel}`)
+					.setTimestamp()
+					.setFooter({
+						text: "Starboard channel",
+						iconURL: client.user.displayAvatarURL(),
+					});
+
+				interaction.reply({ embeds: [embed] });
+			} else if (subcommand === "star") {
+				const input = interaction.options.getInteger("amount");
+
+				const starboardObj = client.starboards.get(interaction.guild.id);
+
+				if (!starboardObj)
+					return interaction.reply("You have't set a starboard channel yet");
+
+				Starboard.update(
+					{
+						star: input,
+					},
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				starboardObj.star = input;
+
+				client.starboards.set(interaction.guild.id, starboardObj);
+
+				const embed = new EmbedBuilder()
+					.setColor("#CD1C6C")
+					.setDescription(`Starboard star set to ${input}`)
+					.setTimestamp()
+					.setFooter({
+						text: "Starboard star",
+						iconURL: client.user.displayAvatarURL(),
+					});
+
+				interaction.reply({ embeds: [embed] });
+			} else if (subcommand === "on") {
+				const starboardObj = client.starboards.get(interaction.guild.id);
+
+				if (!starboardObj)
+					return interaction.reply("You haven't set a starboard channel yet");
+
+				Starboard.update(
+					{
+						switch: true,
+					},
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				starboardObj.switch = true;
+
+				client.starboards.set(interaction.guild.id, starboardObj);
+
+				const embed = new EmbedBuilder()
+					.setColor("#CD1C6C")
+					.setDescription(`Starboard has been set to **on**`)
+					.setTimestamp()
+					.setFooter({
+						text: "Starboard enable",
+						iconURL: client.user.displayAvatarURL(),
+					});
+
+				interaction.reply({ embeds: [embed] });
+			} else if (subcommand === "off") {
+				const starboardObj = client.starboards.get(interaction.guild.id);
+
+				if (!starboardObj)
+					return interaction.reply("You haven't set a starboard channel yet");
+
+				Starboard.update(
+					{
+						switch: false,
+					},
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				starboardObj.switch = false;
+
+				client.starboards.set(interaction.guild.id, starboardObj);
+
+				const embed = new EmbedBuilder()
+					.setColor("#CD1C6C")
+					.setDescription(`Starboard has been set to **off**`)
+					.setTimestamp()
+					.setFooter({
+						text: "Starboard disable",
+						iconURL: client.user.displayAvatarURL(),
+					});
+
+				interaction.reply({ embeds: [embed] });
+			}
+		},
 	},
 };

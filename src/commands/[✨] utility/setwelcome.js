@@ -484,4 +484,424 @@ module.exports = {
 			}
 		}
 	},
+	interaction: {
+		data: {
+			name: "setwelcome",
+			description: "Sets the welcome message",
+			type: 1,
+			default_member_permissions: PermissionsBitField.Flags.ManageChannels.toString(),
+			options: [
+				{
+					name: "set",
+					description: "Sets the welcome message",
+					type: 1,
+					options: [
+						{
+							name: "channel",
+							description: "the channel to send the leave message to",
+							type: 7,
+							required: true,
+							channel_types: [ChannelType.GuildText],
+						},
+
+						{
+							name: "author_name",
+							description: "the author name",
+							type: 3,
+						},
+						{
+							name: "author_url",
+							description: "the author url",
+							type: 3,
+						},
+						{
+							name: "title",
+							description: "the title",
+							type: 3,
+						},
+						{
+							name: "url",
+							description: "the title url",
+							type: 3,
+						},
+						{
+							name: "description",
+							description: "the description",
+							type: 3,
+						},
+						{
+							name: "thumbnail",
+							description: "the thumbnail",
+							type: 3,
+						},
+						{
+							name: "image",
+							description: "the image",
+							type: 3,
+						},
+						{
+							name: "footer_text",
+							description: "the footer text",
+							type: 3,
+						},
+						{
+							name: "footer_url",
+							description: "the footer url",
+							type: 3,
+						},
+						{
+							name: "color",
+							description: "the color",
+							type: 3,
+						},
+					],
+				},
+				{
+					name: "on",
+					description: "Turns on the welcome message",
+					type: 1,
+				},
+				{
+					name: "off",
+					description: "Turns off the welcome message",
+					type: 1,
+				},
+				{
+					name: "preview",
+					description: "Preview the welcome message",
+					type: 1,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const arg = interaction.options.getSubcommand();
+			const welcomeMessage = schemas.welcomeMessage();
+
+			if (arg === "on") {
+				const welcomemessage = await welcomeMessage.findOne({
+					where: { guildID: interaction.guild.id },
+				});
+
+				if (!welcomemessage)
+					return interaction.reply("You haven't set up a leave message yet.");
+
+				welcomemessage.update(
+					{ switch: true },
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				const welcomeObj = client.welcomes.get(interaction.guild.id);
+
+				welcomeObj.switch = true;
+
+				client.welcomes.set(interaction.guild.id, welcomeObj);
+
+				interaction.reply("Leave message has been turned on");
+			} else if (arg === "off") {
+				const welcomemessage = await welcomeMessage.findOne({
+					where: { guildID: interaction.guild.id },
+				});
+
+				if (!welcomemessage)
+					return interaction.reply("You haven't set up a leave message yet.");
+
+				welcomemessage.update(
+					{ switch: false },
+					{ where: { guildID: interaction.guild.id } }
+				);
+
+				const welcomeObj = client.welcomes.get(interaction.guild.id);
+
+				welcomeObj.switch = false;
+
+				client.welcomes.set(interaction.guild.id, welcomeObj);
+
+				interaction.reply("Leave message has been turned off");
+			} else if (arg === "preview") {
+				const welcomeMessage = client.welcomes.get(interaction.guild.id);
+
+				if (!welcomeMessage)
+					return interaction.reply("You haven't set up a leave message yet.");
+
+				const welcomeObj = client.welcomes.get(interaction.guild.id);
+
+				const embed = new EmbedBuilder();
+
+				if (welcomeObj.authorName) {
+					const authorNameEmbed = welcomeObj.authorName
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					if (welcomeObj.authorURL) {
+						embed.setAuthor({
+							name: authorNameEmbed,
+							iconURL: welcomeObj.authorURL
+								.replace("{user avatar}", interaction.user.displayAvatarURL())
+								.replace("{jasmine avatar}", client.user.displayAvatarURL())
+								.replace("{server icon}", interaction.guild.iconURL()),
+						});
+					} else {
+						embed.setAuthor({ name: authorNameEmbed });
+					}
+				}
+
+				if (welcomeObj.title) {
+					const titleEmbed = welcomeObj.title
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					embed.setTitle(titleEmbed);
+
+					if (welcomeObj.titleURL) {
+						embed.setURL(welcomeObj.titleURL);
+					}
+				}
+
+				if (welcomeObj.color) {
+					embed.setColor(welcomeObj.color);
+				}
+
+				if (welcomeObj.thumbnail) {
+					embed.setThumbnail(
+						welcomeObj.thumbnail
+							.replace("{user avatar}", interaction.user.displayAvatarURL())
+							.replace("{jasmine avatar}", client.user.displayAvatarURL())
+							.replace("{server icon}", interaction.guild.iconURL())
+					);
+				}
+
+				if (welcomeObj.description) {
+					const descriptionEmbed = welcomeObj.description
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{mention}", interaction.user)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					embed.setDescription(descriptionEmbed);
+				}
+
+				if (welcomeObj.image) {
+					embed.setImage(
+						welcomeObj.image
+							.replace("{user avatar}", interaction.user.displayAvatarURL())
+							.replace("{jasmine avatar}", client.user.displayAvatarURL())
+							.replace("{server icon}", interaction.guild.iconURL())
+					);
+				}
+
+				if (welcomeObj.footerText) {
+					const footerTextEmbed = welcomeObj.footerText
+						.replace("{username}", interaction.user.username)
+						.replace("{tag}", interaction.user.tag)
+						.replace("{server}", interaction.guild.name)
+						.replace("{membercount}", interaction.guild.memberCount);
+
+					if (welcomeObj.footerURL) {
+						embed.setFooter({
+							text: footerTextEmbed,
+							iconURL: welcomeObj.footerURL
+								.replace("{user avatar}", interaction.user.displayAvatarURL())
+								.replace("{jasmine avatar}", client.user.displayAvatarURL())
+								.replace("{server icon}", interaction.guild.iconURL()),
+						});
+					} else {
+						embed.setFooter({ text: footerTextEmbed });
+					}
+				}
+
+				interaction.reply({ embeds: [embed] });
+			} else {
+				const channel = interaction.options.getChannel("channel");
+
+				if (
+					!interaction.guild.members.me
+						.permissionsIn(channel)
+						.has(PermissionsBitField.Flags.SendMessages)
+				)
+					return interaction.reply(
+						"I do not have a permission to send a message in that channel"
+					);
+
+				const welcomeObj = {
+					channelID: channel.id,
+					switch: false,
+					authorName: null,
+					authorURL: null,
+					title: null,
+					titleURL: null,
+					thumbnail: null,
+					description: null,
+					image: null,
+					footerText: null,
+					footerURL: null,
+					color: null,
+				};
+
+				const authorName = interaction.options.getString("author_name");
+				let authorURL = interaction.options.getString("author_url");
+				const title = interaction.options.getString("title");
+				const titleURL = interaction.options.getString("url");
+				let thumbnail = interaction.options.getString("thumbnail");
+				const description = interaction.options.getString("description");
+				let image = interaction.options.getString("image");
+				const footerText = interaction.options.getString("footer_text");
+				let footerURL = interaction.options.getString("footer_url");
+				const color = interaction.options.getString("color");
+
+				if (authorName) {
+					welcomeObj.authorName = authorName;
+
+					if (authorURL) {
+						switch (authorURL) {
+							case "{user avatar}":
+								authorURL = interaction.user.displayAvatarURL();
+								break;
+							case "{jasmine avatar}":
+								authorURL = client.user.displayAvatarURL();
+								break;
+							case "{server icon}":
+								authorURL = interaction.guild.iconURL();
+								break;
+						}
+
+						if (!(await checkIfImage(authorURL))) {
+							return interaction.reply("`author_url` - Invalid image");
+						}
+
+						welcomeObj.authorURL = authorURL.message;
+					}
+				}
+
+				if (title) {
+					welcomeObj.title = title;
+
+					if (titleURL) {
+						if (!validURL.isUri(titleURL))
+							return interaction.reply("`url` - Not a well formed URL.");
+
+						welcomeObj.titleURL = titleURL.message;
+					}
+				}
+
+				if (description) {
+					welcomeObj.description = description;
+				}
+
+				if (footerText) {
+					welcomeObj.footerText = footerText;
+
+					if (footerURL) {
+						switch (footerURL) {
+							case "{user avatar}":
+								footerURL = interaction.user.displayAvatarURL();
+								break;
+							case "{jasmine avatar}":
+								footerURL = client.user.displayAvatarURL();
+								break;
+							case "{server icon}":
+								footerURL = interaction.guild.iconURL();
+								break;
+						}
+
+						if (!(await checkIfImage(footerURL))) {
+							return interaction.reply("`footer_url` - Not a valid image.");
+						}
+
+						welcomeObj.footerURL = footerURL;
+					}
+				}
+
+				if (thumbnail) {
+					switch (thumbnail) {
+						case "{user avatar}":
+							thumbnail = interaction.user.displayAvatarURL();
+							break;
+						case "{jasmine avatar}":
+							thumbnail = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							thumbnail = interaction.guild.iconURL();
+							break;
+					}
+
+					if (!(await checkIfImage(thumbnail))) {
+						return interaction.reply("`thumbnail` - Not a valid image.");
+					}
+
+					welcomeObj.thumbnail = thumbnail;
+				}
+
+				if (image) {
+					switch (image) {
+						case "{user avatar}":
+							image = interaction.user.displayAvatarURL();
+							break;
+						case "{jasmine avatar}":
+							image = client.user.displayAvatarURL();
+							break;
+						case "{server icon}":
+							image = interaction.guild.iconURL();
+							break;
+					}
+
+					if (!(await checkIfImage(image))) {
+						return interaction.reply("`image` - Not a valid image.");
+					}
+
+					welcomeObj.image = image;
+				}
+
+				if (color) {
+					const hexColor = Color(color.toLowerCase()).hex();
+
+					welcomeObj.color = hexColor;
+				}
+
+				try {
+					await welcomeMessage.create({
+						guildID: interaction.guild.id,
+						channelID: channel.id,
+						switch: false,
+						authorName: welcomeObj.authorName,
+						authorURL: welcomeObj.authorURL,
+						title: welcomeObj.title,
+						titleURL: welcomeObj.titleURL,
+						thumbnail: welcomeObj.thumbnail,
+						description: welcomeObj.description,
+						image: welcomeObj.image,
+						footerText: welcomeObj.footerText,
+						footerURL: welcomeObj.footerURL,
+						color: welcomeObj.color,
+					});
+				} catch {
+					await welcomeMessage.update(
+						{
+							channelID: channel.id,
+							switch: false,
+							authorName: welcomeObj.authorName,
+							authorURL: welcomeObj.authorURL,
+							title: welcomeObj.title,
+							titleURL: welcomeObj.titleURL,
+							thumbnail: welcomeObj.thumbnail,
+							description: welcomeObj.description,
+							image: welcomeObj.image,
+							footerText: welcomeObj.footerText,
+							footerURL: welcomeObj.footerURL,
+							color: welcomeObj.color,
+						},
+						{ where: { guildID: interaction.guild.id } }
+					);
+				}
+
+				client.welcomes.set(interaction.guild.id, welcomeObj);
+
+				interaction.reply(`Leave message has been set!`);
+			}
+		},
+	},
 };

@@ -131,9 +131,10 @@ module.exports = {
 		new Paginate.Paginate(client, message, pages).init();
 	},
 	interaction: {
-		data: new ContextMenuCommandBuilder()
-			.setName("Get User Avatar")
-			.setType(ApplicationCommandType.User),
+		data: {
+			name: "Get User Avatar",
+			type: 2,
+		},
 		run: async (client, interaction) => {
 			const pages = [];
 			const user = await client.users.fetch(interaction.targetId);

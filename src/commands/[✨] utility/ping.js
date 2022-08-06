@@ -36,4 +36,43 @@ module.exports = {
 
 		msg.delete();
 	},
+	interaction: {
+		data: {
+			name: "ping",
+			type: 1,
+			description: "Returns latency and API ping",
+		},
+		run: async (client, interaction) => {
+			const msg = await interaction.channel.send("🏓 Pinging....");
+
+			const embed = new EmbedBuilder()
+				.setAuthor({
+					name: interaction.user.username,
+					iconURL: interaction.user.displayAvatarURL(),
+				})
+				.setColor("#CD1C6C")
+				.setTitle("🏓 Pong")
+				.addFields([
+					{
+						name: "Latency",
+						value: `${Math.floor(
+							msg.createdTimestamp - interaction.createdTimestamp
+						)}ms`,
+					},
+					{
+						name: "API Latency",
+						value: `${Math.floor(client.ws.ping)}ms`,
+					},
+				])
+				.setTimestamp()
+				.setFooter({
+					text: client.user.tag,
+					iconURL: client.user.avatarURL(),
+				});
+
+			interaction.reply({ embeds: [embed] });
+
+			msg.delete();
+		},
+	},
 };

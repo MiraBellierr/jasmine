@@ -30,4 +30,39 @@ module.exports = {
 			new Paginate.Paginate(client, message, pages).init();
 		});
 	},
+	interaction: {
+		data: {
+			name: "youtube",
+			type: 1,
+			description: "Search youtube videos",
+			options: [
+				{
+					name: "title",
+					type: 3,
+					description: "Title of the video",
+					required: true,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			interaction.deferReply();
+
+			yts(interaction.options.getString("title"), async (err, res) => {
+				if (err)
+					return interaction.editReply("I didn't found a video with that name");
+
+				const pages = [];
+
+				for (let i = 0; i < res.videos.length; i++) {
+					const content = `Video ${i + 1}/${res.videos.length}\n${
+						res.videos[i].url
+					}`;
+
+					pages.push(content);
+				}
+
+				new Paginate.Paginate(client, interaction, pages).init();
+			});
+		},
+	},
 };
