@@ -81,15 +81,29 @@ function Paginate(
 		if (this.pages.length < 2) {
 			let msg;
 			if (typeof this.pages[0] == "object") {
-				msg = await this.message.reply({
-					content: "ㅤ",
-					embeds: [this.pages[0]],
-				});
+				if (this.message.deferred) {
+					msg = await this.message.editReply({
+						content: "ㅤ",
+						embeds: [this.pages[0]],
+					});
+				} else {
+					msg = await this.message.reply({
+						content: "ㅤ",
+						embeds: [this.pages[0]],
+					});
+				}
 			} else {
-				msg = await this.message.reply({
-					content: `${[this.pages[0]]}`,
-					embeds: [],
-				});
+				if (this.message.deferred) {
+					msg = await this.message.editReply({
+						content: `${[this.pages[0]]}`,
+						embeds: [],
+					});
+				} else {
+					msg = await this.message.reply({
+						content: `${[this.pages[0]]}`,
+						embeds: [],
+					});
+				}
 			}
 
 			return msg;
@@ -155,31 +169,63 @@ function Paginate(
 
 			if (page === 1) {
 				if (typeof this.pages[page - 1] == "object") {
-					msg = await this.message.reply({
-						content: "ㅤ",
-						embeds: [this.pages[page - 1]],
-						components: [disabledBackward],
-					});
+					if (this.message.deferred) {
+						msg = await this.message.editReply({
+							content: "ㅤ",
+							embeds: [this.pages[page - 1]],
+							components: [disabledBackward],
+						});
+					} else {
+						msg = await this.message.reply({
+							content: "ㅤ",
+							embeds: [this.pages[page - 1]],
+							components: [disabledBackward],
+						});
+					}
 				} else {
-					msg = await this.message.reply({
-						content: `${[this.pages[page - 1]]}`,
-						embeds: [],
-						components: [disabledBackward],
-					});
+					if (this.message.deferred) {
+						msg = await this.message.editReply({
+							content: `${[this.pages[page - 1]]}`,
+							embeds: [],
+							components: [disabledBackward],
+						});
+					} else {
+						msg = await this.message.reply({
+							content: `${[this.pages[page - 1]]}`,
+							embeds: [],
+							components: [disabledBackward],
+						});
+					}
 				}
 			} else {
 				if (typeof this.pages[page - 1] == "object") {
-					msg = await this.message.reply({
-						content: "ㅤ",
-						embeds: [this.pages[page - 1]],
-						components: [row],
-					});
+					if (this.message.deferred) {
+						msg = await this.message.editReply({
+							content: "ㅤ",
+							embeds: [this.pages[page - 1]],
+							components: [row],
+						});
+					} else {
+						msg = await this.message.reply({
+							content: "ㅤ",
+							embeds: [this.pages[page - 1]],
+							components: [row],
+						});
+					}
 				} else {
-					msg = await this.message.reply({
-						content: `${[this.pages[page - 1]]}`,
-						embeds: [],
-						components: [row],
-					});
+					if (this.message.deferred) {
+						msg = await this.message.editReply({
+							content: `${[this.pages[page - 1]]}`,
+							embeds: [],
+							components: [row],
+						});
+					} else {
+						msg = await this.message.reply({
+							content: `${[this.pages[page - 1]]}`,
+							embeds: [],
+							components: [row],
+						});
+					}
 				}
 			}
 
