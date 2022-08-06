@@ -28,7 +28,12 @@ module.exports = {
 			{ where: { userID: message.author.id } }
 		);
 
-		const reward = 100;
+		const guild = await client.guilds.fetch(constants.supportServer.id);
+		const member = await guild.members.fetch(message.author.id);
+
+		let reward = 100;
+
+		if (member && member.roles.cache.get(constants.patreon.id)) reward = 200;
 
 		schemas.coins().update(
 			{

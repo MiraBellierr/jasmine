@@ -48,6 +48,14 @@ module.exports.errorChannel = {
 	id: "879702885670211595",
 };
 
+module.exports.supportServer = {
+	id: "864537979339014184",
+};
+
+module.exports.patreon = {
+	id: "867066322550521886",
+};
+
 module.exports.macs = {
 	message: "macs is cute",
 	isCute: true,
