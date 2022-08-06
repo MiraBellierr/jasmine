@@ -445,9 +445,8 @@ class Giveaway extends EventEmitter {
 		if (!users.size) return [];
 
 		// Bonus Entries
-		let userArray;
+		let userArray = Object.values(users);
 		if (this.bonusEntries.length) {
-			userArray = users.array();
 			for (const user of userArray.slice()) {
 				const isUserValidEntry = await this.checkWinnerEntry(user);
 				if (!isUserValidEntry) continue;
@@ -486,7 +485,7 @@ class Giveaway extends EventEmitter {
 				winners.push(u);
 			} else {
 				// Find a new winner
-				for (const user of userArray || users.array()) {
+				for (const user of userArray) {
 					const isUserValidEntry =
 						!winners.some((winner) => winner.id === user.id) &&
 						(await this.checkWinnerEntry(user));
@@ -708,7 +707,7 @@ class Giveaway extends EventEmitter {
 				}
 				resolve(winners);
 			} else {
-				this.reply(options.messages.error);
+				this.message.reply(options.messages.error);
 				resolve([]);
 			}
 		});
