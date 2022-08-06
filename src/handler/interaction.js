@@ -20,7 +20,8 @@ module.exports = (client) => {
 			const command = require(`../commands/${dir}/${file}`);
 
 			if (command.interaction && command.interaction.data) {
-				const interaction = command.interaction.data.toJSON();
+				const interaction = command.interaction.data;
+				console.log(interaction);
 				client.interactions.set(interaction.name, command.interaction);
 				interactions.push(interaction);
 				table.addRow(file, "✅");
