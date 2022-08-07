@@ -43,4 +43,60 @@ module.exports = {
 			return message.reply({ embeds: [embed] });
 		});
 	},
+	interaction: {
+		data: {
+			name: "topanime",
+			type: 1,
+			description: "Top 10 Anime | Characters | Manga",
+			options: [
+				{
+					name: "query",
+					type: 3,
+					description: "Anime | Characters | Manga",
+					choices: [
+						{
+							name: "Anime",
+							value: "anime",
+						},
+						{
+							name: "Characters",
+							value: "characters",
+						},
+						{
+							name: "Manga",
+							value: "manga",
+						},
+					],
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const type = interaction.options.getString("query");
+
+			axios({
+				method: "get",
+				url: `https://api.jikan.moe/v3/top/${type}`,
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}).then(async (response) => {
+				const top = response.data.top.splice(0, 10);
+				const board = top
+					.map((anime, i) => `**[${i + 1}] - [${anime.title}](${anime.url})**`)
+					.join("\n");
+
+				const embed = new Discord.EmbedBuilder()
+					.setAuthor({
+						name: interaction.user.username,
+						iconURL: interaction.user.displayAvatarURL(),
+					})
+					.setTitle(`Top 10 ${type}`)
+					.setDescription(board)
+					.setColor("#CD1C6C")
+					.setTimestamp();
+
+				return interaction.reply({ embeds: [embed] });
+			});
+		},
+	},
 };
