@@ -41,7 +41,7 @@ module.exports.options = {
 
 module.exports.coins = {
 	link: "https://miraiscute.com/img/coins.gif",
-	emoji: "<a:Coins:987324624318648320>",
+	emoji: "<a:jasminecoins:868105109748469780>",
 };
 
 module.exports.errorChannel = {
