@@ -447,8 +447,8 @@ class Battle {
 
 		return new Discord.EmbedBuilder()
 			.setAuthor({
-				name: this.message.author.username,
-				iconURL: this.message.author.displayAvatarURL(),
+				name: this.user.username,
+				iconURL: this.user.displayAvatarURL(),
 			})
 			.setImage(this.opponent.img)
 			.setThumbnail(this.character.img)

@@ -125,4 +125,102 @@ module.exports = {
 			{ where: { userID: message.author.id } }
 		);
 	},
+	interaction: {
+		data: {
+			name: "equip",
+			description: "Equip an equipment",
+			type: 1,
+			options: [
+				{
+					name: "equipment",
+					description: "The equipment to equip",
+					type: 3,
+					required: true,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const character = await schemas
+				.character()
+				.findOne({ where: { userID: interaction.user.id } });
+
+			if (!character) {
+				return interaction.reply("You haven't registered yet!");
+			}
+
+			const playerEquipments = JSON.parse(character.get("equipments"));
+
+			const prompt = interaction.options
+				.getString("equipment")
+				.replace(/ /g, "")
+				.toLowerCase();
+
+			const weapon = playerEquipments.weapons.inventory.find(
+				(a) => a.toLowerCase() === prompt
+			);
+			const shield = playerEquipments.shields.inventory.find(
+				(a) => a.toLowerCase() === prompt
+			);
+			const helmet = playerEquipments.helmet.inventory.find(
+				(a) => a.toLowerCase() === prompt
+			);
+			const armor = playerEquipments.armor.inventory.find(
+				(a) => a.toLowerCase() === prompt
+			);
+			const gloves = playerEquipments.gloves.inventory.find(
+				(a) => a.toLowerCase() === prompt
+			);
+
+			if (weapon) {
+				playerEquipments.weapons.equipped = weapon;
+
+				interaction.reply(
+					`You equipped **${weapon
+						.replace(/([A-Z])/g, " $1")
+						.toLowerCase()}** as your weapon.`
+				);
+			} else if (shield) {
+				playerEquipments.shields.equipped = shield;
+
+				interaction.reply(
+					`You equipped **${shield
+						.replace(/([A-Z])/g, " $1")
+						.toLowerCase()}** as your shield.`
+				);
+			} else if (helmet) {
+				playerEquipments.helmet.equipped = helmet;
+
+				interaction.reply(
+					`You equipped **${helmet
+						.replace(/([A-Z])/g, " $1")
+						.toLowerCase()}** as your helmet.`
+				);
+			} else if (armor) {
+				playerEquipments.armor.equipped = armor;
+
+				interaction.reply(
+					`You equipped **${armor
+						.replace(/([A-Z])/g, " $1")
+						.toLowerCase()}** as your armor.`
+				);
+			} else if (gloves) {
+				playerEquipments.gloves.equipped = gloves;
+
+				interaction.reply(
+					`You equipped **${gloves
+						.replace(/([A-Z])/g, " $1")
+						.toLowerCase()}** as your gloves.`
+				);
+			} else {
+				return interaction.reply(`You don't have this equipment`);
+			}
+
+			schemas.character().update(
+				{
+					equipments: JSON.stringify(playerEquipments),
+				},
+				{ where: { userID: interaction.user.id } }
+			);
+		},
+	},
 };

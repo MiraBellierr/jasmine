@@ -38,4 +38,44 @@ module.exports = {
 
 		message.reply({ embeds: [embed] });
 	},
+	interaction: {
+		data: {
+			name: "wallet",
+			type: 1,
+			description: "Shows user balance",
+			options: [
+				{
+					name: "user",
+					description: "The user to show the balance of.",
+					type: 6,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const user = interaction.options.getUser("user") || interaction.user;
+
+			const coins = await economy.getCoins(user);
+
+			if (!coins)
+				return interaction.reply(`${user.username} hasn't registered yet!`);
+
+			const embed = new Discord.EmbedBuilder()
+				.setAuthor({
+					name: `${user.username}'s balance`,
+				})
+				.setThumbnail(user.displayAvatarURL())
+				.setColor("#DA70D6")
+				.setFooter({
+					text: "https://patreon.com/jasminebot",
+					iconURL: client.user.displayAvatarURL(),
+				})
+				.setDescription(
+					`**Wallet:** ${constants.coins.emoji} ${coins
+						.get("wallet")
+						.toLocaleString()}`
+				);
+
+			interaction.reply({ embeds: [embed] });
+		},
+	},
 };

@@ -34,4 +34,39 @@ module.exports = {
 
 		message.reply(`Your name has been set to ${name}!`);
 	},
+	interaction: {
+		data: {
+			name: "setname",
+			type: 1,
+			description: "Sets your name",
+			options: [
+				{
+					name: "name",
+					description: "The name to set your character to.",
+					type: 3,
+					required: true,
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const character = await schemas.character().findOne({
+				where: { userID: interaction.user.id },
+			});
+
+			if (!character) return interaction.reply("You haven't register yet!");
+
+			const name = interaction.options.getString("name");
+
+			if (name.length > 256) return interaction.reply("Your name is too long!");
+
+			schemas.character().update(
+				{
+					name,
+				},
+				{ where: { userID: interaction.user.id } }
+			);
+
+			interaction.reply(`Your name has been set to ${name}!`);
+		},
+	},
 };

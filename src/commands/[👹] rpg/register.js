@@ -84,4 +84,80 @@ module.exports = {
 			);
 		}
 	},
+	interaction: {
+		data: {
+			name: "register",
+			description: "Register the profile",
+			type: 1,
+			options: [
+				{
+					name: "class",
+					description: "choose a class",
+					type: 3,
+					required: true,
+					choices: [
+						{
+							name: "Warrior",
+							value: "warrior",
+						},
+						{
+							name: "Mage",
+							value: "mage",
+						},
+						{
+							name: "Monk",
+							value: "monk",
+						},
+					],
+				},
+			],
+		},
+		run: async (client, interaction) => {
+			const prompt = interaction.options.getString("class");
+
+			try {
+				const chaClass = classes[prompt];
+				const img = characterImage[prompt];
+
+				await schemas.character().create({
+					userID: interaction.user.id,
+					name: interaction.user.username,
+					class: prompt,
+					level: 1,
+					img,
+					equipments: JSON.stringify({
+						weapons: {
+							equipped: "",
+							inventory: [],
+						},
+						shields: {
+							equipped: "",
+							inventory: [],
+						},
+						helmet: {
+							equipped: "",
+							inventory: [],
+						},
+						armor: {
+							equipped: "",
+							inventory: [],
+						},
+						gloves: {
+							equipped: "",
+							inventory: [],
+						},
+					}),
+					...chaClass,
+				});
+
+				interaction.reply(
+					`You have successfully registered! Type \`/profile\` to see your profile.`
+				);
+			} catch {
+				interaction.reply(
+					`Sorry, you have already registered! Type \`/profile\` to see your profile.`
+				);
+			}
+		},
+	},
 };
