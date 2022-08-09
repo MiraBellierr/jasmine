@@ -21,24 +21,56 @@ module.exports = async (client, oldChannel, newChannel) => {
 	);
 
 	differences.forEach(async (diff) => {
-		const embed = new EmbedBuilder()
-			.setAuthor({
-				name: `Channel ${diff.charAt(0).toUpperCase() + diff.slice(1)} Updated`,
-				iconURL: newChannel.guild.iconURL(),
-			})
-			.setColor("#CD1C6C")
-			.addFields([
-				{
-					name: "Before",
-					value: `${oldChannel[diff] ? oldChannel[diff] : "N/A"}`,
-				},
-				{
-					name: "After",
-					value: `${newChannel[diff] ? newChannel[diff] : "N/A"}`,
-				},
-			])
-			.setFooter({ text: `channelid: ${newChannel.id}` })
-			.setTimestamp();
+		if (diff === "rawPosition") return;
+
+		let embed;
+
+		if (diff === "parentId") {
+			const oldCategory = await client.channels.fetch(oldChannel[diff]);
+			const newCategory = await client.channels.fetch(newChannel[diff]);
+
+			embed = new EmbedBuilder()
+				.setAuthor({
+					name: "Channel category Updated",
+					iconURL: newChannel.guild.iconURL(),
+				})
+				.setColor("#CD1C6C")
+				.setDescription(`**Channel Name:** ${newChannel.name}`)
+				.addFields([
+					{
+						name: "Before",
+						value: `${oldCategory}`,
+					},
+					{
+						name: "After",
+						value: `${newCategory}`,
+					},
+				])
+				.setFooter({ text: `channelid: ${newChannel.id}` })
+				.setTimestamp();
+		} else {
+			embed = new EmbedBuilder()
+				.setAuthor({
+					name: `Channel ${diff
+						.replace(/([A-Z])/g, " $1")
+						.toLowerCase()} Updated`,
+					iconURL: newChannel.guild.iconURL(),
+				})
+				.setColor("#CD1C6C")
+				.setDescription(`**Channel Name:** ${newChannel.name}`)
+				.addFields([
+					{
+						name: "Before",
+						value: `${oldChannel[diff] ? oldChannel[diff] : "N/A"}`,
+					},
+					{
+						name: "After",
+						value: `${newChannel[diff] ? newChannel[diff] : "N/A"}`,
+					},
+				])
+				.setFooter({ text: `channelid: ${newChannel.id}` })
+				.setTimestamp();
+		}
 
 		let logChannel;
 
