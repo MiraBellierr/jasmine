@@ -57,7 +57,7 @@ module.exports = async (client, oldChannel, newChannel) => {
 					iconURL: newChannel.guild.iconURL(),
 				})
 				.setColor("#CD1C6C")
-				.setDescription(`**Channel Name:** ${newChannel.name}`)
+				.setDescription(`**Channel:** ${newChannel}`)
 				.addFields([
 					{
 						name: "Before",
