@@ -13,12 +13,20 @@ module.exports = async (client, oldRole, newRole) => {
 	);
 
 	differences.forEach(async (diff) => {
+		if (diff === "rawPosition") return;
+
 		const embed = new EmbedBuilder()
 			.setAuthor({
-				name: `Role ${diff.charAt(0).toUpperCase() + diff.slice(1)} Updated`,
+				name: `Role ${
+					diff
+						.replace(/([A-Z])/g, " $1")
+						.charAt(0)
+						.toUpperCase() + diff.replace(/([A-Z])/g, " $1").slice(1)
+				} Updated`,
 				iconURL: newRole.guild.iconURL(),
 			})
 			.setColor("#CD1C6C")
+			.setDescription(`**Role:** ${newRole}`)
 			.addFields([
 				{
 					name: "Before",

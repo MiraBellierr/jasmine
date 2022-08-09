@@ -31,7 +31,7 @@ module.exports = async (client, oldChannel, newChannel) => {
 
 			embed = new EmbedBuilder()
 				.setAuthor({
-					name: "Channel category Updated",
+					name: "Channel Category Updated",
 					iconURL: newChannel.guild.iconURL(),
 				})
 				.setColor("#CD1C6C")
@@ -51,9 +51,12 @@ module.exports = async (client, oldChannel, newChannel) => {
 		} else {
 			embed = new EmbedBuilder()
 				.setAuthor({
-					name: `Channel ${diff
-						.replace(/([A-Z])/g, " $1")
-						.toLowerCase()} Updated`,
+					name: `Channel ${
+						diff
+							.replace(/([A-Z])/g, " $1")
+							.charAt(0)
+							.toUpperCase() + diff.replace(/([A-Z])/g, " $1").slice(1)
+					} Updated`,
 					iconURL: newChannel.guild.iconURL(),
 				})
 				.setColor("#CD1C6C")
