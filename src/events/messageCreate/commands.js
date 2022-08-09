@@ -1,10 +1,10 @@
-const { PermissionsBitField, ChannelType } = require("discord.js");
+const { PermissionsBitField } = require("discord.js");
 const signale = require("signale");
 const contents = require("../../utils/constants");
 
 module.exports = async (client, message) => {
 	if (!message.guild) return;
-	if (!message.channel.type !== ChannelType.GuildText) return;
+	if (message.channel.type !== 0) return;
 
 	if (!client.prefixes.get(message.guild.id))
 		client.prefixes.set(message.guild.id, process.env.PREFIX);
