@@ -6,12 +6,12 @@ const manager = new ShardingManager("src/engine.js", {
 });
 const signale = require("signale");
 
-console.log(" _                           ");
-console.log("| |                          ");
-console.log("| | ____ _ _ __  _ __   __ _ ");
-console.log("| |/ / _` | '_ | '_  / _` |");
-console.log("|   < (_| | | | | | | | (_| |");
-console.log("|_|___,_|_| |_|_| |_|__,_|");
+console.log("       __                     _          ");
+console.log("      / /___ __________ ___  (_)___  ___ ");
+console.log(" __  / / __ `/ ___/ __ `__ `/ / __ `/ _ |");
+console.log("/ /_/ / /_/ (__  ) / / / / / / / / /  __/");
+console.log("\____/\__,_/____/_/ /_/ /_/_/_/ /_/|___| ");
+console.log("                                         ");
 console.log("                             ");
 console.log("=============================");
 signale.start("Launching shard manager, please wait...");
