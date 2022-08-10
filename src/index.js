@@ -8,9 +8,9 @@ const signale = require("signale");
 
 console.log("       __                     _          ");
 console.log("      / /___ __________ ___  (_)___  ___ ");
-console.log(" __  / / __ `/ ___/ __ `__ \/ / __ \/ _ \");
+console.log(" __  / / __ `/ ___/ __ `__ `/ / __ `/ _ |");
 console.log("/ /_/ / /_/ (__  ) / / / / / / / / /  __/");
-console.log("\____/\__,_/____/_/ /_/ /_/_/_/ /_/\___/ ");
+console.log("\____/\__,_/____/_/ /_/ /_/_/_/ /_/|___| ");
 console.log("                                         ");
 console.log("                             ");
 console.log("=============================");
