@@ -27,7 +27,7 @@ module.exports = {
     })
             
         } catch (err) {
-        interaction.reply(`There is an error. Please try again later.`);
+ //       interaction.reply(`There is an error. Please try again later.`);
         signale.fatal(err)
     }
     
