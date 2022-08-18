@@ -83,7 +83,10 @@ module.exports = async (client, oldGuild, newGuild) => {
 			const embed = new EmbedBuilder()
 				.setAuthor({
 					name: `Server ${
-						diff.charAt(0).toUpperCase() + diff.slice(1)
+						diff
+							.replace(/([A-Z])/g, " $1")
+							.charAt(0)
+							.toUpperCase() + diff.replace(/([A-Z])/g, " $1").slice(1)
 					} Updated`,
 					iconURL: newGuild.iconURL(),
 				})
