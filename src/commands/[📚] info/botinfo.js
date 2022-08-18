@@ -41,8 +41,6 @@ module.exports = {
 					discordjs.version
 				}\n**• Database:** ${sqlite.name} v${sqlite.version}\n**• JRE:** Node ${
 					process.version
-				}\n**• Websocket Status:** ${
-					client.ws.status
 				}\n**• Websocket Ping:** ${client.ws.ping.toLocaleString()}ms\n**• Ready At:** ${utils.formatDate(
 					client.readyAt
 				)}\n**• Uptime:** ${uptime}\n**• Github:** [Click Here](${
@@ -87,8 +85,8 @@ module.exports = {
 						discordjs.version
 					}\n**• Database:** ${sqlite.name} v${
 						sqlite.version
-					}\n**• JRE:** Node ${process.version}\n**• Websocket Status:** ${
-						client.ws.status
+					}\n**• JRE:** Node ${
+						process.version
 					}\n**• Websocket Ping:** ${client.ws.ping.toLocaleString()}ms\n**• Ready At:** ${utils.formatDate(
 						client.readyAt
 					)}\n**• Uptime:** ${uptime}\n**• Github:** [Click Here](${
