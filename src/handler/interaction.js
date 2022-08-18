@@ -26,7 +26,7 @@ module.exports = (client) => {
 				interactions.push(interaction);
 				table.addRow(file, "✅");
 			} else {
-				table.addRow(file, "❎ -> no command.name found");
+				table.addRow(file, "❎ -> no interaction found");
 				continue;
 			}
 		}
