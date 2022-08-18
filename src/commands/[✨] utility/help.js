@@ -28,8 +28,8 @@ module.exports = {
 		run: async (client, interaction) => {
 			const commands = (category) => {
 				return client.commands
-					.filter((cmd) => cmd.category === category)
-					.map((cmd) => " " + `\`${cmd.name}\``);
+					.filter((cmd) => cmd.category === category && cmd.interaction)
+					.map((cmd) => " " + `\`${cmd.interaction.data.name}\``);
 			};
 
 			const embed = new EmbedBuilder()
@@ -93,7 +93,14 @@ module.exports = {
 							})
 							.setColor("#CD1C6C")
 							.addFields([
-								{ name: `${i.values[0]}`, value: `${commands(i.values[0])}` },
+								{
+									name: `${i.values[0]}`,
+									value: `${
+										commands(i.values[0]).length > 0
+											? commands(i.values[0])
+											: "no command found here"
+									}`,
+								},
 							])
 							.setDescription(
 								"<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)"
