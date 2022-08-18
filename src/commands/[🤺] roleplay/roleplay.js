@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const utils = require("../../utils/utils");
 
 module.exports = {
+	category: "[🤺] Roleplay",
 	interaction: {
 		data: {
 			name: "roleplay",
