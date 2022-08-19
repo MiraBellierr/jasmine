@@ -60,7 +60,7 @@ module.exports = {
 						constants.assets.eva.emoji
 					} EVA:** ${character.get("eva")}\n**• ${
 						constants.assets.att.emoji
-					} ATT:** ${character.get("att")}\n**• ${
+					} ATT:** ${Math.floor(character.get("att"))}\n**• ${
 						constants.assets.def.emoji
 					} DEF:** ${character.get("def")}`,
 					inline: true,
@@ -185,7 +185,7 @@ module.exports = {
 							constants.assets.eva.emoji
 						} EVA:** ${character.get("eva")}\n**• ${
 							constants.assets.att.emoji
-						} ATT:** ${character.get("att")}\n**• ${
+						} ATT:** ${Math.floor(character.get("att"))}\n**• ${
 							constants.assets.def.emoji
 						} DEF:** ${character.get("def")}`,
 						inline: true,
