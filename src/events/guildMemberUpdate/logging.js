@@ -6,17 +6,22 @@ module.exports = async (client, oldMember, newMember) => {
 	if (!logging || !logging.defaultLogChannel) return;
 
 	if (logging.memberRoleChanges) {
-		const newRoles =
-			newMember.roles.cache
-				.filter((r) => r.id !== newMember.guild.id)
-				.map((r) => r)
-				.join(", ") || "none";
+		const newRoles = newMember.roles.cache
+			.filter((r) => r.id !== newMember.guild.id)
+			.map((r) => r);
 
-		const oldRoles =
-			oldMember.roles.cache
-				.filter((r) => r.id !== oldMember.guild.id)
-				.map((r) => r)
-				.join(", ") || "none";
+		const oldRoles = oldMember.roles.cache
+			.filter((r) => r.id !== oldMember.guild.id)
+			.map((r) => r);
+
+		const roleChanges =
+			newRoles.filter((r) => !oldRoles.includes(r)).length < 1
+				? `**Role Removed:** ${oldRoles
+						.filter((r) => !newRoles.includes(r))
+						.join(", ")}`
+				: `**Role Added:** ${newRoles
+						.filter((r) => !oldRoles.includes(r))
+						.join(", ")}`;
 
 		if (newRoles !== oldRoles) {
 			const embed = new EmbedBuilder()
@@ -25,17 +30,7 @@ module.exports = async (client, oldMember, newMember) => {
 					iconURL: newMember.user.displayAvatarURL(),
 				})
 				.setColor("#CD1C6C")
-				.setDescription(`**Member:** ${newMember}`)
-				.addFields([
-					{
-						name: "Before",
-						value: `${oldRoles}`,
-					},
-					{
-						name: "After",
-						value: `${newRoles}`,
-					},
-				])
+				.setDescription(`**Member:** ${newMember}\n${roleChanges}`)
 				.setFooter({ text: `memberid: ${newMember.id}` })
 				.setTimestamp();
 
