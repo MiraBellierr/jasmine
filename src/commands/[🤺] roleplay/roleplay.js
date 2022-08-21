@@ -293,7 +293,7 @@ module.exports = {
 			if (member.id === interaction.user.id) {
 				const embed = new Discord.EmbedBuilder()
 					.setAuthor({
-						name: `${client.user.username} ${actionPp} on ${member.user.username}!`,
+						name: `${client.user.username} ${actionPp} ${member.user.username}!`,
 						iconURL: client.user.displayAvatarURL(),
 					})
 					.setImage(url)
@@ -304,7 +304,7 @@ module.exports = {
 
 			const embed = new Discord.EmbedBuilder()
 				.setAuthor({
-					name: `${interaction.user.username} ${actionPp} on ${member.user.username}`,
+					name: `${interaction.user.username} ${actionPp} ${member.user.username}`,
 					iconURL: interaction.user.displayAvatarURL(),
 				})
 				.setImage(url)
