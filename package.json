@@ -34,7 +34,7 @@
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
-    "@types/node": "^18.7.3"
+    "@types/node": "^18.7.9"
   },
   "repository": {
     "type": "git",
