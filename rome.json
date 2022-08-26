@@ -1,0 +1,53 @@
+{
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "js": {
+        "rules": {
+          "noArguments": "warn",
+          "noAsyncPromiseExecutor": "warn",
+          "noCatchAssign": "warn",
+          "noCompareNegZero": "warn",
+          "noDeadCode": "warn",
+          "noDebugger": "warn",
+          "noDelete": "off",
+          "noDoubleEquals": "warn",
+          "noEmptyPattern": "warn",
+          "noFunctionAssign": "warn",
+          "noLabelVar": "warn",
+          "noNegationElse": "warn",
+          "noShoutyConstants": "warn",
+          "noSparseArray": "warn",
+          "noUnnecessaryContinue": "warn",
+          "noUnsafeNegation": "warn",
+          "noUnusedTemplateLiteral": "warn",
+          "useBlockStatements": "warn",
+          "useCamelCase": "warn",
+          "useSimplifiedLogicExpression": "warn",
+          "useSingleCaseStatement": "warn",
+          "useSingleVarDeclarator": "warn",
+          "useTemplate": "warn",
+          "useValidTypeof": "warn",
+          "useWhile": "warn"
+        }
+      },
+      "jsx": {
+        "rules": {
+          "noCommentText": "warn",
+          "noImplicitBoolean": "warn",
+          "useSelfClosingElements": "warn"
+        }
+      },
+      "regex": {
+        "rules": {
+          "noMultipleSpacesInRegularExpressionLiterals": "warn"
+        }
+      },
+      "ts": {
+        "rules": {
+          "useShorthandArrayType": "warn"
+        }
+      }
+    }
+  }
+}
