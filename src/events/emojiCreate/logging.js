@@ -1,29 +1,33 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, emoji) => {
-	const logging = client.loggings.get(emoji.guild.id);
+  const logging = client.loggings.get(emoji.guild.id);
 
-	if (!logging || !logging.defaultLogChannel) return;
+  if (!(logging && logging.defaultLogChannel)) {
+    return;
+  }
 
-	if (!logging.emojiAndStickerChanges) return;
+  if (!logging.emojiAndStickerChanges) {
+    return;
+  }
 
-	const embed = new EmbedBuilder()
-		.setAuthor({
-			name: "Emoji Created",
-			iconURL: emoji.guild.iconURL(),
-		})
-		.setColor("#CD1C6C")
-		.setDescription(`**Emoji:** ${emoji}`)
-		.setFooter({ text: `emojiid: ${emoji.id}` })
-		.setTimestamp();
+  const embed = new EmbedBuilder()
+    .setAuthor({
+      name: "Emoji Created",
+      iconURL: emoji.guild.iconURL(),
+    })
+    .setColor("#CD1C6C")
+    .setDescription(`**Emoji:** ${emoji}`)
+    .setFooter({ text: `emojiid: ${emoji.id}` })
+    .setTimestamp();
 
-	let logChannel;
+  let logChannel;
 
-	if (logging.serverLogChannel) {
-		logChannel = await emoji.guild.channels.fetch(logging.serverLogChannel);
-	} else {
-		logChannel = await emoji.guild.channels.fetch(logging.defaultLogChannel);
-	}
+  if (logging.serverLogChannel) {
+    logChannel = await emoji.guild.channels.fetch(logging.serverLogChannel);
+  } else {
+    logChannel = await emoji.guild.channels.fetch(logging.defaultLogChannel);
+  }
 
-	logChannel.send({ embeds: [embed] });
+  logChannel.send({ embeds: [embed] });
 };

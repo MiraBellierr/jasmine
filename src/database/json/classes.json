@@ -1,33 +1,32 @@
 {
-	"warrior": {
-		"hp": 35,
-		"str": 10,
-		"agl": 8,
-		"sta": 15,
-		"acc": 18,
-		"eva": 61,
-		"att": 5,
-		"def": 0
-		
-	},
-	"thief": {
-		"hp": 30,
-		"str": 9,
-		"agl": 15,
-		"sta": 5,
-		"acc": 30,
-		"eva": 73,
-		"att": 4,
-		"def": 0
-	},
-	"monk": {
-		"hp": 33,
-		"str": 12,
-		"agl": 5,
-		"sta": 10,
-		"acc": 13,
-		"eva": 55,
-		"att": 6,
-		"def": 0
-	}
+  "warrior": {
+    "hp": 35,
+    "str": 10,
+    "agl": 8,
+    "sta": 15,
+    "acc": 18,
+    "eva": 61,
+    "att": 5,
+    "def": 0
+  },
+  "thief": {
+    "hp": 30,
+    "str": 9,
+    "agl": 15,
+    "sta": 5,
+    "acc": 30,
+    "eva": 73,
+    "att": 4,
+    "def": 0
+  },
+  "monk": {
+    "hp": 33,
+    "str": 12,
+    "agl": 5,
+    "sta": 10,
+    "acc": 13,
+    "eva": 55,
+    "att": 6,
+    "def": 0
+  }
 }

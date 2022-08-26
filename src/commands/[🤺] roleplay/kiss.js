@@ -4,39 +4,43 @@ const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
 
 module.exports = {
-	name: "kiss",
-	description: "kiss someone",
-	category: "[🤺] roleplay",
-	usage: "<member>",
-	run: async (client, message, args) => {
-		if (!args.length) return argsError(module.exports, client, message);
+  name: "kiss",
+  description: "kiss someone",
+  category: "[🤺] roleplay",
+  usage: "<member>",
+  run: async (client, message, args) => {
+    if (!args.length) {
+      return argsError(module.exports, client, message);
+    }
 
-		const target = await getMemberFromArguments(message, args.join(" "));
+    const target = await getMemberFromArguments(message, args.join(" "));
 
-		if (!target) return message.reply("I didn't found the user with this name");
+    if (!target) {
+      return message.reply("I didn't found the user with this name");
+    }
 
-		const url = await utils.nekoapi(module.exports.name);
+    const url = await utils.nekoapi(module.exports.name);
 
-		if (target.id === message.author.id) {
-			const embed = new Discord.EmbedBuilder()
-				.setAuthor({
-					name: `${client.user.username} ${module.exports.name}es ${target.user.username}!`,
-					iconURL: client.user.displayAvatarURL(),
-				})
-				.setImage(url)
-				.setColor("#CD1C6C");
+    if (target.id === message.author.id) {
+      const embed = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `${client.user.username} ${module.exports.name}es ${target.user.username}!`,
+          iconURL: client.user.displayAvatarURL(),
+        })
+        .setImage(url)
+        .setColor("#CD1C6C");
 
-			return message.reply({ embeds: [embed] });
-		}
+      return message.reply({ embeds: [embed] });
+    }
 
-		const embed = new Discord.EmbedBuilder()
-			.setAuthor({
-				name: `${message.author.username} ${module.exports.name}es ${target.user.username}`,
-				iconURL: message.author.displayAvatarURL(),
-			})
-			.setImage(url)
-			.setColor("#CD1C6C");
+    const embed = new Discord.EmbedBuilder()
+      .setAuthor({
+        name: `${message.author.username} ${module.exports.name}es ${target.user.username}`,
+        iconURL: message.author.displayAvatarURL(),
+      })
+      .setImage(url)
+      .setColor("#CD1C6C");
 
-		message.reply({ embeds: [embed] });
-	},
+    message.reply({ embeds: [embed] });
+  },
 };

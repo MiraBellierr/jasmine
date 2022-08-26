@@ -1,108 +1,118 @@
 const { argsError } = require("../../utils/errors");
 
 module.exports = {
-	name: "purge",
-	category: "[🛠] moderation",
-	description: "delete some messages",
-	clientPermission: "ManageMessages",
-	memberPermission: "ManageMessages",
-	usage: "[bot] <count>",
-	run: async (client, message, args) => {
-		if (message.deletable) message.delete();
+  name: "purge",
+  category: "[🛠] moderation",
+  description: "delete some messages",
+  clientPermission: "ManageMessages",
+  memberPermission: "ManageMessages",
+  usage: "[bot] <count>",
+  run: async (client, message, args) => {
+    if (message.deletable) {
+      message.delete();
+    }
 
-		if (!isNaN(args[0])) {
-			let messageCount = args[0];
+    if (isNaN(args[0])) {
+      if (args[0] === "bot") {
+        let messageCount = args[1];
 
-			if (!messageCount || isNaN(messageCount))
-				return argsError(module.exports, client, message);
+        if (!messageCount || isNaN(messageCount)) {
+          return argsError(module.exports, client, message);
+        }
 
-			if (messageCount > 100) {
-				messageCount = 100;
-			}
+        if (messageCount > 100) {
+          messageCount = 100;
+        }
 
-			const fetch = await message.channel.messages.fetch({
-				limit: parseInt(messageCount),
-			});
+        let fetch = await message.channel.messages.fetch();
 
-			const deletedMessages = (
-				await message.channel.bulkDelete(fetch, true)
-			).map((m) => m);
+        fetch = fetch
+          .filter((m) => m.author.bot)
+          .toJSON()
+          .slice(0, parseInt(messageCount));
 
-			const results = {};
+        const deletedMessages = (
+          await message.channel.bulkDelete(fetch, true)
+        ).map((m) => m);
 
-			for (const deleted of deletedMessages) {
-				if (!deleted) continue;
+        const results = {};
 
-				const user = `${deleted.author.tag}`;
+        for (const deleted of deletedMessages) {
+          if (!deleted) {
+            continue;
+          }
 
-				if (!results[user]) {
-					results[user] = 0;
-				}
+          const user = `${deleted.author.tag}`;
 
-				results[user]++;
-			}
+          if (!results[user]) {
+            results[user] = 0;
+          }
 
-			const userMessageMap = Object.entries(results);
-			const formed = `${deletedMessages.length} message${
-				deletedMessages.length > 1 ? "s" : ""
-			} were removed.\n\n${userMessageMap
-				.map(([user, messages]) => `**${user}**: ${messages}`)
-				.join("\n")}`;
+          results[user]++;
+        }
 
-			message.channel.send(formed).then((m) => {
-				setTimeout(() => {
-					m.delete();
-				}, 5000);
-			});
-		} else if (args[0] === "bot") {
-			let messageCount = args[1];
+        const userMessageMap = Object.entries(results);
+        const formed = `${deletedMessages.length} message${
+          deletedMessages.length > 1 ? "s" : ""
+        } were removed.\n\n${userMessageMap
+          .map(([user, messages]) => `**${user}**: ${messages}`)
+          .join("\n")}`;
 
-			if (!messageCount || isNaN(messageCount))
-				return argsError(module.exports, client, message);
+        message.channel.send(formed).then((m) => {
+          setTimeout(() => {
+            m.delete();
+          }, 5000);
+        });
+      } else {
+        return argsError(module.exports, client, message);
+      }
+    } else {
+      let messageCount = args[0];
 
-			if (messageCount > 100) {
-				messageCount = 100;
-			}
+      if (!messageCount || isNaN(messageCount)) {
+        return argsError(module.exports, client, message);
+      }
 
-			let fetch = await message.channel.messages.fetch();
+      if (messageCount > 100) {
+        messageCount = 100;
+      }
 
-			fetch = fetch
-				.filter((m) => m.author.bot)
-				.toJSON()
-				.slice(0, parseInt(messageCount));
+      const fetch = await message.channel.messages.fetch({
+        limit: parseInt(messageCount),
+      });
 
-			const deletedMessages = (
-				await message.channel.bulkDelete(fetch, true)
-			).map((m) => m);
+      const deletedMessages = (
+        await message.channel.bulkDelete(fetch, true)
+      ).map((m) => m);
 
-			const results = {};
+      const results = {};
 
-			for (const deleted of deletedMessages) {
-				if (!deleted) continue;
+      for (const deleted of deletedMessages) {
+        if (!deleted) {
+          continue;
+        }
 
-				const user = `${deleted.author.tag}`;
+        const user = `${deleted.author.tag}`;
 
-				if (!results[user]) {
-					results[user] = 0;
-				}
+        if (!results[user]) {
+          results[user] = 0;
+        }
 
-				results[user]++;
-			}
+        results[user]++;
+      }
 
-			const userMessageMap = Object.entries(results);
-			const formed = `${deletedMessages.length} message${
-				deletedMessages.length > 1 ? "s" : ""
-			} were removed.\n\n${userMessageMap
-				.map(([user, messages]) => `**${user}**: ${messages}`)
-				.join("\n")}`;
+      const userMessageMap = Object.entries(results);
+      const formed = `${deletedMessages.length} message${
+        deletedMessages.length > 1 ? "s" : ""
+      } were removed.\n\n${userMessageMap
+        .map(([user, messages]) => `**${user}**: ${messages}`)
+        .join("\n")}`;
 
-			message.channel.send(formed).then((m) => {
-				setTimeout(() => {
-					m.delete();
-				}, 5000);
-			});
-		} else {
-			return argsError(module.exports, client, message);
-		}
-	},
+      message.channel.send(formed).then((m) => {
+        setTimeout(() => {
+          m.delete();
+        }, 5000);
+      });
+    }
+  },
 };

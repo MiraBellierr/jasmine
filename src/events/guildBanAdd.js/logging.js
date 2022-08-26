@@ -1,31 +1,35 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = async (client, ban) => {
-	const logging = client.loggings.get(ban.guild.id);
+  const logging = client.loggings.get(ban.guild.id);
 
-	if (!logging || !logging.defaultLogChannel) return;
+  if (!(logging && logging.defaultLogChannel)) {
+    return;
+  }
 
-	if (!logging.memberBans) return;
+  if (!logging.memberBans) {
+    return;
+  }
 
-	await ban.fetch();
+  await ban.fetch();
 
-	const embed = new EmbedBuilder()
-		.setAuthor({
-			name: "Member Banned",
-			iconURL: ban.guild.iconURL(),
-		})
-		.setColor("#CD1C6C")
-		.setDescription(`**Member:** ${ban.user.tag}\n**Reason:** ${ban.reason}`)
-		.setFooter({ text: `memberid: ${ban.user.id}` })
-		.setTimestamp();
+  const embed = new EmbedBuilder()
+    .setAuthor({
+      name: "Member Banned",
+      iconURL: ban.guild.iconURL(),
+    })
+    .setColor("#CD1C6C")
+    .setDescription(`**Member:** ${ban.user.tag}\n**Reason:** ${ban.reason}`)
+    .setFooter({ text: `memberid: ${ban.user.id}` })
+    .setTimestamp();
 
-	let logChannel;
+  let logChannel;
 
-	if (logging.memberLogChannel) {
-		logChannel = await ban.guild.channels.fetch(logging.serverLogChannel);
-	} else {
-		logChannel = await ban.guild.channels.fetch(logging.defaultLogChannel);
-	}
+  if (logging.memberLogChannel) {
+    logChannel = await ban.guild.channels.fetch(logging.serverLogChannel);
+  } else {
+    logChannel = await ban.guild.channels.fetch(logging.defaultLogChannel);
+  }
 
-	logChannel.send({ embeds: [embed] });
+  logChannel.send({ embeds: [embed] });
 };

@@ -3,19 +3,19 @@ const fs = require("fs");
 const { GiveawaysManager } = require("./utils/giveaway");
 const utils = require("./utils/utils");
 const client = new Client({
-	allowedMentions: { parse: ["users"] },
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildBans,
-		GatewayIntentBits.GuildEmojisAndStickers,
-		GatewayIntentBits.GuildIntegrations,
-		GatewayIntentBits.GuildInvites,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.GuildMessageReactions,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildVoiceStates,
-	],
+  allowedMentions: { parse: ["users"] },
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildBans,
+    GatewayIntentBits.GuildEmojisAndStickers,
+    GatewayIntentBits.GuildIntegrations,
+    GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
 });
 
 client.commands = new Collection();
@@ -30,29 +30,30 @@ client.loggings = new Collection();
 client.timer = new Collection();
 client.characters = new Collection();
 client.giveawaysManager = new GiveawaysManager(client, {
-	storage: "./src/database/json/giveaways.json",
-	updateCountdownEvery: 5000,
-	default: {
-		botsCanWin: false,
-		embedColor: "#CD1C6C",
-		embedColorEnd: "#CD1C6C",
-		reaction: "🎉",
-	},
+  storage: "./src/database/json/giveaways.json",
+  updateCountdownEvery: 5000,
+  default: {
+    botsCanWin: false,
+    embedColor: "#CD1C6C",
+    embedColorEnd: "#CD1C6C",
+    reaction: "🎉",
+  },
 });
 
 Object.values(require("./database/json/characters.json")).forEach(
-	(character) => {
-		client.characters.set(character.name, character);
-	}
+  (character) => {
+    client.characters.set(character.name, character);
+  }
 );
 
 async function start() {
-	await utils.asyncForEach(fs.readdirSync("src/handler/"), async (handler) => {
-		if (handler !== "interaction.js")
-			await require(`./handler/${handler}`)(client);
-	});
+  await utils.asyncForEach(fs.readdirSync("src/handler/"), async (handler) => {
+    if (handler !== "interaction.js") {
+      await require(`./handler/${handler}`)(client);
+    }
+  });
 
-	client.login(process.env.TOKEN);
+  client.login(process.env.TOKEN);
 }
 
 start();
