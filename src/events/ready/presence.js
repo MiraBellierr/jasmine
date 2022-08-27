@@ -5,8 +5,6 @@ const Discord = require("discord.js");
 const custom = new Signale(constants.options.ready);
 
 module.exports = async (client) => {
-  const guilds = await client.guilds.fetch();
-
   client.user.setPresence({
     activities: [
       {

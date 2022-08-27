@@ -1,6 +1,7 @@
 const contants = require("../utils/constants");
 
 module.exports = (client) => {
+  // eslint-disable-next-line no-undef
   process.on("unhandledRejection", async (reason) => {
     console.log(reason);
 
@@ -12,9 +13,11 @@ module.exports = (client) => {
     );
 
     setTimeout(() => {
+      // eslint-disable-next-line no-undef
       process.exit(1);
     }, 100);
   });
+  // eslint-disable-next-line no-undef
   process.on("uncaughtException", async (err) => {
     console.log(err);
 
@@ -26,9 +29,11 @@ module.exports = (client) => {
     );
 
     setTimeout(() => {
+      // eslint-disable-next-line no-undef
       process.exit(1);
     }, 100);
   });
+  // eslint-disable-next-line no-undef
   process.on("uncaughtExceptionMonitor", async (err) => {
     console.log(err);
 
@@ -40,6 +45,7 @@ module.exports = (client) => {
     );
 
     setTimeout(() => {
+      // eslint-disable-next-line no-undef
       process.exit(1);
     }, 100);
   });

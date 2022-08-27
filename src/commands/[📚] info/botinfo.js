@@ -40,6 +40,7 @@ module.exports = {
         )}\n**• Library:** ${discordjs.name} v${
           discordjs.version
         }\n**• Database:** ${sqlite.name} v${sqlite.version}\n**• JRE:** Node ${
+          // eslint-disable-next-line no-undef
           process.version
         }\n**• Websocket Ping:** ${client.ws.ping.toLocaleString()}ms\n**• Ready At:** ${utils.formatDate(
           client.readyAt
@@ -86,6 +87,7 @@ module.exports = {
           }\n**• Database:** ${sqlite.name} v${
             sqlite.version
           }\n**• JRE:** Node ${
+            // eslint-disable-next-line no-undef
             process.version
           }\n**• Websocket Ping:** ${client.ws.ping.toLocaleString()}ms\n**• Ready At:** ${utils.formatDate(
             client.readyAt

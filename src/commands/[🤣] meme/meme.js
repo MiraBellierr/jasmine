@@ -5,7 +5,7 @@ module.exports = {
   name: "meme",
   description: "Sends a random meme",
   category: "[🤣] meme",
-  run: async (client, message, args) => {
+  run: async (client, message) => {
     const m = await message.reply("*Please wait...*");
     const subreddits = [
       "funny",

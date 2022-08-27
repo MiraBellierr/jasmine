@@ -11,6 +11,7 @@ module.exports = async (client, message) => {
   }
 
   if (!client.prefixes.get(message.guild.id)) {
+    // eslint-disable-next-line no-undef
     client.prefixes.set(message.guild.id, process.env.PREFIX);
   }
 

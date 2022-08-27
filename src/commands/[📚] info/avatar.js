@@ -1,8 +1,4 @@
-const {
-  EmbedBuilder,
-  ContextMenuCommandBuilder,
-  ApplicationCommandType,
-} = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const {
   getUserFromArguments,
   getMemberFromArguments,

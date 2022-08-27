@@ -53,6 +53,7 @@ async function start() {
     }
   });
 
+  // eslint-disable-next-line no-undef
   client.login(process.env.TOKEN);
 }
 

@@ -1,8 +1,11 @@
 const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(
+  // eslint-disable-next-line no-undef
   process.env.DB_NAME,
+  // eslint-disable-next-line no-undef
   process.env.DB_USER,
+  // eslint-disable-next-line no-undef
   process.env.DB_PASSWORD,
   {
     host: "localhost",

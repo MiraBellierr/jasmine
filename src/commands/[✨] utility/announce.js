@@ -1,10 +1,6 @@
 const { startCollector } = require("../../utils/collectors");
 const { getChannelFromArguments } = require("../../utils/getters");
-const {
-  EmbedBuilder,
-  PermissionsBitField,
-  SlashCommandBuilder,
-} = require("discord.js");
+const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 const { argsError } = require("../../utils/errors");
 const Color = require("color");
 const { checkIfImage } = require("../../utils/utils");

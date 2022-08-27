@@ -8,7 +8,7 @@ module.exports = {
   aliases: ["inv"],
   description: "View your inventory",
   category: "[👹] rpg",
-  run: async (client, message, args) => {
+  run: async (client, message) => {
     const character = await schemas
       .character()
       .findOne({ where: { userID: message.author.id } });

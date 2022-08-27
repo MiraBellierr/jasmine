@@ -108,7 +108,9 @@ module.exports = {
           value: roles,
         },
       ]);
-    } catch {}
+    } catch {
+      null;
+    }
 
     message.reply({ embeds: [embed] });
   },
@@ -218,7 +220,9 @@ module.exports = {
             value: roles,
           },
         ]);
-      } catch {}
+      } catch {
+        null;
+      }
 
       interaction.reply({ embeds: [embed] });
     },

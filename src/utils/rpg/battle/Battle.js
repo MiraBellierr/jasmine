@@ -4,7 +4,6 @@ const constants = require("../../constants");
 const { getProgBar } = require("../../utils");
 const set = new Set();
 const { setTimeout } = require("timers/promises");
-const classes = require("../../../database/json/classes.json");
 const equipments = require("../../../database/json/equipments.json");
 const economies = require("../../../utils/economies");
 
@@ -169,6 +168,7 @@ class Battle {
   async registerXP() {
     // formular: 1 * (5 * (O - P) / P + 4)
 
+    // eslint-disable-next-line no-unused-vars
     let { id, userID, createdAt, updatedAt, ...character } =
       await this.getCharacter();
 
@@ -188,6 +188,7 @@ class Battle {
       { where: { userID: this.user.id } }
     );
 
+    // eslint-disable-next-line no-unused-vars
     let { xp, ...attr } = character;
 
     let hpGain = 0;
@@ -227,6 +228,7 @@ class Battle {
       attr.att = attr.str / 2;
 
       if (this.character.att !== attr.att) {
+        // eslint-disable-next-line no-unused-vars
         attGain = attr.att - this.character.att;
       }
     }

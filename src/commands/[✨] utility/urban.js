@@ -21,10 +21,12 @@ module.exports = {
 
         for (let i = 0; i < result.length; i++) {
           const definition = filter(
+            // eslint-disable-next-line no-useless-escape
             result[i].definition.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
           );
 
           const example = filter(
+            // eslint-disable-next-line no-useless-escape
             result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
           );
 
@@ -83,10 +85,12 @@ module.exports = {
 
           for (let i = 0; i < result.length; i++) {
             const definition = filter(
+              // eslint-disable-next-line no-useless-escape
               result[i].definition.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
             );
 
             const example = filter(
+              // eslint-disable-next-line no-useless-escape
               result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
             );
 

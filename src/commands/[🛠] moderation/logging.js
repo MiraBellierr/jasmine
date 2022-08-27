@@ -1,4 +1,4 @@
-const { PermissionsBitField, EmbedBuilder, Colors } = require("discord.js");
+const { EmbedBuilder, Colors } = require("discord.js");
 const { Paginate } = require("../../utils/pagination");
 const { argsError } = require("../../utils/errors");
 const { getChannelFromArguments } = require("../../utils/getters");
@@ -121,11 +121,17 @@ module.exports = {
       }
 
       const {
+        // eslint-disable-next-line no-unused-vars
         defaultLogChannel,
+        // eslint-disable-next-line no-unused-vars
         memberLogChannel,
+        // eslint-disable-next-line no-unused-vars
         serverLogChannel,
+        // eslint-disable-next-line no-unused-vars
         voiceLogChannel,
+        // eslint-disable-next-line no-unused-vars
         joinLeaveLogChannel,
+        // eslint-disable-next-line no-unused-vars
         ignoredChannels,
         ...events
       } = logging;

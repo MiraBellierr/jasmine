@@ -26,6 +26,7 @@ module.exports = async (client, messageReaction) => {
       return stars.delete();
     }
 
+    // eslint-disable-next-line no-useless-escape
     const star = /^\⭐\s([0-9]{1,3})\s\|\s([0-9]{17,20})/.exec(stars.content);
     const foundStar = stars.embeds[0];
     const embed = new Discord.EmbedBuilder()

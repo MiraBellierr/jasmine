@@ -12,7 +12,7 @@ for (count = 0; count < 284; count++) {
   sharp(originalImage)
     .extract({ width: 32, height: 32, left, top })
     .toFile(outputImage)
-    .then(function (new_file_info) {
+    .then(function () {
       console.log(`Image cropped and saved - ${outputImage}`);
     })
     .catch(function (err) {

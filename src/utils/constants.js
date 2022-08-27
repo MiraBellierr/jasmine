@@ -5,6 +5,7 @@ module.exports.options = {
     logLevel: "info",
     scope: "custom",
     secrets: [],
+    // eslint-disable-next-line no-undef
     stream: process.stdout,
     types: {
       loading: {
@@ -21,6 +22,7 @@ module.exports.options = {
     logLevel: "info",
     scope: "custom",
     secrets: [],
+    // eslint-disable-next-line no-undef
     stream: process.stdout,
     types: {
       rocket: {

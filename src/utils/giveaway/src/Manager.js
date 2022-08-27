@@ -132,25 +132,23 @@ class GiveawaysManager extends EventEmitter {
 
   async start(channel, options) {
     if (!this.ready) {
-      return reject("The manager is not ready yet.");
+      return "The manager is not ready yet.";
     }
     options.messages =
       options.messages && typeof options.messages === "object"
         ? merge(defaultGiveawayMessages, options.messages)
         : defaultGiveawayMessages;
     if (!(channel && channel.id)) {
-      return reject(`channel is not a valid guildchannel. (val=${channel})`);
+      return `channel is not a valid guildchannel. (val=${channel})`;
     }
     if (!options.time || isNaN(options.time)) {
-      return reject(`options.time is not a number. (val=${options.time})`);
+      return `options.time is not a number. (val=${options.time})`;
     }
     if (typeof options.prize !== "string") {
-      return reject(`options.prize is not a string. (val=${options.prize})`);
+      return `options.prize is not a string. (val=${options.prize})`;
     }
     if (!Number.isInteger(options.winnerCount) || options.winnerCount < 1) {
-      return reject(
-        `options.winnerCount is not a positive integer. (val=${options.winnerCount})`
-      );
+      return `options.winnerCount is not a positive integer. (val=${options.winnerCount})`;
     }
     const giveaway = new Giveaway(this, {
       startAt: Date.now(),
@@ -187,7 +185,7 @@ class GiveawaysManager extends EventEmitter {
     message.react(giveaway.reaction);
     giveaway.messageID = message.id;
     this.giveaways.push(giveaway);
-    await this.saveGiveaway(giveaway.messageID, giveaway.data);
+    await this.saveGiveaway();
     return giveaway;
   }
 
@@ -221,12 +219,10 @@ class GiveawaysManager extends EventEmitter {
   async delete(messageID, doNotDeleteMessage = false) {
     const giveaway = this.giveaways.find((g) => g.messageID === messageID);
     if (!giveaway) {
-      return reject(`No giveaway found with ID ${messageID}.`);
+      return `No giveaway found with ID ${messageID}.`;
     }
     if (!(giveaway.channel || doNotDeleteMessage)) {
-      return reject(
-        `Unable to get the channel of the giveaway with message ID ${giveaway.messageID}.`
-      );
+      return `Unable to get the channel of the giveaway with message ID ${giveaway.messageID}.`;
     }
     if (!doNotDeleteMessage) {
       await giveaway.fetchMessage().catch((err) => console.error(err));
@@ -235,13 +231,13 @@ class GiveawaysManager extends EventEmitter {
       }
     }
     this.giveaways = this.giveaways.filter((g) => g.messageID !== messageID);
-    await this.deleteGiveaway(messageID);
+    await this.deleteGiveaway();
     this.emit("giveawayDeleted", giveaway);
 
     return;
   }
 
-  async deleteGiveaway(messageID) {
+  async deleteGiveaway() {
     await writeFileAsync(
       this.options.storage,
       JSON.stringify(this.giveaways.map((giveaway) => giveaway.data)),
@@ -288,7 +284,7 @@ class GiveawaysManager extends EventEmitter {
     }
   }
 
-  async editGiveaway(_messageID, _giveawayData) {
+  async editGiveaway() {
     await writeFileAsync(
       this.options.storage,
       JSON.stringify(this.giveaways.map((giveaway) => giveaway.data)),
@@ -298,7 +294,7 @@ class GiveawaysManager extends EventEmitter {
     return;
   }
 
-  async saveGiveaway(messageID, giveawayData) {
+  async saveGiveaway() {
     await writeFileAsync(
       this.options.storage,
       JSON.stringify(this.giveaways.map((giveaway) => giveaway.data)),
@@ -325,7 +321,7 @@ class GiveawaysManager extends EventEmitter {
       await giveaway.fetchMessage().catch((err) => console.error(err));
       if (!giveaway.message) {
         giveaway.ended = true;
-        await this.editGiveaway(giveaway.messageID, giveaway.data);
+        await this.editGiveaway();
         return;
       }
       const embed = this.generateMainEmbed(
@@ -450,9 +446,9 @@ class GiveawaysManager extends EventEmitter {
             .map((giveaway) => giveaway.messageID)
             .includes(g.messageID)
       );
-      for (const giveaway of endedGiveaways) {
-        await this.deleteGiveaway(giveaway.messageID);
-      }
+      endedGiveaways.forEach(async () => {
+        await this.deleteGiveaway();
+      });
     }
 
     this.client.on("raw", (packet) => this._handleRawPacket(packet));

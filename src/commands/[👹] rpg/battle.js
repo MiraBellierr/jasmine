@@ -6,7 +6,7 @@ module.exports = {
   description: "Battle with another user",
   category: "[👹] rpg",
   usage: "[member]",
-  run: async (client, message, args) => {
+  run: async (client, message) => {
     new Battle(message, message.author).startRandom();
   },
   interaction: {

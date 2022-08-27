@@ -9,7 +9,7 @@ module.exports = {
   aliases: ["sh"],
   description: "Shows RPG shop",
   category: "[👹] rpg",
-  run: async (client, message, args) => {
+  run: async (client, message) => {
     const character = await schemas
       .character()
       .findOne({ where: { userID: message.author.id } });
@@ -520,6 +520,7 @@ module.exports = {
 
         collector();
 
+        // eslint-disable-next-line no-inner-declarations
         function collector() {
           const filter = (i) => i.user.id === interaction.user.id;
 

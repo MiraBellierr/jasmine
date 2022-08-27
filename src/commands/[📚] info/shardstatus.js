@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-const utils = require("../../utils/utils");
-const signale = require("signale");
 
 module.exports = {
   name: "shardstatus",
