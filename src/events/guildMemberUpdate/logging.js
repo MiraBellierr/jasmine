@@ -26,6 +26,10 @@ module.exports = async (client, oldMember, newMember) => {
             .join(", ")}`;
 
     if (newRoles !== oldRoles) {
+      if (newRoles.filter((r) => !oldRoles.includes(r)).length < 1) {
+        return;
+      }
+
       const embed = new EmbedBuilder()
         .setAuthor({
           name: "Member Roles Updated",
