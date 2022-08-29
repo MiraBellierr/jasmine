@@ -1,11 +1,9 @@
-const EventEmitter = require("events");
 const Discord = require("discord.js");
 const constants = require("../../constants");
 const schemas = require("../../../database/schemas");
 
-class Giveaway extends EventEmitter {
+class Giveaway {
   constructor(client) {
-    super();
     this.client = client;
     this.database = [];
   }
@@ -91,7 +89,7 @@ class Giveaway extends EventEmitter {
   winnerAnnounce() {
     const embed = new Discord.EmbedBuilder()
       .setDescription(
-        `[Giveaway link](${Discord.messageLink(
+        `[Giveaway Link](${Discord.messageLink(
           this.options.channel.id,
           this.options.embed.id,
           this.options.channel.guild.id
@@ -100,7 +98,9 @@ class Giveaway extends EventEmitter {
       .setColor(Discord.Colors.DarkButNotBlack);
 
     this.options.channel.send({
-      content: `Congratulations to ${this.options.winners
+      content: ` ${
+        constants.giveaway.congratsEmote
+      } Congratulations to ${this.options.winners
         .map((w) => `<@${w.id}>`)
         .join(", ")} for winning **${this.options.prize}**!`,
       embeds: [embed],
@@ -110,7 +110,7 @@ class Giveaway extends EventEmitter {
   noWinnerAnnounce() {
     const embed = new Discord.EmbedBuilder()
       .setDescription(
-        `[Giveaway link](${Discord.messageLink(
+        `[Giveaway Link](${Discord.messageLink(
           this.options.channel.id,
           this.options.embed.id,
           this.options.channel.guild.id

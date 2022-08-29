@@ -64,6 +64,7 @@ module.exports.giveaway = {
   durationEmote: "<a:Alarm_1:1013674086129467432>",
   winnerEmote: "<:winner:1013674983081386078>",
   entriesEmote: "<:Magic_Badge:1013693425289277451>",
+  congratsEmote: "<a:Tada_Purple:1013937206718640279>",
 };
 
 module.exports.macs = {
