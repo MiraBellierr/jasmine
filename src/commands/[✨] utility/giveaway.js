@@ -266,7 +266,10 @@ module.exports = {
           host: interaction.user,
         });
 
-        interaction.reply(`Giveaway started in ${channel}!`);
+        interaction.reply({
+          content: `Giveaway started in ${channel}!`,
+          ephemeral: true,
+        });
       } else if (subcommand === "end") {
         const messageId = interaction.options.getString("message_id");
         const channel = interaction.options.getChannel("channel");
