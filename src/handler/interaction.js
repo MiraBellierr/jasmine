@@ -21,12 +21,9 @@ module.exports = (client) => {
 
       if (command.interaction && command.interaction.data) {
         const interaction = command.interaction.data;
-        console.log(interaction);
         client.interactions.set(interaction.name, command.interaction);
         interactions.push(interaction);
         table.addRow(file, "✅");
-      } else {
-        table.addRow(file, "❎ -> no interaction found");
       }
     }
   });
