@@ -58,6 +58,14 @@ module.exports.patreon = {
   id: "867066322550521886",
 };
 
+module.exports.giveaway = {
+  prizeEmote: "<:giveaway:1013661352549683320>",
+  hostEmote: "<:Ghost:1013673027340353556>",
+  durationEmote: "<a:Alarm_1:1013674086129467432>",
+  winnerEmote: "<:winner:1013674983081386078>",
+  entriesEmote: "<:Magic_Badge:1013693425289277451>",
+};
+
 module.exports.macs = {
   message: "macs is cute",
   isCute: true,

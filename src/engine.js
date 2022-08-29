@@ -1,6 +1,5 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
-const { GiveawaysManager } = require("./utils/giveaway");
 const utils = require("./utils/utils");
 const client = new Client({
   allowedMentions: { parse: ["users"] },
@@ -29,16 +28,6 @@ client.starboards = new Collection();
 client.loggings = new Collection();
 client.timer = new Collection();
 client.characters = new Collection();
-client.giveawaysManager = new GiveawaysManager(client, {
-  storage: "./src/database/json/giveaways.json",
-  updateCountdownEvery: 5000,
-  default: {
-    botsCanWin: false,
-    embedColor: "#CD1C6C",
-    embedColorEnd: "#CD1C6C",
-    reaction: "🎉",
-  },
-});
 
 Object.values(require("./database/json/characters.json")).forEach(
   (character) => {

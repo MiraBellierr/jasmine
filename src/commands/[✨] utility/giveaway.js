@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const { startCollector } = require("../../utils/collectors");
 const { getChannelFromArguments } = require("../../utils/getters");
 const { ChannelType } = require("discord.js");
+const Giveaway = require("../../utils/giveaway");
 
 module.exports = {
   name: "giveaway",
@@ -24,9 +25,9 @@ module.exports = {
             message.guild.id
           )}giveaway start \`<channel>\`\n• ${client.prefixes.get(
             message.guild.id
-          )}giveaway end \`[message ID | prize]\`\n• ${client.prefixes.get(
+          )}giveaway end \`<channel> [message ID]\`\n• ${client.prefixes.get(
             message.guild.id
-          )}giveaway reroll \`[message ID | prize]\``
+          )}giveaway reroll \`<channel> [message ID]\``
         )
         .setTimestamp();
 
@@ -131,31 +132,12 @@ module.exports = {
       const confirm = await startCollector(message);
 
       if (confirm.message === "yes") {
-        client.giveawaysManager.start(giveawayChannel, {
-          time: ms(giveawayDuration),
-          prize: giveawayPrize,
+        new Giveaway(client).start({
+          channel: giveawayChannel,
+          duration: ms(giveawayDuration),
           winnerCount: numberOfWinners,
-          hostedBy: message.author,
-          messages: {
-            giveaway: "🎉 **GIVEAWAY** 🎉",
-            giveawayEnded: "🎉 **GIVEAWAY ENDED** 🎉",
-            timeRemaining: "Time remaining: **{duration}**!",
-            inviteToParticipate: "React with 🎉 to participate!",
-            winMessage:
-              "Congratulations, {winners}! You won 🎉 **{prize}**! 🎉",
-            embedFooter: "Giveaways",
-            noWinner: "Giveaway cancelled, no valid participations.",
-            hostedBy: "Hosted by: {user}",
-            winners: "winner(s)",
-            endedAt: "Ended at",
-            units: {
-              seconds: "seconds",
-              minutes: "minutes",
-              hours: "hours",
-              days: "days",
-              pluralS: false,
-            },
-          },
+          prize: giveawayPrize,
+          host: message.author,
         });
 
         message.reply(`Giveaway started in ${giveawayChannel}!`);
@@ -163,94 +145,27 @@ module.exports = {
         return message.channel.send("I have stopped the command.");
       }
     } else if (args[0].toLowerCase() === "end") {
-      const giveawayGuild = client.giveawaysManager.giveaways.filter(
-        (g) => g.guildID === message.guild.id
-      );
-
       if (!args[1]) {
-        return message.reply(
-          `**${
-            message.author.username
-          }**, The right syntax is \`${client.prefixes.get(
-            message.guild.id
-          )}giveaway end <message ID | prize>\`.`
-        );
+        return message.channel.send("Please provide a channel name.");
       }
+      const channel = await getChannelFromArguments(message, args[1]);
 
-      const giveaway =
-        giveawayGuild.find((g) => g.prize === args.slice(1).join(" ")) ||
-        giveawayGuild.find((g) => g.messageID === args[1]);
-
-      if (!giveaway) {
-        return message.reply(
-          `Unable to find a giveaway for \`${args.slice(1).join(" ")}\`.`
-        );
+      if (args[2]) {
+        new Giveaway(client).stop(channel, args[2]);
+      } else {
+        new Giveaway(client).stop(channel);
       }
-
-      client.giveawaysManager
-        .edit(giveaway.messageID, {
-          setEndTimestamp: Date.now(),
-        })
-        .then(() => {
-          message.reply(
-            `Giveaway will end in less than ${
-              client.giveawaysManager.options.updateCountdownEvery / 1000
-            } seconds...`
-          );
-        })
-        .catch((e) => {
-          if (
-            e.startsWith(
-              `Giveaway with message ID ${giveaway.messageID} is already ended.`
-            )
-          ) {
-            message.reply("This giveaway is already ended!");
-          } else {
-            console.error(e);
-
-            message.reply("An error occured...");
-          }
-        });
     } else if (args[0].toLowerCase() === "reroll") {
-      let giveaway;
-      const giveawayGuild = client.giveawaysManager.giveaways.filter(
-        (g) => g.guildID === message.guild.id
-      );
-
       if (!args[1]) {
-        giveaway = giveawayGuild[giveawayGuild.length - 1];
+        return message.channel.send("Please provide a channel name.");
       }
+      const channel = await getChannelFromArguments(message, args[1]);
 
-      if (args[1]) {
-        giveaway =
-          giveawayGuild.find((g) => g.prize === args.slice(1).join(" ")) ||
-          giveawayGuild.find((g) => g.messageID === args[1]);
+      if (args[2]) {
+        new Giveaway(client).reroll(channel, args[2]);
+      } else {
+        new Giveaway(client).reroll(channel);
       }
-
-      if (!giveaway) {
-        return message.reply(
-          "Unable to find a giveaway for `" + args.slice(1).join(" ") + "`."
-        );
-      }
-
-      client.giveawaysManager
-        .reroll(giveaway.messageID)
-        .then(() => {
-          message.reply("Giveaway rerolled!");
-        })
-        .catch((e) => {
-          if (
-            e.startsWith(
-              `Giveaway with message ID ${giveaway.messageID} is not ended.`
-            )
-          ) {
-            message.reply("This giveaway is not ended!");
-          } else {
-            console.error(e);
-
-            message.reply("An error occured...");
-          }
-        });
     }
   },
   interaction: {
@@ -299,10 +214,15 @@ module.exports = {
           type: 1,
           options: [
             {
-              name: "message_id",
-              description: "message_id of the giveaway",
-              type: 3,
+              name: "channel",
+              description: "channel of the giveaway",
+              type: 7,
               required: true,
+            },
+            {
+              name: "message_id",
+              description: "message id of the giveaway",
+              type: 3,
             },
           ],
         },
@@ -312,8 +232,14 @@ module.exports = {
           type: 1,
           options: [
             {
+              name: "channel",
+              description: "channel of the giveaway",
+              type: 7,
+              required: true,
+            },
+            {
               name: "message_id",
-              description: "message_id of the giveaway",
+              description: "message id of the giveaway",
               type: 3,
             },
           ],
@@ -332,112 +258,43 @@ module.exports = {
           return interaction.reply("`duration` - Invalid Input");
         }
 
-        client.giveawaysManager.start(channel, {
-          time: ms(duration),
-          prize,
+        new Giveaway(client).start({
+          channel: channel,
+          duration: ms(duration),
           winnerCount: winners,
-          hostedBy: interaction.user,
-          messages: {
-            giveaway: "🎉 **GIVEAWAY** 🎉",
-            giveawayEnded: "🎉 **GIVEAWAY ENDED** 🎉",
-            timeRemaining: "Time remaining: **{duration}**!",
-            inviteToParticipate: "React with 🎉 to participate!",
-            winMessage:
-              "Congratulations, {winners}! You won 🎉 **{prize}**! 🎉",
-            embedFooter: "Giveaways",
-            noWinner: "Giveaway cancelled, no valid participations.",
-            hostedBy: "Hosted by: {user}",
-            winners: "winner(s)",
-            endedAt: "Ended at",
-            units: {
-              seconds: "seconds",
-              minutes: "minutes",
-              hours: "hours",
-              days: "days",
-              pluralS: false,
-            },
-          },
+          prize: prize,
+          host: interaction.user,
         });
 
         interaction.reply(`Giveaway started in ${channel}!`);
       } else if (subcommand === "end") {
         const messageId = interaction.options.getString("message_id");
-
-        const giveawayGuild = client.giveawaysManager.giveaways.filter(
-          (g) => g.guildID === interaction.guild.id
-        );
-
-        const giveaway = giveawayGuild.find((g) => g.messageID === messageId);
-
-        if (!giveaway) {
-          return interaction.reply(
-            `Unable to find a giveaway for \`${messageId}\`.`
-          );
-        }
-
-        client.giveawaysManager
-          .edit(giveaway.messageID, {
-            setEndTimestamp: Date.now(),
-          })
-          .then(() => {
-            interaction.reply(
-              `Giveaway will end in less than ${
-                client.giveawaysManager.options.updateCountdownEvery / 1000
-              } seconds...`
-            );
-          })
-          .catch((e) => {
-            if (
-              e.startsWith(
-                `Giveaway with message ID ${giveaway.messageID} is already ended.`
-              )
-            ) {
-              interaction.reply("This giveaway is already ended!");
-            } else {
-              console.error(e);
-
-              interaction.reply("An error occured...");
-            }
-          });
-      } else {
-        const messageId = interaction.options.getString("message_id");
-        let giveaway;
-        const giveawayGuild = client.giveawaysManager.giveaways.filter(
-          (g) => g.guildID === interaction.guild.id
-        );
-
-        if (!messageId) {
-          giveaway = giveawayGuild[giveawayGuild.length - 1];
-        }
+        const channel = interaction.options.getChannel("channel");
 
         if (messageId) {
-          giveaway = giveawayGuild.find((g) => g.messageID === messageId);
+          new Giveaway(client).stop(channel, messageId);
+        } else {
+          new Giveaway(client).stop(channel);
         }
 
-        if (!giveaway) {
-          return interaction.reply(
-            "Unable to find a giveaway for `" + messageId + "`."
-          );
+        interaction.reply({
+          content: `Giveaway stopped in ${channel}!`,
+          ephemeral: true,
+        });
+      } else {
+        const messageId = interaction.options.getString("message_id");
+        const channel = interaction.options.getChannel("channel");
+
+        if (messageId) {
+          new Giveaway(client).reroll(channel, messageId);
+        } else {
+          new Giveaway(client).reroll(channel);
         }
 
-        client.giveawaysManager
-          .reroll(giveaway.messageID)
-          .then(() => {
-            interaction.reply("Giveaway rerolled!");
-          })
-          .catch((e) => {
-            if (
-              e.startsWith(
-                `Giveaway with message ID ${giveaway.messageID} is not ended.`
-              )
-            ) {
-              interaction.reply("This giveaway is not ended!");
-            } else {
-              console.error(e);
-
-              interaction.reply("An error occured...");
-            }
-          });
+        interaction.reply({
+          content: `Giveaway rerolled in ${channel}!`,
+          ephemeral: true,
+        });
       }
     },
   },

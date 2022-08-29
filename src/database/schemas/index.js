@@ -6,6 +6,7 @@ const coins = require("./coins");
 const timer = require("./timer");
 const character = require("./character");
 const logging = require("./logging");
+const Giveaway = require("./giveaway");
 
 module.exports = {
 	guild,
@@ -16,4 +17,5 @@ module.exports = {
 	timer,
 	character,
 	logging,
+	Giveaway
 };
