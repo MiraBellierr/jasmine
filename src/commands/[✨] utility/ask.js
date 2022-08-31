@@ -11,13 +11,15 @@ module.exports = {
     if (!args.length) return error.argsError(module.exports, client, message);
 
     const question = args.join(" ");
-    const url = `https://www.google.com/search?q=${encodeURIComponent(
+    const url = `https://www.google.com/search?hl=en&q=${encodeURIComponent(
       question
     )}`;
     message.channel.send("let me think... <:LumineThink:1014510903665889331>");
     const results = [];
     puppeteer
-      .launch()
+      .launch({
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      })
       .then(function (browser) {
         return browser.newPage();
       })
@@ -103,7 +105,9 @@ module.exports = {
       interaction.reply("let me think... <:LumineThink:1014510903665889331>");
       const results = [];
       puppeteer
-        .launch()
+        .launch({
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        })
         .then(function (browser) {
           return browser.newPage();
         })
