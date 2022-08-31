@@ -20,7 +20,6 @@ module.exports = {
     const results = [];
 
     const browser = await puppeteer.launch({
-      headless: false,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
@@ -101,7 +100,6 @@ module.exports = {
       const results = [];
 
       const browser = await puppeteer.launch({
-        headless: false,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
 

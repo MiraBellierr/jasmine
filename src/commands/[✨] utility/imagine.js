@@ -17,7 +17,7 @@ module.exports = {
     message.reply("I will draw it now, might take a while...");
 
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
