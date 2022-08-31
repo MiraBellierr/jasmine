@@ -99,7 +99,7 @@ module.exports = {
     },
     run: async (client, interaction) => {
       const question = interaction.options.getString("question");
-      const url = `https://www.google.com/search?q=${encodeURIComponent(
+      const url = `https://www.google.com/search?hl=en&q=${encodeURIComponent(
         question
       )}`;
       interaction.reply("let me think... <:LumineThink:1014510903665889331>");
