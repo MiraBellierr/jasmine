@@ -1,8 +1,7 @@
 const puppeteer = require("puppeteer");
 const ch = require("cheerio");
 const fs = require("fs");
-const url = "https://imageupscaler.com/ai-image-generator/";
-const { setTimeout } = require("timers/promises");
+const url = "https://www.craiyon.com/";
 const error = require("../../utils/errors");
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
 
     const input = args.join(" ");
 
-    message.reply("I will draw it now, might take a while...");
+    const m = await message.reply("I will draw it now, might take a while...");
 
     const browser = await puppeteer.launch({
       headless: true,
@@ -23,17 +22,32 @@ module.exports = {
 
     const page = await browser.newPage();
     await page.goto(url);
-    await page.type(".autogrow", input);
-    await page.select(".js-image-type", "Photo");
-    await setTimeout(2000);
-    await page.click("button.btn");
-    await page.waitForSelector(".block-after > img");
+    await page.type("#prompt", input);
+    await page.click("button.my-2:nth-child(2)");
+
+    const updateMessage = setInterval(async function () {
+      const earlyHtml = await page.content();
+      const $$ = ch.load(earlyHtml);
+      const count = $$(".text-right", earlyHtml).text();
+      m.edit(`I will draw it now, might take a while... (${count}s)`);
+    }, 5000);
+    await page
+      .waitForSelector("div.aspect-w-1:nth-child(1) > img", { timeout: 120000 })
+      .catch((e) => {
+        console.log(e);
+        message.reply("Couldn't draw it, sowwy.");
+        browser.close();
+      });
+
+    clearInterval(updateMessage);
+
+    m.edit("I will draw it now, might take a while... (done)");
 
     const html = await page.content();
 
     const $ = ch.load(html);
 
-    const pic = $(".block-after > img").attr("src");
+    const pic = $("div.aspect-w-1:nth-child(1) > img").attr("src");
 
     const src = await page.goto(pic);
 
