@@ -65,6 +65,19 @@ module.exports = {
     }
 
     if (results.length < 1 || results[0].length < 1) {
+      let text = $(
+        "div.MjjYud:nth-child(2) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div"
+      ).text();
+      if (text.trim().endsWith("...")) {
+        const splitted = text.replace("...", "").split(".");
+        splitted.pop();
+        text = splitted.join(".");
+      }
+
+      results.push(text);
+    }
+
+    if (results.length < 1 || results[0].length < 1) {
       message.channel.send(
         "I'm sorry, I don't know how to answer that question <a:CatCry:1014518651900133386>"
       );
@@ -143,6 +156,19 @@ module.exports = {
           "div.webanswers-webanswers_table__webanswers-table:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > b:nth-child(1)",
           html
         ).text();
+        results.push(text);
+      }
+
+      if (results.length < 1 || results[0].length < 1) {
+        let text = $(
+          "div.MjjYud:nth-child(2) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div"
+        ).text();
+        if (text.trim().endsWith("...")) {
+          const splitted = text.replace("...", "").split(".");
+          splitted.pop();
+          text = splitted.join(".");
+        }
+
         results.push(text);
       }
 
