@@ -17,7 +17,7 @@ module.exports = {
 
     message.channel.send("let me think... <:LumineThink:1014510903665889331>");
 
-    const results = [];
+    let results = [];
 
     const browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -66,7 +66,8 @@ module.exports = {
 
     if (results.length < 1 || results[0].length < 1) {
       let text = $(
-        "div.MjjYud:nth-child(2) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div"
+        "div.MjjYud:nth-child(2) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div",
+        html
       ).text();
       if (text.trim().endsWith("...")) {
         const splitted = text.replace("...", "").split(".");
@@ -76,6 +77,14 @@ module.exports = {
 
       results.push(text);
     }
+
+    if (results.length < 1 || results[0].length < 1) {
+      const text = $(".VAVtdc", html).text().trim();
+
+      results.push(text);
+    }
+
+    results = results.filter((result) => result !== "");
 
     if (results.length < 1 || results[0].length < 1) {
       message.channel.send(
@@ -110,7 +119,7 @@ module.exports = {
         question
       )}`;
       interaction.reply("let me think... <:LumineThink:1014510903665889331>");
-      const results = [];
+      let results = [];
 
       const browser = await puppeteer.launch({
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -161,7 +170,8 @@ module.exports = {
 
       if (results.length < 1 || results[0].length < 1) {
         let text = $(
-          "div.MjjYud:nth-child(2) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div"
+          "div.MjjYud:nth-child(2) > div:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div",
+          html
         ).text();
         if (text.trim().endsWith("...")) {
           const splitted = text.replace("...", "").split(".");
@@ -171,6 +181,14 @@ module.exports = {
 
         results.push(text);
       }
+
+      if (results.length < 1 || results[0].length < 1) {
+        const text = $(".VAVtdc", html).text().trim();
+
+        results.push(text);
+      }
+
+      results = results.filter((result) => result !== "");
 
       if (results.length < 1 || results[0].length < 1) {
         interaction.followUp(
