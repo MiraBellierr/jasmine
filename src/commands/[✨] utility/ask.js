@@ -34,8 +34,6 @@ module.exports = {
 
       if (/^\d+\W\W/.test(answer)) {
         answer = answer.replace(/^\d+\W\W/, "");
-      } else if (/^\W\d+\W/.test(answer)) {
-        answer = answer.replace(/^\W\d+\W/, "");
       }
 
       message.channel.send(`So you want to know ${question.toLowerCase()}`);
@@ -87,8 +85,6 @@ module.exports = {
 
         if (/^\d+\W\W/.test(answer)) {
           answer = answer.replace(/^\d+\W\W/, "");
-        } else if (/^\W\d+\W/.test(answer)) {
-          answer = answer.replace(/^\W\d+\W/, "");
         }
 
         interaction.followUp(`So you want to know ${question.toLowerCase()}`);
