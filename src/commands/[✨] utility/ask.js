@@ -36,7 +36,9 @@ module.exports = {
       const $ = cheerio.load(html);
 
       const question = $("[id^=exacc_] > span").first().text();
-      let answer = $("[id*=__] > div > div > span.ILfuVd > span").text();
+      let answer = $("[id*=__] > div > div > span.ILfuVd > span")
+        .first()
+        .text();
 
       message.channel.send(`So you want to know ${question.toLowerCase()}`);
       await setTimeout(3000);
@@ -67,8 +69,9 @@ module.exports = {
       const query = interaction.options.getString("question");
 
       interaction.reply("let me think... <:LumineThink:1014510903665889331>");
-      const browser = await puppeteer.launch({ headless: false });
-
+      const browser = await puppeteer.launch({
+        headless: false,
+      });
       try {
         const page = await browser.newPage();
         await page.goto(
@@ -82,13 +85,15 @@ module.exports = {
         await page.click("#W0wltc").catch(() => null);
         await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
 
+        await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span");
+
         const html = await page.content();
         const $ = cheerio.load(html);
 
-        await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span");
-
         const question = $("[id^=exacc_] > span").first().text();
-        let answer = $("[id*=__] > div > div > span.ILfuVd > span").text();
+        let answer = $("[id*=__] > div > div > span.ILfuVd > span")
+          .first()
+          .text();
 
         interaction.followUp(`So you want to know ${question.toLowerCase()}`);
         await setTimeout(3000);
