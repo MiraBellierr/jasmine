@@ -71,7 +71,6 @@ module.exports = {
           await browser.close();
           console.log(err);
         }
-        console.log("file saved");
       }
     );
 
@@ -153,7 +152,6 @@ module.exports = {
             await browser.close();
             console.log(err);
           }
-          console.log("file saved");
         }
       );
 
