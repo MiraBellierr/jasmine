@@ -38,10 +38,6 @@ module.exports = {
       const question = $("[id^=exacc_] > span").first().text();
       let answer = $("[id*=__] > div > div > span.ILfuVd > span").text();
 
-      if (/^\d+\W\W/.test(answer)) {
-        answer = answer.replace(/^\d+\W\W/, "");
-      }
-
       message.channel.send(`So you want to know ${question.toLowerCase()}`);
       await setTimeout(3000);
       message.channel.send(`${answer} <:foxnote:1014517679576592505>`);
@@ -93,10 +89,6 @@ module.exports = {
 
         const question = $("[id^=exacc_] > span").first().text();
         let answer = $("[id*=__] > div > div > span.ILfuVd > span").text();
-
-        if (/^\d+\W\W/.test(answer)) {
-          answer = answer.replace(/^\d+\W\W/, "");
-        }
 
         interaction.followUp(`So you want to know ${question.toLowerCase()}`);
         await setTimeout(3000);
