@@ -24,13 +24,16 @@ module.exports = {
       );
 
       await page.waitForSelector(
-        "[id*=__] > div > div > div.wWOJcd > div.r21Kzd"
+        "[id*=__] > div > div > div.wWOJcd > div.r21Kzd",
+        { timeout: 10000 }
       );
 
       await page.click("#W0wltc").catch(() => null);
       await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
 
-      await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span");
+      await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span", {
+        timeout: 10000,
+      });
 
       const html = await page.content();
       const $ = cheerio.load(html);
@@ -79,13 +82,17 @@ module.exports = {
         );
 
         await page.waitForSelector(
-          "[id*=__] > div > div > div.wWOJcd > div.r21Kzd"
+          "[id*=__] > div > div > div.wWOJcd > div.r21Kzd",
+          { timeout: 10000 }
         );
 
         await page.click("#W0wltc").catch(() => null);
         await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
 
-        await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span");
+        await page.waitForSelector(
+          "[id*=__] > div > div > span.ILfuVd > span",
+          { timeout: 10000 }
+        );
 
         const html = await page.content();
         const $ = cheerio.load(html);
