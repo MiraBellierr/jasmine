@@ -15,16 +15,22 @@ module.exports = {
     message.channel.send("let me think... <:LumineThink:1014510903665889331>");
 
     const browser = await puppeteer.launch({
-      args: ["--no-sandbox"],
+      headless: false,
     });
-
     try {
       const page = await browser.newPage();
       await page.goto(
         `https://www.google.com/search?hl=en&q=${encodeURIComponent(query)}`
       );
 
+      await page.waitForSelector(
+        "[id*=__] > div > div > div.wWOJcd > div.r21Kzd"
+      );
+
+      await page.click("#W0wltc").catch(() => null);
       await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
+
+      await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span");
 
       const html = await page.content();
       const $ = cheerio.load(html);
@@ -65,9 +71,7 @@ module.exports = {
       const query = interaction.options.getString("question");
 
       interaction.reply("let me think... <:LumineThink:1014510903665889331>");
-      const browser = await puppeteer.launch({
-        args: ["--no-sandbox"],
-      });
+      const browser = await puppeteer.launch({ headless: false });
 
       try {
         const page = await browser.newPage();
@@ -75,10 +79,17 @@ module.exports = {
           `https://www.google.com/search?hl=en&q=${encodeURIComponent(query)}`
         );
 
+        await page.waitForSelector(
+          "[id*=__] > div > div > div.wWOJcd > div.r21Kzd"
+        );
+
+        await page.click("#W0wltc").catch(() => null);
         await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
 
         const html = await page.content();
         const $ = cheerio.load(html);
+
+        await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span");
 
         const question = $("[id^=exacc_] > span").first().text();
         let answer = $("[id*=__] > div > div > span.ILfuVd > span").text();
