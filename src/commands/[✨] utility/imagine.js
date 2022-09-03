@@ -2,6 +2,9 @@ const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const errors = require("../../utils/errors");
 const fs = require("fs");
+const { createCanvas, loadImage } = require("canvas");
+const canvas = createCanvas(900, 900);
+const ctx = canvas.getContext("2d");
 
 module.exports = {
   name: "imagine",
@@ -55,22 +58,68 @@ module.exports = {
     const html = await page.content();
     const $ = cheerio.load(html);
 
-    const img = $(
-      "#app > div > div > div.aspect-w-1.aspect-h-1 > div > div > div > div.grid.grid-cols-3.gap-2 > div:nth-child(1) > img"
-    ).attr("src");
+    const images = [];
 
-    const src = await page.goto(img);
+    images.push(
+      $("div.aspect-w-1:nth-child(1) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.grid:nth-child(1) > div:nth-child(2) > img:nth-child(1)").attr(
+        "src"
+      )
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(3) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(4) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(5) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(6) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(7) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(8) > img:nth-child(1)").attr("src")
+    );
+    images.push(
+      $("div.aspect-w-1:nth-child(9) > img:nth-child(1)").attr("src")
+    );
+
+    let x = 0;
+    let y = 0;
+
+    for (const img of images) {
+      const page = await browser.newPage();
+      const src = await page.goto(img);
+
+      await loadImage(await src.buffer()).then((image) => {
+        ctx.drawImage(image, x, y, 300, 300);
+      });
+
+      x += 300;
+
+      if (x > 600) {
+        x = 0;
+        y += 300;
+      }
+    }
+
     const random = Math.floor(Math.random() * 100000000000);
 
     fs.writeFile(
       `./src/images/${random}.jpeg`,
-      await src.buffer(),
+      canvas.toBuffer(),
       null,
-      async (err) => {
+      (err) => {
         if (err) {
-          await browser.close();
           console.log(err);
         }
+        console.log(`done - ${random}.jpeg`);
       }
     );
 
@@ -136,26 +185,74 @@ module.exports = {
       const html = await page.content();
       const $ = cheerio.load(html);
 
-      const img = $(
-        "#app > div > div > div.aspect-w-1.aspect-h-1 > div > div > div > div.grid.grid-cols-3.gap-2 > div:nth-child(1) > img"
-      ).attr("src");
+      const images = [];
 
-      const src = await page.goto(img);
+      images.push(
+        $("div.aspect-w-1:nth-child(1) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.grid:nth-child(1) > div:nth-child(2) > img:nth-child(1)").attr(
+          "src"
+        )
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(3) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(4) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(5) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(6) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(7) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(8) > img:nth-child(1)").attr("src")
+      );
+      images.push(
+        $("div.aspect-w-1:nth-child(9) > img:nth-child(1)").attr("src")
+      );
+
+      let x = 0;
+      let y = 0;
+
+      for (const img of images) {
+        const page = await browser.newPage();
+        const src = await page.goto(img);
+
+        await loadImage(await src.buffer()).then((image) => {
+          ctx.drawImage(image, x, y, 300, 300);
+        });
+
+        x += 300;
+
+        if (x > 600) {
+          x = 0;
+          y += 300;
+        }
+      }
+
       const random = Math.floor(Math.random() * 100000000000);
 
       fs.writeFile(
         `./src/images/${random}.jpeg`,
-        await src.buffer(),
+        canvas.toBuffer(),
         null,
-        async (err) => {
+        (err) => {
           if (err) {
-            await browser.close();
             console.log(err);
           }
+          console.log(`done - ${random}.jpeg`);
         }
       );
 
       interaction.followUp({ files: [`./src/images/${random}.jpeg`] });
+
+      await browser.close();
     },
   },
 };
