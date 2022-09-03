@@ -35,6 +35,8 @@ module.exports = {
     const text = $("#editable-content-within-article").first().text();
 
     m.edit(text);
+
+    await browser.close();
   },
   interaction: {
     data: {
@@ -74,6 +76,8 @@ module.exports = {
       const text = $("#editable-content-within-article").first().text();
 
       interaction.editReply(text);
+
+      await browser.close();
     },
   },
 };
