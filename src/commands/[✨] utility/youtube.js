@@ -53,7 +53,9 @@ module.exports = {
 
       yts(interaction.options.getString("title"), async (err, res) => {
         if (err) {
-          return interaction.editReply("I couldn't find a video with that name");
+          return interaction.editReply(
+            "I couldn't find a video with that name"
+          );
         }
 
         const pages = [];
