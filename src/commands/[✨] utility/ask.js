@@ -17,6 +17,7 @@ module.exports = {
     const browser = await puppeteer.launch({
       headless: false,
     });
+
     try {
       const page = await browser.newPage();
       await page.goto(
@@ -43,9 +44,11 @@ module.exports = {
         .first()
         .text();
 
-      message.channel.send(`So you want to know ${question.toLowerCase()}`);
+      const m = await message.reply(
+        `So you want to know ${question.toLowerCase()}`
+      );
       await setTimeout(3000);
-      message.channel.send(`${answer} <:foxnote:1014517679576592505>`);
+      m.reply(`${answer} <:foxnote:1014517679576592505>`);
 
       await browser.close();
     } catch (e) {
