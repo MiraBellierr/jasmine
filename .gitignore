@@ -4,3 +4,4 @@ database.sqlite
 src/database/json/giveaways.json
 .vscode
 src/images/*
+test.js
