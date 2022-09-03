@@ -52,7 +52,7 @@ module.exports = {
     clearInterval(interval);
 
     m.edit(
-      "Let me draw it for you... might take a while (done) <:foxnote:1014517679576592505>"
+      "Let me draw it for you... might take a while (almost...) <:foxnote:1014517679576592505>"
     );
 
     const html = await page.content();
@@ -123,7 +123,13 @@ module.exports = {
       }
     );
 
+    m.edit(
+      "Let me draw it for you... might take a while (done) <:foxnote:1014517679576592505>"
+    );
+
     message.reply({ files: [`./src/images/${random}.jpeg`] });
+
+    await browser.close();
   },
   interaction: {
     data: {
@@ -179,7 +185,7 @@ module.exports = {
       clearInterval(interval);
 
       interaction.editReply(
-        "Let me draw it for you... might take a while (done) <:foxnote:1014517679576592505>"
+        "Let me draw it for you... might take a while (almost...) <:foxnote:1014517679576592505>"
       );
 
       const html = await page.content();
@@ -248,6 +254,10 @@ module.exports = {
           }
           console.log(`done - ${random}.jpeg`);
         }
+      );
+
+      interaction.editReply(
+        "Let me draw it for you... might take a while (done) <:foxnote:1014517679576592505>"
       );
 
       interaction.followUp({ files: [`./src/images/${random}.jpeg`] });
