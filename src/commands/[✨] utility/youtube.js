@@ -16,7 +16,7 @@ module.exports = {
 
     yts(args.join(" "), async (err, res) => {
       if (err) {
-        return message.reply("I didn't found a video with that name");
+        return message.reply("I couldn't find a video with that name");
       }
 
       const pages = [];
@@ -53,7 +53,7 @@ module.exports = {
 
       yts(interaction.options.getString("title"), async (err, res) => {
         if (err) {
-          return interaction.editReply("I didn't found a video with that name");
+          return interaction.editReply("I couldn't find a video with that name");
         }
 
         const pages = [];
