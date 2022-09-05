@@ -28,7 +28,7 @@
     "puppeteer": "^17.0.0",
     "sequelize": "^6.21.4",
     "serialize-javascript": "^6.0.0",
-    "sharp": "^0.30.7",
+    "sharp": "^0.31.0",
     "signale": "^1.4.0",
     "sqlite3": "^5.0.11",
     "systeminformation": "^5.12.6",
