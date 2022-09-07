@@ -54,8 +54,23 @@ module.exports = {
       });
 
       $("[id*=__]").each(function () {
-        if ($(this).find("div > div > span.ILfuVd > span").text()) {
-          answers.push($(this).find("div > div > span.ILfuVd > span").text());
+        if ($(this).find("div > div > div.iKJnec").text()) {
+          answers.push($(this).find("div > div > div.iKJnec").first().text());
+        } else if (
+          $(this)
+            .find(
+              "div > div > div.webanswers-webanswers_table__webanswers-table > table > tbody > tr:nth-child(2) > td"
+            )
+            .text()
+        ) {
+          answers.push(
+            $(this)
+              .find(
+                "div > div > div.webanswers-webanswers_table__webanswers-table > table > tbody > tr:nth-child(2) > td"
+              )
+              .first()
+              .text()
+          );
         } else if ($(this).find(".co8aDb").text()) {
           const header = `${$(this).find(".co8aDb").text()}`;
           let lists = [];
@@ -71,6 +86,8 @@ module.exports = {
           answers.push(
             `${header}\n${lists.map((list) => `• ${list}`).join("\n")}`
           );
+        } else if ($(this).find("div > div > span.ILfuVd > span").text()) {
+          answers.push($(this).find("div > div > span.ILfuVd > span").text());
         }
       });
 
@@ -78,9 +95,11 @@ module.exports = {
       const text = [];
 
       for (let i = 0; i < questions.length; i++) {
-        text.push(
-          `So you want to know ${questions[i].toLowerCase()}\n\n${answers[i]}`
-        );
+        if (answers[i] && answers[i].length > 35) {
+          text.push(
+            `So you want to know ${questions[i].toLowerCase()}\n\n${answers[i]}`
+          );
+        }
       }
 
       new Paginate(client, message, text).init();
@@ -151,8 +170,23 @@ module.exports = {
         });
 
         $("[id*=__]").each(function () {
-          if ($(this).find("div > div > span.ILfuVd > span").text()) {
-            answers.push($(this).find("div > div > span.ILfuVd > span").text());
+          if ($(this).find("div > div > div.iKJnec").text()) {
+            answers.push($(this).find("div > div > div.iKJnec").first().text());
+          } else if (
+            $(this)
+              .find(
+                "div > div > div.webanswers-webanswers_table__webanswers-table > table > tbody > tr:nth-child(2) > td"
+              )
+              .text()
+          ) {
+            answers.push(
+              $(this)
+                .find(
+                  "div > div > div.webanswers-webanswers_table__webanswers-table > table > tbody > tr:nth-child(2) > td"
+                )
+                .first()
+                .text()
+            );
           } else if ($(this).find(".co8aDb").text()) {
             const header = `${$(this).find(".co8aDb").text()}`;
             let lists = [];
@@ -168,6 +202,8 @@ module.exports = {
             answers.push(
               `${header}\n${lists.map((list) => `• ${list}`).join("\n")}`
             );
+          } else if ($(this).find("div > div > span.ILfuVd > span").text()) {
+            answers.push($(this).find("div > div > span.ILfuVd > span").text());
           }
         });
 
@@ -175,9 +211,13 @@ module.exports = {
         const text = [];
 
         for (let i = 0; i < questions.length; i++) {
-          text.push(
-            `So you want to know ${questions[i].toLowerCase()}\n\n${answers[i]}`
-          );
+          if (answers[i] && answers[i].length > 35) {
+            text.push(
+              `So you want to know ${questions[i].toLowerCase()}\n\n${
+                answers[i]
+              }`
+            );
+          }
         }
 
         new Paginate(client, interaction, text).init();
