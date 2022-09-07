@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const error = require("../../utils/errors");
-const { setTimeout } = require("timers/promises");
+const { Paginate } = require("../../utils/pagination");
 
 module.exports = {
   name: "ask",
@@ -30,7 +30,15 @@ module.exports = {
       );
 
       await page.click("#W0wltc").catch(() => null);
-      await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
+      await page.evaluate(() => {
+        Array.from(
+          document.querySelectorAll(
+            "[id*=__] > div > div > div.wWOJcd > div.r21Kzd"
+          )
+        ).forEach((elem) => {
+          elem.click();
+        });
+      });
 
       await page.waitForSelector("[id*=__] > div > div > span.ILfuVd > span", {
         timeout: 10000,
@@ -38,17 +46,44 @@ module.exports = {
 
       const html = await page.content();
       const $ = cheerio.load(html);
+      let answers = [];
+      const questions = [];
 
-      const question = $("[id^=exacc_] > span").first().text();
-      let answer = $("[id*=__] > div > div > span.ILfuVd > span")
-        .first()
-        .text();
+      $("[id^=exacc_] > span").each(function () {
+        questions.push($(this).text());
+      });
 
-      const m = await message.reply(
-        `So you want to know ${question.toLowerCase()}`
-      );
-      await setTimeout(3000);
-      m.reply(`${answer} <:foxnote:1014517679576592505>`);
+      $("[id*=__]").each(function () {
+        if ($(this).find("div > div > span.ILfuVd > span").text()) {
+          answers.push($(this).find("div > div > span.ILfuVd > span").text());
+        } else if ($(this).find(".co8aDb").text()) {
+          const header = `${$(this).find(".co8aDb").text()}`;
+          let lists = [];
+
+          $(this)
+            .find("li.TrT0Xe")
+            .each(function () {
+              lists.push($(this).text());
+            });
+
+          lists = [...new Set(lists)];
+
+          answers.push(
+            `${header}\n${lists.map((list) => `• ${list}`).join("\n")}`
+          );
+        }
+      });
+
+      answers = [...new Set(answers)];
+      const text = [];
+
+      for (let i = 0; i < questions.length; i++) {
+        text.push(
+          `So you want to know ${questions[i].toLowerCase()}\n\n${answers[i]}`
+        );
+      }
+
+      new Paginate(client, message, text).init();
 
       await browser.close();
     } catch (e) {
@@ -90,7 +125,15 @@ module.exports = {
         );
 
         await page.click("#W0wltc").catch(() => null);
-        await page.click("[id*=__] > div > div > div.wWOJcd > div.r21Kzd");
+        await page.evaluate(() => {
+          Array.from(
+            document.querySelectorAll(
+              "[id*=__] > div > div > div.wWOJcd > div.r21Kzd"
+            )
+          ).forEach((elem) => {
+            elem.click();
+          });
+        });
 
         await page.waitForSelector(
           "[id*=__] > div > div > span.ILfuVd > span",
@@ -100,14 +143,44 @@ module.exports = {
         const html = await page.content();
         const $ = cheerio.load(html);
 
-        const question = $("[id^=exacc_] > span").first().text();
-        let answer = $("[id*=__] > div > div > span.ILfuVd > span")
-          .first()
-          .text();
+        let answers = [];
+        const questions = [];
 
-        interaction.followUp(`So you want to know ${question.toLowerCase()}`);
-        await setTimeout(3000);
-        interaction.followUp(`${answer} <:foxnote:1014517679576592505>`);
+        $("[id^=exacc_] > span").each(function () {
+          questions.push($(this).text());
+        });
+
+        $("[id*=__]").each(function () {
+          if ($(this).find("div > div > span.ILfuVd > span").text()) {
+            answers.push($(this).find("div > div > span.ILfuVd > span").text());
+          } else if ($(this).find(".co8aDb").text()) {
+            const header = `${$(this).find(".co8aDb").text()}`;
+            let lists = [];
+
+            $(this)
+              .find("li.TrT0Xe")
+              .each(function () {
+                lists.push($(this).text());
+              });
+
+            lists = [...new Set(lists)];
+
+            answers.push(
+              `${header}\n${lists.map((list) => `• ${list}`).join("\n")}`
+            );
+          }
+        });
+
+        answers = [...new Set(answers)];
+        const text = [];
+
+        for (let i = 0; i < questions.length; i++) {
+          text.push(
+            `So you want to know ${questions[i].toLowerCase()}\n\n${answers[i]}`
+          );
+        }
+
+        new Paginate(client, interaction, text).init();
 
         await browser.close();
       } catch (e) {
