@@ -96,7 +96,7 @@ function Paginate(
     if (this.pages.length < 2) {
       let msg;
       if (typeof this.pages[0] === "object") {
-        if (this.message.deferred) {
+        if (this.message.deferred || this.message.replied) {
           msg = await this.message.editReply({
             content: "ㅤ",
             embeds: [this.pages[0]],
@@ -108,7 +108,7 @@ function Paginate(
           });
         }
       } else {
-        if (this.message.deferred) {
+        if (this.message.deferred || this.message.replied) {
           msg = await this.message.editReply({
             content: `${[this.pages[0]]}`,
             embeds: [],
@@ -184,7 +184,7 @@ function Paginate(
 
       if (page === 1) {
         if (typeof this.pages[page - 1] === "object") {
-          if (this.message.deferred) {
+          if (this.message.deferred || this.message.replied) {
             msg = await this.message.editReply({
               content: "ㅤ",
               embeds: [this.pages[page - 1]],
@@ -198,7 +198,7 @@ function Paginate(
             });
           }
         } else {
-          if (this.message.deferred) {
+          if (this.message.deferred || this.message.replied) {
             msg = await this.message.editReply({
               content: `${[this.pages[page - 1]]}`,
               embeds: [],
@@ -214,7 +214,7 @@ function Paginate(
         }
       } else {
         if (typeof this.pages[page - 1] === "object") {
-          if (this.message.deferred) {
+          if (this.message.deferred || this.message.replied) {
             msg = await this.message.editReply({
               content: "ㅤ",
               embeds: [this.pages[page - 1]],
@@ -228,7 +228,7 @@ function Paginate(
             });
           }
         } else {
-          if (this.message.deferred) {
+          if (this.message.deferred || this.message.replied) {
             msg = await this.message.editReply({
               content: `${[this.pages[page - 1]]}`,
               embeds: [],
