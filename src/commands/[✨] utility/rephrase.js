@@ -6,6 +6,7 @@ const errors = require("../../utils/errors");
 module.exports = {
   name: "rephrase",
   description: "let the bot rephrase something for you",
+  category: "[✨] utility",
   usage: "<input>",
   run: async (client, message, args) => {
     if (!args.length) return errors.argsError(module.exports, client, message);

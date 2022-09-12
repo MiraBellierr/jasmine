@@ -9,6 +9,7 @@ const ctx = canvas.getContext("2d");
 module.exports = {
   name: "imagine",
   description: "let the bot draw something for you",
+  category: "[✨] utility",
   usage: "<input>",
   run: async (client, message, args) => {
     if (!args.length) return errors.argsError(module.exports, client, message);

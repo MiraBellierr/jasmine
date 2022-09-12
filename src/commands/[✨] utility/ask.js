@@ -6,6 +6,7 @@ const { Paginate } = require("../../utils/pagination");
 module.exports = {
   name: "ask",
   description: "Ask a question to the bot",
+  category: "[✨] utility",
   usage: "<question>",
   run: async (client, message, args) => {
     if (!args.length) return error.argsError(module.exports, client, message);
