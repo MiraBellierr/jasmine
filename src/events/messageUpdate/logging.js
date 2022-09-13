@@ -31,7 +31,9 @@ module.exports = async (client, oldMessage, newMessage) => {
           iconURL: newMessage.author.displayAvatarURL(),
         })
         .setColor("#CD1C6C")
-        .setDescription(`**Member:** ${newMessage.member}`)
+        .setDescription(
+          `**Member:** ${newMessage.member}\n**Channel:** ${newMessage.channel}`
+        )
         .addFields([
           {
             name: "Before",
