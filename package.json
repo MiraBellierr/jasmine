@@ -36,7 +36,7 @@
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
-    "@types/node": "^18.7.18",
+    "@types/node": "^18.7.21",
     "eslint": "^8.24.0",
     "prettier": "2.7.1"
   },
