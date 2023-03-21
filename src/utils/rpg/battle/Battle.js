@@ -463,6 +463,20 @@ class Battle {
       this.actions[this.actions.length - 1]
     }`;
 
+    // TODO: Get assets for every weapons
+    // TODO: Display weapon icons on the embed
+
+    // const playerEquipments = JSON.parse(this.character.equipments);
+    // const opponentEquipments = JSON.parse(this.opponent.equipments);
+
+    // let playerEquipped = [];
+    // let opponentEquipped = [];
+
+    // ["weapon", "shields", "helmet", "armor", "gloves"].forEach((e) => {
+    //   playerEquipped.push(playerEquipments[e].equipped);
+    //   opponentEquipped.push(opponentEquipments[e].equipped);
+    // });
+
     return new Discord.EmbedBuilder()
       .setAuthor({
         name: this.user.username,
@@ -475,52 +489,12 @@ class Battle {
       .addFields([
         {
           name: `${this.character.name}`,
-          value: `**• ${constants.assets.xp.emoji} Level:** ${
-            this.character.level
-          }\n**• ${constants.assets.hp.emoji} HP:** ${this.character.hp}\n**• ${
-            constants.assets.str.emoji
-          } STR:** ${this.character.str}\n**• ${
-            constants.assets.agl.emoji
-          } AGL:** ${Math.floor(this.character.agl)}\n**• ${
-            constants.assets.sta.emoji
-          } STA:** ${this.character.sta}\n**• ${
-            constants.assets.acc.emoji
-          } ACC:** ${this.character.acc}\n**• ${
-            constants.assets.eva.emoji
-          } EVA:** ${this.character.eva}\n**• ${
-            constants.assets.eva.emoji
-          } ATT:** ${Math.floor(this.character.att)}\n**• ${
-            constants.assets.def.emoji
-          } DEF:** ${this.character.def}\n${getProgBar(
-            this.character.hp,
-            this.character.maxHp,
-            20
-          )}`,
+          value: `**• ${constants.assets.xp.emoji} Level:** ${this.character.level}\n**• ${constants.assets.hp.emoji} HP:** ${this.character.hp}`,
           inline: true,
         },
         {
           name: `${this.opponent.name}`,
-          value: `**• ${constants.assets.xp.emoji} Level:** ${
-            this.opponent.level
-          }\n**• ${constants.assets.hp.emoji} HP:** ${this.opponent.hp}\n**• ${
-            constants.assets.str.emoji
-          } STR:** ${this.opponent.str}\n**• ${
-            constants.assets.agl.emoji
-          } AGL:** ${Math.floor(this.opponent.agl)}\n**• ${
-            constants.assets.sta.emoji
-          } STA:** ${this.opponent.sta}\n**• ${
-            constants.assets.acc.emoji
-          } ACC:** ${this.opponent.acc}\n**• ${
-            constants.assets.eva.emoji
-          } EVA:** ${this.opponent.eva}\n**• ${
-            constants.assets.att.emoji
-          } ATT:** ${Math.floor(this.opponent.att)}\n**• ${
-            constants.assets.def.emoji
-          } DEF:** ${this.opponent.def}\n${getProgBar(
-            this.opponent.hp,
-            this.opponent.maxHp,
-            20
-          )}`,
+          value: `**• ${constants.assets.xp.emoji} Level:** ${this.opponent.level}\n**• ${constants.assets.hp.emoji} HP:** ${this.opponent.hp}`,
           inline: true,
         },
       ]);
