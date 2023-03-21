@@ -6,7 +6,7 @@
         "acc": 10,
         "crit": 2
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 5
     },
     "dagger": {
@@ -15,7 +15,7 @@
         "acc": 10,
         "crit": 10
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 175
     },
     "mythrilKnife": {
@@ -24,7 +24,7 @@
         "acc": 15,
         "crit": 16
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 800
     },
     "mageMasher": {
@@ -33,7 +33,7 @@
         "acc": 30,
         "crit": 25
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 69700
     },
     "gladius": {
@@ -43,7 +43,7 @@
         "eva": 10,
         "crit": 26
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 73900
     },
     "rapier": {
@@ -52,7 +52,7 @@
         "acc": 5,
         "crit": 4
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 10
     },
     "saber": {
@@ -61,7 +61,7 @@
         "acc": 5,
         "crit": 12
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 450
     },
     "broadSword": {
@@ -98,7 +98,7 @@
         "eva": 80,
         "crit": 26
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 75900
     },
     "scimitar": {
@@ -107,7 +107,7 @@
         "acc": 10,
         "crit": 8
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 200
     },
     "falchion": {
@@ -116,7 +116,7 @@
         "acc": 10,
         "crit": 15
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 450
     },
     "kotetsu": {
@@ -125,7 +125,7 @@
         "acc": 20,
         "crit": 21
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 55900
     },
     "nunchaku": {
@@ -133,7 +133,7 @@
         "att": 12,
         "crit": 1
       },
-      "classes": ["monk"],
+      "classes": ["ghost"],
       "cost": 10
     },
     "ironNunchaku": {
@@ -141,7 +141,7 @@
         "att": 16,
         "crit": 9
       },
-      "classes": ["monk"],
+      "classes": ["ghost"],
       "cost": 200
     },
     "battleAxe": {
@@ -214,7 +214,7 @@
         "acc": 0,
         "crit": 3
       },
-      "classes": ["warrior", "monk"],
+      "classes": ["warrior", "ghost"],
       "cost": 5
     },
     "crosier": {
@@ -223,7 +223,7 @@
         "acc": 0,
         "crit": 11
       },
-      "classes": ["warrior", "monk"],
+      "classes": ["warrior", "ghost"],
       "cost": 200
     }
   },
@@ -239,7 +239,7 @@
       "attr": {
         "def": 2
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "cost": 2500
     },
     "ironShield": {
@@ -260,7 +260,7 @@
       "attr": {
         "def": 8
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "weight": 2,
       "cost": 20000
     },
@@ -269,7 +269,7 @@
         "def": 4,
         "eva": 9
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "weight": 1,
       "cost": 51000
     },
@@ -277,7 +277,7 @@
       "attr": {
         "def": 9
       },
-      "classes": ["warrior", "thief"],
+      "classes": ["warrior", "fox"],
       "weight": 1,
       "cost": 55800
     }
@@ -287,7 +287,7 @@
       "attr": {
         "def": 1
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 1,
       "cost": 80
     },
@@ -321,7 +321,7 @@
       "attr": {
         "def": 1
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 2,
       "cost": 10
     },
@@ -329,7 +329,7 @@
       "attr": {
         "def": 4
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 8,
       "cost": 50
     },
@@ -361,7 +361,7 @@
       "attr": {
         "def": 4
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 1,
       "cost": 1000
     },
@@ -369,7 +369,7 @@
       "attr": {
         "def": 24
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 1,
       "cost": 5000
     },
@@ -377,7 +377,7 @@
       "attr": {
         "def": 34
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 1,
       "cost": 50000
     },
@@ -385,7 +385,7 @@
       "attr": {
         "def": 20
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 3,
       "cost": 67300
     }
@@ -395,7 +395,7 @@
       "attr": {
         "def": 1
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 1,
       "cost": 60
     },
@@ -427,7 +427,7 @@
       "attr": {
         "def": 8
       },
-      "classes": ["warrior", "thief", "monk"],
+      "classes": ["warrior", "fox", "ghost"],
       "weight": 1,
       "cost": 20000
     }

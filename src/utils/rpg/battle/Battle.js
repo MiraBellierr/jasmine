@@ -203,11 +203,11 @@ class Battle {
         accGain = 3;
         break;
       }
-      case "thief": {
+      case "fox": {
         accGain = 5;
         break;
       }
-      case "monk": {
+      case "ghost": {
         accGain = 3;
         break;
       }

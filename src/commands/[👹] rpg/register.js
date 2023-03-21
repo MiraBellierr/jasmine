@@ -107,7 +107,7 @@ module.exports = {
             },
             {
               name: "Monk",
-              value: "monk",
+              value: "ghost",
             },
           ],
         },
