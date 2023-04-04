@@ -1,7 +1,6 @@
 const schemas = require("../../../database/schemas");
 const Discord = require("discord.js");
 const constants = require("../../constants");
-const { getProgBar } = require("../../utils");
 const set = new Set();
 const { setTimeout } = require("timers/promises");
 const equipments = require("../../../database/json/equipments.json");
