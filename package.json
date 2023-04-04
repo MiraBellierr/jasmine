@@ -31,7 +31,6 @@
     "systeminformation": "^5.17.12",
     "urban-dictionary": "^3.0.2",
     "valid-url": "^1.0.9",
-    "weather-js2": "^2.0.2",
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
