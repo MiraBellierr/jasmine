@@ -1,6 +1,6 @@
 const axios = require("axios");
-const request = require("request").defaults({ encoding: null });
 const Discord = require("discord.js");
+const https = require("https");
 
 // delete element in array
 const deleteElement = (array, element) => {
@@ -100,20 +100,15 @@ const nekoapi = async (endpoint) => {
 };
 
 const checkIfImage = (url) => {
-  return new Promise((resolve) => {
-    request(url, (err, res) => {
-      if (err) {
-        resolve(false);
-      }
-      if (res.statusCode !== 200) {
-        resolve(false);
-      }
-      if (res.headers["content-type"].startsWith("image")) {
-        resolve(true);
-      }
-
-      resolve(false);
-    });
+  return new Promise((resolve, reject) => {
+    https
+      .get(url, (res) => {
+        const contentType = res.headers["content-type"];
+        resolve(contentType.startsWith("image/"));
+      })
+      .on("error", (err) => {
+        reject(err);
+      });
   });
 };
 
