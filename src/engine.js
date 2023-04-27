@@ -20,7 +20,6 @@ const client = new Client({
 client.commands = new Collection();
 client.interactions = new Collection();
 client.aliases = new Collection();
-client.categories = fs.readdirSync("src/commands/");
 client.prefixes = new Collection();
 client.welcomes = new Collection();
 client.leaves = new Collection();
@@ -28,6 +27,8 @@ client.starboards = new Collection();
 client.loggings = new Collection();
 client.timer = new Collection();
 client.characters = new Collection();
+
+client.categories = fs.readdirSync("src/commands/");
 
 Object.values(require("./database/json/characters.json")).forEach(
   (character) => {
