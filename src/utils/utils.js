@@ -84,19 +84,10 @@ const formatTime = (date) => {
 const nekoapi = async (endpoint) => {
   const res = await axios({
     method: "get",
-    url: `https://www.nekos.life/api/v2/img/${endpoint}`,
+    url: `https://nekos.best/api/v2/${endpoint}`,
   });
 
-  if (!res.data.url) {
-    const links = require("../database/json/roleplay.json");
-
-    const random =
-      links[endpoint][Math.floor(Math.random() * links[endpoint].length)];
-
-    return random;
-  }
-
-  return res.data.url;
+  return res.data.results[0].url;
 };
 
 const checkIfImage = (url) => {

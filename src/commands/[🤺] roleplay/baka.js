@@ -4,9 +4,8 @@ const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
 
 module.exports = {
-  name: "poke",
-  aliases: ["beep", "boop"],
-  description: "poke someone",
+  name: "baka",
+  description: "looks like someone is a baka",
   category: "[🤺] roleplay",
   usage: "<member>",
   run: async (client, message, args) => {
