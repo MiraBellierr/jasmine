@@ -1,13 +1,14 @@
 const Discord = require("discord.js");
 const axios = require("axios");
 const moment = require("moment");
+const Paginate = require("../../utils/pagination");
 const { argsError } = require("../../utils/errors");
 
 module.exports = {
   name: "anime",
   description: "Search for an Anime, character or Manga",
   category: "anime",
-  usage: "<name> [--anime | --character | --manga]",
+  usage: "<name> [--anime | --characters | --manga]",
   run: async (client, message, args) => {
     if (!args.length) {
       return argsError(module.exports, client, message);
@@ -25,182 +26,177 @@ module.exports = {
 
     axios({
       method: "get",
-      url: `https://api.jikan.moe/v3/search/${type}?q=${query}`,
+      url: `https://api.jikan.moe/v4/${type}?q=${query}`,
       headers: {
         "Content-Type": "application/json",
       },
     }).then(
       async (response) => {
         if (type === "anime") {
-          const anime = response.data.results[0];
-          const startDate = moment(anime.start_date).format(
-            "dddd, MMMM Do YYYY, h:mm:ss a"
-          );
-          const endDate = moment(anime.end_date).format(
-            "dddd, MMMM Do YYYY, h:mm:ss a"
-          );
+          const animes = response.data.data;
+          const embeds = [];
 
-          const embed = new Discord.EmbedBuilder()
-            .setAuthor({
-              name: "Anime Search",
-              iconURL: message.author.displayAvatarURL(),
-            })
-            .setTitle(anime.title)
-            .setURL(anime.url)
-            .setThumbnail(client.user.displayAvatarURL())
-            .setDescription(anime.synopsis)
-            .addFields([
-              {
-                name: "Type",
-                value: `${anime.type ? anime.type : "N/A"}`,
-                inline: true,
-              },
-              {
-                name: "Episodes",
-                value: anime.episodes === 0 ? "???" : `${anime.episodes}`,
-                inline: true,
-              },
-              {
-                name: "Score",
-                value: `${anime.score ? anime.score : "???"}`,
-                inline: true,
-              },
-              {
-                name: "Start Date",
-                value: `${startDate ? startDate : "???"}`,
-                inline: true,
-              },
-              {
-                name: "End Date",
-                value: anime.end_date === null ? "???" : `${endDate}`,
-                inline: true,
-              },
-              {
-                name: "Members",
-                value: `${anime.members.toLocaleString()}`,
-                inline: true,
-              },
-              {
-                name: "Rated",
-                value: `${anime.rated ? anime.rated : "???"}`,
-                inline: true,
-              },
-            ])
-            .setColor("#CD1C6C")
-            .setImage(anime.image_url)
-            .setTimestamp()
-            .setFooter({ text: `ID: ${anime.mal_id}` });
+          for (const anime of animes) {
+            const startDate = moment(anime.aired.from).format("MMMM Do YYYY");
+            const endDate = moment(anime.aired.to).format("MMMM Do YYYY");
 
-          m.delete();
+            const embed = new Discord.EmbedBuilder()
+              .setAuthor({
+                name: "Anime Search",
+                iconURL: message.author.displayAvatarURL(),
+              })
+              .setTitle(anime.title)
+              .setURL(anime.url)
+              .setThumbnail(client.user.displayAvatarURL())
+              .setDescription(anime.synopsis)
+              .addFields([
+                {
+                  name: "Type",
+                  value: `${anime.type ? anime.type : "N/A"}`,
+                  inline: true,
+                },
+                {
+                  name: "Episodes",
+                  value: anime.episodes === null ? "???" : `${anime.episodes}`,
+                  inline: true,
+                },
+                {
+                  name: "Score",
+                  value: `${anime.score ? anime.score : "???"}`,
+                  inline: true,
+                },
+                {
+                  name: "Aired from",
+                  value: `${startDate ? startDate : "???"}`,
+                  inline: true,
+                },
+                {
+                  name: "Aired to",
+                  value: anime.aired.to === null ? "???" : `${endDate}`,
+                  inline: true,
+                },
+                {
+                  name: "status",
+                  value: `${anime.status}`,
+                  inline: true,
+                },
+                {
+                  name: "Rating",
+                  value: `${anime.rating ? anime.rating : "???"}`,
+                  inline: true,
+                },
+              ])
+              .setColor("#CD1C6C")
+              .setImage(anime.images.jpg.image_url)
+              .setTimestamp()
+              .setFooter({ text: `ID: ${anime.mal_id}` });
 
-          return message.reply({ embeds: [embed] });
-        } else if (type === "character") {
-          const character = response.data.results[0];
-          const altNames = character.alternative_names
-            .map((charname) => `${charname}`)
-            .join(", ");
-          const anime = character.anime
-            .splice(0, 5)
-            .map((anime2) => `${anime2.name}`)
-            .join(", ");
-          const manga = character.manga
-            .splice(0, 5)
-            .map((manga2) => `${manga2.name}`)
-            .join(", ");
-
-          const embed = new Discord.EmbedBuilder()
-            .setAuthor({
-              name: "Character Search",
-              iconURL: message.author.displayAvatarURL(),
-            })
-            .setTitle(character.name)
-            .setURL(character.url)
-            .setThumbnail(client.user.displayAvatarURL())
-            .addFields([
-              {
-                name: "Alternative_name",
-                value: `${altNames ? altNames : "???"}`,
-              },
-              {
-                name: "Anime",
-                value: `${anime ? anime : "???"}`,
-              },
-              {
-                name: "Manga",
-                value: `${manga ? manga : "???"}`,
-              },
-            ])
-            .setColor("#CD1C6C")
-            .setImage(character.image_url)
-            .setTimestamp()
-            .setFooter({ text: `ID: ${character.mal_id}` });
+            embeds.push(embed);
+          }
 
           m.delete();
 
-          return message.reply({ embeds: [embed] });
+          new Paginate.Paginate(client, message, embeds).init();
+        } else if (type === "characters") {
+          const characters = response.data.data;
+          const embeds = [];
+
+          for (const character of characters) {
+            const embed = new Discord.EmbedBuilder()
+              .setAuthor({
+                name: "Character Search",
+                iconURL: message.author.displayAvatarURL(),
+              })
+              .setTitle(character.name)
+              .setURL(character.url)
+              .setThumbnail(client.user.displayAvatarURL())
+              .addFields([
+                {
+                  name: "Kanji name",
+                  value:
+                    character.name_kanji === null
+                      ? "???"
+                      : character.name_kanji,
+                },
+              ])
+              .setDescription(character.about)
+              .setColor("#CD1C6C")
+              .setImage(character.images.jpg.image_url)
+              .setTimestamp()
+              .setFooter({ text: `ID: ${character.mal_id}` });
+
+            embeds.push(embed);
+          }
+
+          m.delete();
+
+          new Paginate.Paginate(client, message, embeds).init();
         } else if (type === "manga") {
-          const manga = response.data.results[0];
-          const startDate = moment(manga.start_date).format(
-            "dddd, MMMM Do YYYY, h:mm:ss a"
-          );
-          const endDate = moment(manga.end_date).format(
-            "dddd, MMMM Do YYYY, h:mm:ss a"
-          );
+          const mangas = response.data.data;
+          const embeds = [];
 
-          const embed = new Discord.EmbedBuilder()
-            .setAuthor({
-              name: "Manga Search",
-              iconURL: message.author.displayAvatarURL(),
-            })
-            .setTitle(manga.title)
-            .setURL(manga.url)
-            .setThumbnail(client.user.displayAvatarURL())
-            .setDescription(manga.synopsis)
-            .addFields([
-              {
-                name: "Type",
-                value: `${manga.type ? manga.type : "???"}`,
-                inline: true,
-              },
-              {
-                name: "Chapters",
-                value: manga.chapters === 0 ? "???" : `${manga.chapters}`,
-                inline: true,
-              },
-              {
-                name: "Volumes",
-                value: manga.volumes === 0 ? "???" : `${manga.volumes}`,
-                inline: true,
-              },
-              {
-                name: "Score",
-                value: `${manga.score ? manga.score : "???"}`,
-                inline: true,
-              },
-              {
-                name: "Start Date",
-                value: `${startDate ? startDate : "???"}`,
-                inline: true,
-              },
-              {
-                name: "End Date",
-                value: manga.end_date === null ? "???" : `${endDate}`,
-                inline: true,
-              },
-              {
-                name: "Members",
-                value: `${manga.members.toLocaleString()}`,
-                inline: true,
-              },
-            ])
-            .setColor("#CD1C6C")
-            .setImage(manga.image_url)
-            .setTimestamp()
-            .setFooter({ text: `ID: ${manga.mal_id}` });
+          for (const manga of mangas) {
+            const startDate = moment(manga.published.from).format(
+              "MMMM Do YYYY"
+            );
+            const endDate = moment(manga.published.to).format("MMMM Do YYYY");
 
+            const embed = new Discord.EmbedBuilder()
+              .setAuthor({
+                name: "Manga Search",
+                iconURL: message.author.displayAvatarURL(),
+              })
+              .setTitle(manga.title)
+              .setURL(manga.url)
+              .setThumbnail(client.user.displayAvatarURL())
+              .setDescription(manga.synopsis)
+              .addFields([
+                {
+                  name: "Type",
+                  value: `${manga.type ? manga.type : "???"}`,
+                  inline: true,
+                },
+                {
+                  name: "Chapters",
+                  value: manga.chapters === 0 ? "???" : `${manga.chapters}`,
+                  inline: true,
+                },
+                {
+                  name: "Volumes",
+                  value: manga.volumes === 0 ? "???" : `${manga.volumes}`,
+                  inline: true,
+                },
+                {
+                  name: "Score",
+                  value: `${manga.score ? manga.score : "???"}`,
+                  inline: true,
+                },
+                {
+                  name: "Published from",
+                  value: `${startDate ? startDate : "???"}`,
+                  inline: true,
+                },
+                {
+                  name: "Published to",
+                  value: manga.published.to === null ? "???" : `${endDate}`,
+                  inline: true,
+                },
+                {
+                  name: "Rank",
+                  value: `${manga.rank === null ? "???" : manga.rank}`,
+                  inline: true,
+                },
+              ])
+              .setColor("#CD1C6C")
+              .setImage(manga.images.jpg.image_url)
+              .setTimestamp()
+              .setFooter({ text: `ID: ${manga.mal_id}` });
+
+            embeds.push(embed);
+          }
           m.delete();
 
-          return message.reply({ embeds: [embed] });
+          new Paginate.Paginate(client, message, embeds).init();
         } else {
           return argsError(module.exports, client, message);
         }
@@ -232,7 +228,7 @@ module.exports = {
           ],
         },
         {
-          name: "character",
+          name: "characters",
           type: 1,
           description: "Search for a character",
           options: [
@@ -269,176 +265,173 @@ module.exports = {
 
       axios({
         method: "get",
-        url: `https://api.jikan.moe/v3/search/${type}?q=${query}`,
+        url: `https://api.jikan.moe/v4/${type}?q=${query}`,
         headers: {
           "Content-Type": "application/json",
         },
       }).then(
         async (response) => {
           if (type === "anime") {
-            const anime = response.data.results[0];
-            const startDate = moment(anime.start_date).format(
-              "dddd, MMMM Do YYYY, h:mm:ss a"
-            );
-            const endDate = moment(anime.end_date).format(
-              "dddd, MMMM Do YYYY, h:mm:ss a"
-            );
+            const animes = response.data.data;
+            const embeds = [];
 
-            const embed = new Discord.EmbedBuilder()
-              .setAuthor({
-                name: "Anime Search",
-                iconURL: interaction.user.displayAvatarURL(),
-              })
-              .setTitle(anime.title)
-              .setURL(anime.url)
-              .setThumbnail(client.user.displayAvatarURL())
-              .setDescription(anime.synopsis)
-              .addFields([
-                {
-                  name: "Type",
-                  value: `${anime.type ? anime.type : "???"}`,
-                  inline: true,
-                },
-                {
-                  name: "Episodes",
-                  value: anime.episodes === 0 ? "???" : `${anime.episodes}`,
-                  inline: true,
-                },
-                {
-                  name: "Score",
-                  value: `${anime.score ? anime.score : "???"}`,
-                  inline: true,
-                },
-                {
-                  name: "Start Date",
-                  value: `${startDate ? startDate : "???"}`,
-                  inline: true,
-                },
-                {
-                  name: "End Date",
-                  value: anime.end_date === null ? "???" : `${endDate}`,
-                  inline: true,
-                },
-                {
-                  name: "Members",
-                  value: `${anime.members.toLocaleString()}`,
-                  inline: true,
-                },
-                {
-                  name: "Rated",
-                  value: `${anime.rated ? anime.rated : "???"}`,
-                  inline: true,
-                },
-              ])
-              .setColor("#CD1C6C")
-              .setImage(anime.image_url)
-              .setTimestamp()
-              .setFooter({ text: `ID: ${anime.mal_id}` });
+            for (const anime of animes) {
+              const startDate = moment(anime.aired.from).format("MMMM Do YYYY");
+              const endDate = moment(anime.aired.to).format("MMMM Do YYYY");
 
-            return interaction.reply({ embeds: [embed] });
-          } else if (type === "character") {
-            const character = response.data.results[0];
-            const altNames = character.alternative_names
-              .map((charname) => `${charname}`)
-              .join(", ");
-            const anime = character.anime
-              .splice(0, 5)
-              .map((anime2) => `${anime2.name}`)
-              .join(", ");
-            const manga = character.manga
-              .splice(0, 5)
-              .map((manga2) => `${manga2.name}`)
-              .join(", ");
+              const embed = new Discord.EmbedBuilder()
+                .setAuthor({
+                  name: "Anime Search",
+                  iconURL: interaction.user.displayAvatarURL(),
+                })
+                .setTitle(anime.title)
+                .setURL(anime.url)
+                .setThumbnail(client.user.displayAvatarURL())
+                .setDescription(anime.synopsis)
+                .addFields([
+                  {
+                    name: "Type",
+                    value: `${anime.type ? anime.type : "N/A"}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Episodes",
+                    value:
+                      anime.episodes === null ? "???" : `${anime.episodes}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Score",
+                    value: `${anime.score ? anime.score : "???"}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Aired from",
+                    value: `${startDate ? startDate : "???"}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Aired to",
+                    value: anime.aired.to === null ? "???" : `${endDate}`,
+                    inline: true,
+                  },
+                  {
+                    name: "status",
+                    value: `${anime.status}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Rating",
+                    value: `${anime.rating ? anime.rating : "???"}`,
+                    inline: true,
+                  },
+                ])
+                .setColor("#CD1C6C")
+                .setImage(anime.images.jpg.image_url)
+                .setTimestamp()
+                .setFooter({ text: `ID: ${anime.mal_id}` });
 
-            const embed = new Discord.EmbedBuilder()
-              .setAuthor({
-                name: "Character Search",
-                iconURL: interaction.user.displayAvatarURL(),
-              })
-              .setTitle(character.name)
-              .setURL(character.url)
-              .setThumbnail(client.user.displayAvatarURL())
-              .addFields([
-                {
-                  name: "Alternative_name",
-                  value: `${altNames ? altNames : "???"}`,
-                },
-                {
-                  name: "Anime",
-                  value: `${anime ? anime : "???"}`,
-                },
-                {
-                  name: "Manga",
-                  value: `${manga ? manga : "???"}`,
-                },
-              ])
-              .setColor("#CD1C6C")
-              .setImage(character.image_url)
-              .setTimestamp()
-              .setFooter({ text: `ID: ${character.mal_id}` });
+              embeds.push(embed);
+            }
 
-            return interaction.reply({ embeds: [embed] });
+            new Paginate.Paginate(client, interaction, embeds).init();
+          } else if (type === "characters") {
+            const characters = response.data.data;
+            const embeds = [];
+
+            for (const character of characters) {
+              const embed = new Discord.EmbedBuilder()
+                .setAuthor({
+                  name: "Character Search",
+                  iconURL: interaction.user.displayAvatarURL(),
+                })
+                .setTitle(character.name)
+                .setURL(character.url)
+                .setThumbnail(client.user.displayAvatarURL())
+                .addFields([
+                  {
+                    name: "Kanji name",
+                    value:
+                      character.name_kanji === null
+                        ? "???"
+                        : character.name_kanji,
+                  },
+                ])
+                .setDescription(character.about)
+                .setColor("#CD1C6C")
+                .setImage(character.images.jpg.image_url)
+                .setTimestamp()
+                .setFooter({ text: `ID: ${character.mal_id}` });
+
+              embeds.push(embed);
+            }
+
+            new Paginate.Paginate(client, interaction, embeds).init();
           } else if (type === "manga") {
-            const manga = response.data.results[0];
-            const startDate = moment(manga.start_date).format(
-              "dddd, MMMM Do YYYY, h:mm:ss a"
-            );
-            const endDate = moment(manga.end_date).format(
-              "dddd, MMMM Do YYYY, h:mm:ss a"
-            );
+            const mangas = response.data.data;
+            const embeds = [];
 
-            const embed = new Discord.EmbedBuilder()
-              .setAuthor({
-                name: "Manga Search",
-                iconURL: interaction.user.displayAvatarURL(),
-              })
-              .setTitle(manga.title)
-              .setURL(manga.url)
-              .setThumbnail(client.user.displayAvatarURL())
-              .setDescription(manga.synopsis)
-              .addFields([
-                {
-                  name: "Type",
-                  value: `${manga.type ? manga.type : "???"}`,
-                  inline: true,
-                },
-                {
-                  name: "Chapters",
-                  value: manga.chapters === 0 ? "???" : `${manga.chapters}`,
-                  inline: true,
-                },
-                {
-                  name: "Volumes",
-                  value: manga.volumes === 0 ? "???" : `${manga.volumes}`,
-                  inline: true,
-                },
-                {
-                  name: "Score",
-                  value: `${manga.score ? manga.score : "???"}`,
-                  inline: true,
-                },
-                {
-                  name: "Start Date",
-                  value: `${startDate ? startDate : "???"}`,
-                  inline: true,
-                },
-                {
-                  name: "End Date",
-                  value: manga.end_date === null ? "???" : `${endDate}`,
-                  inline: true,
-                },
-                {
-                  name: "Members",
-                  value: `${manga.members.toLocaleString()}`,
-                  inline: true,
-                },
-              ])
-              .setColor("#CD1C6C")
-              .setImage(manga.image_url)
-              .setTimestamp()
-              .setFooter({ text: `ID: ${manga.mal_id}` });
+            for (const manga of mangas) {
+              const startDate = moment(manga.published.from).format(
+                "MMMM Do YYYY"
+              );
+              const endDate = moment(manga.published.to).format("MMMM Do YYYY");
 
-            return interaction.reply({ embeds: [embed] });
+              const embed = new Discord.EmbedBuilder()
+                .setAuthor({
+                  name: "Manga Search",
+                  iconURL: interaction.user.displayAvatarURL(),
+                })
+                .setTitle(manga.title)
+                .setURL(manga.url)
+                .setThumbnail(client.user.displayAvatarURL())
+                .setDescription(manga.synopsis)
+                .addFields([
+                  {
+                    name: "Type",
+                    value: `${manga.type ? manga.type : "???"}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Chapters",
+                    value: manga.chapters === 0 ? "???" : `${manga.chapters}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Volumes",
+                    value: manga.volumes === 0 ? "???" : `${manga.volumes}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Score",
+                    value: `${manga.score ? manga.score : "???"}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Published from",
+                    value: `${startDate ? startDate : "???"}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Published to",
+                    value: manga.published.to === null ? "???" : `${endDate}`,
+                    inline: true,
+                  },
+                  {
+                    name: "Rank",
+                    value: `${manga.rank === null ? "???" : manga.rank}`,
+                    inline: true,
+                  },
+                ])
+                .setColor("#CD1C6C")
+                .setImage(manga.images.jpg.image_url)
+                .setTimestamp()
+                .setFooter({ text: `ID: ${manga.mal_id}` });
+
+              embeds.push(embed);
+            }
+
+            new Paginate.Paginate(client, interaction, embeds).init();
           }
         },
         () => {
