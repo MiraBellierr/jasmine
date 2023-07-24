@@ -35,7 +35,7 @@
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
-    "@types/node": "^20.3.1",
+    "@types/node": "^20.4.4",
     "prettier": "2.8.8"
   },
   "repository": {
