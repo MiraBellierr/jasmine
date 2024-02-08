@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const ud = require("urban-dictionary");
+const urban = require('relevant-urban');
 const Paginate = require("../../utils/pagination");
 const { argsError } = require("../../utils/errors");
 const badwords = require("../../database/json/badwords.json");
@@ -15,7 +15,7 @@ module.exports = {
       return argsError(module.exports, client, message);
     }
 
-    ud.define(args.join(" ")).then(
+    urban.all(args.join(" ")).then(
       async (result) => {
         const pages = [];
 
@@ -36,14 +36,14 @@ module.exports = {
               iconURL: message.author.displayAvatarURL(),
             })
             .setTitle(result[i].word)
-            .setURL(result[i].permalink)
+            .setURL(result[i].urbanURL)
             .setColor("#CD1C6C")
             .setDescription(Discord.escapeMarkdown(definition))
             .addFields([
               { name: "example", value: `${Discord.escapeMarkdown(example)}` },
               {
                 name: "Upvotes",
-                value: `${result[i].thumbs_up}`,
+                value: `${result[i].thumbsUp}`,
                 inline: true,
               },
             ])
