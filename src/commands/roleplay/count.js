@@ -17,18 +17,14 @@ module.exports = {
   run: async (client, message, args) => {
     let target, action;
 
-    if (message.reference && message.reference.messageId) {
-      const msg = message.channel.messages.cache.find(
-        (mssg) => mssg.id === message.reference.messageId,
-      );
-
-      action = "hug";
-      target = msg.member;
-    } else if (!args[1]) {
+    if (!args[0]) {
       return argsError(module.exports, client, message);
-    } else {
+    } else if (args.length > 1) {
       action = args[0];
       target = await getMemberFromArguments(message, args[1]);
+    } else {
+      target = message.member;
+      action = "hug";
     }
 
     const validate = await schemas.roleplay().findOne({
@@ -65,6 +61,8 @@ module.exports = {
     }
 
     Promise.all(inOrder).then((res) => {
+      if (res.length < 1) return message.reply(`No one ${action} you yet!`);
+
       const embed = new Discord.EmbedBuilder()
         .setAuthor({
           name: `${target.user.username}`,
