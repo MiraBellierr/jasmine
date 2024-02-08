@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
+const schemas = require("../../database/schemas");
 
 module.exports = {
   name: "hug",
@@ -41,13 +42,27 @@ module.exports = {
       return message.reply({ embeds: [embed] });
     }
 
+    schemas.roleplay().create({
+      userID: message.author.id,
+      targetId: target.user.id,
+      actionType: "hug"
+    });
+
+    const count = await schemas.roleplay().count({
+      where: {
+        userID: message.author.id,
+        targetId: target.user.id,
+        actionType: "hug"
+    }})
+
     const embed = new Discord.EmbedBuilder()
       .setAuthor({
         name: `${message.author.username} ${module.exports.name}s ${target.user.username}!`,
         iconURL: message.author.displayAvatarURL(),
       })
       .setImage(url)
-      .setColor("#CD1C6C");
+      .setColor("#CD1C6C")
+      .setFooter({ text: `${target.user.username} has been hugged by ${message.author.username} ${count} times!`});
 
     message.reply({ embeds: [embed] });
   },

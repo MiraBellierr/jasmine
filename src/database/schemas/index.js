@@ -7,6 +7,7 @@ const timer = require("./timer");
 const character = require("./character");
 const logging = require("./logging");
 const Giveaway = require("./giveaway");
+const roleplay = require("./roleplay");
 
 module.exports = {
 	guild,
@@ -17,5 +18,6 @@ module.exports = {
 	timer,
 	character,
 	logging,
-	Giveaway
+	Giveaway,
+	roleplay
 };
