@@ -20,11 +20,11 @@ module.exports = {
     if (!args[0]) {
       return argsError(module.exports, client, message);
     } else if (args.length > 1) {
-      action = args[0];
+      action = args[0].toLowerCase();
       target = await getMemberFromArguments(message, args[1]);
     } else {
       target = message.member;
-      action = "hug";
+      action = args[0].toLowerCase();
     }
 
     const validate = await schemas.roleplay().findOne({
