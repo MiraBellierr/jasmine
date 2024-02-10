@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
+const { getCount } = require("../../utils/economies");
 
 module.exports = {
   name: "slap",
@@ -13,7 +14,7 @@ module.exports = {
 
     if (message.reference && message.reference.messageId) {
       const msg = message.channel.messages.cache.find(
-        (mssg) => mssg.id === message.reference.messageId
+        (mssg) => mssg.id === message.reference.messageId,
       );
 
       target = msg.member;
@@ -41,13 +42,18 @@ module.exports = {
       return message.reply({ embeds: [embed] });
     }
 
+    const count = await getCount(message, target, "slap");
+
     const embed = new Discord.EmbedBuilder()
       .setAuthor({
         name: `${message.author.username} ${module.exports.name}s ${target.user.username}!`,
         iconURL: message.author.displayAvatarURL(),
       })
       .setImage(url)
-      .setColor("#CD1C6C");
+      .setColor("#CD1C6C")
+      .setFooter({
+        text: `${target.user.username} has been slapped by ${message.user.username} ${count} times!`,
+      });
 
     message.reply({ embeds: [embed] });
   },

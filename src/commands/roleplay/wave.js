@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const utils = require("../../utils/utils");
+const { getCount } = require("../../utils/economies");
 
 module.exports = {
   name: "wave",
@@ -12,7 +13,7 @@ module.exports = {
 
     if (message.reference && message.reference.messageId) {
       const msg = message.channel.messages.cache.find(
-        (mssg) => mssg.id === message.reference.messageId
+        (mssg) => mssg.id === message.reference.messageId,
       );
 
       target = msg.member;
@@ -27,7 +28,7 @@ module.exports = {
         .setAuthor({
           name: `${message.author.username} is ${module.exports.name.slice(
             0,
-            3
+            3,
           )}ing.`,
           iconURL: message.author.displayAvatarURL(),
         })
@@ -51,13 +52,18 @@ module.exports = {
       return message.reply({ embeds: [embed] });
     }
 
+    const count = await getCount(message, target, "wave");
+
     const embed = new Discord.EmbedBuilder()
       .setAuthor({
         name: `${message.author.username} ${module.exports.name}s at ${target.user.username}!`,
         iconURL: message.author.displayAvatarURL(),
       })
       .setImage(url)
-      .setColor("#CD1C6C");
+      .setColor("#CD1C6C")
+      .setFooter({
+        text: `${target.user.username} has been waved by ${message.user.username} ${count} times!`,
+      });
 
     message.reply({ embeds: [embed] });
   },

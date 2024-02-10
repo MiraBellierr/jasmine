@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
-const schemas = require("../../database/schemas");
+const { getCount } = require("../../utils/economies");
 
 module.exports = {
   name: "pat",
@@ -42,19 +42,7 @@ module.exports = {
       return message.reply({ embeds: [embed] });
     }
 
-    schemas.roleplay().create({
-      userID: message.author.id,
-      targetId: target.user.id,
-      actionType: "pat",
-    });
-
-    const count = await schemas.roleplay().count({
-      where: {
-        userID: message.author.id,
-        targetId: target.user.id,
-        actionType: "pat",
-      },
-    });
+    const count = await getCount(message, target, "pat");
 
     const embed = new Discord.EmbedBuilder()
       .setAuthor({

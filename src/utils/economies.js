@@ -1,5 +1,23 @@
 const schemas = require("../database/schemas");
 
+const getCount = async (message, target, action) => {
+  schemas.roleplay().create({
+    userID: message.author.id,
+    targetId: target.user.id,
+    actionType: action,
+  });
+
+  const count = await schemas.roleplay().count({
+    where: {
+      userID: message.author.id,
+      targetId: target.user.id,
+      actionType: "hug",
+    },
+  });
+
+  return count;
+};
+
 const getCoins = async (user) => {
   let coins = await schemas.coins().findOne({ where: { userID: user.id } });
 
@@ -351,4 +369,5 @@ module.exports = {
   getWork,
   getCrimeSuccess,
   getCrimeFail,
+  getCount,
 };
