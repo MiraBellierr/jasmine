@@ -11,7 +11,7 @@ const getCount = async (message, target, action) => {
     where: {
       userID: message.author.id,
       targetId: target.user.id,
-      actionType: "hug",
+      actionType: action,
     },
   });
 
