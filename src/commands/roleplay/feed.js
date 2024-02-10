@@ -52,7 +52,7 @@ module.exports = {
       .setImage(url)
       .setColor("#CD1C6C")
       .setFooter({
-        text: `${target.user.username} has been fed by ${message.user.username} ${count} times!`,
+        text: `${target.user.username} has been fed by ${message.author.username} ${count} times!`,
       });
 
     message.reply({ embeds: [embed] });
