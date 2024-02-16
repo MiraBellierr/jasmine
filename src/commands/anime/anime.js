@@ -137,7 +137,7 @@ module.exports = {
 
           for (const manga of mangas) {
             const startDate = moment(manga.published.from).format(
-              "MMMM Do YYYY"
+              "MMMM Do YYYY",
             );
             const endDate = moment(manga.published.to).format("MMMM Do YYYY");
 
@@ -205,7 +205,7 @@ module.exports = {
         m.delete();
 
         return message.reply("I didn't find any result");
-      }
+      },
     );
   },
   interaction: {
@@ -373,7 +373,7 @@ module.exports = {
 
             for (const manga of mangas) {
               const startDate = moment(manga.published.from).format(
-                "MMMM Do YYYY"
+                "MMMM Do YYYY",
               );
               const endDate = moment(manga.published.to).format("MMMM Do YYYY");
 
@@ -436,7 +436,7 @@ module.exports = {
         },
         () => {
           return interaction.reply("I didn't find any result");
-        }
+        },
       );
     },
   },
