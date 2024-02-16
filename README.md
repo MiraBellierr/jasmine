@@ -1,4 +1,4 @@
-[![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Jasmine%27s%20Jolly%20Joyhouse&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
+[![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Anya%27s%20Amazing%20Apartment&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MiraBellierr/jasmine?logo=github&style=plastic)
 ![Contributor](https://img.shields.io/github/contributors/MiraBellierr/jasmine?color=blue&logo=github&style=plastic)
 ![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/jasmine?color=blue&logo=github&style=plastic)<br>
@@ -12,7 +12,7 @@ Jasmine is a Discord bot written in Javascript developed by Mirabellier just for
 
 ## ❤️ About
 
-Jasmine is a simple RPG Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
+Jasmine is a simple RPG Discord bot ⚔️ developed by Mirabellier for fun. You can invite it to your Discord server by clicking [this link](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)! You can also join our Discord server [Anya's Amazing Apartment](https://discord.gg/NcPeGuNEdc) for all questions, suggestions, and assistance! It comes packaged with a variety of fun commands and utility commands that can be useful for your server.
 
 ## 🧡 Features
 
