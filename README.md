@@ -1,4 +1,4 @@
-[![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Jasmine%27s%20Jolly%20Joyhouse&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
+[![Discord](https://img.shields.io/discord/864537979339014184?color=blue&label=Anya%27s%20Amazing%20Apartment&logo=discord&logoColor=white&style=plastic)](https://discord.gg/NcPeGuNEdc)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/MiraBellierr/jasmine?logo=github&style=plastic)
 ![Contributor](https://img.shields.io/github/contributors/MiraBellierr/jasmine?color=blue&logo=github&style=plastic)
 ![Issue](https://img.shields.io/github/issues-closed/MiraBellierr/jasmine?color=blue&logo=github&style=plastic)<br>
