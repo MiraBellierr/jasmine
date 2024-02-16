@@ -31,7 +31,7 @@ module.exports = {
     run: async (client, interaction) => {
       const guild = await client.guilds.fetch("864537979339014184");
 
-      if (interaction.guildId !== guild) {
+      if (interaction.guildId !== guild.id) {
         interaction.reply({
           content: "You must join the support server first!",
           ephemeral: true,
