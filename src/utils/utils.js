@@ -12,9 +12,17 @@ const deleteElement = (array, element) => {
   return array;
 };
 
+const camelCaseToNormal = (str) => {
+  return str
+    .replace(/([A-Z])/g, " $1")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
 const splitMessage = (
   text,
-  { maxLength = 2_000, char = "\n", prepend = "", append = "" } = {}
+  { maxLength = 2_000, char = "\n", prepend = "", append = "" } = {},
 ) => {
   text = Discord.verifyString(text);
 
@@ -128,4 +136,5 @@ module.exports = {
   deleteElement,
   getProgBar,
   asyncForEach,
+  camelCaseToNormal,
 };

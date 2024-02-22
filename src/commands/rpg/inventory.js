@@ -2,6 +2,7 @@ const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 const constants = require("../../utils/constants");
 const equipments = require("../../database/json/equipments.json");
+const { camelCaseToNormal } = require("../../utils/utils");
 
 module.exports = {
   name: "inventory",
@@ -16,8 +17,8 @@ module.exports = {
     if (!character) {
       return message.reply(
         `You are not registered yet. Please type \`${client.prefixes.get(
-          message.guild.id
-        )}register <class>\` to register`
+          message.guild.id,
+        )}register <class>\` to register`,
       );
     }
 
@@ -61,8 +62,8 @@ module.exports = {
             description: "List of Gloves",
             value: "gloves",
             emoji: constants.assets.gloves.emoji,
-          }
-        )
+          },
+        ),
     );
 
     const embed = new Discord.EmbedBuilder()
@@ -105,11 +106,7 @@ module.exports = {
               Object.keys(w).forEach((a) => attr.push(`${a}:${w[a]}`));
 
               weaponsText.push(
-                `• **${weapon
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")}** - \`${attr.join("|")}\``
+                `• **${camelCaseToNormal(weapon)}** - \`${attr.join("|")}\``,
               );
             });
 
@@ -128,7 +125,7 @@ module.exports = {
               .setThumbnail("https://miraiscute.com/assets/146.png")
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -151,11 +148,7 @@ module.exports = {
               Object.keys(s).forEach((a) => attr.push(`${a}:${s[a]}`));
 
               shieldsText.push(
-                `• ${shield
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")} - \`${attr.join("|")}\``
+                `• ${camelCaseToNormal(shield)} - \`${attr.join("|")}\``,
               );
             });
 
@@ -174,7 +167,7 @@ module.exports = {
               .setThumbnail("https://miraiscute.com/assets/146.png")
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -197,11 +190,7 @@ module.exports = {
               Object.keys(h).forEach((a) => attr.push(`${a}:${h[a]}`));
 
               helmetText.push(
-                `• ${helmet
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")} - \`${attr.join("|")}\``
+                `• ${camelCaseToNormal(helmet)} - \`${attr.join("|")}\``,
               );
             });
 
@@ -220,7 +209,7 @@ module.exports = {
               .setThumbnail("https://miraiscute.com/assets/146.png")
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -243,11 +232,7 @@ module.exports = {
               Object.keys(a).forEach((b) => attr.push(`${b}:${a[b]}`));
 
               armorText.push(
-                `• ${armort
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")} - \`${attr.join("|")}\``
+                `• ${camelCaseToNormal(armort)} - \`${attr.join("|")}\``,
               );
             });
 
@@ -266,7 +251,7 @@ module.exports = {
               .setThumbnail("https://miraiscute.com/assets/146.png")
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -289,11 +274,7 @@ module.exports = {
               Object.keys(g).forEach((a) => attr.push(`${a}:${g[a]}`));
 
               glovesText.push(
-                `• ${glove
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")} - \`${attr.join("|")}\``
+                `• ${camelCaseToNormal(glove)} - \`${attr.join("|")}\``,
               );
             });
 
@@ -312,7 +293,7 @@ module.exports = {
               .setThumbnail("https://miraiscute.com/assets/146.png")
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -324,7 +305,7 @@ module.exports = {
             collector();
           }
         },
-        () => null
+        () => null,
       );
     }
   },
@@ -383,8 +364,8 @@ module.exports = {
               description: "List of Gloves",
               value: "gloves",
               emoji: constants.assets.gloves.emoji,
-            }
-          )
+            },
+          ),
       );
 
       const embed = new Discord.EmbedBuilder()
@@ -427,11 +408,7 @@ module.exports = {
                 Object.keys(w).forEach((a) => attr.push(`${a}:${w[a]}`));
 
                 weaponsText.push(
-                  `• **${weapon
-                    .replace(/([A-Z])/g, " $1")
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")}** - \`${attr.join("|")}\``
+                  `• **${camelCaseToNormal(weapon)}** - \`${attr.join("|")}\``,
                 );
               });
 
@@ -471,11 +448,7 @@ module.exports = {
                 Object.keys(s).forEach((a) => attr.push(`${a}:${s[a]}`));
 
                 shieldsText.push(
-                  `• ${shield
-                    .replace(/([A-Z])/g, " $1")
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")} - \`${attr.join("|")}\``
+                  `• ${camelCaseToNormal(shield)} - \`${attr.join("|")}\``,
                 );
               });
 
@@ -515,11 +488,7 @@ module.exports = {
                 Object.keys(h).forEach((a) => attr.push(`${a}:${h[a]}`));
 
                 helmetText.push(
-                  `• ${helmet
-                    .replace(/([A-Z])/g, " $1")
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")} - \`${attr.join("|")}\``
+                  `• ${camelCaseToNormal(helmet)} - \`${attr.join("|")}\``,
                 );
               });
 
@@ -559,11 +528,7 @@ module.exports = {
                 Object.keys(a).forEach((b) => attr.push(`${b}:${a[b]}`));
 
                 armorText.push(
-                  `• ${armort
-                    .replace(/([A-Z])/g, " $1")
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")} - \`${attr.join("|")}\``
+                  `• ${camelCaseToNormal(armort)} - \`${attr.join("|")}\``,
                 );
               });
 
@@ -603,11 +568,7 @@ module.exports = {
                 Object.keys(g).forEach((a) => attr.push(`${a}:${g[a]}`));
 
                 glovesText.push(
-                  `• ${glove
-                    .replace(/([A-Z])/g, " $1")
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")} - \`${attr.join("|")}\``
+                  `• ${camelCaseToNormal(glove)} - \`${attr.join("|")}\``,
                 );
               });
 
@@ -636,7 +597,7 @@ module.exports = {
               collector();
             }
           },
-          () => null
+          () => null,
         );
       }
     },
