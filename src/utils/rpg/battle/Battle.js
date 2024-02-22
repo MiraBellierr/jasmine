@@ -27,6 +27,16 @@ class Battle {
     return character.toJSON();
   }
 
+  async getOpponentCharacter(user) {
+    const character = await schemas
+      .character()
+      .findOne({ where: { userID: user.id } });
+
+    if (!character) return null;
+
+    return character.toJSON();
+  }
+
   async getRandomOpponent() {
     const allCharacter = await schemas.character().findAll();
     let randomCharacter =
@@ -42,6 +52,135 @@ class Battle {
     }
 
     return randomCharacter.toJSON();
+  }
+
+  async confirmBattle(opponent) {
+    const embed = new Discord.EmbedBuilder().setDescription(
+      `Hello ${opponent}, ${this.user} wants to challenge you! Do you accept?`,
+    );
+
+    const rejectedEmbed = new Discord.EmbedBuilder().setDescription(
+      `${this.user}, ${opponent} rejected your challenge!`,
+    );
+
+    const acceptedEmbed = new Discord.EmbedBuilder().setDescription(
+      `${this.user}, ${opponent} accepted your challenge!`,
+    );
+
+    const acceptButton = new Discord.ButtonBuilder()
+      .setCustomId("accept")
+      .setEmoji("✅")
+      .setLabel("Accept")
+      .setStyle(Discord.ButtonStyle.Primary);
+
+    const denyButton = new Discord.ButtonBuilder()
+      .setCustomId("deny")
+      .setEmoji("❎")
+      .setLabel("Deny")
+      .setStyle(Discord.ButtonStyle.Secondary);
+
+    const actionRow = new Discord.ActionRowBuilder().addComponents(
+      acceptButton,
+      denyButton,
+    );
+
+    const response = await this.message.channel.send({
+      content: `${opponent}`,
+      embeds: [embed],
+      components: [actionRow],
+    });
+
+    const collectorFilter = (i) => i.user.id === opponent.id;
+
+    try {
+      const confirmation = await response.awaitMessageComponent({
+        filter: collectorFilter,
+        time: 60_000,
+      });
+
+      const actionRowDisabled = new Discord.ActionRowBuilder().addComponents(
+        acceptButton.setDisabled(true),
+        denyButton.setDisabled(true),
+      );
+
+      if (confirmation.customId === "accept") {
+        confirmation.update({
+          content: " ",
+          embeds: [acceptedEmbed],
+          components: [actionRowDisabled],
+        });
+
+        return true;
+      } else {
+        confirmation.update({
+          content: " ",
+          embeds: [rejectedEmbed],
+          components: [actionRowDisabled],
+        });
+        return false;
+      }
+    } catch (e) {
+      const actionRowDisabled = new Discord.ActionRowBuilder().addComponents(
+        acceptButton.setDisabled(true),
+        denyButton.setDisabled(true),
+      );
+
+      response.edit({
+        content: `${opponent}`,
+        embeds: [rejectedEmbed],
+        components: [actionRowDisabled],
+      });
+    }
+  }
+
+  async startOpponent(opponent) {
+    this.character = await this.getCharacter();
+
+    if (!this.character) {
+      return this.message.channel.send("You haven't registered yet!");
+    }
+
+    if (set.has(this.user.id)) {
+      return this.message.reply("You are already in a battle!");
+    }
+
+    this.opponent = await this.getOpponentCharacter(opponent);
+
+    if (!this.opponent) {
+      return this.message.channel.send(
+        "The opponent doesn't have a character yet!",
+      );
+    }
+
+    const confirm = await this.confirmBattle(opponent);
+
+    if (!confirm) return;
+
+    set.add(this.user.id);
+
+    this.character.maxHp = this.character.hp;
+    this.opponent.maxHp = this.opponent.hp;
+
+    this.character.crit = 0;
+    this.opponent.crit = 0;
+
+    this.opponent.weight = 0;
+    this.character.weight = 0;
+
+    await this.registerEquipments();
+
+    if (this.character.agl === this.opponent.agl) {
+      this.character.agl += Math.random();
+      this.opponent.agl += Math.random();
+    }
+
+    this.battleMessage = await this.message.channel.send({
+      embeds: [this.battleEmbed()],
+    });
+
+    setTimeout(2000);
+
+    this.battle(true);
   }
 
   async startRandom() {
@@ -81,10 +220,10 @@ class Battle {
 
     setTimeout(2000);
 
-    this.battle();
+    this.battle(false);
   }
 
-  async battle() {
+  async battle(custom) {
     // DMG = ATT * ATT / (ATT + DEF)
 
     if (this.character.agl > this.opponent.agl) {
@@ -93,7 +232,7 @@ class Battle {
       await setTimeout(1500);
 
       if (this.opponent.hp < 1) {
-        return this.end();
+        return this.end(custom);
       }
 
       this.battleMessage.edit({ embeds: [this.battleEmbed()] });
@@ -113,7 +252,7 @@ class Battle {
       await setTimeout(1500);
 
       if (this.character.hp < 1) {
-        return this.end();
+        return this.end(custom);
       }
 
       this.battleMessage.edit({ embeds: [this.battleEmbed()] });
@@ -123,16 +262,19 @@ class Battle {
       await setTimeout(1500);
 
       if (this.opponent.hp < 1) {
-        return this.end();
+        return this.end(custom);
       }
 
       this.battleMessage.edit({ embeds: [this.battleEmbed()] });
     }
 
-    this.battle();
+    this.battle(custom);
   }
 
-  async end() {
+  async end(custom) {
+    let xpGain = 0;
+    let rewardGained = 0;
+
     if (this.character.hp < 1) {
       set.delete(this.user.id);
 
@@ -150,9 +292,10 @@ class Battle {
 
       const battleEmbed = this.battleEmbed();
 
-      const xpGain = await this.registerXP();
-
-      const rewardGained = await this.registerReward();
+      if (!custom) {
+        xpGain = await this.registerXP();
+        rewardGained = await this.registerReward();
+      }
 
       battleEmbed
         .setFooter({
@@ -175,7 +318,7 @@ class Battle {
       1 *
         ((5 * (this.opponent.level - this.character.level)) /
           this.character.level +
-          4)
+          4),
     );
 
     character.xp += xpGain;
@@ -184,7 +327,7 @@ class Battle {
       {
         xp: character.xp,
       },
-      { where: { userID: this.user.id } }
+      { where: { userID: this.user.id } },
     );
 
     // eslint-disable-next-line no-unused-vars
@@ -259,7 +402,7 @@ class Battle {
         .setTitle("Level Up!")
         .setThumbnail(this.character.img)
         .setDescription(
-          `Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}\n**• ACC:** +${accGain}`
+          `Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}\n**• ACC:** +${accGain}`,
         );
 
       this.message.channel.send({ embeds: [embed] });
@@ -375,7 +518,7 @@ class Battle {
       },
       {
         where: { userID: this.user.id },
-      }
+      },
     );
 
     return reward;
@@ -386,13 +529,13 @@ class Battle {
       (this.character.acc / 100) *
         Math.floor(
           (this.character.att * this.character.att) /
-            (this.character.att + this.opponent.def)
-        )
+            (this.character.att + this.opponent.def),
+        ),
     );
 
     const dmg = Math.floor(
       (this.character.att * this.character.att) /
-        (this.character.att + this.opponent.def)
+        (this.character.att + this.opponent.def),
     );
 
     let playerDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc) + 1;
@@ -406,12 +549,12 @@ class Battle {
       if (this.character.crit > 0 && Math.random() < crit) {
         this.opponent.hp -= playerDmg + playerDmg;
         this.actions.push(
-          `${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage. Its a critical hit!`
+          `${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage. Its a critical hit!`,
         );
       } else {
         this.opponent.hp -= playerDmg;
         this.actions.push(
-          `${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage!`
+          `${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage!`,
         );
       }
     } else {
@@ -424,13 +567,13 @@ class Battle {
       (this.opponent.acc / 100) *
         Math.floor(
           (this.opponent.att * this.opponent.att) /
-            (this.opponent.att + this.opponent.def)
-        )
+            (this.opponent.att + this.opponent.def),
+        ),
     );
 
     const dmg = Math.floor(
       (this.opponent.att * this.opponent.att) /
-        (this.opponent.att + this.character.def)
+        (this.opponent.att + this.character.def),
     );
 
     const opponentDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc) + 1;
@@ -444,12 +587,12 @@ class Battle {
       if (this.opponent.crit > 0 && Math.random() < crit) {
         this.character.hp -= opponentDmg + opponentDmg;
         this.actions.push(
-          `${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage. Its a critical hit!`
+          `${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage. Its a critical hit!`,
         );
       } else {
         this.character.hp -= opponentDmg;
         this.actions.push(
-          `${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage!`
+          `${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage!`,
         );
       }
     } else {
