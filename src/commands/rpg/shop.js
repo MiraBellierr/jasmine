@@ -3,6 +3,7 @@ const equipments = require("../../database/json/equipments.json");
 const Discord = require("discord.js");
 const constants = require("../../utils/constants");
 const economies = require("../../utils/economies");
+const { camelCaseToNormal } = require("../../utils/utils");
 
 module.exports = {
   name: "shop",
@@ -18,7 +19,7 @@ module.exports = {
       return message.reply(
         "You are not registered yet. Please type `" +
           client.prefixes.get(message.guild.id) +
-          "register <class>` to register"
+          "register <class>` to register",
       );
     }
 
@@ -30,9 +31,9 @@ module.exports = {
         .filter(
           ([name, weapon]) =>
             weapon.classes.includes(playerClass) &&
-            !playerEquipments.weapons.inventory.includes(name)
+            !playerEquipments.weapons.inventory.includes(name),
         )
-        .sort((a, b) => a[1].cost - b[1].cost)
+        .sort((a, b) => a[1].cost - b[1].cost),
     );
 
     const shields = Object.fromEntries(
@@ -40,9 +41,9 @@ module.exports = {
         .filter(
           ([name, shield]) =>
             shield.classes.includes(playerClass) &&
-            !playerEquipments.shields.inventory.includes(name)
+            !playerEquipments.shields.inventory.includes(name),
         )
-        .sort((a, b) => a[1].cost - b[1].cost)
+        .sort((a, b) => a[1].cost - b[1].cost),
     );
 
     const helmet = Object.fromEntries(
@@ -50,9 +51,9 @@ module.exports = {
         .filter(
           ([name, helmet]) =>
             helmet.classes.includes(playerClass) &&
-            !playerEquipments.helmet.inventory.includes(name)
+            !playerEquipments.helmet.inventory.includes(name),
         )
-        .sort((a, b) => a[1].cost - b[1].cost)
+        .sort((a, b) => a[1].cost - b[1].cost),
     );
 
     const armor = Object.fromEntries(
@@ -60,9 +61,9 @@ module.exports = {
         .filter(
           ([name, armor]) =>
             armor.classes.includes(playerClass) &&
-            !playerEquipments.armor.inventory.includes(name)
+            !playerEquipments.armor.inventory.includes(name),
         )
-        .sort((a, b) => a[1].cost - b[1].cost)
+        .sort((a, b) => a[1].cost - b[1].cost),
     );
 
     const gloves = Object.fromEntries(
@@ -70,9 +71,9 @@ module.exports = {
         .filter(
           ([name, gloves]) =>
             gloves.classes.includes(playerClass) &&
-            !playerEquipments.gloves.inventory.includes(name)
+            !playerEquipments.gloves.inventory.includes(name),
         )
-        .sort((a, b) => a[1].cost - b[1].cost)
+        .sort((a, b) => a[1].cost - b[1].cost),
     );
 
     const row = new Discord.ActionRowBuilder().addComponents(
@@ -109,8 +110,8 @@ module.exports = {
             description: "List of Gloves",
             value: "gloves",
             emoji: constants.assets.gloves.emoji,
-          }
-        )
+          },
+        ),
     );
 
     const embed = new Discord.EmbedBuilder()
@@ -122,7 +123,7 @@ module.exports = {
       .setDescription("> Please select a category below!")
       .setColor("#0099ff")
       .setThumbnail(
-        "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+        "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
       )
       .setFooter({
         text: client.user.username,
@@ -149,13 +150,11 @@ module.exports = {
 
             for (let [name, weapon] of Object.entries(weapons)) {
               weaponsText.push(
-                `**• ${name
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                  .join(" ")}** \`${Object.keys(weapon.attr)
+                `**• ${camelCaseToNormal(name)}** \`${Object.keys(weapon.attr)
                   .map((a) => `${a}:${weapon.attr[a]}`)
-                  .join("|")}\` - ${constants.coins.emoji} ${weapon.cost}`
+                  .join(
+                    "|",
+                  )}${weapon.passive ? ` | ${weapon.passive.description}` : " "}\` - ${constants.coins.emoji} ${weapon.cost}`,
               );
             }
 
@@ -172,11 +171,11 @@ module.exports = {
               .setDescription(weaponsText.join("\n"))
               .setColor("#0099ff")
               .setThumbnail(
-                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
               )
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -193,13 +192,11 @@ module.exports = {
 
             for (let [name, shield] of Object.entries(shields)) {
               shieldsText.push(
-                `**• ${name
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                  .join(" ")}** \`${Object.keys(shield.attr)
+                `**• ${camelCaseToNormal(name)}** \`${Object.keys(shield.attr)
                   .map((a) => `${a}:${shield.attr[a]}`)
-                  .join("|")}\` - ${constants.coins.emoji} ${shield.cost}`
+                  .join(
+                    "|",
+                  )}${shield.passive ? ` | ${shield.passive.description}` : " "}\` - ${constants.coins.emoji} ${shield.cost}`,
               );
             }
 
@@ -216,11 +213,11 @@ module.exports = {
               .setDescription(shieldsText.join("\n"))
               .setColor("#0099ff")
               .setThumbnail(
-                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
               )
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -237,13 +234,11 @@ module.exports = {
 
             for (let [name, helmett] of Object.entries(helmet)) {
               helmetText.push(
-                `**• ${name
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                  .join(" ")}** \`${Object.keys(helmett.attr)
+                `**• ${camelCaseToNormal(name)}** \`${Object.keys(helmett.attr)
                   .map((a) => `${a}:${helmett.attr[a]}`)
-                  .join("|")}\` - ${constants.coins.emoji} ${helmett.cost}`
+                  .join(
+                    "|",
+                  )}${helmett.passive ? ` | ${helmett.passive.description}` : " "}\` - ${constants.coins.emoji} ${helmett.cost}`,
               );
             }
 
@@ -260,11 +255,11 @@ module.exports = {
               .setDescription(helmetText.join("\n"))
               .setColor("#0099ff")
               .setThumbnail(
-                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
               )
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -281,13 +276,11 @@ module.exports = {
 
             for (let [name, armort] of Object.entries(armor)) {
               armorText.push(
-                `**• ${name
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                  .join(" ")}** \`${Object.keys(armort.attr)
+                `**• ${camelCaseToNormal(name)}** \`${Object.keys(armort.attr)
                   .map((a) => `${a}:${armort.attr[a]}`)
-                  .join("|")}\` - ${constants.coins.emoji} ${armort.cost}`
+                  .join(
+                    "|",
+                  )}${armort.passive ? ` | ${armort.passive.description}` : " "}\` - ${constants.coins.emoji} ${armort.cost}`,
               );
             }
 
@@ -304,11 +297,11 @@ module.exports = {
               .setDescription(armorText.join("\n"))
               .setColor("#0099ff")
               .setThumbnail(
-                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
               )
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -325,13 +318,11 @@ module.exports = {
 
             for (let [name, glove] of Object.entries(gloves)) {
               glovesText.push(
-                `**• ${name
-                  .replace(/([A-Z])/g, " $1")
-                  .split(" ")
-                  .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                  .join(" ")}** \`${Object.keys(glove.attr)
+                `**• ${camelCaseToNormal(name)}** \`${Object.keys(glove.attr)
                   .map((a) => `${a}:${glove.attr[a]}`)
-                  .join("|")}\` - ${constants.coins.emoji} ${glove.cost}`
+                  .join(
+                    "|",
+                  )}${glove.passive ? ` | ${glove.passive.description}` : " "}\` - ${constants.coins.emoji} ${glove.cost}`,
               );
             }
 
@@ -348,11 +339,11 @@ module.exports = {
               .setDescription(glovesText.join("\n"))
               .setColor("#0099ff")
               .setThumbnail(
-                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
               )
               .setFooter({
                 text: `To buy, type ${client.prefixes.get(
-                  message.guild.id
+                  message.guild.id,
                 )}buy <name>`,
                 iconURL: client.user.displayAvatarURL(),
               });
@@ -364,7 +355,7 @@ module.exports = {
             collector();
           }
         },
-        () => null
+        () => null,
       );
     }
   },
@@ -414,9 +405,9 @@ module.exports = {
             .filter(
               ([name, weapon]) =>
                 weapon.classes.includes(playerClass) &&
-                !playerEquipments.weapons.inventory.includes(name)
+                !playerEquipments.weapons.inventory.includes(name),
             )
-            .sort((a, b) => a[1].cost - b[1].cost)
+            .sort((a, b) => a[1].cost - b[1].cost),
         );
 
         const shields = Object.fromEntries(
@@ -424,9 +415,9 @@ module.exports = {
             .filter(
               ([name, shield]) =>
                 shield.classes.includes(playerClass) &&
-                !playerEquipments.shields.inventory.includes(name)
+                !playerEquipments.shields.inventory.includes(name),
             )
-            .sort((a, b) => a[1].cost - b[1].cost)
+            .sort((a, b) => a[1].cost - b[1].cost),
         );
 
         const helmet = Object.fromEntries(
@@ -434,9 +425,9 @@ module.exports = {
             .filter(
               ([name, helmet]) =>
                 helmet.classes.includes(playerClass) &&
-                !playerEquipments.helmet.inventory.includes(name)
+                !playerEquipments.helmet.inventory.includes(name),
             )
-            .sort((a, b) => a[1].cost - b[1].cost)
+            .sort((a, b) => a[1].cost - b[1].cost),
         );
 
         const armor = Object.fromEntries(
@@ -444,9 +435,9 @@ module.exports = {
             .filter(
               ([name, armor]) =>
                 armor.classes.includes(playerClass) &&
-                !playerEquipments.armor.inventory.includes(name)
+                !playerEquipments.armor.inventory.includes(name),
             )
-            .sort((a, b) => a[1].cost - b[1].cost)
+            .sort((a, b) => a[1].cost - b[1].cost),
         );
 
         const gloves = Object.fromEntries(
@@ -454,9 +445,9 @@ module.exports = {
             .filter(
               ([name, gloves]) =>
                 gloves.classes.includes(playerClass) &&
-                !playerEquipments.gloves.inventory.includes(name)
+                !playerEquipments.gloves.inventory.includes(name),
             )
-            .sort((a, b) => a[1].cost - b[1].cost)
+            .sort((a, b) => a[1].cost - b[1].cost),
         );
 
         const row = new Discord.ActionRowBuilder().addComponents(
@@ -493,8 +484,8 @@ module.exports = {
                 description: "List of Gloves",
                 value: "gloves",
                 emoji: constants.assets.gloves.emoji,
-              }
-            )
+              },
+            ),
         );
 
         const embed = new Discord.EmbedBuilder()
@@ -506,7 +497,7 @@ module.exports = {
           .setDescription("> Please select a category below!")
           .setColor("#0099ff")
           .setThumbnail(
-            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
           )
           .setFooter({
             text: client.user.username,
@@ -534,13 +525,13 @@ module.exports = {
 
                 for (let [name, weapon] of Object.entries(weapons)) {
                   weaponsText.push(
-                    `**• ${name
-                      .replace(/([A-Z])/g, " $1")
-                      .split(" ")
-                      .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                      .join(" ")}** \`${Object.keys(weapon.attr)
+                    `**• ${camelCaseToNormal(name)}** \`${Object.keys(
+                      weapon.attr,
+                    )
                       .map((a) => `${a}:${weapon.attr[a]}`)
-                      .join("|")}\` - ${constants.coins.emoji} ${weapon.cost}`
+                      .join(
+                        "|",
+                      )}${weapon.passive ? ` | ${weapon.passive.description}` : " "}\` - ${constants.coins.emoji} ${weapon.cost}`,
                   );
                 }
 
@@ -557,7 +548,7 @@ module.exports = {
                   .setDescription(weaponsText.join("\n"))
                   .setColor("#0099ff")
                   .setThumbnail(
-                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
                   )
                   .setFooter({
                     text: "To buy, use /shop buy <name>",
@@ -576,13 +567,13 @@ module.exports = {
 
                 for (let [name, shield] of Object.entries(shields)) {
                   shieldsText.push(
-                    `**• ${name
-                      .replace(/([A-Z])/g, " $1")
-                      .split(" ")
-                      .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                      .join(" ")}** \`${Object.keys(shield.attr)
+                    `**• ${camelCaseToNormal(name)}** \`${Object.keys(
+                      shield.attr,
+                    )
                       .map((a) => `${a}:${shield.attr[a]}`)
-                      .join("|")}\` - ${constants.coins.emoji} ${shield.cost}`
+                      .join(
+                        "|",
+                      )}${shield.passive ? ` | ${shield.passive.description}` : " "} |\` - ${constants.coins.emoji} ${shield.cost}`,
                   );
                 }
 
@@ -599,7 +590,7 @@ module.exports = {
                   .setDescription(shieldsText.join("\n"))
                   .setColor("#0099ff")
                   .setThumbnail(
-                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
                   )
                   .setFooter({
                     text: "To buy, use /shop buy <name>",
@@ -618,13 +609,13 @@ module.exports = {
 
                 for (let [name, helmett] of Object.entries(helmet)) {
                   helmetText.push(
-                    `**• ${name
-                      .replace(/([A-Z])/g, " $1")
-                      .split(" ")
-                      .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                      .join(" ")}** \`${Object.keys(helmett.attr)
+                    `**• ${camelCaseToNormal(name)}** \`${Object.keys(
+                      helmett.attr,
+                    )
                       .map((a) => `${a}:${helmett.attr[a]}`)
-                      .join("|")}\` - ${constants.coins.emoji} ${helmett.cost}`
+                      .join(
+                        "|",
+                      )}${helmett.passive ? ` | ${helmett.passive.description}` : " "}\` - ${constants.coins.emoji} ${helmett.cost}`,
                   );
                 }
 
@@ -641,7 +632,7 @@ module.exports = {
                   .setDescription(helmetText.join("\n"))
                   .setColor("#0099ff")
                   .setThumbnail(
-                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
                   )
                   .setFooter({
                     text: "To buy, use /shop buy <name>",
@@ -660,13 +651,13 @@ module.exports = {
 
                 for (let [name, armort] of Object.entries(armor)) {
                   armorText.push(
-                    `**• ${name
-                      .replace(/([A-Z])/g, " $1")
-                      .split(" ")
-                      .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                      .join(" ")}** \`${Object.keys(armort.attr)
+                    `**• ${camelCaseToNormal(name)}** \`${Object.keys(
+                      armort.attr,
+                    )
                       .map((a) => `${a}:${armort.attr[a]}`)
-                      .join("|")}\` - ${constants.coins.emoji} ${armort.cost}`
+                      .join(
+                        "|",
+                      )}${armort.passive ? ` | ${armort.passive.description}` : " "}\` - ${constants.coins.emoji} ${armort.cost}`,
                   );
                 }
 
@@ -683,7 +674,7 @@ module.exports = {
                   .setDescription(armorText.join("\n"))
                   .setColor("#0099ff")
                   .setThumbnail(
-                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
                   )
                   .setFooter({
                     text: "To buy, use /shop buy <name>",
@@ -702,13 +693,13 @@ module.exports = {
 
                 for (let [name, glove] of Object.entries(gloves)) {
                   glovesText.push(
-                    `**• ${name
-                      .replace(/([A-Z])/g, " $1")
-                      .split(" ")
-                      .map((a) => a.charAt(0).toUpperCase() + a.slice(1))
-                      .join(" ")}** \`${Object.keys(glove.attr)
+                    `**• ${camelCaseToNormal(name)}** \`${Object.keys(
+                      glove.attr,
+                    )
                       .map((a) => `${a}:${glove.attr[a]}`)
-                      .join("|")}\` - ${constants.coins.emoji} ${glove.cost}`
+                      .join(
+                        "|",
+                      )}${glove.passive ? ` | ${glove.passive.description}` : " "}\` - ${constants.coins.emoji} ${glove.cost}`,
                   );
                 }
 
@@ -725,7 +716,7 @@ module.exports = {
                   .setDescription(glovesText.join("\n"))
                   .setColor("#0099ff")
                   .setThumbnail(
-                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8"
+                    "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/089d21ad-7782-4104-89c2-a65435feaa61/d9dbds5-953028f0-861a-4db8-9b6f-91162fe1959d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8wODlkMjFhZC03NzgyLTQxMDQtODljMi1hNjU0MzVmZWFhNjEvZDlkYmRzNS05NTMwMjhmMC04NjFhLTRkYjgtOWI2Zi05MTE2MmZlMTk1OWQuZ2lmIn1dXX0.Ez2k2AdkZOj3eKeJx4YhE301riLSPQT8dXLtBGFYGh8",
                   )
                   .setFooter({
                     text: "To buy, use /shop buy <name>",
@@ -739,7 +730,7 @@ module.exports = {
                 collector();
               }
             },
-            () => null
+            () => null,
           );
         }
       } else if (subcommand === "buy") {
@@ -760,40 +751,40 @@ module.exports = {
           Object.entries(equipments.weapons).filter(
             ([name, weapon]) =>
               weapon.classes.includes(playerClass) &&
-              !playerEquipments.weapons.inventory.includes(name)
-          )
+              !playerEquipments.weapons.inventory.includes(name),
+          ),
         );
 
         const shields = Object.fromEntries(
           Object.entries(equipments.shields).filter(
             ([name, shield]) =>
               shield.classes.includes(playerClass) &&
-              !playerEquipments.shields.inventory.includes(name)
-          )
+              !playerEquipments.shields.inventory.includes(name),
+          ),
         );
 
         const helmet = Object.fromEntries(
           Object.entries(equipments.helmet).filter(
             ([name, helmet]) =>
               helmet.classes.includes(playerClass) &&
-              !playerEquipments.helmet.inventory.includes(name)
-          )
+              !playerEquipments.helmet.inventory.includes(name),
+          ),
         );
 
         const armor = Object.fromEntries(
           Object.entries(equipments.armor).filter(
             ([name, armor]) =>
               armor.classes.includes(playerClass) &&
-              !playerEquipments.armor.inventory.includes(name)
-          )
+              !playerEquipments.armor.inventory.includes(name),
+          ),
         );
 
         const gloves = Object.fromEntries(
           Object.entries(equipments.gloves).filter(
             ([name, gloves]) =>
               gloves.classes.includes(playerClass) &&
-              !playerEquipments.gloves.inventory.includes(name)
-          )
+              !playerEquipments.gloves.inventory.includes(name),
+          ),
         );
 
         const prompt = interaction.options
@@ -835,11 +826,11 @@ module.exports = {
             {
               wallet: coins.get("wallet") - weapon.cost,
             },
-            { where: { userID: interaction.user.id } }
+            { where: { userID: interaction.user.id } },
           );
 
           const name = Object.keys(weapons).find(
-            (name) => name.toLowerCase() === prompt
+            (name) => name.toLowerCase() === prompt,
           );
 
           playerEquipments.weapons.inventory.push(name);
@@ -847,7 +838,7 @@ module.exports = {
           interaction.reply(
             `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
               constants.coins.emoji
-            } ${weapon.cost}!`
+            } ${weapon.cost}!`,
           );
         } else if (shield) {
           if (coins.get("wallet") < shield.cost) {
@@ -858,11 +849,11 @@ module.exports = {
             {
               wallet: coins.get("wallet") - shield.cost,
             },
-            { where: { userID: interaction.user.id } }
+            { where: { userID: interaction.user.id } },
           );
 
           const name = Object.keys(shields).find(
-            (name) => name.toLowerCase() === prompt
+            (name) => name.toLowerCase() === prompt,
           );
 
           playerEquipments.shields.inventory.push(name);
@@ -870,7 +861,7 @@ module.exports = {
           interaction.reply(
             `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
               constants.coins.emoji
-            } ${shield.cost}!`
+            } ${shield.cost}!`,
           );
         } else if (helmett) {
           if (coins.get("wallet") < helmett.cost) {
@@ -881,11 +872,11 @@ module.exports = {
             {
               wallet: coins.get("wallet") - helmett.cost,
             },
-            { where: { userID: interaction.user.id } }
+            { where: { userID: interaction.user.id } },
           );
 
           const name = Object.keys(helmet).find(
-            (name) => name.toLowerCase() === prompt
+            (name) => name.toLowerCase() === prompt,
           );
 
           playerEquipments.helmet.inventory.push(name);
@@ -893,7 +884,7 @@ module.exports = {
           interaction.reply(
             `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
               constants.coins.emoji
-            } ${helmett.cost}!`
+            } ${helmett.cost}!`,
           );
         } else if (armort) {
           if (coins.get("wallet") < armort.cost) {
@@ -904,11 +895,11 @@ module.exports = {
             {
               wallet: coins.get("wallet") - armort.cost,
             },
-            { where: { userID: interaction.user.id } }
+            { where: { userID: interaction.user.id } },
           );
 
           const name = Object.keys(armor).find(
-            (name) => name.toLowerCase() === prompt
+            (name) => name.toLowerCase() === prompt,
           );
 
           playerEquipments.armor.inventory.push(name);
@@ -916,7 +907,7 @@ module.exports = {
           interaction.reply(
             `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
               constants.coins.emoji
-            } ${armort.cost}!`
+            } ${armort.cost}!`,
           );
         } else if (glove) {
           if (coins.get("wallet") < glove.cost) {
@@ -927,11 +918,11 @@ module.exports = {
             {
               wallet: coins.get("wallet") - glove.cost,
             },
-            { where: { userID: interaction.user.id } }
+            { where: { userID: interaction.user.id } },
           );
 
           const name = Object.keys(gloves).find(
-            (name) => name.toLowerCase() === prompt
+            (name) => name.toLowerCase() === prompt,
           );
 
           playerEquipments.gloves.inventory.push(name);
@@ -939,7 +930,7 @@ module.exports = {
           interaction.reply(
             `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
               constants.coins.emoji
-            } ${glove.cost}!`
+            } ${glove.cost}!`,
           );
         }
 
@@ -947,7 +938,7 @@ module.exports = {
           {
             equipments: JSON.stringify(playerEquipments),
           },
-          { where: { userID: interaction.user.id } }
+          { where: { userID: interaction.user.id } },
         );
       }
     },
