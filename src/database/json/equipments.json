@@ -7,7 +7,8 @@
         "crit": 2
       },
       "classes": ["warrior", "fox"],
-      "cost": 5
+      "cost": 5,
+      "passive": null
     },
     "dagger": {
       "attr": {
@@ -16,7 +17,8 @@
         "crit": 10
       },
       "classes": ["warrior", "fox"],
-      "cost": 175
+      "cost": 175,
+      "passive": null
     },
     "mythrilKnife": {
       "attr": {
@@ -25,7 +27,8 @@
         "crit": 16
       },
       "classes": ["warrior", "fox"],
-      "cost": 800
+      "cost": 800,
+      "passive": null
     },
     "mageMasher": {
       "attr": {
@@ -34,7 +37,8 @@
         "crit": 25
       },
       "classes": ["warrior", "fox"],
-      "cost": 69700
+      "cost": 69700,
+      "passive": null
     },
     "gladius": {
       "attr": {
@@ -44,7 +48,8 @@
         "crit": 26
       },
       "classes": ["warrior", "fox"],
-      "cost": 73900
+      "cost": 73900,
+      "passive": null
     },
     "rapier": {
       "attr": {
@@ -53,7 +58,8 @@
         "crit": 4
       },
       "classes": ["warrior", "fox"],
-      "cost": 10
+      "cost": 10,
+      "passive": null
     },
     "saber": {
       "attr": {
@@ -62,7 +68,8 @@
         "crit": 12
       },
       "classes": ["warrior", "fox"],
-      "cost": 450
+      "cost": 450,
+      "passive": null
     },
     "broadSword": {
       "attr": {
@@ -71,7 +78,8 @@
         "crit": 6
       },
       "classes": ["warrior"],
-      "cost": 550
+      "cost": 550,
+      "passive": null
     },
     "longsword": {
       "attr": {
@@ -80,7 +88,8 @@
         "crit": 13
       },
       "classes": ["warrior"],
-      "cost": 1500
+      "cost": 1500,
+      "passive": null
     },
     "mythrilSword": {
       "attr": {
@@ -89,7 +98,8 @@
         "crit": 17
       },
       "classes": ["warrior"],
-      "cost": 4000
+      "cost": 4000,
+      "passive": null
     },
     "duelRapier": {
       "attr": {
@@ -99,7 +109,8 @@
         "crit": 26
       },
       "classes": ["warrior", "fox"],
-      "cost": 75900
+      "cost": 75900,
+      "passive": null
     },
     "scimitar": {
       "attr": {
@@ -108,6 +119,7 @@
         "crit": 8
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "cost": 200
     },
     "falchion": {
@@ -117,6 +129,7 @@
         "crit": 15
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "cost": 450
     },
     "kotetsu": {
@@ -126,6 +139,7 @@
         "crit": 21
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "cost": 55900
     },
     "nunchaku": {
@@ -134,6 +148,7 @@
         "crit": 1
       },
       "classes": ["ghost"],
+      "passive": null,
       "cost": 10
     },
     "ironNunchaku": {
@@ -142,6 +157,7 @@
         "crit": 9
       },
       "classes": ["ghost"],
+      "passive": null,
       "cost": 200
     },
     "battleAxe": {
@@ -151,6 +167,7 @@
         "crit": 7
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 550
     },
     "mythrilAxe": {
@@ -160,6 +177,7 @@
         "crit": 19
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 4500
     },
     "lightAxe": {
@@ -169,6 +187,7 @@
         "crit": 29
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 10000
     },
     "vikingAxe": {
@@ -178,6 +197,7 @@
         "crit": 16
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 10,
       "cost": 43300
     },
@@ -188,6 +208,7 @@
         "crit": 20
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 37100
     },
     "hammer": {
@@ -197,6 +218,7 @@
         "crit": 5
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 10
     },
     "mythrilHammer": {
@@ -206,6 +228,7 @@
         "crit": 18
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 2500
     },
     "staff": {
@@ -215,6 +238,7 @@
         "crit": 3
       },
       "classes": ["warrior", "ghost"],
+      "passive": null,
       "cost": 5
     },
     "crosier": {
@@ -224,6 +248,7 @@
         "crit": 11
       },
       "classes": ["warrior", "ghost"],
+      "passive": null,
       "cost": 200
     }
   },
@@ -233,6 +258,7 @@
         "def": 2
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 15
     },
     "buckler": {
@@ -240,6 +266,7 @@
         "def": 2
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "cost": 2500
     },
     "ironShield": {
@@ -247,6 +274,7 @@
         "def": 4
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 100
     },
     "mythrilShield": {
@@ -254,6 +282,7 @@
         "def": 8
       },
       "classes": ["warrior"],
+      "passive": null,
       "cost": 2500
     },
     "protectCloak": {
@@ -261,6 +290,7 @@
         "def": 8
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "weight": 2,
       "cost": 20000
     },
@@ -270,6 +300,7 @@
         "eva": 9
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "weight": 1,
       "cost": 51000
     },
@@ -278,6 +309,7 @@
         "def": 9
       },
       "classes": ["warrior", "fox"],
+      "passive": null,
       "weight": 1,
       "cost": 55800
     }
@@ -288,6 +320,7 @@
         "def": 1
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 1,
       "cost": 80
     },
@@ -296,6 +329,7 @@
         "def": 3
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 3,
       "cost": 100
     },
@@ -304,6 +338,7 @@
         "def": 5
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 5,
       "cost": 450
     },
@@ -312,6 +347,7 @@
         "def": 6
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 3,
       "cost": 2500
     }
@@ -322,6 +358,7 @@
         "def": 1
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 2,
       "cost": 10
     },
@@ -330,6 +367,7 @@
         "def": 4
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 8,
       "cost": 50
     },
@@ -338,6 +376,7 @@
         "def": 15
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 15,
       "cost": 7500
     },
@@ -346,6 +385,7 @@
         "def": 24
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 24,
       "cost": 800
     },
@@ -354,6 +394,7 @@
         "def": 34
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 33,
       "cost": 45000
     },
@@ -362,6 +403,7 @@
         "def": 4
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 1,
       "cost": 1000
     },
@@ -370,6 +412,7 @@
         "def": 24
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 1,
       "cost": 5000
     },
@@ -378,6 +421,7 @@
         "def": 34
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 1,
       "cost": 50000
     },
@@ -387,7 +431,13 @@
       },
       "classes": ["warrior", "fox", "ghost"],
       "weight": 3,
-      "cost": 67300
+      "cost": 67300,
+      "passive": {
+        "rate": 20,
+        "hp": 3,
+        "action": "add",
+        "description": "Grants a 20% chance for the character to gain 3 additional HP"
+      }
     }
   },
   "gloves": {
@@ -396,6 +446,7 @@
         "def": 1
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 1,
       "cost": 60
     },
@@ -404,6 +455,7 @@
         "def": 2
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 3,
       "cost": 200
     },
@@ -412,6 +464,7 @@
         "def": 4
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 5,
       "cost": 750
     },
@@ -420,6 +473,7 @@
         "def": 6
       },
       "classes": ["warrior"],
+      "passive": null,
       "weight": 3,
       "cost": 2500
     },
@@ -428,6 +482,7 @@
         "def": 8
       },
       "classes": ["warrior", "fox", "ghost"],
+      "passive": null,
       "weight": 1,
       "cost": 20000
     }
