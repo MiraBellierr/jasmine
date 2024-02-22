@@ -6,71 +6,22 @@ module.exports = {
   description: "Sends a random meme",
   category: "meme",
   run: async (client, message) => {
-    const m = await message.reply("*Please wait...*");
-    const subreddits = [
-      "funny",
-      "memes",
-      "dankmemes",
-      "wholesomememes",
-      "okbuddyretard",
-      "comedymemes",
-      "pewdiepiesubmissions",
-      "lastimages",
-      "historymemes",
-      "raimimemes",
-    ];
-    const random = Math.floor(Math.random() * subreddits.length);
-    const subreddit = subreddits[random];
-
-    const response = await axios.get(
-      `https://www.reddit.com/r/${subreddit}/hot.json`
-    );
-
-    const memes = [];
-
-    const childrens = response.data.data.children;
-    Array.from(childrens).forEach((child) => {
-      if (
-        (child.kind === "t3" && !child.data.over_18 && child.media) ||
-        (child.kind === "t3" &&
-          !child.data.over_18 &&
-          child.data.url.includes("."))
-      ) {
-        memes.push(child);
-      }
-    });
-
-    const randomMeme = memes[Math.floor(Math.random() * memes.length)].data;
+    const response = await axios.get(`https://meme-api.com/gimme`);
+    const meme = response.data;
 
     const embed = new EmbedBuilder()
       .setAuthor({
-        name: `By ${randomMeme.author} - `,
-        iconURL:
-          randomMeme.all_awardings.length > 0
-            ? randomMeme.all_awardings[
-                Math.floor(Math.random() * randomMeme.all_awardings.length)
-              ].icon_url
-            : client.user.avatarURL(),
+        name: `By ${meme.author} - `,
+        iconURL: client.user.avatarURL(),
       })
-      .setTitle(`${randomMeme.title.slice(0, 253)}...`)
-      .setURL(`https://www.reddit.com${randomMeme.permalink}`)
-      .setImage(randomMeme.url)
+      .setTitle(meme.title)
+      .setURL(meme.postLink)
+      .setImage(meme.url)
       .setFooter({
-        text: `⬆️ ${randomMeme.ups} | 💬 ${randomMeme.num_comments} | 🏅 ${randomMeme.total_awards_received}`,
+        text: `⬆️ ${meme.ups} | 💬 r/${meme.subreddit}`,
       });
 
-    if (randomMeme.is_video) {
-      const attachment = new AttachmentBuilder()
-        .setName("meme.mp4")
-        .setFile(randomMeme.media.reddit_video.fallback_url)
-        .setDescription("meme");
-
-      message.reply({ content: randomMeme.title, files: [attachment] });
-      m.delete();
-    } else {
-      message.reply({ embeds: [embed] });
-      m.delete();
-    }
+    message.reply({ embeds: [embed] });
   },
   interaction: {
     data: {
@@ -79,73 +30,22 @@ module.exports = {
       type: 1,
     },
     run: async (client, interaction) => {
-      interaction.deferReply();
-
-      const subreddits = [
-        "funny",
-        "memes",
-        "dankmemes",
-        "wholesomememes",
-        "okbuddyretard",
-        "comedymemes",
-        "pewdiepiesubmissions",
-        "lastimages",
-        "historymemes",
-        "raimimemes",
-      ];
-      const random = Math.floor(Math.random() * subreddits.length);
-      const subreddit = subreddits[random];
-
-      const response = await axios.get(
-        `https://www.reddit.com/r/${subreddit}/hot.json`
-      );
-
-      const memes = [];
-
-      const childrens = response.data.data.children;
-      Array.from(childrens).forEach((child) => {
-        if (
-          (child.kind === "t3" && !child.data.over_18 && child.media) ||
-          (child.kind === "t3" &&
-            !child.data.over_18 &&
-            child.data.url.includes("."))
-        ) {
-          memes.push(child);
-        }
-      });
-
-      const randomMeme = memes[Math.floor(Math.random() * memes.length)].data;
+      const response = await axios.get(`https://meme-api.com/gimme`);
+      const meme = response.data;
 
       const embed = new EmbedBuilder()
         .setAuthor({
-          name: `By ${randomMeme.author} - `,
-          iconURL:
-            randomMeme.all_awardings.length > 0
-              ? randomMeme.all_awardings[
-                  Math.floor(Math.random() * randomMeme.all_awardings.length)
-                ].icon_url
-              : client.user.avatarURL(),
+          name: `By ${meme.author} - `,
+          iconURL: client.user.avatarURL(),
         })
-        .setTitle(`${randomMeme.title.slice(0, 253)}...`)
-        .setURL(`https://www.reddit.com${randomMeme.permalink}`)
-        .setImage(randomMeme.url)
+        .setTitle(meme.title)
+        .setURL(meme.postLink)
+        .setImage(meme.url)
         .setFooter({
-          text: `⬆️ ${randomMeme.ups} | 💬 ${randomMeme.num_comments} | 🏅 ${randomMeme.total_awards_received}`,
+          text: `⬆️ ${meme.ups} | 💬 r/${meme.subreddit}`,
         });
 
-      if (randomMeme.is_video) {
-        const attachment = new AttachmentBuilder()
-          .setName("meme.mp4")
-          .setFile(randomMeme.media.reddit_video.fallback_url)
-          .setDescription("meme");
-
-        interaction.editReply({
-          content: randomMeme.title,
-          files: [attachment],
-        });
-      } else {
-        interaction.editReply({ embeds: [embed] });
-      }
+      interaction.reply({ embeds: [embed] });
     },
   },
 };
