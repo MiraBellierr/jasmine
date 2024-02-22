@@ -1,6 +1,7 @@
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 const constants = require("../../utils/constants");
+const { camelCaseToNormal } = require("../../utils/utils");
 
 module.exports = {
   name: "equip",
@@ -14,7 +15,7 @@ module.exports = {
 
     if (!character) {
       return message.channel.send(
-        `You haven't registered yet! Use \`${client.config.prefix}register\` to register.`
+        `You haven't registered yet! Use \`${client.config.prefix}register\` to register.`,
       );
     }
 
@@ -32,25 +33,25 @@ module.exports = {
         .setDescription(
           `**• ${constants.assets.weapon.emoji} Weapon:** ${
             playerEquipments.weapons.equipped
-              ? playerEquipments.weapons.equipped
+              ? camelCaseToNormal(playerEquipments.weapons.equipped)
               : "None"
           }\n**• ${constants.assets.shield.emoji} Shield:** ${
             playerEquipments.shields.equipped
-              ? playerEquipments.shields.equipped
+              ? camelCaseToNormal(playerEquipments.shields.equipped)
               : "None"
           }\n**• ${constants.assets.helmet.emoji} Helmet:** ${
             playerEquipments.helmet.equipped
-              ? playerEquipments.helmet.equipped
+              ? camelCaseToNormal(playerEquipments.helmet.equipped)
               : "None"
           }\n**• ${constants.assets.armor.emoji} Armor:** ${
             playerEquipments.armor.equipped
-              ? playerEquipments.armor.equipped
+              ? camelCaseToNormal(playerEquipments.armor.equipped)
               : "None"
           }\n**• ${constants.assets.gloves.emoji} Gloves:** ${
             playerEquipments.gloves.equipped
-              ? playerEquipments.gloves.equipped
+              ? camelCaseToNormal(playerEquipments.gloves.equipped)
               : "None"
-          }`
+          }`,
         );
 
       return message.reply({ embeds: [embed] });
@@ -59,19 +60,19 @@ module.exports = {
     const prompt = args.join("").toLowerCase();
 
     const weapon = playerEquipments.weapons.inventory.find(
-      (a) => a.toLowerCase() === prompt
+      (a) => a.toLowerCase() === prompt,
     );
     const shield = playerEquipments.shields.inventory.find(
-      (a) => a.toLowerCase() === prompt
+      (a) => a.toLowerCase() === prompt,
     );
     const helmet = playerEquipments.helmet.inventory.find(
-      (a) => a.toLowerCase() === prompt
+      (a) => a.toLowerCase() === prompt,
     );
     const armor = playerEquipments.armor.inventory.find(
-      (a) => a.toLowerCase() === prompt
+      (a) => a.toLowerCase() === prompt,
     );
     const gloves = playerEquipments.gloves.inventory.find(
-      (a) => a.toLowerCase() === prompt
+      (a) => a.toLowerCase() === prompt,
     );
 
     if (weapon) {
@@ -80,7 +81,7 @@ module.exports = {
       message.channel.send(
         `You equipped **${weapon
           .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your weapon.`
+          .toLowerCase()}** as your weapon.`,
       );
     } else if (shield) {
       playerEquipments.shields.equipped = shield;
@@ -88,7 +89,7 @@ module.exports = {
       message.channel.send(
         `You equipped **${shield
           .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your shield.`
+          .toLowerCase()}** as your shield.`,
       );
     } else if (helmet) {
       playerEquipments.helmet.equipped = helmet;
@@ -96,7 +97,7 @@ module.exports = {
       message.channel.send(
         `You equipped **${helmet
           .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your helmet.`
+          .toLowerCase()}** as your helmet.`,
       );
     } else if (armor) {
       playerEquipments.armor.equipped = armor;
@@ -104,7 +105,7 @@ module.exports = {
       message.channel.send(
         `You equipped **${armor
           .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your armor.`
+          .toLowerCase()}** as your armor.`,
       );
     } else if (gloves) {
       playerEquipments.gloves.equipped = gloves;
@@ -112,7 +113,7 @@ module.exports = {
       message.channel.send(
         `You equipped **${gloves
           .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your gloves.`
+          .toLowerCase()}** as your gloves.`,
       );
     } else {
       return message.channel.send(`You don't have this equipment`);
@@ -122,7 +123,7 @@ module.exports = {
       {
         equipments: JSON.stringify(playerEquipments),
       },
-      { where: { userID: message.author.id } }
+      { where: { userID: message.author.id } },
     );
   },
   interaction: {
@@ -156,19 +157,19 @@ module.exports = {
         .toLowerCase();
 
       const weapon = playerEquipments.weapons.inventory.find(
-        (a) => a.toLowerCase() === prompt
+        (a) => a.toLowerCase() === prompt,
       );
       const shield = playerEquipments.shields.inventory.find(
-        (a) => a.toLowerCase() === prompt
+        (a) => a.toLowerCase() === prompt,
       );
       const helmet = playerEquipments.helmet.inventory.find(
-        (a) => a.toLowerCase() === prompt
+        (a) => a.toLowerCase() === prompt,
       );
       const armor = playerEquipments.armor.inventory.find(
-        (a) => a.toLowerCase() === prompt
+        (a) => a.toLowerCase() === prompt,
       );
       const gloves = playerEquipments.gloves.inventory.find(
-        (a) => a.toLowerCase() === prompt
+        (a) => a.toLowerCase() === prompt,
       );
 
       if (weapon) {
@@ -177,7 +178,7 @@ module.exports = {
         interaction.reply(
           `You equipped **${weapon
             .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your weapon.`
+            .toLowerCase()}** as your weapon.`,
         );
       } else if (shield) {
         playerEquipments.shields.equipped = shield;
@@ -185,7 +186,7 @@ module.exports = {
         interaction.reply(
           `You equipped **${shield
             .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your shield.`
+            .toLowerCase()}** as your shield.`,
         );
       } else if (helmet) {
         playerEquipments.helmet.equipped = helmet;
@@ -193,7 +194,7 @@ module.exports = {
         interaction.reply(
           `You equipped **${helmet
             .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your helmet.`
+            .toLowerCase()}** as your helmet.`,
         );
       } else if (armor) {
         playerEquipments.armor.equipped = armor;
@@ -201,7 +202,7 @@ module.exports = {
         interaction.reply(
           `You equipped **${armor
             .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your armor.`
+            .toLowerCase()}** as your armor.`,
         );
       } else if (gloves) {
         playerEquipments.gloves.equipped = gloves;
@@ -209,7 +210,7 @@ module.exports = {
         interaction.reply(
           `You equipped **${gloves
             .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your gloves.`
+            .toLowerCase()}** as your gloves.`,
         );
       } else {
         return interaction.reply(`You don't have this equipment`);
@@ -219,7 +220,7 @@ module.exports = {
         {
           equipments: JSON.stringify(playerEquipments),
         },
-        { where: { userID: interaction.user.id } }
+        { where: { userID: interaction.user.id } },
       );
     },
   },
