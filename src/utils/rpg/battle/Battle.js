@@ -11,6 +11,8 @@ class Battle {
     this.user = user;
     this.message = message;
     this.actions = ["battle started"];
+    this.playerPassives = [];
+    this.opponentPassives = [];
   }
 
   async getCharacter() {
@@ -412,97 +414,51 @@ class Battle {
   }
 
   async registerEquipments() {
-    const playerEquipments = JSON.parse(this.character.equipments);
-    const opponentEquipments = JSON.parse(this.opponent.equipments);
-    // weapons
-    if (playerEquipments.weapons.equipped) {
-      const attr = equipments.weapons[playerEquipments.weapons.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.character[key] += attr[key];
-      });
-    }
-    if (opponentEquipments.weapons.equipped) {
-      const attr = equipments.weapons[opponentEquipments.weapons.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.opponent[key] += attr[key];
-      });
-    }
-    // shields
-    if (playerEquipments.shields.equipped) {
-      const attr = equipments.shields[playerEquipments.shields.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.character[key] += attr[key];
-      });
-    }
-    if (opponentEquipments.shields.equipped) {
-      const attr = equipments.shields[opponentEquipments.shields.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.opponent[key] += attr[key];
-      });
-    }
-    // helmet
-    if (playerEquipments.helmet.equipped) {
-      const attr = equipments.helmet[playerEquipments.helmet.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.character[key] += attr[key];
-      });
-      if (equipments.helmet[playerEquipments.helmet.equipped].weight) {
-        this.character.weight +=
-          equipments.helmet[playerEquipments.helmet.equipped].weight;
+    const register = (player, opponent, type) => {
+      const playerEquip = JSON.parse(player.equipments);
+      const opponentEquip = JSON.parse(opponent.equipments);
+
+      if (playerEquip[type].equipped) {
+        const attr = equipments[type][playerEquip[type].equipped].attr;
+        const passive = equipments[type][playerEquip[type].equipped].passive;
+
+        if (passive) {
+          this.playerPassives.push(passive);
+        }
+
+        Object.keys(attr).forEach((key) => {
+          player[key] += attr[key];
+        });
+
+        if (equipments[type][playerEquip[type].equipped].weight) {
+          player.weight += equipments[type][playerEquip[type].equipped].weight;
+        }
       }
-    }
-    if (opponentEquipments.helmet.equipped) {
-      const attr = equipments.helmet[opponentEquipments.helmet.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.opponent[key] += attr[key];
-      });
-      if (equipments.helmet[opponentEquipments.helmet.equipped].weight) {
-        this.opponent.weight +=
-          equipments.helmet[opponentEquipments.helmet.equipped].weight;
+
+      if (opponentEquip[type].equipped) {
+        const attr = equipments[type][opponentEquip[type].equipped].attr;
+        const passive = equipments[type][opponentEquip[type].equipped].passive;
+
+        if (passive) {
+          this.opponentPassives.push(passive);
+        }
+
+        Object.keys(attr).forEach((key) => {
+          opponent[key] += attr[key];
+        });
+
+        if (equipments[type][opponentEquip[type].equipped].weight) {
+          opponent.weight +=
+            equipments[type][opponentEquip[type].equipped].weight;
+        }
       }
-    }
-    // armor
-    if (playerEquipments.armor.equipped) {
-      const attr = equipments.armor[playerEquipments.armor.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.character[key] += attr[key];
-      });
-      if (equipments.armor[playerEquipments.armor.equipped].weight) {
-        this.character.weight +=
-          equipments.armor[playerEquipments.armor.equipped].weight;
-      }
-    }
-    if (opponentEquipments.armor.equipped) {
-      const attr = equipments.armor[opponentEquipments.armor.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.opponent[key] += attr[key];
-      });
-      if (equipments.armor[opponentEquipments.armor.equipped].weight) {
-        this.opponent.weight +=
-          equipments.armor[opponentEquipments.armor.equipped].weight;
-      }
-    }
-    // gloves
-    if (playerEquipments.gloves.equipped) {
-      const attr = equipments.gloves[playerEquipments.gloves.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.character[key] += attr[key];
-      });
-      if (equipments.gloves[playerEquipments.gloves.equipped].weight) {
-        this.character.weight +=
-          equipments.gloves[playerEquipments.gloves.equipped].weight;
-      }
-    }
-    if (opponentEquipments.gloves.equipped) {
-      const attr = equipments.gloves[opponentEquipments.gloves.equipped].attr;
-      Object.keys(attr).forEach((key) => {
-        this.opponent[key] += attr[key];
-      });
-      if (equipments.gloves[opponentEquipments.gloves.equipped].weight) {
-        this.opponent.weight +=
-          equipments.gloves[opponentEquipments.gloves.equipped].weight;
-      }
-    }
+    };
+
+    register(this.character, this.opponent, "weapons");
+    register(this.character, this.opponent, "shields");
+    register(this.character, this.opponent, "helmet");
+    register(this.character, this.opponent, "armor");
+    register(this.character, this.opponent, "gloves");
   }
 
   async registerReward() {
@@ -545,6 +501,39 @@ class Battle {
 
     if (opponentSuccess) {
       const crit = (this.character.crit + 1) / 201 / 100;
+      const passives = this.playerPassives;
+
+      if (passives) {
+        for (const passive of passives) {
+          const success = Math.random() < passive.rate / 100;
+
+          if (success) {
+            if (passive.action === "deduce") {
+              for (const key in passive) {
+                if (
+                  key !== "action" &&
+                  key !== "rate" &&
+                  key !== "description"
+                ) {
+                  this.opponent[key] -= passive[key];
+                }
+              }
+            }
+
+            if (passive.action === "add") {
+              for (const key in passive) {
+                if (
+                  key !== "action" &&
+                  key !== "rate" &&
+                  key !== "description"
+                ) {
+                  this.character[key] += passive[key];
+                }
+              }
+            }
+          }
+        }
+      }
 
       if (this.character.crit > 0 && Math.random() < crit) {
         this.opponent.hp -= playerDmg + playerDmg;
@@ -583,6 +572,39 @@ class Battle {
 
     if (playerSuccess) {
       const crit = (this.opponent.crit + 1) / 201 / 100;
+      const passives = this.opponentPassives;
+
+      if (passives) {
+        for (const passive of passives) {
+          const success = Math.random() < passive.rate / 100;
+
+          if (success) {
+            if (passive.action === "deduce") {
+              for (const key in passive) {
+                if (
+                  key !== "action" &&
+                  key !== "rate" &&
+                  key !== "description"
+                ) {
+                  this.character[key] -= passive[key];
+                }
+              }
+            }
+
+            if (passive.action === "add") {
+              for (const key in passive) {
+                if (
+                  key !== "action" &&
+                  key !== "rate" &&
+                  key !== "description"
+                ) {
+                  this.opponent[key] += passive[key];
+                }
+              }
+            }
+          }
+        }
+      }
 
       if (this.opponent.crit > 0 && Math.random() < crit) {
         this.character.hp -= opponentDmg + opponentDmg;
