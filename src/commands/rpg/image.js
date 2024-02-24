@@ -54,7 +54,7 @@ module.exports = {
         const searchResults = [];
         for (const key in characters) {
           const character = characters[key];
-          if (character.name.toLowerCase().includes(name.toLowerCase())) {
+          if (character.name.toLowerCase() === name.toLowerCase()) {
             searchResults.push(key);
           }
         }
