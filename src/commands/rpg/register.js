@@ -121,7 +121,7 @@ module.exports = {
       const prompt = interaction.options.getString("class");
 
       try {
-        const chaClass = classes[args[0].toLowerCase()];
+        const chaClass = classes[prompt.toLowerCase()];
         const characterKeys = Object.keys(characters);
         const randomIndex = Math.floor(Math.random() * characterKeys.length);
         const randomCharacterKey = characterKeys[randomIndex];
