@@ -1,7 +1,7 @@
 const classes = require("../../database/json/classes.json");
 const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
-const characterImage = require("../../database/json/img.json");
+const characters = require("../../database/json/characters.json");
 
 module.exports = {
   name: "register",
@@ -19,8 +19,8 @@ module.exports = {
         })
         .setDescription(
           `To begin play, please choose one of these class with the \`${client.prefixes.get(
-            message.guild.id
-          )}register <class>\``
+            message.guild.id,
+          )}register <class>\``,
         )
         .setTimestamp()
         .setColor("#CD1C6C");
@@ -39,14 +39,18 @@ module.exports = {
 
     try {
       const chaClass = classes[args[0].toLowerCase()];
-      const img = characterImage[args[0].toLowerCase()];
+      const characterKeys = Object.keys(characters);
+      const randomIndex = Math.floor(Math.random() * characterKeys.length);
+      const randomCharacterKey = characterKeys[randomIndex];
+      const randomCharacter = characters[randomCharacterKey];
 
       await schemas.character().create({
         userID: message.author.id,
-        name: message.author.username,
+        name: randomCharacter.name,
         class: args[0].toLowerCase(),
         level: 1,
-        img,
+        img: randomCharacterKey,
+        images: JSON.stringify([randomCharacterKey]),
         equipments: JSON.stringify({
           weapons: {
             equipped: "",
@@ -74,14 +78,14 @@ module.exports = {
 
       message.reply(
         `You have successfully registered! Type \`${client.prefixes.get(
-          message.guild.id
-        )}profile\` to see your profile.`
+          message.guild.id,
+        )}profile\` to see your profile.`,
       );
     } catch {
       message.reply(
         `Sorry, you have already registered! Type \`${client.prefixes.get(
-          message.guild.id
-        )}profile\` to see your profile.`
+          message.guild.id,
+        )}profile\` to see your profile.`,
       );
     }
   },
@@ -117,15 +121,19 @@ module.exports = {
       const prompt = interaction.options.getString("class");
 
       try {
-        const chaClass = classes[prompt];
-        const img = characterImage[prompt];
+        const chaClass = classes[args[0].toLowerCase()];
+        const characterKeys = Object.keys(characters);
+        const randomIndex = Math.floor(Math.random() * characterKeys.length);
+        const randomCharacterKey = characterKeys[randomIndex];
+        const randomCharacter = characters[randomCharacterKey];
 
         await schemas.character().create({
           userID: interaction.user.id,
-          name: interaction.user.username,
+          name: randomCharacter.name,
           class: prompt,
           level: 1,
-          img,
+          img: randomCharacterKey,
+          images: JSON.stringify([randomCharacterKey]),
           equipments: JSON.stringify({
             weapons: {
               equipped: "",
@@ -152,11 +160,11 @@ module.exports = {
         });
 
         interaction.reply(
-          "You have successfully registered! Type `/profile` to see your profile."
+          "You have successfully registered! Type `/profile` to see your profile.",
         );
       } catch {
         interaction.reply(
-          "Sorry, you have already registered! Type `/profile` to see your profile."
+          "Sorry, you have already registered! Type `/profile` to see your profile.",
         );
       }
     },

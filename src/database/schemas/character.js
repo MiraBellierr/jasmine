@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
     logging: false,
     dialect: "sqlite",
     storage: "database.sqlite",
-  }
+  },
 );
 
 module.exports = () => {
@@ -40,7 +40,7 @@ module.exports = () => {
     },
     xpNeeded: {
       type: Sequelize.BIGINT,
-      defaultValue: 10,
+      defaultValue: 5,
     },
     hp: {
       type: Sequelize.BIGINT,
@@ -80,6 +80,10 @@ module.exports = () => {
     },
     equipments: {
       type: Sequelize.TEXT,
+    },
+    images: {
+      type: Sequelize.TEXT,
+      allowNull: false,
     },
   });
 

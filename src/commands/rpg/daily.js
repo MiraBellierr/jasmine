@@ -5,13 +5,13 @@ const constants = require("../../utils/constants");
 module.exports = {
   name: "daily",
   description: "Daily to earn coins",
-  category: "[🎩] economy",
+  category: "rpg",
   run: async (client, message) => {
     const coins = await economies.getCoins(message.author);
 
     if (!coins) {
       return message.reply(
-        `You haven't registered yet! Please use \`${constants.prefix}register <class>\` to register.`
+        `You haven't registered yet! Please use \`${client.prefixes.get(message.guild.id)}register <class>\` to register.`,
       );
     }
 
@@ -19,7 +19,7 @@ module.exports = {
 
     if (timer) {
       return message.reply(
-        `**${message.author.username}**, Please wait **${timer.hours}h ${timer.seconds}s** before you can claim your daily again.`
+        `**${message.author.username}**, Please wait **${timer.hours}h ${timer.seconds}s** before you can claim your daily again.`,
       );
     }
 
@@ -27,7 +27,7 @@ module.exports = {
       {
         daily: Date.now(),
       },
-      { where: { userID: message.author.id } }
+      { where: { userID: message.author.id } },
     );
 
     const guild = await client.guilds.fetch(constants.supportServer.id);
@@ -43,7 +43,7 @@ module.exports = {
       {
         wallet: coins.get("wallet") + reward,
       },
-      { where: { userID: message.author.id } }
+      { where: { userID: message.author.id } },
     );
 
     const amount = `${constants.coins.emoji} ${reward}`;
@@ -61,19 +61,19 @@ module.exports = {
 
       if (!coins) {
         return interaction.reply(
-          `You haven't registered yet! Please use \`${constants.prefix}register <class>\` to register.`
+          `You haven't registered yet! Please use \`${constants.prefix}register <class>\` to register.`,
         );
       }
 
       const timer = await economies.getCooldown(
         interaction.user,
         "daily",
-        864e5
+        864e5,
       );
 
       if (timer) {
         return interaction.reply(
-          `**${interaction.user.username}**, Please wait **${timer.hours}h ${timer.seconds}s** before you can claim your daily again.`
+          `**${interaction.user.username}**, Please wait **${timer.hours}h ${timer.seconds}s** before you can claim your daily again.`,
         );
       }
 
@@ -81,7 +81,7 @@ module.exports = {
         {
           daily: Date.now(),
         },
-        { where: { userID: interaction.user.id } }
+        { where: { userID: interaction.user.id } },
       );
 
       const guild = await client.guilds.fetch(constants.supportServer.id);
@@ -98,7 +98,7 @@ module.exports = {
         {
           wallet: coins.get("wallet") + reward,
         },
-        { where: { userID: interaction.user.id } }
+        { where: { userID: interaction.user.id } },
       );
 
       const amount = `${constants.coins.emoji} ${reward}`;

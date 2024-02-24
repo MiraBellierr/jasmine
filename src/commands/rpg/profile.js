@@ -2,6 +2,7 @@ const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const constants = require("../../utils/constants");
+const characters = require("../../database/json/characters.json");
 
 module.exports = {
   name: "profile",
@@ -26,8 +27,8 @@ module.exports = {
         `A user with a username ${
           member.user.username
         } is not register yet. Please type \`${client.prefixes.get(
-          message.guild.id
-        )}register <class>\` to register`
+          message.guild.id,
+        )}register <class>\` to register`,
       );
     }
 
@@ -47,7 +48,7 @@ module.exports = {
             character.get("class").charAt(0).toUpperCase() +
             character.get("class").slice(1)
           }\n**• ${constants.assets.xp.emoji} XP:** ${character.get(
-            "xp"
+            "xp",
           )}/${character.get("xpNeeded")}\n**• ${
             constants.assets.hp.emoji
           } HP:** ${character.get("hp")}\n**• ${
@@ -118,7 +119,7 @@ module.exports = {
           inline: true,
         },
       ])
-      .setImage(character.get("img"))
+      .setImage(characters[character.get("img")].image)
       .setTimestamp()
       .setFooter({
         text: "https://patreon.com/jasminebot",
@@ -154,7 +155,7 @@ module.exports = {
 
       if (!character) {
         return interaction.reply(
-          `A user with a username ${member.user.username} is not register yet.`
+          `A user with a username ${member.user.username} is not register yet.`,
         );
       }
 
@@ -174,7 +175,7 @@ module.exports = {
               character.get("class").charAt(0).toUpperCase() +
               character.get("class").slice(1)
             }\n**• ${constants.assets.xp.emoji} XP:** ${character.get(
-              "xp"
+              "xp",
             )}/${character.get("xpNeeded")}\n**• ${
               constants.assets.hp.emoji
             } HP:** ${character.get("hp")}\n**• ${
@@ -245,7 +246,7 @@ module.exports = {
             inline: true,
           },
         ])
-        .setImage(character.get("img"))
+        .setImage(characters[character.get("img")].image)
         .setTimestamp()
         .setFooter({
           text: "https://patreon.com/jasminebot",

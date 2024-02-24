@@ -15,7 +15,7 @@ module.exports = {
 
     if (!character) {
       return message.channel.send(
-        `You haven't registered yet! Use \`${client.config.prefix}register\` to register.`,
+        `You haven't registered yet! Use \`${client.prefixes.get(message.guild.id)}register\` to register.`,
       );
     }
 

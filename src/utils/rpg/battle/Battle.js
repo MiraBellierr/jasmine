@@ -5,6 +5,7 @@ const set = new Set();
 const { setTimeout } = require("timers/promises");
 const equipments = require("../../../database/json/equipments.json");
 const economies = require("../../../utils/economies");
+const characters = require("../../../database/json/characters.json");
 
 class Battle {
   constructor(message, user) {
@@ -310,7 +311,7 @@ class Battle {
   }
 
   async registerXP() {
-    // formular: 1 * (5 * (O - P) / P + 4)
+    // formular: 1 * (5 * (O - P) / P + 4 + O)
 
     // eslint-disable-next-line no-unused-vars
     let { id, userID, createdAt, updatedAt, ...character } =
@@ -320,7 +321,8 @@ class Battle {
       1 *
         ((5 * (this.opponent.level - this.character.level)) /
           this.character.level +
-          4),
+          4 +
+          this.opponent.level),
     );
 
     character.xp += xpGain;
@@ -340,29 +342,10 @@ class Battle {
     let aglGain = 0;
     let attGain = 0;
     let staGain = 0;
-    let accGain = 0;
 
-    switch (this.character.class) {
-      case "warrior": {
-        accGain = 3;
-        break;
-      }
-      case "fox": {
-        accGain = 5;
-        break;
-      }
-      case "ghost": {
-        accGain = 3;
-        break;
-      }
-      default:
-        accGain = 0;
-        break;
-    }
-
-    while (character.xp > attr.xpNeeded) {
+    while (character.xp >= attr.xpNeeded) {
       attr.level++;
-      attr.xpNeeded *= 2;
+      attr.xpNeeded += Math.ceil(attr.xpNeeded * 2 * 0.1) + 4;
 
       hpGain += Math.floor(character.sta / 4) + 1;
       strGain += Math.floor(Math.random() * 2) + 1;
@@ -383,16 +366,6 @@ class Battle {
       attr.agl += aglGain;
       attr.sta += staGain;
 
-      if (attr.acc < 100) {
-        if (Math.random() < 0.125) {
-          attr.acc += accGain;
-        } else {
-          accGain = 0;
-        }
-      } else {
-        attr.acc = 99;
-      }
-
       schemas.character().update(attr, { where: { userID: this.user.id } });
 
       const embed = new Discord.EmbedBuilder()
@@ -404,7 +377,7 @@ class Battle {
         .setTitle("Level Up!")
         .setThumbnail(this.character.img)
         .setDescription(
-          `Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}\n**• ACC:** +${accGain}`,
+          `Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}`,
         );
 
       this.message.channel.send({ embeds: [embed] });
@@ -646,8 +619,8 @@ class Battle {
         name: this.user.username,
         iconURL: this.user.displayAvatarURL(),
       })
-      .setImage(this.opponent.img)
-      .setThumbnail(this.character.img)
+      .setImage(characters[this.opponent.img].image)
+      .setThumbnail(characters[this.character.img].image)
       .setColor("#DDA0DD")
       .setDescription(`\`\`\`\n${actionShow}\n\`\`\``)
       .addFields([
