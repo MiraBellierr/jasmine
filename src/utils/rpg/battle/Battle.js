@@ -375,7 +375,7 @@ class Battle {
         })
         .setColor("#DDA0DD")
         .setTitle("Level Up!")
-        .setThumbnail(this.character.img)
+        .setThumbnail(characters[this.character.img].image)
         .setDescription(
           `Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}`,
         );
