@@ -316,12 +316,14 @@ class Battle {
     let { id, userID, createdAt, updatedAt, ...character } =
       await this.getCharacter();
 
-    const xpGain = Math.floor(
+    let xpGain = Math.floor(
       1 *
         ((5 * (this.opponent.level - this.character.level)) /
           this.character.level +
           4),
     );
+
+    if (xpGain < 1) xpGain = 1;
 
     character.xp += xpGain;
 
