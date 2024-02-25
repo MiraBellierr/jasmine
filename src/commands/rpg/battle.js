@@ -9,7 +9,7 @@ module.exports = {
   usage: "[member]",
   run: async (client, message, args) => {
     if (!args.length) {
-      new Battle(message, message.author).startRandom();
+      new Battle(client, message, message.author).startRandom();
     } else {
       const target = await getMemberFromArguments(message, args.join(" "));
 
@@ -23,7 +23,7 @@ module.exports = {
         return message.reply("You can't battle yourself");
       }
 
-      new Battle(message, message.author).startOpponent(opponent);
+      new Battle(client, message, message.author).startOpponent(opponent);
     }
   },
   interaction: {
@@ -43,9 +43,11 @@ module.exports = {
       const opponent = interaction.options.getUser("opponent");
 
       if (!opponent) {
-        new Battle(interaction, interaction.user).startRandom();
+        new Battle(client, interaction, interaction.user).startRandom();
       } else {
-        new Battle(interaction, interaction.user).startOpponent(opponent);
+        new Battle(client, interaction, interaction.user).startOpponent(
+          opponent,
+        );
       }
     },
   },

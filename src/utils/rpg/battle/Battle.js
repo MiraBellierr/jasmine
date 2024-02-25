@@ -8,12 +8,14 @@ const economies = require("../../../utils/economies");
 const characters = require("../../../database/json/characters.json");
 
 class Battle {
-  constructor(message, user) {
+  constructor(client, message, user) {
+    this.client = client;
     this.user = user;
     this.message = message;
     this.actions = ["battle started"];
     this.playerPassives = [];
     this.opponentPassives = [];
+    this.opponentUser;
   }
 
   async getCharacter() {
@@ -37,6 +39,8 @@ class Battle {
 
     if (!character) return null;
 
+    this.opponentUser = await this.client.users.fetch(character.get("userID"));
+
     return character.toJSON();
   }
 
@@ -53,6 +57,10 @@ class Battle {
     } else {
       randomCharacter = allCharacter[0];
     }
+
+    this.opponentUser = await this.client.users.fetch(
+      randomCharacter.get("userID"),
+    );
 
     return randomCharacter.toJSON();
   }
@@ -625,12 +633,12 @@ class Battle {
       .setDescription(`\`\`\`\n${actionShow}\n\`\`\``)
       .addFields([
         {
-          name: `${this.character.name}`,
+          name: `${this.character.name} (${this.user.username})`,
           value: `**• ${constants.assets.xp.emoji} Level:** ${this.character.level}\n**• ${constants.assets.hp.emoji} HP:** ${this.character.hp}`,
           inline: true,
         },
         {
-          name: `${this.opponent.name}`,
+          name: `${this.opponent.name} (${this.opponentUser.username})`,
           value: `**• ${constants.assets.xp.emoji} Level:** ${this.opponent.level}\n**• ${constants.assets.hp.emoji} HP:** ${this.opponent.hp}`,
           inline: true,
         },
