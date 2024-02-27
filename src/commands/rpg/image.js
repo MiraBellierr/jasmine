@@ -69,10 +69,21 @@ module.exports = {
         );
       }
 
-      if (!images.includes(results[0])) {
+      function findFirstCommonElement(array1, array2) {
+        for (let i = 0; i < array1.length; i++) {
+          if (array2.includes(array1[i])) {
+            return array1[i];
+          }
+        }
+        return null;
+      }
+
+      const result = findFirstCommonElement(results, images);
+
+      if (!result) {
         message.channel.send("I didn't find that character in your inventory.");
       } else {
-        const img = results[0];
+        const img = result;
 
         schemas.character().update(
           {
