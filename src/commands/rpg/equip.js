@@ -2,6 +2,7 @@ const schemas = require("../../database/schemas");
 const Discord = require("discord.js");
 const constants = require("../../utils/constants");
 const { camelCaseToNormal } = require("../../utils/utils");
+const characters = require("../../database/json/characters.json");
 
 module.exports = {
   name: "equip",
@@ -27,7 +28,7 @@ module.exports = {
           name: message.author.username,
           iconURL: message.author.displayAvatarURL(),
         })
-        .setThumbnail(character.get("img"))
+        .setThumbnail(characters[character.get("img")].image)
         .setColor("#0099ff")
         .setTitle("Equipped Equipments")
         .setDescription(

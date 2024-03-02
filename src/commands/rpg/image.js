@@ -50,15 +50,12 @@ module.exports = {
       const name = args.join(" ");
       const images = JSON.parse(userCharacter.get("images"));
 
-      function searchCharacterByName(name) {
-        const searchResults = [];
-        for (const key in characters) {
-          const character = characters[key];
-          if (character.name.toLowerCase() === name.toLowerCase()) {
-            searchResults.push(key);
-          }
-        }
-        return searchResults;
+      function searchCharacterByName(searchname) {
+        return Object.entries(characters)
+          .filter(([_, { name }]) =>
+            name.toLowerCase().includes(searchname.toLowerCase()),
+          )
+          .map(([id]) => id);
       }
 
       const results = searchCharacterByName(name);
@@ -70,12 +67,7 @@ module.exports = {
       }
 
       function findFirstCommonElement(array1, array2) {
-        for (let i = 0; i < array1.length; i++) {
-          if (array2.includes(array1[i])) {
-            return array1[i];
-          }
-        }
-        return null;
+        return array1.find((id) => array2.includes(id));
       }
 
       const result = findFirstCommonElement(results, images);

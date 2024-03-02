@@ -74,46 +74,31 @@ module.exports = {
             equipments.weapons.equipped
               ? equipments.weapons.equipped
                   .replace(/([A-Z])/g, " $1")
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")
+                  .replace(/\b\w/g, (e) => e.toUpperCase())
               : "None"
           }\n**• ${constants.assets.shield.emoji} Shield:** ${
             equipments.shields.equipped
               ? equipments.shields.equipped
                   .replace(/([A-Z])/g, " $1")
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")
+                  .replace(/\b\w/g, (e) => e.toUpperCase())
               : "None"
           }\n**• ${constants.assets.helmet.emoji} Helmet:** ${
             equipments.helmet.equipped
               ? equipments.helmet.equipped
                   .replace(/([A-Z])/g, " $1")
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")
+                  .replace(/\b\w/g, (e) => e.toUpperCase())
               : "None"
           }\n**• ${constants.assets.armor.emoji} Armor:** ${
             equipments.armor.equipped
               ? equipments.armor.equipped
                   .replace(/([A-Z])/g, " $1")
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")
+                  .replace(/\b\w/g, (e) => e.toUpperCase())
               : "None"
           }\n**• ${constants.assets.gloves.emoji} Gloves:** ${
             equipments.gloves.equipped
               ? equipments.gloves.equipped
                   .replace(/([A-Z])/g, " $1")
-                  .toLowerCase()
-                  .split(" ")
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(" ")
+                  .replace(/\b\w/g, (e) => e.toUpperCase())
               : "None"
           }`,
           inline: true,
@@ -201,46 +186,31 @@ module.exports = {
               equipments.weapons.equipped
                 ? equipments.weapons.equipped
                     .replace(/([A-Z])/g, " $1")
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")
+                    .replace(/\b\w/g, (e) => e.toUpperCase())
                 : "None"
             }\n**• ${constants.assets.shield.emoji} Shield:** ${
               equipments.shields.equipped
                 ? equipments.shields.equipped
                     .replace(/([A-Z])/g, " $1")
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")
+                    .replace(/\b\w/g, (e) => e.toUpperCase())
                 : "None"
             }\n**• ${constants.assets.helmet.emoji} Helmet:** ${
               equipments.helmet.equipped
                 ? equipments.helmet.equipped
                     .replace(/([A-Z])/g, " $1")
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")
+                    .replace(/\b\w/g, (e) => e.toUpperCase())
                 : "None"
             }\n**• ${constants.assets.armor.emoji} Armor:** ${
               equipments.armor.equipped
                 ? equipments.armor.equipped
                     .replace(/([A-Z])/g, " $1")
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")
+                    .replace(/\b\w/g, (e) => e.toUpperCase())
                 : "None"
             }\n**• ${constants.assets.gloves.emoji} Gloves:** ${
               equipments.gloves.equipped
                 ? equipments.gloves.equipped
                     .replace(/([A-Z])/g, " $1")
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")
+                    .replace(/\b\w/g, (e) => e.toUpperCase())
                 : "None"
             }`,
             inline: true,
