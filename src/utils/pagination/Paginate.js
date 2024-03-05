@@ -10,6 +10,7 @@ function Paginate(
   client,
   message,
   pages,
+  file = false,
   page = 1,
   options = {
     time: 1000 * 60 * 3,
@@ -23,7 +24,7 @@ function Paginate(
     backward: "◀",
     stop: "🛑",
     forward: "▶",
-  }
+  },
 ) {
   this.client = client;
   this.message = message;
@@ -31,6 +32,7 @@ function Paginate(
   this.page = page;
   this.options = options;
   this.emojis = emojis;
+  this.file = file;
 
   if (!this.message.author) {
     this.message.author = this.message.user;
@@ -47,7 +49,7 @@ function Paginate(
   }
   if (!(this.emojis.backward && this.emojis.stop && this.emojis.forward)) {
     throw new TypeError(
-      "Specify emojis to skip the page, return to previous page and stop the process."
+      "Specify emojis to skip the page, return to previous page and stop the process.",
     );
   }
 
@@ -97,15 +99,29 @@ function Paginate(
       let msg;
       if (typeof this.pages[0] === "object") {
         if (this.message.deferred || this.message.replied) {
-          msg = await this.message.editReply({
-            content: "ㅤ",
-            embeds: [this.pages[0]],
-          });
+          if (file) {
+            msg = await this.message.editReply({
+              content: "ㅤ",
+              files: [this.pages[0]],
+            });
+          } else {
+            msg = await this.message.editReply({
+              content: "ㅤ",
+              embeds: [this.pages[0]],
+            });
+          }
         } else {
-          msg = await this.message.reply({
-            content: "ㅤ",
-            embeds: [this.pages[0]],
-          });
+          if (file) {
+            msg = await this.message.reply({
+              content: "ㅤ",
+              files: [this.pages[0]],
+            });
+          } else {
+            msg = await this.message.reply({
+              content: "ㅤ",
+              embeds: [this.pages[0]],
+            });
+          }
         }
       } else {
         if (this.message.deferred || this.message.replied) {
@@ -185,17 +201,33 @@ function Paginate(
       if (page === 1) {
         if (typeof this.pages[page - 1] === "object") {
           if (this.message.deferred || this.message.replied) {
-            msg = await this.message.editReply({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [disabledBackward],
-            });
+            if (file) {
+              msg = await this.message.editReply({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [disabledBackward],
+              });
+            } else {
+              msg = await this.message.editReply({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [disabledBackward],
+              });
+            }
           } else {
-            msg = await this.message.reply({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [disabledBackward],
-            });
+            if (file) {
+              msg = await this.message.reply({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [disabledBackward],
+              });
+            } else {
+              msg = await this.message.reply({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [disabledBackward],
+              });
+            }
           }
         } else {
           if (this.message.deferred || this.message.replied) {
@@ -215,17 +247,33 @@ function Paginate(
       } else {
         if (typeof this.pages[page - 1] === "object") {
           if (this.message.deferred || this.message.replied) {
-            msg = await this.message.editReply({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [row],
-            });
+            if (file) {
+              msg = await this.message.editReply({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [row],
+              });
+            } else {
+              msg = await this.message.editReply({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [row],
+              });
+            }
           } else {
-            msg = await this.message.reply({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [row],
-            });
+            if (file) {
+              msg = await this.message.reply({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [row],
+              });
+            } else {
+              msg = await this.message.reply({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [row],
+              });
+            }
           }
         } else {
           if (this.message.deferred || this.message.replied) {
@@ -276,11 +324,19 @@ function Paginate(
 
         if (page === 1) {
           if (typeof this.pages[page - 1] === "object") {
-            await i.update({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [disabledBackward],
-            });
+            if (file) {
+              await i.update({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [disabledBackward],
+              });
+            } else {
+              await i.update({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [disabledBackward],
+              });
+            }
           } else {
             await i.update({
               content: this.pages[page - 1],
@@ -290,11 +346,19 @@ function Paginate(
           }
         } else {
           if (typeof this.pages[page - 1] === "object") {
-            await i.update({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [row],
-            });
+            if (file) {
+              await i.update({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [row],
+              });
+            } else {
+              await i.update({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [row],
+              });
+            }
           } else {
             await i.update({
               content: this.pages[page - 1],
@@ -317,6 +381,7 @@ function Paginate(
             content: "Interaction for this message has been stopped.",
             embeds: [],
             components: [],
+            files: [],
           });
         }
       });
@@ -326,11 +391,19 @@ function Paginate(
 
         if (page === this.pages.length) {
           if (typeof this.pages[page - 1] === "object") {
-            await i.update({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [disabledForward],
-            });
+            if (file) {
+              await i.update({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [disabledForward],
+              });
+            } else {
+              await i.update({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [disabledForward],
+              });
+            }
           } else {
             await i.update({
               content: this.pages[page - 1],
@@ -340,11 +413,19 @@ function Paginate(
           }
         } else {
           if (typeof this.pages[page - 1] === "object") {
-            await i.update({
-              content: "ㅤ",
-              embeds: [this.pages[page - 1]],
-              components: [row],
-            });
+            if (file) {
+              await i.update({
+                content: "ㅤ",
+                files: [this.pages[page - 1]],
+                components: [row],
+              });
+            } else {
+              await i.update({
+                content: "ㅤ",
+                embeds: [this.pages[page - 1]],
+                components: [row],
+              });
+            }
           } else {
             await i.update({
               content: this.pages[page - 1],
