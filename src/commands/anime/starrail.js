@@ -20,6 +20,14 @@ module.exports = {
     const data = {
       uid: args[0],
       lang: "en",
+      image: {
+        8004: "https://s1.zerochan.net/Stelle.600.3918384.jpg",
+        1102: "https://s1.zerochan.net/Seele.%28Honkai.Star.Rail%29.600.3978285.jpg",
+        1212: "https://s1.zerochan.net/Jingliu.600.4045195.jpg",
+        1209: "https://s1.zerochan.net/Yanqing.600.3910167.jpg",
+        1203: "https://s1.zerochan.net/Luocha.600.3980315.jpg",
+        1208: "https://s1.zerochan.net/Fu.Xuan.600.3936904.jpg",
+      },
     };
 
     try {
