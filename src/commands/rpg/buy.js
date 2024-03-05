@@ -4,6 +4,16 @@ const errors = require("../../utils/errors");
 const economies = require("../../utils/economies");
 const constants = require("../../utils/constants");
 
+const searchItems = (equipments, playerClass, playerEquipments) => {
+  Object.fromEntries(
+    Object.entries(equipments).filter(
+      ([name, equipment]) =>
+        equipment.classes.includes(playerClass) &&
+        !playerEquipments.inventory.includes(name),
+    ),
+  );
+};
+
 module.exports = {
   name: "buy",
   aliases: ["b"],
@@ -19,7 +29,7 @@ module.exports = {
       return message.reply(
         "You are not registered yet. Please type `" +
           client.prefixes.get(message.guild.id) +
-          "register <class>` to register"
+          "register <class>` to register",
       );
     }
 
@@ -32,44 +42,34 @@ module.exports = {
     const playerClass = character.get("class");
     const playerEquipments = JSON.parse(character.get("equipments"));
 
-    const weapons = Object.fromEntries(
-      Object.entries(equipments.weapons).filter(
-        ([name, weapon]) =>
-          weapon.classes.includes(playerClass) &&
-          !playerEquipments.weapons.inventory.includes(name)
-      )
+    const weapons = searchItems(
+      equipments.weapons,
+      playerClass,
+      playerEquipments.weapons,
     );
 
-    const shields = Object.fromEntries(
-      Object.entries(equipments.shields).filter(
-        ([name, shield]) =>
-          shield.classes.includes(playerClass) &&
-          !playerEquipments.shields.inventory.includes(name)
-      )
+    const shields = searchItems(
+      equipments.shields,
+      playerClass,
+      playerEquipments.shields,
     );
 
-    const helmet = Object.fromEntries(
-      Object.entries(equipments.helmet).filter(
-        ([name, helmet]) =>
-          helmet.classes.includes(playerClass) &&
-          !playerEquipments.helmet.inventory.includes(name)
-      )
+    const helmet = searchItems(
+      equipments.helmet,
+      playerClass,
+      playerEquipments.helmet,
     );
 
-    const armor = Object.fromEntries(
-      Object.entries(equipments.armor).filter(
-        ([name, armor]) =>
-          armor.classes.includes(playerClass) &&
-          !playerEquipments.armor.inventory.includes(name)
-      )
+    const armor = searchItems(
+      equipments.armor,
+      playerClass,
+      playerEquipments.armor,
     );
 
-    const gloves = Object.fromEntries(
-      Object.entries(equipments.gloves).filter(
-        ([name, gloves]) =>
-          gloves.classes.includes(playerClass) &&
-          !playerEquipments.gloves.inventory.includes(name)
-      )
+    const gloves = searchItems(
+      equipments.gloves,
+      playerClass,
+      playerEquipments.gloves,
     );
 
     const prompt = args.join("").toLowerCase();
@@ -102,11 +102,11 @@ module.exports = {
         {
           wallet: coins.get("wallet") - weapon.cost,
         },
-        { where: { userID: message.author.id } }
+        { where: { userID: message.author.id } },
       );
 
       const name = Object.keys(weapons).find(
-        (name) => name.toLowerCase() === prompt
+        (name) => name.toLowerCase() === prompt,
       );
 
       playerEquipments.weapons.inventory.push(name);
@@ -114,7 +114,7 @@ module.exports = {
       message.reply(
         `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
           constants.coins.emoji
-        } ${weapon.cost}!`
+        } ${weapon.cost}!`,
       );
     } else if (shield) {
       if (coins.get("wallet") < shield.cost) {
@@ -125,11 +125,11 @@ module.exports = {
         {
           wallet: coins.get("wallet") - shield.cost,
         },
-        { where: { userID: message.author.id } }
+        { where: { userID: message.author.id } },
       );
 
       const name = Object.keys(shields).find(
-        (name) => name.toLowerCase() === prompt
+        (name) => name.toLowerCase() === prompt,
       );
 
       playerEquipments.shields.inventory.push(name);
@@ -137,7 +137,7 @@ module.exports = {
       message.reply(
         `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
           constants.coins.emoji
-        } ${shield.cost}!`
+        } ${shield.cost}!`,
       );
     } else if (helmett) {
       if (coins.get("wallet") < helmett.cost) {
@@ -148,11 +148,11 @@ module.exports = {
         {
           wallet: coins.get("wallet") - helmett.cost,
         },
-        { where: { userID: message.author.id } }
+        { where: { userID: message.author.id } },
       );
 
       const name = Object.keys(helmet).find(
-        (name) => name.toLowerCase() === prompt
+        (name) => name.toLowerCase() === prompt,
       );
 
       playerEquipments.helmet.inventory.push(name);
@@ -160,7 +160,7 @@ module.exports = {
       message.reply(
         `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
           constants.coins.emoji
-        } ${helmett.cost}!`
+        } ${helmett.cost}!`,
       );
     } else if (armort) {
       if (coins.get("wallet") < armort.cost) {
@@ -171,11 +171,11 @@ module.exports = {
         {
           wallet: coins.get("wallet") - armort.cost,
         },
-        { where: { userID: message.author.id } }
+        { where: { userID: message.author.id } },
       );
 
       const name = Object.keys(armor).find(
-        (name) => name.toLowerCase() === prompt
+        (name) => name.toLowerCase() === prompt,
       );
 
       playerEquipments.armor.inventory.push(name);
@@ -183,7 +183,7 @@ module.exports = {
       message.reply(
         `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
           constants.coins.emoji
-        } ${armort.cost}!`
+        } ${armort.cost}!`,
       );
     } else if (glove) {
       if (coins.get("wallet") < glove.cost) {
@@ -194,11 +194,11 @@ module.exports = {
         {
           wallet: coins.get("wallet") - glove.cost,
         },
-        { where: { userID: message.author.id } }
+        { where: { userID: message.author.id } },
       );
 
       const name = Object.keys(gloves).find(
-        (name) => name.toLowerCase() === prompt
+        (name) => name.toLowerCase() === prompt,
       );
 
       playerEquipments.gloves.inventory.push(name);
@@ -206,7 +206,7 @@ module.exports = {
       message.reply(
         `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
           constants.coins.emoji
-        } ${glove.cost}!`
+        } ${glove.cost}!`,
       );
     }
 
@@ -214,7 +214,7 @@ module.exports = {
       {
         equipments: JSON.stringify(playerEquipments),
       },
-      { where: { userID: message.author.id } }
+      { where: { userID: message.author.id } },
     );
   },
 };
