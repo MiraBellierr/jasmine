@@ -40,7 +40,7 @@ class Giveaway {
       })
       .setTitle("Giveaway started!")
       .setDescription(
-        `${constants.giveaway.prizeEmote} **Price:** ${this.options.prize}\n${
+        `${constants.giveaway.prizeEmote} **Prize:** ${this.options.prize}\n${
           constants.giveaway.hostEmote
         } **Host:** ${this.options.host.toString()}\n${
           constants.giveaway.entriesEmote
@@ -71,7 +71,7 @@ class Giveaway {
       })
       .setTitle("Giveaway ended!")
       .setDescription(
-        `${constants.giveaway.prizeEmote} **Price:** ${this.options.prize}\n${
+        `${constants.giveaway.prizeEmote} **Prize:** ${this.options.prize}\n${
           constants.giveaway.hostEmote
         } **Host:** ${this.options.host.toString()}\n${
           constants.giveaway.winnerEmote
@@ -132,7 +132,7 @@ class Giveaway {
       })
       .setTitle("Giveaway ended!")
       .setDescription(
-        `${constants.giveaway.prizeEmote} **Price:** ${this.options.prize}\n${
+        `${constants.giveaway.prizeEmote} **Prize:** ${this.options.prize}\n${
           constants.giveaway.hostEmote
         } **Host:** ${this.options.host.toString()}\n${
           constants.giveaway.winnerEmote
