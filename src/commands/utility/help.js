@@ -39,7 +39,7 @@ module.exports = {
         })
         .setColor("#CD1C6C")
         .setDescription(
-          "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)"
+          "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)",
         )
         .setThumbnail(client.user.displayAvatarURL())
         .setTimestamp()
@@ -53,14 +53,14 @@ module.exports = {
       client.categories.forEach((category) => {
         embed.addFields([
           {
-            name: category.chatAt(0).toUpperCase() + category.slice(1),
+            name: category.charAt(0).toUpperCase() + category.slice(1),
             value: `List of the ${category} commands`,
             inline: true,
           },
         ]);
 
         options.push({
-          label: category.chatAt(0).toUpperCase() + category.slice(1),
+          label: category.charAt(0).toUpperCase() + category.slice(1),
           description: `List of the ${category} commands`,
           value: category,
         });
@@ -103,7 +103,7 @@ module.exports = {
                 },
               ])
               .setDescription(
-                "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)"
+                "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)",
               )
               .setThumbnail(client.user.displayAvatarURL())
               .setTimestamp()
@@ -116,7 +116,7 @@ module.exports = {
 
             collector();
           },
-          () => null
+          () => null,
         );
       }
     },
@@ -137,7 +137,7 @@ async function getAll(client, message) {
     })
     .setColor("#CD1C6C")
     .setDescription(
-      "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)"
+      "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)",
     )
     .setThumbnail(client.user.displayAvatarURL())
     .setTimestamp()
@@ -199,7 +199,7 @@ async function getAll(client, message) {
             },
           ])
           .setDescription(
-            "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)"
+            "<:discord:885340297733746798> [Invite Jasmine](https://discord.com/api/oauth2/authorize?client_id=969633016089546763&permissions=0&scope=bot%20applications.commands)\n<:jasmine:1004800922439925893> [Jasmine's Jolly Joyhouse](https://discord.gg/NcPeGuNEdc)",
           )
           .setThumbnail(client.user.displayAvatarURL())
           .setTimestamp()
@@ -212,7 +212,7 @@ async function getAll(client, message) {
 
         collector();
       },
-      () => null
+      () => null,
     );
   }
 }
