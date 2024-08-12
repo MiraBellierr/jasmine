@@ -29,7 +29,7 @@
     "serialize-javascript": "^6.0.0",
     "signale": "^1.4.0",
     "sqlite3": "^5.1.6",
-    "systeminformation": "^5.22.11",
+    "systeminformation": "^5.23.4",
     "valid-url": "^1.0.9",
     "yt-search": "^2.10.3"
   },
