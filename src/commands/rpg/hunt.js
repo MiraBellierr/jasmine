@@ -3,6 +3,7 @@ const characters = require("../../database/json/characters.json");
 const economies = require("../../utils/economies");
 const constants = require("../../utils/constants");
 const Discord = require("discord.js");
+const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "hunt",
@@ -73,5 +74,10 @@ module.exports = {
 
       message.channel.send({ embeds: [embed] });
     }
+  },
+  interaction: {
+    data: slashCommand("hunt", "Hunt for character"),
+    run: async (client, interaction) =>
+      runPrefixCommand(client, interaction, module.exports),
   },
 };

@@ -82,7 +82,7 @@ module.exports = {
 
       function collector() {
         m.awaitMessageComponent({
-          componentType: ComponentType.SelectMenu,
+          componentType: ComponentType.StringSelect,
           time: 30000,
         }).then(
           (i) => {
@@ -180,7 +180,7 @@ async function getAll(client, message) {
 
   function collector() {
     m.awaitMessageComponent({
-      componentType: ComponentType.SelectMenu,
+      componentType: ComponentType.StringSelect,
       time: 30000,
     }).then(
       (i) => {

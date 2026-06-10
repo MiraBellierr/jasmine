@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const utils = require("../../utils/utils");
 const { getCount } = require("../../utils/economies");
+const { roleplayInteraction } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "wink",
@@ -64,4 +65,5 @@ module.exports = {
 
     message.reply({ embeds: [embed] });
   },
+  interaction: roleplayInteraction("wink", "wink at someone", { target: "optional", command: () => module.exports }),
 };

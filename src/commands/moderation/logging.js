@@ -4,6 +4,54 @@ const { argsError } = require("../../utils/errors");
 const { getChannelFromArguments } = require("../../utils/getters");
 const schemas = require("../../database/schemas");
 const { deleteElement } = require("../../utils/utils");
+const {
+  applyDefaultPermission,
+  channelOption,
+  runPrefixCommand,
+  slashCommand,
+} = require("../../utils/slashCommands");
+
+const loggingEventOptions = [
+  "channelCreation",
+  "channelUpdate",
+  "channelDeletion",
+  "roleCreation",
+  "roleUpdate",
+  "roleDeletion",
+  "serverUpdate",
+  "emojiAndStickerChanges",
+  "memberRoleChanges",
+  "nameChanges",
+  "avatarChanges",
+  "memberBans",
+  "memberUnbans",
+  "joinVoice",
+  "moveBetweenVoiceChannels",
+  "leaveVoice",
+  "messageDeletion",
+  "messageEdit",
+  "messagePurge",
+  "discordInvites",
+  "memberJoin",
+  "memberLeave",
+];
+
+const loggingChannelOptions = [
+  "defaultLogChannel",
+  "memberLogChannel",
+  "serverLogChannel",
+  "voiceLogChannel",
+  "joinLeaveLogChannel",
+  "ignoredChannels",
+];
+
+const modeChoices = [
+  { name: "enable", value: "enable" },
+  { name: "disable", value: "disable" },
+];
+
+const addChoiceList = (option, choices) =>
+  option.addChoices(...choices.map((choice) => ({ name: choice, value: choice })));
 
 module.exports = {
   name: "logging",
@@ -263,5 +311,106 @@ module.exports = {
     }
 
     return argsError(module.exports, client, message);
+  },
+  interaction: {
+    data: applyDefaultPermission(
+      slashCommand("logging", "Toggles logging for certain events.", (builder) =>
+        builder
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("view")
+              .setDescription("View the current logging configuration"),
+          )
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("all")
+              .setDescription("Enable or disable all logging events")
+              .addStringOption((option) =>
+                option
+                  .setName("mode")
+                  .setDescription("Whether to enable or disable logging")
+                  .setRequired(true)
+                  .addChoices(...modeChoices),
+              ),
+          )
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("event")
+              .setDescription("Enable or disable one logging event")
+              .addStringOption((option) =>
+                addChoiceList(
+                  option
+                    .setName("event")
+                    .setDescription("Logging event to update")
+                    .setRequired(true),
+                  loggingEventOptions,
+                ),
+              )
+              .addStringOption((option) =>
+                option
+                  .setName("mode")
+                  .setDescription("Whether to enable or disable this event")
+                  .setRequired(true)
+                  .addChoices(...modeChoices),
+              ),
+          )
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("channel")
+              .setDescription("Set or remove a logging channel")
+              .addStringOption((option) =>
+                addChoiceList(
+                  option
+                    .setName("option")
+                    .setDescription("Logging channel option to update")
+                    .setRequired(true),
+                  loggingChannelOptions,
+                ),
+              )
+              .addChannelOption((option) =>
+                channelOption(option, "channel", "Channel to use for logging"),
+              )
+              .addBooleanOption((option) =>
+                option
+                  .setName("remove")
+                  .setDescription("Remove this channel instead of setting it")
+                  .setRequired(false),
+              ),
+          ),
+      ),
+      "ManageMessages",
+    ),
+    run: async (client, interaction) => {
+      const subcommand = interaction.options.getSubcommand();
+
+      if (subcommand === "view") {
+        return runPrefixCommand(client, interaction, module.exports);
+      }
+
+      if (subcommand === "all") {
+        return runPrefixCommand(client, interaction, module.exports, [
+          "all",
+          interaction.options.getString("mode", true),
+        ]);
+      }
+
+      if (subcommand === "event") {
+        return runPrefixCommand(client, interaction, module.exports, [
+          interaction.options.getString("event", true),
+          interaction.options.getString("mode", true),
+        ]);
+      }
+
+      const args = [
+        interaction.options.getString("option", true),
+        interaction.options.getChannel("channel", true).id,
+      ];
+
+      if (interaction.options.getBoolean("remove")) {
+        args.push("--remove");
+      }
+
+      return runPrefixCommand(client, interaction, module.exports, args);
+    },
   },
 };

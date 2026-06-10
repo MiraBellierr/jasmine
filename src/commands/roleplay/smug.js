@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const utils = require("../../utils/utils");
+const { roleplayInteraction } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "smug",
@@ -18,4 +19,5 @@ module.exports = {
 
     message.reply({ embeds: [embed] });
   },
+  interaction: roleplayInteraction("smug", "Im smugging", { command: () => module.exports }),
 };

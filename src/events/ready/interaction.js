@@ -1,7 +1,7 @@
 const interaction = require("../../handler/interaction");
 
-module.exports = (client) => {
-  interaction(client);
+module.exports = async (client) => {
+  await interaction(client);
 
   console.log("All ready!");
 };

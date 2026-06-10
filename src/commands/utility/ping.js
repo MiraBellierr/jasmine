@@ -43,7 +43,7 @@ module.exports = {
       description: "Returns latency and API ping",
     },
     run: async (client, interaction) => {
-      const msg = await interaction.channel.send("🏓 Pinging....");
+      await interaction.deferReply();
 
       const embed = new EmbedBuilder()
         .setAuthor({
@@ -56,7 +56,7 @@ module.exports = {
           {
             name: "Latency",
             value: `${Math.floor(
-              msg.createdTimestamp - interaction.createdTimestamp
+              Date.now() - interaction.createdTimestamp
             )}ms`,
           },
           {
@@ -70,9 +70,7 @@ module.exports = {
           iconURL: client.user.avatarURL(),
         });
 
-      interaction.reply({ embeds: [embed] });
-
-      msg.delete();
+      interaction.editReply({ embeds: [embed] });
     },
   },
 };

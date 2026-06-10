@@ -3,6 +3,7 @@ const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
 const { getCount } = require("../../utils/economies");
+const { roleplayInteraction } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "kiss",
@@ -57,4 +58,5 @@ module.exports = {
 
     message.reply({ embeds: [embed] });
   },
+  interaction: roleplayInteraction("kiss", "kiss someone", { target: "required", command: () => module.exports }),
 };

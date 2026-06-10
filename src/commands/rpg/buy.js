@@ -3,9 +3,10 @@ const equipments = require("../../database/json/equipments.json");
 const errors = require("../../utils/errors");
 const economies = require("../../utils/economies");
 const constants = require("../../utils/constants");
+const { runPrefixCommand, slashCommand, textOption } = require("../../utils/slashCommands");
 
 const searchItems = (equipments, playerClass, playerEquipments) => {
-  Object.fromEntries(
+  return Object.fromEntries(
     Object.entries(equipments).filter(
       ([name, equipment]) =>
         equipment.classes.includes(playerClass) &&
@@ -216,5 +217,16 @@ module.exports = {
       },
       { where: { userID: message.author.id } },
     );
+  },
+  interaction: {
+    data: slashCommand("buy", "buy an equipments", (builder) =>
+      builder.addStringOption((option) =>
+        textOption(option, "equipment", "Equipment to buy"),
+      ),
+    ),
+    run: async (client, interaction) =>
+      runPrefixCommand(client, interaction, module.exports, [
+        interaction.options.getString("equipment", true),
+      ]),
   },
 };

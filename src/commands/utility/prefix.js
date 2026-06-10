@@ -1,5 +1,12 @@
 const schemas = require("../../database/schemas");
 const { argsError } = require("../../utils/errors");
+const {
+  applyDefaultPermission,
+  runPrefixCommand,
+  sendInteraction,
+  slashCommand,
+  textOption,
+} = require("../../utils/slashCommands");
 
 module.exports = {
   name: "prefix",
@@ -37,5 +44,28 @@ module.exports = {
         message.guild.id
       )}**!`
     );
+  },
+  interaction: {
+    data: applyDefaultPermission(
+      slashCommand("prefix", "change a prefix for your server", (builder) =>
+        builder.addStringOption((option) =>
+          textOption(option, "value", "New prefix for this server"),
+        ),
+      ),
+      "ManageGuild",
+    ),
+    run: async (client, interaction) => {
+      const prefix = interaction.options.getString("value", true).trim();
+
+      if (!prefix || /<(@!?|@&|#)\d+>/.test(prefix)) {
+        return sendInteraction(interaction, "Please provide a valid prefix.", {
+          ephemeral: true,
+        });
+      }
+
+      return runPrefixCommand(client, interaction, module.exports, [prefix], {
+        ephemeral: true,
+      });
+    },
   },
 };

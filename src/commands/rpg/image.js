@@ -4,6 +4,7 @@ const economies = require("../../utils/economies");
 const constants = require("../../utils/constants");
 const Discord = require("discord.js");
 const { Paginate } = require("../../utils/pagination");
+const { runPrefixCommand, slashCommand, textOption } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "image",
@@ -98,5 +99,22 @@ module.exports = {
         message.channel.send({ embeds: [embed] });
       }
     }
+  },
+  interaction: {
+    data: slashCommand("image", "display your hunted images", (builder) =>
+      builder.addStringOption((option) =>
+        textOption(option, "character", "Character to display", false),
+      ),
+    ),
+    run: async (client, interaction) => {
+      const character = interaction.options.getString("character");
+
+      return runPrefixCommand(
+        client,
+        interaction,
+        module.exports,
+        character ? [character] : [],
+      );
+    },
   },
 };

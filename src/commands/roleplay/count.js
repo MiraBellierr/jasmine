@@ -4,6 +4,7 @@ const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
 const schemas = require("../../database/schemas");
 const { Sequelize, Model, DataTypes } = require("sequelize");
+const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
 const sequelize = new Sequelize("database", "username", "password", {
   dialect: "sqlite",
   storage: "database.sqlite",
@@ -74,5 +75,32 @@ module.exports = {
 
       message.reply({ embeds: [embed] });
     });
+  },
+  interaction: {
+    data: slashCommand("count", "action count", (builder) =>
+      builder
+        .addStringOption((option) =>
+          option
+            .setName("action")
+            .setDescription("Action to count")
+            .setRequired(true),
+        )
+        .addUserOption((option) =>
+          option
+            .setName("user")
+            .setDescription("User to check")
+            .setRequired(false),
+        ),
+    ),
+    run: async (client, interaction) => {
+      const args = [interaction.options.getString("action", true)];
+      const user = interaction.options.getUser("user");
+
+      if (user) {
+        args.push(user.id);
+      }
+
+      return runPrefixCommand(client, interaction, module.exports, args);
+    },
   },
 };

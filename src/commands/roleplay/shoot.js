@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
+const { roleplayInteraction } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "shoot",
@@ -51,4 +52,5 @@ module.exports = {
 
     message.reply({ embeds: [embed] });
   },
+  interaction: roleplayInteraction("shoot", "shoot someone", { target: "required", command: () => module.exports }),
 };

@@ -3,14 +3,13 @@ const Ascii = require("ascii-table");
 const table = new Ascii("Interactions");
 const signale = require("signale");
 const constants = require("../utils/constants");
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord.js");
+const { REST, Routes } = require("discord.js");
 
 table.setHeading("Interaction", "Status");
 
 const custom = new signale.Signale(constants.options.handler);
 
-module.exports = (client) => {
+module.exports = async (client) => {
   const interactions = [];
 
   fs.readdirSync("src/commands/").forEach((dir) => {
@@ -20,8 +19,15 @@ module.exports = (client) => {
       const command = require(`../commands/${dir}/${file}`);
 
       if (command.interaction && command.interaction.data) {
-        const interaction = command.interaction.data;
-        client.interactions.set(interaction.name, command.interaction);
+        const interaction =
+          typeof command.interaction.data.toJSON === "function"
+            ? command.interaction.data.toJSON()
+            : command.interaction.data;
+
+        client.interactions.set(interaction.name, {
+          ...command.interaction,
+          command,
+        });
         interactions.push(interaction);
         table.addRow(file, "✅");
       }
@@ -31,14 +37,11 @@ module.exports = (client) => {
   // eslint-disable-next-line no-undef
   const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
-  rest
-    .put(Routes.applicationCommands(client.user.id), { body: interactions })
-    .then(
-      () => {
-        console.log("=============================");
-        signale.watch("Loading interactions...");
-        custom.loading("\n" + table.toString());
-      },
-      (err) => console.log(err)
-    );
+  await rest.put(Routes.applicationCommands(client.user.id), {
+    body: interactions,
+  });
+
+  console.log("=============================");
+  signale.watch(`Loading ${interactions.length} interactions...`);
+  custom.loading("\n" + table.toString());
 };

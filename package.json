@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
+    "build": "node scripts/build.js",
+    "validate:commands": "node scripts/validateCommands.js",
     "format": "prettier --write .",
     "lint": "eslint --ignore-path=.gitignore --quiet ."
   },
@@ -28,13 +30,14 @@
     "sequelize": "^6.37.3",
     "serialize-javascript": "^6.0.0",
     "signale": "^1.4.0",
-    "sqlite3": "^5.1.6",
+    "sqlite3": "^6.0.1",
     "systeminformation": "^5.22.11",
     "valid-url": "^1.0.9",
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
     "@types/node": "^20.14.8",
+    "nodemon": "^3.1.14",
     "prettier": "3.2.5"
   },
   "repository": {

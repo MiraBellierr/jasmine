@@ -2,6 +2,7 @@ const axios = require("axios");
 const Discord = require("discord.js");
 const { argsError } = require("../../utils/errors");
 const Paginate = require("../../utils/pagination");
+const { runPrefixCommand, slashCommand, textOption } = require("../../utils/slashCommands");
 
 module.exports = {
   name: "starrail",
@@ -60,20 +61,15 @@ module.exports = {
       console.error("Error during the request:", error.message);
     }
   },
-  //   interaction: {
-  //     data: {
-  //       name: "starrail",
-  //       type: 1,
-  //       description: `Send starrail character info`,
-  //       options: [
-  //         {
-  //           name: "UID",
-  //           type: 3,
-  //           description: "Star Rail UID",
-  //           required: true,
-  //         },
-  //       ],
-  //     },
-  //     run: async (client, interaction) => {},
-  //   },
+  interaction: {
+    data: slashCommand("starrail", "Send star rail image info", (builder) =>
+      builder.addStringOption((option) =>
+        textOption(option, "uid", "Star Rail UID"),
+      ),
+    ),
+    run: async (client, interaction) =>
+      runPrefixCommand(client, interaction, module.exports, [
+        interaction.options.getString("uid", true),
+      ]),
+  },
 };
