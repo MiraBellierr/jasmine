@@ -121,7 +121,7 @@ module.exports = {
         return message.reply("You have't set a starboard channel yet");
       }
 
-      Starboard.update(
+      await Starboard.update(
         {
           star: input,
         },
@@ -149,7 +149,7 @@ module.exports = {
         return message.reply("You haven't set a starboard channel yet");
       }
 
-      Starboard.update(
+      await Starboard.update(
         {
           switch: true,
         },
@@ -177,7 +177,7 @@ module.exports = {
         return message.reply("You haven't set a starboard channel yet");
       }
 
-      Starboard.update(
+      await Starboard.update(
         {
           switch: false,
         },
@@ -309,7 +309,7 @@ module.exports = {
           return interaction.reply("You have't set a starboard channel yet");
         }
 
-        Starboard.update(
+        await Starboard.update(
           {
             star: input,
           },
@@ -337,7 +337,7 @@ module.exports = {
           return interaction.reply("You haven't set a starboard channel yet");
         }
 
-        Starboard.update(
+        await Starboard.update(
           {
             switch: true,
           },
@@ -365,7 +365,7 @@ module.exports = {
           return interaction.reply("You haven't set a starboard channel yet");
         }
 
-        Starboard.update(
+        await Starboard.update(
           {
             switch: false,
           },

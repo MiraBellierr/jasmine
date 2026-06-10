@@ -37,7 +37,7 @@ module.exports = {
         );
       }
 
-      WelcomeMessage.update(
+      await WelcomeMessage.update(
         { switch: true },
         { where: { guildID: message.guild.id } }
       );
@@ -60,7 +60,7 @@ module.exports = {
         );
       }
 
-      WelcomeMessage.update(
+      await WelcomeMessage.update(
         { switch: false },
         { where: { guildID: message.guild.id } }
       );
@@ -631,7 +631,7 @@ module.exports = {
           return interaction.reply("You haven't set up a leave message yet.");
         }
 
-        welcomemessage.update(
+        await welcomemessage.update(
           { switch: true },
           { where: { guildID: interaction.guild.id } }
         );
@@ -652,7 +652,7 @@ module.exports = {
           return interaction.reply("You haven't set up a leave message yet.");
         }
 
-        welcomemessage.update(
+        await welcomemessage.update(
           { switch: false },
           { where: { guildID: interaction.guild.id } }
         );

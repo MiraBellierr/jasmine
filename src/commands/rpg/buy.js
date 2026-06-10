@@ -99,7 +99,7 @@ module.exports = {
         return message.reply("You don't have enough coins to buy this");
       }
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") - weapon.cost,
         },
@@ -122,7 +122,7 @@ module.exports = {
         return message.reply("You don't have enough coins to buy this");
       }
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") - shield.cost,
         },
@@ -145,7 +145,7 @@ module.exports = {
         return message.reply("You don't have enough coins to buy this");
       }
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") - helmett.cost,
         },
@@ -168,7 +168,7 @@ module.exports = {
         return message.reply("You don't have enough coins to buy this");
       }
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") - armort.cost,
         },
@@ -191,7 +191,7 @@ module.exports = {
         return message.reply("You don't have enough coins to buy this");
       }
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") - glove.cost,
         },
@@ -211,7 +211,7 @@ module.exports = {
       );
     }
 
-    schemas.character().update(
+    await schemas.character().update(
       {
         equipments: JSON.stringify(playerEquipments),
       },

@@ -1,19 +1,7 @@
 const Sequelize = require("sequelize");
+const createSequelize = require("../createSequelize");
 
-const sequelize = new Sequelize(
-  // eslint-disable-next-line no-undef
-  process.env.DB_NAME,
-  // eslint-disable-next-line no-undef
-  process.env.DB_USER,
-  // eslint-disable-next-line no-undef
-  process.env.DB_PASSWORD,
-  {
-    host: "localhost",
-    logging: false,
-    dialect: "sqlite",
-    storage: "database.sqlite",
-  }
-);
+const sequelize = createSequelize();
 
 module.exports = () => {
   const WelcomeMessage = sequelize.define("welcomeMessage", {

@@ -11,7 +11,7 @@ module.exports = async (client, interaction) => {
     JSON.parse(g.dataValues.options)
   );
 
-  giveawayDatabase.forEach((op) => {
+  for (const op of giveawayDatabase) {
     let temp = new Discord.Collection();
     if (interaction.customId === op.id) {
       if (op.ended) return;
@@ -41,7 +41,7 @@ module.exports = async (client, interaction) => {
       }
 
       console.log(op);
-      new Giveaway(client).update(op);
+      await new Giveaway(client).update(op);
     }
-  });
+  }
 };

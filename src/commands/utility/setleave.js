@@ -35,7 +35,7 @@ module.exports = {
         return message.channel.send("You haven't set up a leave message yet.");
       }
 
-      LeaveMessage.update(
+      await LeaveMessage.update(
         { switch: true },
         { where: { guildID: message.guild.id } }
       );
@@ -56,7 +56,7 @@ module.exports = {
         return message.channel.send("You haven't set up a leave message yet.");
       }
 
-      LeaveMessage.update(
+      await LeaveMessage.update(
         { switch: false },
         { where: { guildID: message.guild.id } }
       );
@@ -629,7 +629,7 @@ module.exports = {
           return interaction.reply("You haven't set up a leave message yet.");
         }
 
-        LeaveMessage.update(
+        await LeaveMessage.update(
           { switch: true },
           { where: { guildID: interaction.guild.id } }
         );
@@ -650,7 +650,7 @@ module.exports = {
           return interaction.reply("You haven't set up a leave message yet.");
         }
 
-        LeaveMessage.update(
+        await LeaveMessage.update(
           { switch: false },
           { where: { guildID: interaction.guild.id } }
         );

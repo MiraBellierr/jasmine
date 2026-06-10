@@ -78,7 +78,7 @@ module.exports = {
       } else {
         const img = result;
 
-        schemas.character().update(
+        await schemas.character().update(
           {
             img,
             name: characters[img].name,

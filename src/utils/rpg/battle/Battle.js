@@ -335,7 +335,7 @@ class Battle {
 
     character.xp += xpGain;
 
-    schemas.character().update(
+    await schemas.character().update(
       {
         xp: character.xp,
       },
@@ -374,7 +374,7 @@ class Battle {
       attr.agl += aglGain;
       attr.sta += staGain;
 
-      schemas.character().update(attr, { where: { userID: this.user.id } });
+      await schemas.character().update(attr, { where: { userID: this.user.id } });
 
       const embed = new Discord.EmbedBuilder()
         .setAuthor({
@@ -449,7 +449,7 @@ class Battle {
       Math.ceil(Math.random() * 10) *
       Math.max(1, this.opponent.level - this.character.level);
 
-    schemas.coins().update(
+    await schemas.coins().update(
       {
         wallet: wallet.get("wallet") + reward,
       },

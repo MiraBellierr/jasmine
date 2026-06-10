@@ -23,7 +23,7 @@ module.exports = {
       );
     }
 
-    schemas.timer().update(
+    await schemas.timer().update(
       {
         daily: Date.now(),
       },
@@ -39,7 +39,7 @@ module.exports = {
       reward = 200;
     }
 
-    schemas.coins().update(
+    await schemas.coins().update(
       {
         wallet: coins.get("wallet") + reward,
       },
@@ -77,7 +77,7 @@ module.exports = {
         );
       }
 
-      schemas.timer().update(
+      await schemas.timer().update(
         {
           daily: Date.now(),
         },
@@ -94,7 +94,7 @@ module.exports = {
         reward = 200;
       }
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") + reward,
         },

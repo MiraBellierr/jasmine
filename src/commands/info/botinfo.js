@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const discordjs = require("../../../node_modules/discord.js/package.json");
 const utils = require("../../utils/utils");
-const sqlite = require("../../../node_modules/sqlite3/package.json");
+const sqlite = require("better-sqlite3/package.json");
 const jasmine = require("../../../package.json");
 
 module.exports = {

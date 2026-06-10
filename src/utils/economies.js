@@ -1,7 +1,7 @@
 const schemas = require("../database/schemas");
 
 const getCount = async (message, target, action) => {
-  schemas.roleplay().create({
+  await schemas.roleplay().create({
     userID: message.author.id,
     targetId: target.user.id,
     actionType: action,

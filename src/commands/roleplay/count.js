@@ -3,12 +3,8 @@ const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
 const utils = require("../../utils/utils");
 const schemas = require("../../database/schemas");
-const { Sequelize, Model, DataTypes } = require("sequelize");
+const { Sequelize } = require("sequelize");
 const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
-const sequelize = new Sequelize("database", "username", "password", {
-  dialect: "sqlite",
-  storage: "database.sqlite",
-});
 
 module.exports = {
   name: "count",

@@ -29,7 +29,7 @@ class Giveaway {
 
   async sendEmbed() {
     this.options.embed = await this.options.channel.send(this.generateEmbed());
-    this.addToDatabase();
+    await this.addToDatabase();
   }
 
   generateEmbed() {
@@ -145,15 +145,15 @@ class Giveaway {
     this.options.embed.edit({ embeds: [embed] });
   }
 
-  addToDatabase() {
-    schemas.Giveaway().create({
+  async addToDatabase() {
+    await schemas.Giveaway().create({
       messageID: this.options.embed.id,
       options: JSON.stringify(this.options),
     });
   }
 
-  updateDatabase() {
-    schemas.Giveaway().update(
+  async updateDatabase() {
+    await schemas.Giveaway().update(
       {
         options: JSON.stringify(this.options),
       },
@@ -218,7 +218,7 @@ class Giveaway {
 
     this.options.ended = true;
 
-    this.updateDatabase();
+    await this.updateDatabase();
     this.roll();
   }
 
@@ -294,7 +294,7 @@ class Giveaway {
       this.roll();
     }
 
-    this.updateDatabase();
+    await this.updateDatabase();
   }
 
   async reroll(channel, messageID) {
@@ -373,7 +373,7 @@ class Giveaway {
       this.roll();
     }
 
-    this.updateDatabase();
+    await this.updateDatabase();
   }
 
   async update(op) {
@@ -388,7 +388,7 @@ class Giveaway {
     );
     this.options.entries = this.options.participants.size;
 
-    this.updateDatabase();
+    await this.updateDatabase();
 
     this.options.embed.edit(this.generateEmbed());
   }

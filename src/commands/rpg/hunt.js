@@ -32,7 +32,7 @@ module.exports = {
     if (images.includes(randomCharacterKey)) {
       const coins = await economies.getCoins(message.author);
 
-      schemas.coins().update(
+      await schemas.coins().update(
         {
           wallet: coins.get("wallet") + 20,
         },
@@ -53,7 +53,7 @@ module.exports = {
     } else {
       images.push(randomCharacterKey);
 
-      schemas.character().update(
+      await schemas.character().update(
         {
           images: JSON.stringify(images),
         },

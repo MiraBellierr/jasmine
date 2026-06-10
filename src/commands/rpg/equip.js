@@ -120,7 +120,7 @@ module.exports = {
       return message.channel.send(`You don't have this equipment`);
     }
 
-    schemas.character().update(
+    await schemas.character().update(
       {
         equipments: JSON.stringify(playerEquipments),
       },
@@ -217,7 +217,7 @@ module.exports = {
         return interaction.reply(`You don't have this equipment`);
       }
 
-      schemas.character().update(
+      await schemas.character().update(
         {
           equipments: JSON.stringify(playerEquipments),
         },
