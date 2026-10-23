@@ -34,7 +34,7 @@
     "yt-search": "^2.10.3"
   },
   "devDependencies": {
-    "@types/node": "^20.14.8",
+    "@types/node": "^24.19.2",
     "eslint": "8.57.1",
     "nodemon": "^3.1.14",
     "prettier": "3.9.10"
