@@ -1,0 +1,11 @@
+{
+  "watch": ["src", ".env"],
+  "ext": "js,json",
+  "ignore": [
+    "src/assets/**",
+    "src/images/**",
+    "src/database/json/giveaways.json"
+  ],
+  "delay": 500,
+  "verbose": false
+}
