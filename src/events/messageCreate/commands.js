@@ -17,22 +17,20 @@ module.exports = async (client, message) => {
 
   const prefix = client.prefixes.get(message.guild.id);
 
-  if (
-    !(
-      message.guild.members.me.permissions.has(
-        PermissionsBitField.Flags.SendMessages
-      ) &&
-      message.guild.members.me
-        .permissionsIn(message.channel)
-        .has(PermissionsBitField.Flags.SendMessages)
-    )
-  ) {
+  if (!(
+    message.guild.members.me.permissions.has(
+      PermissionsBitField.Flags.SendMessages,
+    ) &&
+    message.guild.members.me
+      .permissionsIn(message.channel)
+      .has(PermissionsBitField.Flags.SendMessages)
+  )) {
     return;
   }
 
   if (message.mentions.users.first() === client.user) {
     message.reply(
-      `My prefix for this server is \`${prefix}\`. Type \`${prefix}help\` for more info about me.`
+      `My prefix for this server is \`${prefix}\`. Type \`${prefix}help\` for more info about me.`,
     );
   }
 
@@ -58,22 +56,22 @@ module.exports = async (client, message) => {
   if (
     command.clientPermission &&
     !message.guild.members.me.permissions.has(
-      PermissionsBitField.Flags[command.clientPermission]
+      PermissionsBitField.Flags[command.clientPermission],
     )
   ) {
     return message.channel.send(
-      `I do not have the \`${command.clientPermission}\` permission to be able to continue this command`
+      `I do not have the \`${command.clientPermission}\` permission to be able to continue this command`,
     );
   }
 
   if (
     command.memberPermission &&
     !message.member.permissions.has(
-      PermissionsBitField.Flags[command.memberPermission]
+      PermissionsBitField.Flags[command.memberPermission],
     )
   ) {
     return message.channel.send(
-      `You don't have the \`${command.memberPermission}\` permission to use this command`
+      `You don't have the \`${command.memberPermission}\` permission to use this command`,
     );
   }
 
@@ -82,18 +80,18 @@ module.exports = async (client, message) => {
   } catch (err) {
     signale.fatal(err);
     message.reply(
-      "There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc"
+      "There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc",
     );
 
     client.channels.fetch(contents.errorChannel.id).then(
       (channel) => {
         return channel.send(
-          `An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``
+          `An error occured: \n\`\`\`js\n${err.stack}\n\`\`\``,
         );
       },
       () => {
         return;
-      }
+      },
     );
   }
 };
