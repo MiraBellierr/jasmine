@@ -29,7 +29,7 @@
     "relevant-urban": "^2.0.0",
     "sequelize": "^6.37.3",
     "signale": "^1.4.0",
-    "systeminformation": "^5.22.11",
+    "systeminformation": "^5.33.16",
     "valid-url": "^1.0.9",
     "yt-search": "^2.10.3"
   },
