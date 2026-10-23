@@ -1,12 +1,10 @@
 const { EmbedBuilder, PermissionsBitField } = require("discord.js");
 
 module.exports = async (client, member) => {
-  if (
-    !(
-      client.leaves.get(member.guild.id) &&
-      client.leaves.get(member.guild.id).switch
-    )
-  ) {
+  if (!(
+    client.leaves.get(member.guild.id) &&
+    client.leaves.get(member.guild.id).switch
+  )) {
     return;
   }
 
@@ -57,7 +55,7 @@ module.exports = async (client, member) => {
       leaveObj.thumbnail
         .replace("{user avatar}", member.user.displayAvatarURL())
         .replace("{jasmine avatar}", client.user.displayAvatarURL())
-        .replace("{server icon}", member.guild.iconURL())
+        .replace("{server icon}", member.guild.iconURL()),
     );
   }
 
@@ -77,7 +75,7 @@ module.exports = async (client, member) => {
       leaveObj.image
         .replace("{user avatar}", member.user.displayAvatarURL())
         .replace("{jasmine avatar}", client.user.displayAvatarURL())
-        .replace("{server icon}", member.guild.iconURL())
+        .replace("{server icon}", member.guild.iconURL()),
     );
   }
 
@@ -103,14 +101,12 @@ module.exports = async (client, member) => {
 
   const channel = await member.guild.channels.fetch(leaveObj.channelID);
 
-  if (
-    !(
-      channel &&
-      member.guild.members.me
-        .permissionsIn(channel)
-        .has(PermissionsBitField.Flags.SendMessages)
-    )
-  ) {
+  if (!(
+    channel &&
+    member.guild.members.me
+      .permissionsIn(channel)
+      .has(PermissionsBitField.Flags.SendMessages)
+  )) {
     return;
   }
 

@@ -9,9 +9,9 @@ module.exports = {
   category: "rpg",
   usage: "<class>",
   run: async (client, message, args) => {
-    if (
-      !(args.length && Object.keys(classes).includes(args[0].toLowerCase()))
-    ) {
+    if (!(
+      args.length && Object.keys(classes).includes(args[0].toLowerCase())
+    )) {
       const embed = new Discord.EmbedBuilder()
         .setAuthor({
           name: message.author.username,
