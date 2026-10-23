@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const urban = require('relevant-urban');
+const urban = require("relevant-urban");
 const Paginate = require("../../utils/pagination");
 const { argsError } = require("../../utils/errors");
 const badwords = require("../../database/json/badwords.json");
@@ -22,12 +22,12 @@ module.exports = {
         for (let i = 0; i < result.length; i++) {
           const definition = filter(
             // eslint-disable-next-line no-useless-escape
-            result[i].definition.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
+            result[i].definition.replace(/[\[+]/gm, "").replace(/[\]+]/gm, ""),
           );
 
           const example = filter(
             // eslint-disable-next-line no-useless-escape
-            result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
+            result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, ""),
           );
 
           const embed = new Discord.EmbedBuilder()
@@ -61,7 +61,7 @@ module.exports = {
       },
       async () => {
         message.reply("I can't find the urban definition for that word");
-      }
+      },
     );
   },
   interaction: {
@@ -79,19 +79,21 @@ module.exports = {
       ],
     },
     run: async (client, interaction) => {
-      ud.define(interaction.options.getString("word")).then(
+      urban.all(interaction.options.getString("word")).then(
         async (result) => {
           const pages = [];
 
           for (let i = 0; i < result.length; i++) {
             const definition = filter(
-              // eslint-disable-next-line no-useless-escape
-              result[i].definition.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
+              result[i].definition
+                // eslint-disable-next-line no-useless-escape
+                .replace(/[\[+]/gm, "")
+                .replace(/[\]+]/gm, ""),
             );
 
             const example = filter(
               // eslint-disable-next-line no-useless-escape
-              result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, "")
+              result[i].example.replace(/[\[+]/gm, "").replace(/[\]+]/gm, ""),
             );
 
             const embed = new Discord.EmbedBuilder()
@@ -100,7 +102,7 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL(),
               })
               .setTitle(result[i].word)
-              .setURL(result[i].permalink)
+              .setURL(result[i].urbanURL)
               .setColor("#CD1C6C")
               .setDescription(Discord.escapeMarkdown(definition))
               .addFields([
@@ -110,7 +112,7 @@ module.exports = {
                 },
                 {
                   name: "Upvotes",
-                  value: `${result[i].thumbs_up}`,
+                  value: `${result[i].thumbsUp}`,
                   inline: true,
                 },
               ])
@@ -128,7 +130,7 @@ module.exports = {
         },
         async () => {
           interaction.reply("I can't find the urban definition for that word");
-        }
+        },
       );
     },
   },
@@ -140,7 +142,7 @@ function filter(words) {
   for (const badword of badwords) {
     filtered = filtered.replace(
       new RegExp(badword, "gi"),
-      "*".repeat(badword.length)
+      "*".repeat(badword.length),
     );
   }
 

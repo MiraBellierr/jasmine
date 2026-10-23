@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const { getMemberFromArguments } = require("../../utils/getters");
 const { argsError } = require("../../utils/errors");
-const utils = require("../../utils/utils");
 const schemas = require("../../database/schemas");
 const { Sequelize } = require("sequelize");
 const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
