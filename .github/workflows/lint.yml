@@ -6,18 +6,17 @@ on:
   pull_request:
     branches: ["master"]
 
+permissions:
+  contents: read
+
 jobs:
   eslint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
-      - run: npm ci # or yarn install
-      - uses: sibiraj-s/action-eslint@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }} # Optional
-          eslint-args: "--ignore-path=.gitignore --quiet"
-          extensions: "js,jsx,ts,tsx"
-          annotations: true
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint

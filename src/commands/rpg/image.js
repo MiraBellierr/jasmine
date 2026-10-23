@@ -1,10 +1,12 @@
 const schemas = require("../../database/schemas");
 const characters = require("../../database/json/characters.json");
-const economies = require("../../utils/economies");
-const constants = require("../../utils/constants");
 const Discord = require("discord.js");
 const { Paginate } = require("../../utils/pagination");
-const { runPrefixCommand, slashCommand, textOption } = require("../../utils/slashCommands");
+const {
+  runPrefixCommand,
+  slashCommand,
+  textOption,
+} = require("../../utils/slashCommands");
 
 module.exports = {
   name: "image",
@@ -28,7 +30,7 @@ module.exports = {
         (ch) => `• [${characters[ch].name}](${characters[ch].image})`,
       );
 
-      function chunkBreakforEmbed(array, size) {
+      const chunkBreakforEmbed = (array, size) => {
         const result = [];
         for (let i = 0; i < array.length; i += size) {
           result.push(
@@ -42,7 +44,7 @@ module.exports = {
         }
 
         return result;
-      }
+      };
 
       const imagesByChunk = chunkBreakforEmbed(list, 10);
 
@@ -51,13 +53,13 @@ module.exports = {
       const name = args.join(" ");
       const images = JSON.parse(userCharacter.get("images"));
 
-      function searchCharacterByName(searchname) {
+      const searchCharacterByName = (searchname) => {
         return Object.entries(characters)
-          .filter(([_, { name }]) =>
+          .filter(([, { name }]) =>
             name.toLowerCase().includes(searchname.toLowerCase()),
           )
           .map(([id]) => id);
-      }
+      };
 
       const results = searchCharacterByName(name);
 
@@ -67,9 +69,9 @@ module.exports = {
         );
       }
 
-      function findFirstCommonElement(array1, array2) {
+      const findFirstCommonElement = (array1, array2) => {
         return array1.find((id) => array2.includes(id));
-      }
+      };
 
       const result = findFirstCommonElement(results, images);
 

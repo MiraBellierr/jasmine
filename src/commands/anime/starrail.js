@@ -1,8 +1,11 @@
 const axios = require("axios");
-const Discord = require("discord.js");
 const { argsError } = require("../../utils/errors");
 const Paginate = require("../../utils/pagination");
-const { runPrefixCommand, slashCommand, textOption } = require("../../utils/slashCommands");
+const {
+  runPrefixCommand,
+  slashCommand,
+  textOption,
+} = require("../../utils/slashCommands");
 
 module.exports = {
   name: "starrail",

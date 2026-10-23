@@ -1,25 +1,31 @@
-name: Continuous Integration
+name: Prettier
 
-# This action works with pull requests and pushes
 on:
-  push:
-    branches: ["master"]
   pull_request:
     branches: ["master"]
+
+permissions:
+  contents: read
 
 jobs:
   prettier:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
-          # Make sure the actual branch is checked out when running on pull requests
-          ref: ${{ github.head_ref }}
-
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
         with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.{js,md}
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # Only changed files are checked while the repository still has
+      # pre-existing formatting drift. Switch to `prettier --check .`
+      # once the whole tree is formatted.
+      - name: Check changed files
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git fetch --no-tags origin "$BASE_REF"
+          git diff --name-only -z --diff-filter=ACMR "FETCH_HEAD...HEAD" -- '*.js' '*.md' \
+            | xargs -0 -r npx --no-install prettier --check
