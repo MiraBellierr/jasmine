@@ -52,6 +52,7 @@ module.exports.errorChannel = {
 
 module.exports.supportServer = {
   id: "864537979339014184",
+  url: "https://discord.gg/t4H7zVXwzc",
 };
 
 module.exports.patreon = {

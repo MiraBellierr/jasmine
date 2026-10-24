@@ -1,303 +1,278 @@
-const Discord = require("discord.js");
-const Paginate = require("../../utils/pagination");
+const {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  MessageFlags,
+  escapeMarkdown,
+} = require("discord.js");
+
+const BRAND_COLOR = "#CD1C6C";
+const ERROR_COLOR = "#EF4444";
+const VIEW_TIMEOUT = 180_000;
+
+const VIEW_ICON = "icon";
+const VIEW_SPLASH = "splash";
+const VIEW_BANNER = "banner";
+const VIEW_DISCOVERY = "discovery";
+
+const FORMAT_LABELS = {
+  png: "PNG",
+  jpg: "JPG",
+  webp: "WebP",
+  gif: "GIF",
+};
+
+const isAnimated = (hash) => Boolean(hash?.startsWith("a_"));
+
+function formatLinks(urlFor, animated) {
+  const formats = ["png", "jpg", "webp"];
+
+  if (animated) {
+    formats.push("gif");
+  }
+
+  return `-# Formats: ${formats
+    .map((format) => `[${FORMAT_LABELS[format]}](${urlFor(format)})`)
+    .join(" • ")}`;
+}
+
+function buildAssetEmbed(client, guild, { title, image, description }) {
+  const embed = new EmbedBuilder()
+    .setAuthor({
+      name: client.user.username,
+      iconURL: client.user.displayAvatarURL(),
+    })
+    .setColor(BRAND_COLOR)
+    .setTitle(title)
+    .setDescription(description)
+    .setFooter({
+      text: `Server ID ${guild.id}`,
+      iconURL: client.user.displayAvatarURL(),
+    })
+    .setTimestamp();
+
+  if (image) {
+    embed.setImage(image);
+  }
+
+  return embed;
+}
+
+function buildPages(client, guild) {
+  const pages = [];
+  const name = escapeMarkdown(guild.name);
+
+  const addPage = ({ key, label, title, hash, url }) => {
+    const image = url({ size: 4096 });
+
+    if (!image) {
+      return;
+    }
+
+    pages.push({
+      key,
+      label,
+      customId: `servericon:view:${key}`,
+      embed: buildAssetEmbed(client, guild, {
+        title,
+        image,
+        description: formatLinks(
+          (extension) => url({ size: 4096, extension }),
+          isAnimated(hash),
+        ),
+      }),
+    });
+  };
+
+  addPage({
+    key: VIEW_ICON,
+    label: "Icon",
+    title: `${name}'s icon`,
+    hash: guild.icon,
+    url: (options) => guild.iconURL(options),
+  });
+
+  addPage({
+    key: VIEW_SPLASH,
+    label: "Invite splash",
+    title: `${name}'s invite splash`,
+    hash: guild.splash,
+    url: (options) => guild.splashURL(options),
+  });
+
+  addPage({
+    key: VIEW_BANNER,
+    label: "Banner",
+    title: `${name}'s banner`,
+    hash: guild.banner,
+    url: (options) => guild.bannerURL(options),
+  });
+
+  addPage({
+    key: VIEW_DISCOVERY,
+    label: "Discovery splash",
+    title: `${name}'s discovery splash`,
+    hash: guild.discoverySplash,
+    url: (options) => guild.discoverySplashURL(options),
+  });
+
+  return pages;
+}
+
+function buildButtons(pages, selectedKey, disabled = false) {
+  if (pages.length < 2) {
+    return [];
+  }
+
+  return [
+    new ActionRowBuilder().addComponents(
+      pages.map((page) =>
+        new ButtonBuilder()
+          .setCustomId(page.customId)
+          .setLabel(page.label)
+          .setStyle(ButtonStyle.Secondary)
+          .setDisabled(disabled || page.key === selectedKey),
+      ),
+    ),
+  ];
+}
+
+function buildPayload(pages, selectedKey) {
+  const page = pages.find((entry) => entry.key === selectedKey) || pages[0];
+  const components = buildButtons(pages, page.key);
+
+  return {
+    embeds: [page.embed],
+    ...(components.length ? { components } : {}),
+  };
+}
+
+function attachViewer(message, pages) {
+  let selected = pages[0].key;
+
+  const collector = message.createMessageComponentCollector({
+    time: VIEW_TIMEOUT,
+  });
+
+  collector.on("collect", async (interaction) => {
+    const page = pages.find((entry) => entry.customId === interaction.customId);
+
+    if (!page) {
+      return;
+    }
+
+    selected = page.key;
+
+    await interaction
+      .update({
+        embeds: [page.embed],
+        components: buildButtons(pages, selected),
+      })
+      .catch(() => null);
+  });
+
+  collector.on("end", async (_collected, reason) => {
+    if (reason === "messageDelete") {
+      return;
+    }
+
+    try {
+      await message.edit({
+        components: buildButtons(pages, selected, true),
+      });
+    } catch {
+      // The message is gone, or the bot cannot edit it anymore.
+    }
+  });
+
+  return collector;
+}
+
+function buildErrorEmbed(client, title, description) {
+  return new EmbedBuilder()
+    .setAuthor({
+      name: client.user.username,
+      iconURL: client.user.displayAvatarURL(),
+    })
+    .setColor(ERROR_COLOR)
+    .setTitle(title)
+    .setDescription(description)
+    .setTimestamp();
+}
+
+function emptyEmbed(client, guild) {
+  return buildAssetEmbed(client, guild, {
+    title: "No server images",
+    description: "This server has no icon, banner, or splash image.",
+  });
+}
+
+async function deliver(client, send, guild) {
+  const pages = buildPages(client, guild);
+
+  if (!pages.length) {
+    return send({ embeds: [emptyEmbed(client, guild)] });
+  }
+
+  const sent = await send(buildPayload(pages, pages[0].key));
+
+  if (pages.length > 1 && sent?.createMessageComponentCollector) {
+    attachViewer(sent, pages);
+  }
+
+  return sent;
+}
 
 module.exports = {
   name: "servericon",
   aliases: ["si"],
   category: "info",
-  description: "Returns server icon",
-  run: (client, message) => {
-    if (!message.guild.iconURL()) {
-      return message.reply("This server doesn't have a server icon");
+  description:
+    "Show the server's icon, invite splash, banner, and discovery splash",
+  run: async (client, message) => {
+    if (!message.guild) {
+      return message.reply({
+        embeds: [
+          buildErrorEmbed(
+            client,
+            "Server only",
+            "Run this command in a server to see its images.",
+          ),
+        ],
+      });
     }
 
-    const pages = [];
-
-    const iconEmbed = new Discord.EmbedBuilder()
-      .setAuthor({
-        name: message.author.username,
-        iconURL: message.author.displayAvatarURL(),
-      })
-      .setTitle("Server Icon")
-      .setColor("#CD1C6C")
-      .setDescription(
-        `[webp](${message.guild.iconURL({
-          format: "webp",
-          size: 4096,
-        })}) | [png](${message.guild.iconURL({
-          format: "png",
-          size: 4096,
-        })}) | [jpg](${message.guild.iconURL({
-          format: "jpg",
-          size: 4096,
-        })}) | [jpeg](${message.guild.iconURL({
-          format: "jpeg",
-          size: 4096,
-        })}) | [gif](${message.guild.iconURL({
-          size: 4096,
-          format: "gif",
-        })})`
-      )
-      .setImage(message.guild.iconURL({ size: 4096 }))
-      .setTimestamp()
-      .setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
-
-    pages.push(iconEmbed);
-
-    if (message.guild.splashURL()) {
-      const splashEmbed = new Discord.EmbedBuilder()
-        .setAuthor({
-          name: message.author.username,
-          iconURL: message.author.displayAvatarURL(),
-        })
-        .setTitle("Server Splash")
-        .setColor("#CD1C6C")
-        .setImage(message.guild.splashURL({ size: 4096 }))
-        .setDescription(
-          `[webp](${message.guild.splashURL({
-            format: "webp",
-            size: 4096,
-          })}) | [png](${message.guild.splashURL({
-            format: "png",
-            size: 4096,
-          })}) | [jpg](${message.guild.splashURL({
-            format: "jpg",
-            size: 4096,
-          })}) | [jpeg](${message.guild.splashURL({
-            format: "jpeg",
-            size: 4096,
-          })}) | [gif](${message.guild.splashURL({
-            size: 4096,
-            format: "gif",
-          })})`
-        )
-        .setTimestamp()
-        .setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
-
-      pages.push(splashEmbed);
-    }
-
-    if (message.guild.bannerURL()) {
-      const bannerEmbed = new Discord.EmbedBuilder()
-        .setAuthor({
-          name: message.author.username,
-          iconURL: message.author.displayAvatarURL(),
-        })
-        .setTitle("Server Banner")
-        .setColor("#CD1C6C")
-        .setImage(message.guild.bannerURL({ size: 4096 }))
-        .setDescription(
-          `[webp](${message.guild.bannerURL({
-            format: "webp",
-            size: 4096,
-          })}) | [png](${message.guild.bannerURL({
-            format: "png",
-            size: 4096,
-          })}) | [jpg](${message.guild.bannerURL({
-            format: "jpg",
-            size: 4096,
-          })}) | [jpeg](${message.guild.bannerURL({
-            format: "jpeg",
-            size: 4096,
-          })}) | [gif](${message.guild.bannerURL({
-            size: 4096,
-            format: "gif",
-          })})`
-        )
-        .setTimestamp()
-        .setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
-
-      pages.push(bannerEmbed);
-    }
-
-    if (message.guild.discoverySplashURL()) {
-      const discoverySplashEmbed = new Discord.EmbedBuilder()
-        .setAuthor({
-          name: message.author.username,
-          iconURL: message.author.displayAvatarURL(),
-        })
-        .setTitle("Server Splash (Discovery)")
-        .setColor("#CD1C6C")
-        .setImage(message.guild.discoverySplashURL({ size: 4096 }))
-        .setDescription(
-          `[webp](${message.guild.discoverySplashURL({
-            format: "webp",
-            size: 4096,
-          })}) | [png](${message.guild.discoverySplashURL({
-            format: "png",
-            size: 4096,
-          })}) | [jpg](${message.guild.discoverySplashURL({
-            format: "jpg",
-            size: 4096,
-          })}) | [jpeg](${message.guild.discoverySplashURL({
-            format: "jpeg",
-            size: 4096,
-          })}) | [gif](${message.guild.discoverySplashURL({
-            size: 4096,
-            format: "gif",
-          })})`
-        )
-        .setTimestamp()
-        .setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
-
-      pages.push(discoverySplashEmbed);
-    }
-
-    new Paginate.Paginate(client, message, pages).init();
+    return deliver(client, (payload) => message.reply(payload), message.guild);
   },
   interaction: {
     data: {
       name: "servericon",
-      description: "View the server icon.",
       type: 1,
+      description:
+        "Show the server's icon, invite splash, banner, and discovery splash",
     },
     run: async (client, interaction) => {
-      if (!interaction.guild.iconURL()) {
-        return interaction.reply("This server doesn't have a server icon");
+      if (!interaction.guild) {
+        return interaction.reply({
+          embeds: [
+            buildErrorEmbed(
+              client,
+              "Server only",
+              "Run this command in a server to see its images.",
+            ),
+          ],
+          flags: MessageFlags.Ephemeral,
+        });
       }
 
-      const pages = [];
+      await interaction.deferReply();
 
-      const iconEmbed = new Discord.EmbedBuilder()
-        .setAuthor({
-          name: interaction.user.username,
-          iconURL: interaction.user.displayAvatarURL(),
-        })
-        .setTitle("Server Icon")
-        .setColor("#CD1C6C")
-        .setDescription(
-          `[webp](${interaction.guild.iconURL({
-            format: "webp",
-            size: 4096,
-          })}) | [png](${interaction.guild.iconURL({
-            format: "png",
-            size: 4096,
-          })}) | [jpg](${interaction.guild.iconURL({
-            format: "jpg",
-            size: 4096,
-          })}) | [jpeg](${interaction.guild.iconURL({
-            format: "jpeg",
-            size: 4096,
-          })}) | [gif](${interaction.guild.iconURL({
-            size: 4096,
-            format: "gif",
-          })})`
-        )
-        .setImage(interaction.guild.iconURL({ size: 4096 }))
-        .setTimestamp()
-        .setFooter({ text: client.user.tag, iconURL: client.user.avatarURL() });
-
-      pages.push(iconEmbed);
-
-      if (interaction.guild.splashURL()) {
-        const splashEmbed = new Discord.EmbedBuilder()
-          .setAuthor({
-            name: interaction.user.username,
-            iconURL: interaction.user.displayAvatarURL(),
-          })
-          .setTitle("Server Splash")
-          .setColor("#CD1C6C")
-          .setImage(interaction.guild.splashURL({ size: 4096 }))
-          .setDescription(
-            `[webp](${interaction.guild.splashURL({
-              format: "webp",
-              size: 4096,
-            })}) | [png](${interaction.guild.splashURL({
-              format: "png",
-              size: 4096,
-            })}) | [jpg](${interaction.guild.splashURL({
-              format: "jpg",
-              size: 4096,
-            })}) | [jpeg](${interaction.guild.splashURL({
-              format: "jpeg",
-              size: 4096,
-            })}) | [gif](${interaction.guild.splashURL({
-              size: 4096,
-              format: "gif",
-            })})`
-          )
-          .setTimestamp()
-          .setFooter({
-            text: client.user.tag,
-            iconURL: client.user.avatarURL(),
-          });
-
-        pages.push(splashEmbed);
-      }
-
-      if (interaction.guild.bannerURL()) {
-        const bannerEmbed = new Discord.EmbedBuilder()
-          .setAuthor({
-            name: interaction.user.username,
-            iconURL: interaction.user.displayAvatarURL(),
-          })
-          .setTitle("Server Banner")
-          .setColor("#CD1C6C")
-          .setImage(interaction.guild.bannerURL({ size: 4096 }))
-          .setDescription(
-            `[webp](${interaction.guild.bannerURL({
-              format: "webp",
-              size: 4096,
-            })}) | [png](${interaction.guild.bannerURL({
-              format: "png",
-              size: 4096,
-            })}) | [jpg](${interaction.guild.bannerURL({
-              format: "jpg",
-              size: 4096,
-            })}) | [jpeg](${interaction.guild.bannerURL({
-              format: "jpeg",
-              size: 4096,
-            })}) | [gif](${interaction.guild.bannerURL({
-              size: 4096,
-              format: "gif",
-            })})`
-          )
-          .setTimestamp()
-          .setFooter({
-            text: client.user.tag,
-            iconURL: client.user.avatarURL(),
-          });
-
-        pages.push(bannerEmbed);
-      }
-
-      if (interaction.guild.discoverySplashURL()) {
-        const discoverySplashEmbed = new Discord.EmbedBuilder()
-          .setAuthor({
-            name: interaction.user.username,
-            iconURL: interaction.user.displayAvatarURL(),
-          })
-          .setTitle("Server Splash (Discovery)")
-          .setColor("#CD1C6C")
-          .setImage(interaction.guild.discoverySplashURL({ size: 4096 }))
-          .setDescription(
-            `[webp](${interaction.guild.discoverySplashURL({
-              format: "webp",
-              size: 4096,
-            })}) | [png](${interaction.guild.discoverySplashURL({
-              format: "png",
-              size: 4096,
-            })}) | [jpg](${interaction.guild.discoverySplashURL({
-              format: "jpg",
-              size: 4096,
-            })}) | [jpeg](${interaction.guild.discoverySplashURL({
-              format: "jpeg",
-              size: 4096,
-            })}) | [gif](${interaction.guild.discoverySplashURL({
-              size: 4096,
-              format: "gif",
-            })})`
-          )
-          .setTimestamp()
-          .setFooter({
-            text: client.user.tag,
-            iconURL: client.user.avatarURL(),
-          });
-
-        pages.push(discoverySplashEmbed);
-      }
-
-      new Paginate.Paginate(client, interaction, pages).init();
+      return deliver(
+        client,
+        (payload) => interaction.editReply(payload),
+        interaction.guild,
+      );
     },
   },
 };

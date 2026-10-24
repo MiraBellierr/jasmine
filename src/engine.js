@@ -1,5 +1,6 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
+const signale = require("signale");
 const utils = require("./utils/utils");
 const client = new Client({
   allowedMentions: { parse: ["users"] },
@@ -33,7 +34,7 @@ client.categories = fs.readdirSync("src/commands/");
 Object.values(require("./database/json/characters.json")).forEach(
   (character) => {
     client.characters.set(character.name, character);
-  }
+  },
 );
 
 async function start() {
@@ -43,8 +44,12 @@ async function start() {
     }
   });
 
-  // eslint-disable-next-line no-undef
-  client.login(process.env.TOKEN);
+  try {
+    await client.login(process.env.TOKEN);
+  } catch (error) {
+    signale.error(`Shard login failed: ${error.message}`);
+    process.exit(1);
+  }
 }
 
 start();

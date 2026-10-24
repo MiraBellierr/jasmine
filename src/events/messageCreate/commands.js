@@ -80,7 +80,7 @@ module.exports = async (client, message) => {
   } catch (err) {
     signale.fatal(err);
     message.reply(
-      "There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc",
+      `There was an error trying to execute this command. Report it by joining our server: ${contents.supportServer.url}`,
     );
 
     client.channels.fetch(contents.errorChannel.id).then(

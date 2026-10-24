@@ -17,19 +17,22 @@ module.exports = async (client) => {
 
     for (const file of files) {
       const command = require(`../commands/${dir}/${file}`);
+      const entries = [command.interaction, command.contextMenu].filter(
+        (entry) => entry?.data && typeof entry.run === "function",
+      );
 
-      if (command.interaction && command.interaction.data) {
+      for (const entry of entries) {
         const interaction =
-          typeof command.interaction.data.toJSON === "function"
-            ? command.interaction.data.toJSON()
-            : command.interaction.data;
+          typeof entry.data.toJSON === "function"
+            ? entry.data.toJSON()
+            : entry.data;
 
-        client.interactions.set(interaction.name, {
-          ...command.interaction,
-          command,
-        });
+        client.interactions.set(interaction.name, { ...entry, command });
         interactions.push(interaction);
-        table.addRow(file, "✅");
+        table.addRow(
+          entry === command.contextMenu ? `${file} (menu)` : file,
+          "✅",
+        );
       }
     }
   });

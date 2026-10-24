@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const signale = require("signale");
 const constants = require("../../constants");
 const schemas = require("../../../database/schemas");
 
@@ -48,7 +49,7 @@ class Giveaway {
           constants.giveaway.winnerEmote
         } **Winner(s):** ${this.options.winnerCount}\n${
           constants.giveaway.durationEmote
-        } **Ends:** <t:${Math.floor(this.options.endAt)}:R>`
+        } **Ends:** <t:${Math.floor(this.options.endAt)}:R>`,
       )
       .setThumbnail("https://cdn3.emoji.gg/emojis/2659-tada-purple.gif")
       .setColor("#DA70D6");
@@ -79,7 +80,7 @@ class Giveaway {
           .map((w) => `<@${w.id}>`)
           .join(", ")}\n${
           constants.giveaway.durationEmote
-        } **Ends:** <t:${Math.floor(this.options.endAt)}:R>`
+        } **Ends:** <t:${Math.floor(this.options.endAt)}:R>`,
       )
       .setColor("#DA70D6");
 
@@ -92,8 +93,8 @@ class Giveaway {
         `[Giveaway Link](${Discord.messageLink(
           this.options.channel.id,
           this.options.embed.id,
-          this.options.channel.guild.id
-        )})`
+          this.options.channel.guild.id,
+        )})`,
       )
       .setColor(Discord.Colors.DarkButNotBlack);
 
@@ -113,8 +114,8 @@ class Giveaway {
         `[Giveaway Link](${Discord.messageLink(
           this.options.channel.id,
           this.options.embed.id,
-          this.options.channel.guild.id
-        )})`
+          this.options.channel.guild.id,
+        )})`,
       )
       .setColor(Discord.Colors.DarkButNotBlack);
 
@@ -138,7 +139,7 @@ class Giveaway {
           constants.giveaway.winnerEmote
         } **Winner(s):** No Winner\n${
           constants.giveaway.durationEmote
-        } **Ends:** <t:${Math.floor(this.options.endAt)}:R>`
+        } **Ends:** <t:${Math.floor(this.options.endAt)}:R>`,
       )
       .setColor("#DA70D6");
 
@@ -157,7 +158,7 @@ class Giveaway {
       {
         options: JSON.stringify(this.options),
       },
-      { where: { messageID: this.options.embed.id } }
+      { where: { messageID: this.options.embed.id } },
     );
   }
 
@@ -165,7 +166,7 @@ class Giveaway {
     let giveawayDatabase = await schemas.Giveaway().findAll();
 
     giveawayDatabase = giveawayDatabase.map((g) =>
-      JSON.parse(g.dataValues.options)
+      JSON.parse(g.dataValues.options),
     );
 
     return giveawayDatabase;
@@ -265,7 +266,7 @@ class Giveaway {
         .map((g) => JSON.parse(g.dataValues.options))
         .filter(
           (g) =>
-            g.channel.id === channel.id && g.embed.id === messageID && !g.ended
+            g.channel.id === channel.id && g.embed.id === messageID && !g.ended,
         );
 
       if (!giveawayDatabase.length) return channel.send("No giveaways found.");
@@ -307,7 +308,7 @@ class Giveaway {
         .map((g) => JSON.parse(g.dataValues.options))
         .filter(
           (g) =>
-            g.channel.id === channel.id && g.ended && g.participants.length > 1
+            g.channel.id === channel.id && g.ended && g.participants.length > 1,
         );
 
       if (!giveawayDatabase.length) return channel.send("No giveaways found.");
@@ -345,7 +346,7 @@ class Giveaway {
             g.channel.id === channel.id &&
             g.embed.id === messageID &&
             g.ended &&
-            g.participants.length > 1
+            g.participants.length > 1,
         );
 
       if (!giveawayDatabase.length) return channel.send("No giveaways found.");
@@ -380,11 +381,11 @@ class Giveaway {
     this.options = op;
     this.options.host = await this.client.users.fetch(this.options.host.id);
     this.options.channel = await this.client.channels.fetch(
-      this.options.channel.id
+      this.options.channel.id,
     );
 
     this.options.embed = await this.options.channel.messages.fetch(
-      this.options.embed.id
+      this.options.embed.id,
     );
     this.options.entries = this.options.participants.size;
 
@@ -394,21 +395,36 @@ class Giveaway {
   }
 
   init() {
-    setInterval(async () => {
-      await this.checkGiveaway();
+    setInterval(() => {
+      this.checkGiveaway().catch((error) => {
+        signale.warn(`Giveaway check failed: ${error.message}`);
+      });
     }, 1000);
   }
 
   async checkGiveaway() {
-    (await this.getDatabase()).forEach(async (g) => {
+    const giveaways = await this.getDatabase();
+
+    for (const g of giveaways) {
       if (g.ended) {
-        return;
+        continue;
       }
 
-      if (g.endAt < new Date().getTime() / 1000) {
-        await this.end(g);
+      // Each shard only owns the channels in its own guilds.
+      if (!this.client.channels.cache.has(g.channel.id)) {
+        continue;
       }
-    });
+
+      if (g.endAt < Date.now() / 1000) {
+        try {
+          await this.end(g);
+        } catch (error) {
+          signale.warn(
+            `Giveaway ${g.embed?.id} failed to end: ${error.message}`,
+          );
+        }
+      }
+    }
   }
 }
 

@@ -4,7 +4,10 @@ const { PermissionsBitField } = require("discord.js");
 const { sendInteraction } = require("../../utils/slashCommands");
 
 module.exports = async (client, interaction) => {
-  if (!interaction.isChatInputCommand() && !interaction.isContextMenuCommand()) {
+  if (
+    !interaction.isChatInputCommand() &&
+    !interaction.isContextMenuCommand()
+  ) {
     return;
   }
 
@@ -51,7 +54,7 @@ module.exports = async (client, interaction) => {
 
     await sendInteraction(
       interaction,
-      "There was an error trying to execute this command. Report it by joining our server: https://discord.gg/NcPeGuNEdc",
+      `There was an error trying to execute this command. Report it by joining our server: ${contents.supportServer.url}`,
       { ephemeral: true },
     );
 

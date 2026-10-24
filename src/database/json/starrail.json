@@ -1,0 +1,7899 @@
+{
+  "source": "https://github.com/Mar-7th/StarRailRes",
+  "characters": {
+    "1001": {
+      "name": "March 7th",
+      "rarity": 4,
+      "path": "Preservation",
+      "element": "Ice",
+      "ranks": [
+        "100101",
+        "100102",
+        "100103",
+        "100104",
+        "100105",
+        "100106"
+      ]
+    },
+    "1002": {
+      "name": "Dan Heng",
+      "rarity": 4,
+      "path": "The Hunt",
+      "element": "Wind",
+      "ranks": [
+        "100201",
+        "100202",
+        "100203",
+        "100204",
+        "100205",
+        "100206"
+      ]
+    },
+    "1003": {
+      "name": "Himeko",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Fire",
+      "ranks": [
+        "100301",
+        "100302",
+        "100303",
+        "100304",
+        "100305",
+        "100306"
+      ]
+    },
+    "1004": {
+      "name": "Welt",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Imaginary",
+      "ranks": [
+        "100401",
+        "100402",
+        "100403",
+        "100404",
+        "100405",
+        "100406"
+      ]
+    },
+    "1005": {
+      "name": "Kafka",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Thunder",
+      "ranks": [
+        "100501",
+        "100502",
+        "100503",
+        "100504",
+        "100505",
+        "100506"
+      ]
+    },
+    "1006": {
+      "name": "Silver Wolf",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Quantum",
+      "ranks": [
+        "100601",
+        "100602",
+        "100603",
+        "100604",
+        "100605",
+        "100606"
+      ]
+    },
+    "1008": {
+      "name": "Arlan",
+      "rarity": 4,
+      "path": "Destruction",
+      "element": "Thunder",
+      "ranks": [
+        "100801",
+        "100802",
+        "100803",
+        "100804",
+        "100805",
+        "100806"
+      ]
+    },
+    "1009": {
+      "name": "Asta",
+      "rarity": 4,
+      "path": "Harmony",
+      "element": "Fire",
+      "ranks": [
+        "100901",
+        "100902",
+        "100903",
+        "100904",
+        "100905",
+        "100906"
+      ]
+    },
+    "1013": {
+      "name": "Herta",
+      "rarity": 4,
+      "path": "Erudition",
+      "element": "Ice",
+      "ranks": [
+        "101301",
+        "101302",
+        "101303",
+        "101304",
+        "101305",
+        "101306"
+      ]
+    },
+    "1014": {
+      "name": "Saber",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Wind",
+      "ranks": [
+        "101401",
+        "101402",
+        "101403",
+        "101404",
+        "101405",
+        "101406"
+      ]
+    },
+    "1015": {
+      "name": "Archer",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Quantum",
+      "ranks": [
+        "101501",
+        "101502",
+        "101503",
+        "101504",
+        "101505",
+        "101506"
+      ]
+    },
+    "1101": {
+      "name": "Bronya",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Wind",
+      "ranks": [
+        "110101",
+        "110102",
+        "110103",
+        "110104",
+        "110105",
+        "110106"
+      ]
+    },
+    "1102": {
+      "name": "Seele",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Quantum",
+      "ranks": [
+        "110201",
+        "110202",
+        "110203",
+        "110204",
+        "110205",
+        "110206"
+      ]
+    },
+    "1103": {
+      "name": "Serval",
+      "rarity": 4,
+      "path": "Erudition",
+      "element": "Thunder",
+      "ranks": [
+        "110301",
+        "110302",
+        "110303",
+        "110304",
+        "110305",
+        "110306"
+      ]
+    },
+    "1104": {
+      "name": "Gepard",
+      "rarity": 5,
+      "path": "Preservation",
+      "element": "Ice",
+      "ranks": [
+        "110401",
+        "110402",
+        "110403",
+        "110404",
+        "110405",
+        "110406"
+      ]
+    },
+    "1105": {
+      "name": "Natasha",
+      "rarity": 4,
+      "path": "Abundance",
+      "element": "Physical",
+      "ranks": [
+        "110501",
+        "110502",
+        "110503",
+        "110504",
+        "110505",
+        "110506"
+      ]
+    },
+    "1106": {
+      "name": "Pela",
+      "rarity": 4,
+      "path": "Nihility",
+      "element": "Ice",
+      "ranks": [
+        "110601",
+        "110602",
+        "110603",
+        "110604",
+        "110605",
+        "110606"
+      ]
+    },
+    "1107": {
+      "name": "Clara",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Physical",
+      "ranks": [
+        "110701",
+        "110702",
+        "110703",
+        "110704",
+        "110705",
+        "110706"
+      ]
+    },
+    "1108": {
+      "name": "Sampo",
+      "rarity": 4,
+      "path": "Nihility",
+      "element": "Wind",
+      "ranks": [
+        "110801",
+        "110802",
+        "110803",
+        "110804",
+        "110805",
+        "110806"
+      ]
+    },
+    "1109": {
+      "name": "Hook",
+      "rarity": 4,
+      "path": "Destruction",
+      "element": "Fire",
+      "ranks": [
+        "110901",
+        "110902",
+        "110903",
+        "110904",
+        "110905",
+        "110906"
+      ]
+    },
+    "1110": {
+      "name": "Lynx",
+      "rarity": 4,
+      "path": "Abundance",
+      "element": "Quantum",
+      "ranks": [
+        "111001",
+        "111002",
+        "111003",
+        "111004",
+        "111005",
+        "111006"
+      ]
+    },
+    "1111": {
+      "name": "Luka",
+      "rarity": 4,
+      "path": "Nihility",
+      "element": "Physical",
+      "ranks": [
+        "111101",
+        "111102",
+        "111103",
+        "111104",
+        "111105",
+        "111106"
+      ]
+    },
+    "1112": {
+      "name": "Topaz & Numby",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Fire",
+      "ranks": [
+        "111201",
+        "111202",
+        "111203",
+        "111204",
+        "111205",
+        "111206"
+      ]
+    },
+    "1201": {
+      "name": "Qingque",
+      "rarity": 4,
+      "path": "Erudition",
+      "element": "Quantum",
+      "ranks": [
+        "120101",
+        "120102",
+        "120103",
+        "120104",
+        "120105",
+        "120106"
+      ]
+    },
+    "1202": {
+      "name": "Tingyun",
+      "rarity": 4,
+      "path": "Harmony",
+      "element": "Thunder",
+      "ranks": [
+        "120201",
+        "120202",
+        "120203",
+        "120204",
+        "120205",
+        "120206"
+      ]
+    },
+    "1203": {
+      "name": "Luocha",
+      "rarity": 5,
+      "path": "Abundance",
+      "element": "Imaginary",
+      "ranks": [
+        "120301",
+        "120302",
+        "120303",
+        "120304",
+        "120305",
+        "120306"
+      ]
+    },
+    "1204": {
+      "name": "Jing Yuan",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Thunder",
+      "ranks": [
+        "120401",
+        "120402",
+        "120403",
+        "120404",
+        "120405",
+        "120406"
+      ]
+    },
+    "1205": {
+      "name": "Blade",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Wind",
+      "ranks": [
+        "120501",
+        "120502",
+        "120503",
+        "120504",
+        "120505",
+        "120506"
+      ]
+    },
+    "1206": {
+      "name": "Sushang",
+      "rarity": 4,
+      "path": "The Hunt",
+      "element": "Physical",
+      "ranks": [
+        "120601",
+        "120602",
+        "120603",
+        "120604",
+        "120605",
+        "120606"
+      ]
+    },
+    "1207": {
+      "name": "Yukong",
+      "rarity": 4,
+      "path": "Harmony",
+      "element": "Imaginary",
+      "ranks": [
+        "120701",
+        "120702",
+        "120703",
+        "120704",
+        "120705",
+        "120706"
+      ]
+    },
+    "1208": {
+      "name": "Fu Xuan",
+      "rarity": 5,
+      "path": "Preservation",
+      "element": "Quantum",
+      "ranks": [
+        "120801",
+        "120802",
+        "120803",
+        "120804",
+        "120805",
+        "120806"
+      ]
+    },
+    "1209": {
+      "name": "Yanqing",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Ice",
+      "ranks": [
+        "120901",
+        "120902",
+        "120903",
+        "120904",
+        "120905",
+        "120906"
+      ]
+    },
+    "1210": {
+      "name": "Guinaifen",
+      "rarity": 4,
+      "path": "Nihility",
+      "element": "Fire",
+      "ranks": [
+        "121001",
+        "121002",
+        "121003",
+        "121004",
+        "121005",
+        "121006"
+      ]
+    },
+    "1211": {
+      "name": "Bailu",
+      "rarity": 5,
+      "path": "Abundance",
+      "element": "Thunder",
+      "ranks": [
+        "121101",
+        "121102",
+        "121103",
+        "121104",
+        "121105",
+        "121106"
+      ]
+    },
+    "1212": {
+      "name": "Jingliu",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Ice",
+      "ranks": [
+        "121201",
+        "121202",
+        "121203",
+        "121204",
+        "121205",
+        "121206"
+      ]
+    },
+    "1213": {
+      "name": "Dan Heng • Imbibitor Lunae",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Imaginary",
+      "ranks": [
+        "121301",
+        "121302",
+        "121303",
+        "121304",
+        "121305",
+        "121306"
+      ]
+    },
+    "1214": {
+      "name": "Xueyi",
+      "rarity": 4,
+      "path": "Destruction",
+      "element": "Quantum",
+      "ranks": [
+        "121401",
+        "121402",
+        "121403",
+        "121404",
+        "121405",
+        "121406"
+      ]
+    },
+    "1215": {
+      "name": "Hanya",
+      "rarity": 4,
+      "path": "Harmony",
+      "element": "Physical",
+      "ranks": [
+        "121501",
+        "121502",
+        "121503",
+        "121504",
+        "121505",
+        "121506"
+      ]
+    },
+    "1217": {
+      "name": "Huohuo",
+      "rarity": 5,
+      "path": "Abundance",
+      "element": "Wind",
+      "ranks": [
+        "121701",
+        "121702",
+        "121703",
+        "121704",
+        "121705",
+        "121706"
+      ]
+    },
+    "1218": {
+      "name": "Jiaoqiu",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Fire",
+      "ranks": [
+        "121801",
+        "121802",
+        "121803",
+        "121804",
+        "121805",
+        "121806"
+      ]
+    },
+    "1220": {
+      "name": "Feixiao",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Wind",
+      "ranks": [
+        "122001",
+        "122002",
+        "122003",
+        "122004",
+        "122005",
+        "122006"
+      ]
+    },
+    "1221": {
+      "name": "Yunli",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Physical",
+      "ranks": [
+        "122101",
+        "122102",
+        "122103",
+        "122104",
+        "122105",
+        "122106"
+      ]
+    },
+    "1222": {
+      "name": "Lingsha",
+      "rarity": 5,
+      "path": "Abundance",
+      "element": "Fire",
+      "ranks": [
+        "122201",
+        "122202",
+        "122203",
+        "122204",
+        "122205",
+        "122206"
+      ]
+    },
+    "1223": {
+      "name": "Moze",
+      "rarity": 4,
+      "path": "The Hunt",
+      "element": "Thunder",
+      "ranks": [
+        "122301",
+        "122302",
+        "122303",
+        "122304",
+        "122305",
+        "122306"
+      ]
+    },
+    "1224": {
+      "name": "March 7th",
+      "rarity": 4,
+      "path": "The Hunt",
+      "element": "Imaginary",
+      "ranks": [
+        "122401",
+        "122402",
+        "122403",
+        "122404",
+        "122405",
+        "122406"
+      ]
+    },
+    "1225": {
+      "name": "Fugue",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Fire",
+      "ranks": [
+        "122501",
+        "122502",
+        "122503",
+        "122504",
+        "122505",
+        "122506"
+      ]
+    },
+    "1301": {
+      "name": "Gallagher",
+      "rarity": 4,
+      "path": "Abundance",
+      "element": "Fire",
+      "ranks": [
+        "130101",
+        "130102",
+        "130103",
+        "130104",
+        "130105",
+        "130106"
+      ]
+    },
+    "1302": {
+      "name": "Argenti",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Physical",
+      "ranks": [
+        "130201",
+        "130202",
+        "130203",
+        "130204",
+        "130205",
+        "130206"
+      ]
+    },
+    "1303": {
+      "name": "Ruan Mei",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Ice",
+      "ranks": [
+        "130301",
+        "130302",
+        "130303",
+        "130304",
+        "130305",
+        "130306"
+      ]
+    },
+    "1304": {
+      "name": "Aventurine",
+      "rarity": 5,
+      "path": "Preservation",
+      "element": "Imaginary",
+      "ranks": [
+        "130401",
+        "130402",
+        "130403",
+        "130404",
+        "130405",
+        "130406"
+      ]
+    },
+    "1305": {
+      "name": "Dr. Ratio",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Imaginary",
+      "ranks": [
+        "130501",
+        "130502",
+        "130503",
+        "130504",
+        "130505",
+        "130506"
+      ]
+    },
+    "1306": {
+      "name": "Sparkle",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Quantum",
+      "ranks": [
+        "130601",
+        "130602",
+        "130603",
+        "130604",
+        "130605",
+        "130606"
+      ]
+    },
+    "1307": {
+      "name": "Black Swan",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Wind",
+      "ranks": [
+        "130701",
+        "130702",
+        "130703",
+        "130704",
+        "130705",
+        "130706"
+      ]
+    },
+    "1308": {
+      "name": "Acheron",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Thunder",
+      "ranks": [
+        "130801",
+        "130802",
+        "130803",
+        "130804",
+        "130805",
+        "130806"
+      ]
+    },
+    "1309": {
+      "name": "Robin",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Physical",
+      "ranks": [
+        "130901",
+        "130902",
+        "130903",
+        "130904",
+        "130905",
+        "130906"
+      ]
+    },
+    "1310": {
+      "name": "Firefly",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Fire",
+      "ranks": [
+        "131001",
+        "131002",
+        "131003",
+        "131004",
+        "131005",
+        "131006"
+      ]
+    },
+    "1312": {
+      "name": "Misha",
+      "rarity": 4,
+      "path": "Destruction",
+      "element": "Ice",
+      "ranks": [
+        "131201",
+        "131202",
+        "131203",
+        "131204",
+        "131205",
+        "131206"
+      ]
+    },
+    "1313": {
+      "name": "Sunday",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Imaginary",
+      "ranks": [
+        "131301",
+        "131302",
+        "131303",
+        "131304",
+        "131305",
+        "131306"
+      ]
+    },
+    "1314": {
+      "name": "Jade",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Quantum",
+      "ranks": [
+        "131401",
+        "131402",
+        "131403",
+        "131404",
+        "131405",
+        "131406"
+      ]
+    },
+    "1315": {
+      "name": "Boothill",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Physical",
+      "ranks": [
+        "131501",
+        "131502",
+        "131503",
+        "131504",
+        "131505",
+        "131506"
+      ]
+    },
+    "1317": {
+      "name": "Rappa",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Imaginary",
+      "ranks": [
+        "131701",
+        "131702",
+        "131703",
+        "131704",
+        "131705",
+        "131706"
+      ]
+    },
+    "1321": {
+      "name": "The Dahlia",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Fire",
+      "ranks": [
+        "132101",
+        "132102",
+        "132103",
+        "132104",
+        "132105",
+        "132106"
+      ]
+    },
+    "1401": {
+      "name": "The Herta",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Ice",
+      "ranks": [
+        "140101",
+        "140102",
+        "140103",
+        "140104",
+        "140105",
+        "140106"
+      ]
+    },
+    "1402": {
+      "name": "Aglaea",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Thunder",
+      "ranks": [
+        "140201",
+        "140202",
+        "140203",
+        "140204",
+        "140205",
+        "140206"
+      ]
+    },
+    "1403": {
+      "name": "Tribbie",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Quantum",
+      "ranks": [
+        "140301",
+        "140302",
+        "140303",
+        "140304",
+        "140305",
+        "140306"
+      ]
+    },
+    "1404": {
+      "name": "Mydei",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Imaginary",
+      "ranks": [
+        "140401",
+        "140402",
+        "140403",
+        "140404",
+        "140405",
+        "140406"
+      ]
+    },
+    "1405": {
+      "name": "Anaxa",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Wind",
+      "ranks": [
+        "140501",
+        "140502",
+        "140503",
+        "140504",
+        "140505",
+        "140506"
+      ]
+    },
+    "1406": {
+      "name": "Cipher",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Quantum",
+      "ranks": [
+        "140601",
+        "140602",
+        "140603",
+        "140604",
+        "140605",
+        "140606"
+      ]
+    },
+    "1407": {
+      "name": "Castorice",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Quantum",
+      "ranks": [
+        "140701",
+        "140702",
+        "140703",
+        "140704",
+        "140705",
+        "140706"
+      ]
+    },
+    "1408": {
+      "name": "Phainon",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Physical",
+      "ranks": [
+        "140801",
+        "140802",
+        "140803",
+        "140804",
+        "140805",
+        "140806"
+      ]
+    },
+    "1409": {
+      "name": "Hyacine",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Wind",
+      "ranks": [
+        "140901",
+        "140902",
+        "140903",
+        "140904",
+        "140905",
+        "140906"
+      ]
+    },
+    "1410": {
+      "name": "Hysilens",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Physical",
+      "ranks": [
+        "141001",
+        "141002",
+        "141003",
+        "141004",
+        "141005",
+        "141006"
+      ]
+    },
+    "1412": {
+      "name": "Cerydra",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Wind",
+      "ranks": [
+        "141201",
+        "141202",
+        "141203",
+        "141204",
+        "141205",
+        "141206"
+      ]
+    },
+    "1413": {
+      "name": "Evernight",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Ice",
+      "ranks": [
+        "141301",
+        "141302",
+        "141303",
+        "141304",
+        "141305",
+        "141306"
+      ]
+    },
+    "1414": {
+      "name": "Dan Heng • Permansor Terrae",
+      "rarity": 5,
+      "path": "Preservation",
+      "element": "Physical",
+      "ranks": [
+        "141401",
+        "141402",
+        "141403",
+        "141404",
+        "141405",
+        "141406"
+      ]
+    },
+    "1415": {
+      "name": "Cyrene",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Ice",
+      "ranks": [
+        "141501",
+        "141502",
+        "141503",
+        "141504",
+        "141505",
+        "141506"
+      ]
+    },
+    "1501": {
+      "name": "Sparxie",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Fire",
+      "ranks": [
+        "150101",
+        "150102",
+        "150103",
+        "150104",
+        "150105",
+        "150106"
+      ]
+    },
+    "1502": {
+      "name": "Yao Guang",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Physical",
+      "ranks": [
+        "150201",
+        "150202",
+        "150203",
+        "150204",
+        "150205",
+        "150206"
+      ]
+    },
+    "1503": {
+      "name": "Pearl",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Ice",
+      "ranks": [
+        "150301",
+        "150302",
+        "150303",
+        "150304",
+        "150305",
+        "150306"
+      ]
+    },
+    "1504": {
+      "name": "Ashveil",
+      "rarity": 5,
+      "path": "The Hunt",
+      "element": "Thunder",
+      "ranks": [
+        "150401",
+        "150402",
+        "150403",
+        "150404",
+        "150405",
+        "150406"
+      ]
+    },
+    "1505": {
+      "name": "Evanescia",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Physical",
+      "ranks": [
+        "150501",
+        "150502",
+        "150503",
+        "150504",
+        "150505",
+        "150506"
+      ]
+    },
+    "1506": {
+      "name": "Silver Wolf LV.999",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Imaginary",
+      "ranks": [
+        "150601",
+        "150602",
+        "150603",
+        "150604",
+        "150605",
+        "150606"
+      ]
+    },
+    "1507": {
+      "name": "Mortenax Blade",
+      "rarity": 5,
+      "path": "Nihility",
+      "element": "Fire",
+      "ranks": [
+        "150701",
+        "150702",
+        "150703",
+        "150704",
+        "150705",
+        "150706"
+      ]
+    },
+    "1508": {
+      "name": "Rin Tohsaka",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Quantum",
+      "ranks": [
+        "150801",
+        "150802",
+        "150803",
+        "150804",
+        "150805",
+        "150806"
+      ]
+    },
+    "1509": {
+      "name": "Gilgamesh",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Thunder",
+      "ranks": [
+        "150901",
+        "150902",
+        "150903",
+        "150904",
+        "150905",
+        "150906"
+      ]
+    },
+    "1510": {
+      "name": "Himeko • Nova",
+      "rarity": 5,
+      "path": "Erudition",
+      "element": "Fire",
+      "ranks": [
+        "151001",
+        "151002",
+        "151003",
+        "151004",
+        "151005",
+        "151006"
+      ]
+    },
+    "1512": {
+      "name": "Robin • Summeretto",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Wind",
+      "ranks": [
+        "151201",
+        "151202",
+        "151203",
+        "151204",
+        "151205",
+        "151206"
+      ]
+    },
+    "1513": {
+      "name": "Aventurine • Waveflair",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Quantum",
+      "ranks": [
+        "151301",
+        "151302",
+        "151303",
+        "151304",
+        "151305",
+        "151306"
+      ]
+    },
+    "8001": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Physical",
+      "ranks": [
+        "800101",
+        "800102",
+        "800103",
+        "800104",
+        "800105",
+        "800106"
+      ]
+    },
+    "8002": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Destruction",
+      "element": "Physical",
+      "ranks": [
+        "800201",
+        "800202",
+        "800203",
+        "800204",
+        "800205",
+        "800206"
+      ]
+    },
+    "8003": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Preservation",
+      "element": "Fire",
+      "ranks": [
+        "800301",
+        "800302",
+        "800303",
+        "800304",
+        "800305",
+        "800306"
+      ]
+    },
+    "8004": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Preservation",
+      "element": "Fire",
+      "ranks": [
+        "800401",
+        "800402",
+        "800403",
+        "800404",
+        "800405",
+        "800406"
+      ]
+    },
+    "8005": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Imaginary",
+      "ranks": [
+        "800501",
+        "800502",
+        "800503",
+        "800504",
+        "800505",
+        "800506"
+      ]
+    },
+    "8006": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Harmony",
+      "element": "Imaginary",
+      "ranks": [
+        "800601",
+        "800602",
+        "800603",
+        "800604",
+        "800605",
+        "800606"
+      ]
+    },
+    "8007": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Ice",
+      "ranks": [
+        "800701",
+        "800702",
+        "800703",
+        "800704",
+        "800705",
+        "800706"
+      ]
+    },
+    "8008": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Remembrance",
+      "element": "Ice",
+      "ranks": [
+        "800801",
+        "800802",
+        "800803",
+        "800804",
+        "800805",
+        "800806"
+      ]
+    },
+    "8009": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Thunder",
+      "ranks": [
+        "800901",
+        "800902",
+        "800903",
+        "800904",
+        "800905",
+        "800906"
+      ]
+    },
+    "8010": {
+      "name": "{NICKNAME}",
+      "rarity": 5,
+      "path": "Elation",
+      "element": "Thunder",
+      "ranks": [
+        "801001",
+        "801002",
+        "801003",
+        "801004",
+        "801005",
+        "801006"
+      ]
+    }
+  },
+  "lightCones": {
+    "20000": {
+      "name": "Arrows",
+      "rarity": 3,
+      "path": "The Hunt"
+    },
+    "20001": {
+      "name": "Cornucopia",
+      "rarity": 3,
+      "path": "Abundance"
+    },
+    "20002": {
+      "name": "Collapsing Sky",
+      "rarity": 3,
+      "path": "Destruction"
+    },
+    "20003": {
+      "name": "Amber",
+      "rarity": 3,
+      "path": "Preservation"
+    },
+    "20004": {
+      "name": "Void",
+      "rarity": 3,
+      "path": "Nihility"
+    },
+    "20005": {
+      "name": "Chorus",
+      "rarity": 3,
+      "path": "Harmony"
+    },
+    "20006": {
+      "name": "Data Bank",
+      "rarity": 3,
+      "path": "Erudition"
+    },
+    "20007": {
+      "name": "Darting Arrow",
+      "rarity": 3,
+      "path": "The Hunt"
+    },
+    "20008": {
+      "name": "Fine Fruit",
+      "rarity": 3,
+      "path": "Abundance"
+    },
+    "20009": {
+      "name": "Shattered Home",
+      "rarity": 3,
+      "path": "Destruction"
+    },
+    "20010": {
+      "name": "Defense",
+      "rarity": 3,
+      "path": "Preservation"
+    },
+    "20011": {
+      "name": "Loop",
+      "rarity": 3,
+      "path": "Nihility"
+    },
+    "20012": {
+      "name": "Meshing Cogs",
+      "rarity": 3,
+      "path": "Harmony"
+    },
+    "20013": {
+      "name": "Passkey",
+      "rarity": 3,
+      "path": "Erudition"
+    },
+    "20014": {
+      "name": "Adversarial",
+      "rarity": 3,
+      "path": "The Hunt"
+    },
+    "20015": {
+      "name": "Multiplication",
+      "rarity": 3,
+      "path": "Abundance"
+    },
+    "20016": {
+      "name": "Mutual Demise",
+      "rarity": 3,
+      "path": "Destruction"
+    },
+    "20017": {
+      "name": "Pioneering",
+      "rarity": 3,
+      "path": "Preservation"
+    },
+    "20018": {
+      "name": "Hidden Shadow",
+      "rarity": 3,
+      "path": "Nihility"
+    },
+    "20019": {
+      "name": "Mediation",
+      "rarity": 3,
+      "path": "Harmony"
+    },
+    "20020": {
+      "name": "Sagacity",
+      "rarity": 3,
+      "path": "Erudition"
+    },
+    "20021": {
+      "name": "Shadowburn",
+      "rarity": 3,
+      "path": "Remembrance"
+    },
+    "20022": {
+      "name": "Reminiscence",
+      "rarity": 3,
+      "path": "Remembrance"
+    },
+    "20023": {
+      "name": "Sneering",
+      "rarity": 3,
+      "path": "Elation"
+    },
+    "20024": {
+      "name": "Lingering Tear",
+      "rarity": 3,
+      "path": "Elation"
+    },
+    "21000": {
+      "name": "Post-Op Conversation",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21001": {
+      "name": "Good Night and Sleep Well",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21002": {
+      "name": "Day One of My New Life",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21003": {
+      "name": "Only Silence Remains",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21004": {
+      "name": "Memories of the Past",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21005": {
+      "name": "The Moles Welcome You",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21006": {
+      "name": "The Birth of the Self",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21007": {
+      "name": "Shared Feeling",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21008": {
+      "name": "Eyes of the Prey",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21009": {
+      "name": "Landau's Choice",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21010": {
+      "name": "Swordplay",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21011": {
+      "name": "Planetary Rendezvous",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21012": {
+      "name": "A Secret Vow",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21013": {
+      "name": "Make the World Clamor",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21014": {
+      "name": "Perfect Timing",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21015": {
+      "name": "Resolution Shines As Pearls of Sweat",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21016": {
+      "name": "Trend of the Universal Market",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21017": {
+      "name": "Subscribe for More!",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21018": {
+      "name": "Dance! Dance! Dance!",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21019": {
+      "name": "Under the Blue Sky",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21020": {
+      "name": "Geniuses' Repose",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21021": {
+      "name": "Quid Pro Quo",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21022": {
+      "name": "Fermata",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21023": {
+      "name": "We Are Wildfire",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21024": {
+      "name": "River Flows in Spring",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21025": {
+      "name": "Past and Future",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21026": {
+      "name": "Woof! Walk Time!",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21027": {
+      "name": "The Seriousness of Breakfast",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21028": {
+      "name": "Warmth Shortens Cold Nights",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21029": {
+      "name": "We Will Meet Again",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21030": {
+      "name": "This Is Me!",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21031": {
+      "name": "Return to Darkness",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21032": {
+      "name": "Carve the Moon, Weave the Clouds",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21033": {
+      "name": "Nowhere to Run",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21034": {
+      "name": "Today Is Another Peaceful Day",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21035": {
+      "name": "What Is Real?",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21036": {
+      "name": "Dreamville Adventure",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21037": {
+      "name": "Final Victor",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21038": {
+      "name": "Flames Afar",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21039": {
+      "name": "Destiny's Threads Forewoven",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21040": {
+      "name": "The Day The Cosmos Fell",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21041": {
+      "name": "It's Showtime",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21042": {
+      "name": "Indelible Promise",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21043": {
+      "name": "Concert for Two",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21044": {
+      "name": "Boundless Choreo",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21045": {
+      "name": "After the Charmony Fall",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21046": {
+      "name": "Poised to Bloom",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21047": {
+      "name": "Shadowed by Night",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21048": {
+      "name": "Dream's Montage",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21050": {
+      "name": "Victory In a Blink",
+      "rarity": 4,
+      "path": "Remembrance"
+    },
+    "21051": {
+      "name": "Geniuses' Greetings",
+      "rarity": 4,
+      "path": "Remembrance"
+    },
+    "21052": {
+      "name": "Sweat Now, Cry Less",
+      "rarity": 4,
+      "path": "Remembrance"
+    },
+    "21053": {
+      "name": "Journey, Forever Peaceful",
+      "rarity": 4,
+      "path": "Preservation"
+    },
+    "21054": {
+      "name": "The Story's Next Page",
+      "rarity": 4,
+      "path": "Remembrance"
+    },
+    "21055": {
+      "name": "Unto Tomorrow's Morrow",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "21056": {
+      "name": "In Pursuit of the Wind",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "21057": {
+      "name": "The Flower Remembers",
+      "rarity": 4,
+      "path": "Remembrance"
+    },
+    "21058": {
+      "name": "A Trail of Bygone Blood",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "21060": {
+      "name": "A Dream Scented in Wheat",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "21061": {
+      "name": "Holiday Thermae Escapade",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "21062": {
+      "name": "See You at the End",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "21064": {
+      "name": "Mushy Shroomy's Adventures",
+      "rarity": 4,
+      "path": "Elation"
+    },
+    "21065": {
+      "name": "Today's Good Luck",
+      "rarity": 4,
+      "path": "Elation"
+    },
+    "21066": {
+      "name": "A Little Getaway",
+      "rarity": 4,
+      "path": "Elation"
+    },
+    "22000": {
+      "name": "Before the Tutorial Mission Starts",
+      "rarity": 4,
+      "path": "Nihility"
+    },
+    "22001": {
+      "name": "Hey, Over Here",
+      "rarity": 4,
+      "path": "Abundance"
+    },
+    "22002": {
+      "name": "For Tomorrow's Journey",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "22003": {
+      "name": "Ninja Record: Sound Hunt",
+      "rarity": 4,
+      "path": "Destruction"
+    },
+    "22004": {
+      "name": "The Great Cosmic Enterprise",
+      "rarity": 4,
+      "path": "Erudition"
+    },
+    "22005": {
+      "name": "The Forever Victual",
+      "rarity": 4,
+      "path": "Harmony"
+    },
+    "22006": {
+      "name": "Fly Into a Pink Tomorrow",
+      "rarity": 4,
+      "path": "Remembrance"
+    },
+    "22007": {
+      "name": "Tomorrow, Together",
+      "rarity": 4,
+      "path": "Elation"
+    },
+    "22008": {
+      "name": "Race to the Horizon",
+      "rarity": 4,
+      "path": "The Hunt"
+    },
+    "23000": {
+      "name": "Night on the Milky Way",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23001": {
+      "name": "In the Night",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23002": {
+      "name": "Something Irreplaceable",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23003": {
+      "name": "But the Battle Isn't Over",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23004": {
+      "name": "In the Name of the World",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23005": {
+      "name": "Moment of Victory",
+      "rarity": 5,
+      "path": "Preservation"
+    },
+    "23006": {
+      "name": "Patience Is All You Need",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23007": {
+      "name": "Incessant Rain",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23008": {
+      "name": "Echoes of the Coffin",
+      "rarity": 5,
+      "path": "Abundance"
+    },
+    "23009": {
+      "name": "The Unreachable Side",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23010": {
+      "name": "Before Dawn",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23011": {
+      "name": "She Already Shut Her Eyes",
+      "rarity": 5,
+      "path": "Preservation"
+    },
+    "23012": {
+      "name": "Sleep Like the Dead",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23013": {
+      "name": "Time Waits for No One",
+      "rarity": 5,
+      "path": "Abundance"
+    },
+    "23014": {
+      "name": "I Shall Be My Own Sword",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23015": {
+      "name": "Brighter Than the Sun",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23016": {
+      "name": "Worrisome, Blissful",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23017": {
+      "name": "Night of Fright",
+      "rarity": 5,
+      "path": "Abundance"
+    },
+    "23018": {
+      "name": "An Instant Before A Gaze",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23019": {
+      "name": "Past Self in Mirror",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23020": {
+      "name": "Baptism of Pure Thought",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23021": {
+      "name": "Earthly Escapade",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23022": {
+      "name": "Reforged Remembrance",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23023": {
+      "name": "Inherently Unjust Destiny",
+      "rarity": 5,
+      "path": "Preservation"
+    },
+    "23024": {
+      "name": "Along the Passing Shore",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23025": {
+      "name": "Whereabouts Should Dreams Rest",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23026": {
+      "name": "Flowing Nightglow",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23027": {
+      "name": "Sailing Towards a Second Life",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23028": {
+      "name": "Yet Hope Is Priceless",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23029": {
+      "name": "Those Many Springs",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23030": {
+      "name": "Dance at Sunset",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23031": {
+      "name": "I Venture Forth to Hunt",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23032": {
+      "name": "Scent Alone Stays True",
+      "rarity": 5,
+      "path": "Abundance"
+    },
+    "23033": {
+      "name": "Ninjutsu Inscription: Dazzling Evilbreaker",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23034": {
+      "name": "A Grounded Ascent",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23035": {
+      "name": "Long Road Leads Home",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23036": {
+      "name": "Time Woven Into Gold",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "23037": {
+      "name": "Into the Unreachable Veil",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23038": {
+      "name": "If Time Were a Flower",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23039": {
+      "name": "Flame of Blood, Blaze My Path",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23040": {
+      "name": "Make Farewells More Beautiful",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "23041": {
+      "name": "Life Should Be Cast to Flames",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23042": {
+      "name": "Long May Rainbows Adorn the Sky",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "23043": {
+      "name": "Lies Dance on the Breeze",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23044": {
+      "name": "Thus Burns the Dawn",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23045": {
+      "name": "A Thankless Coronation",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23046": {
+      "name": "The Hell Where Ideals Burn",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23047": {
+      "name": "Why Does the Ocean Sing",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23048": {
+      "name": "Epoch Etched in Golden Blood",
+      "rarity": 5,
+      "path": "Harmony"
+    },
+    "23049": {
+      "name": "To Evernight's Stars",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "23050": {
+      "name": "Never Forget Her Flame",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23051": {
+      "name": "Though Worlds Apart",
+      "rarity": 5,
+      "path": "Preservation"
+    },
+    "23052": {
+      "name": "This Love, Forever",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "23053": {
+      "name": "Dazzled by a Flowery World",
+      "rarity": 5,
+      "path": "Elation"
+    },
+    "23054": {
+      "name": "When She Decided to See",
+      "rarity": 5,
+      "path": "Elation"
+    },
+    "23055": {
+      "name": "Colors for Tomorrow",
+      "rarity": 5,
+      "path": "Elation"
+    },
+    "23056": {
+      "name": "The Finale of a Lie",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "23057": {
+      "name": "Welcome to the Cosmic City",
+      "rarity": 5,
+      "path": "Elation"
+    },
+    "23058": {
+      "name": "Until the Flowers Bloom Again",
+      "rarity": 5,
+      "path": "Elation"
+    },
+    "23059": {
+      "name": "Reforged in Hellfire",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "23060": {
+      "name": "A Star That Lights the Night",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23061": {
+      "name": "Flickering Stars",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "23062": {
+      "name": "I Am As You Behold",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "23063": {
+      "name": "Rise and Sing",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "23064": {
+      "name": "Summer Rides the Surf",
+      "rarity": 5,
+      "path": "Elation"
+    },
+    "24000": {
+      "name": "On the Fall of an Aeon",
+      "rarity": 5,
+      "path": "Destruction"
+    },
+    "24001": {
+      "name": "Cruising in the Stellar Sea",
+      "rarity": 5,
+      "path": "The Hunt"
+    },
+    "24002": {
+      "name": "Texture of Memories",
+      "rarity": 5,
+      "path": "Preservation"
+    },
+    "24003": {
+      "name": "Solitary Healing",
+      "rarity": 5,
+      "path": "Nihility"
+    },
+    "24004": {
+      "name": "Eternal Calculus",
+      "rarity": 5,
+      "path": "Erudition"
+    },
+    "24005": {
+      "name": "Memory's Curtain Never Falls",
+      "rarity": 5,
+      "path": "Remembrance"
+    },
+    "24006": {
+      "name": "Elation Brimming With Blessings",
+      "rarity": 5,
+      "path": "Elation"
+    }
+  },
+  "relics": {
+    "31011": {
+      "name": "Passerby's Rejuvenated Wooden Hairstick",
+      "set": "101",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/101_0.png"
+    },
+    "31012": {
+      "name": "Passerby's Roaming Dragon Bracer",
+      "set": "101",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/101_1.png"
+    },
+    "31013": {
+      "name": "Passerby's Ragged Embroidered Coat",
+      "set": "101",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/101_2.png"
+    },
+    "31014": {
+      "name": "Passerby's Stygian Hiking Boots",
+      "set": "101",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/101_3.png"
+    },
+    "31021": {
+      "name": "Musketeer's Wild Wheat Felt Hat",
+      "set": "102",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/102_0.png"
+    },
+    "31022": {
+      "name": "Musketeer's Coarse Leather Gloves",
+      "set": "102",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/102_1.png"
+    },
+    "31023": {
+      "name": "Musketeer's Wind-Hunting Shawl",
+      "set": "102",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/102_2.png"
+    },
+    "31024": {
+      "name": "Musketeer's Rivets Riding Boots",
+      "set": "102",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/102_3.png"
+    },
+    "31031": {
+      "name": "Knight's Forgiving Casque",
+      "set": "103",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/103_0.png"
+    },
+    "31032": {
+      "name": "Knight's Silent Oath Ring",
+      "set": "103",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/103_1.png"
+    },
+    "31033": {
+      "name": "Knight's Solemn Breastplate",
+      "set": "103",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/103_2.png"
+    },
+    "31034": {
+      "name": "Knight's Iron Boots of Order",
+      "set": "103",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/103_3.png"
+    },
+    "31041": {
+      "name": "Hunter's Artaius Hood",
+      "set": "104",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/104_0.png"
+    },
+    "31042": {
+      "name": "Hunter's Lizard Gloves",
+      "set": "104",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/104_1.png"
+    },
+    "31043": {
+      "name": "Hunter's Ice Dragon Cloak",
+      "set": "104",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/104_2.png"
+    },
+    "31044": {
+      "name": "Hunter's Soft Elkskin Boots",
+      "set": "104",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/104_3.png"
+    },
+    "31051": {
+      "name": "Champion's Headgear",
+      "set": "105",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/105_0.png"
+    },
+    "31052": {
+      "name": "Champion's Heavy Gloves",
+      "set": "105",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/105_1.png"
+    },
+    "31053": {
+      "name": "Champion's Chest Guard",
+      "set": "105",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/105_2.png"
+    },
+    "31054": {
+      "name": "Champion's Fleetfoot Boots",
+      "set": "105",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/105_3.png"
+    },
+    "31061": {
+      "name": "Guard's Cast Iron Helmet",
+      "set": "106",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/106_0.png"
+    },
+    "31062": {
+      "name": "Guard's Shining Gauntlets",
+      "set": "106",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/106_1.png"
+    },
+    "31063": {
+      "name": "Guard's Uniform of Old",
+      "set": "106",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/106_2.png"
+    },
+    "31064": {
+      "name": "Guard's Silver Greaves",
+      "set": "106",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/106_3.png"
+    },
+    "31071": {
+      "name": "Firesmith's Obsidian Goggles",
+      "set": "107",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/107_0.png"
+    },
+    "31072": {
+      "name": "Firesmith's Ring of Flame-Mastery",
+      "set": "107",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/107_1.png"
+    },
+    "31073": {
+      "name": "Firesmith's Fireproof Apron",
+      "set": "107",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/107_2.png"
+    },
+    "31074": {
+      "name": "Firesmith's Alloy Leg",
+      "set": "107",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/107_3.png"
+    },
+    "31081": {
+      "name": "Genius's Ultraremote Sensing Visor",
+      "set": "108",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/108_0.png"
+    },
+    "31082": {
+      "name": "Genius's Frequency Catcher",
+      "set": "108",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/108_1.png"
+    },
+    "31083": {
+      "name": "Genius's Metafield Suit",
+      "set": "108",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/108_2.png"
+    },
+    "31084": {
+      "name": "Genius's Gravity Walker",
+      "set": "108",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/108_3.png"
+    },
+    "31091": {
+      "name": "Band's Polarized Sunglasses",
+      "set": "109",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/109_0.png"
+    },
+    "31092": {
+      "name": "Band's Touring Bracelet",
+      "set": "109",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/109_1.png"
+    },
+    "31093": {
+      "name": "Band's Leather Jacket With Studs",
+      "set": "109",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/109_2.png"
+    },
+    "31094": {
+      "name": "Band's Ankle Boots With Rivets",
+      "set": "109",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/109_3.png"
+    },
+    "31101": {
+      "name": "Eagle's Beaked Helmet",
+      "set": "110",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/110_0.png"
+    },
+    "31102": {
+      "name": "Eagle's Soaring Ring",
+      "set": "110",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/110_1.png"
+    },
+    "31103": {
+      "name": "Eagle's Winged Suit Harness",
+      "set": "110",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/110_2.png"
+    },
+    "31104": {
+      "name": "Eagle's Quilted Puttees",
+      "set": "110",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/110_3.png"
+    },
+    "31111": {
+      "name": "Thief's Myriad-Faced Mask",
+      "set": "111",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/111_0.png"
+    },
+    "31112": {
+      "name": "Thief's Gloves With Prints",
+      "set": "111",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/111_1.png"
+    },
+    "31113": {
+      "name": "Thief's Steel Grappling Hook",
+      "set": "111",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/111_2.png"
+    },
+    "31114": {
+      "name": "Thief's Meteor Boots",
+      "set": "111",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/111_3.png"
+    },
+    "31121": {
+      "name": "Wastelander's Breathing Mask",
+      "set": "112",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/112_0.png"
+    },
+    "31122": {
+      "name": "Wastelander's Desert Terminal",
+      "set": "112",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/112_1.png"
+    },
+    "31123": {
+      "name": "Wastelander's Friar Robe",
+      "set": "112",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/112_2.png"
+    },
+    "31124": {
+      "name": "Wastelander's Powered Greaves",
+      "set": "112",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/112_3.png"
+    },
+    "31131": {
+      "name": "Disciple's Prosthetic Eye",
+      "set": "113",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/113_0.png"
+    },
+    "31132": {
+      "name": "Disciple's Ingenium Hand",
+      "set": "113",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/113_1.png"
+    },
+    "31133": {
+      "name": "Disciple's Dewy Feather Garb",
+      "set": "113",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/113_2.png"
+    },
+    "31134": {
+      "name": "Disciple's Celestial Silk Sandals",
+      "set": "113",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/113_3.png"
+    },
+    "31141": {
+      "name": "Messenger's Holovisor",
+      "set": "114",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/114_0.png"
+    },
+    "31142": {
+      "name": "Messenger's Transformative Arm",
+      "set": "114",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/114_1.png"
+    },
+    "31143": {
+      "name": "Messenger's Secret Satchel",
+      "set": "114",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/114_2.png"
+    },
+    "31144": {
+      "name": "Messenger's Par-kool Sneakers",
+      "set": "114",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/114_3.png"
+    },
+    "31151": {
+      "name": "Grand Duke's Crown of Netherflame",
+      "set": "115",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/115_0.png"
+    },
+    "31152": {
+      "name": "Grand Duke's Gloves of Fieryfur",
+      "set": "115",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/115_1.png"
+    },
+    "31153": {
+      "name": "Grand Duke's Robe of Grace",
+      "set": "115",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/115_2.png"
+    },
+    "31154": {
+      "name": "Grand Duke's Ceremonial Boots",
+      "set": "115",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/115_3.png"
+    },
+    "31161": {
+      "name": "Prisoner's Sealed Muzzle",
+      "set": "116",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/116_0.png"
+    },
+    "31162": {
+      "name": "Prisoner's Leadstone Shackles",
+      "set": "116",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/116_1.png"
+    },
+    "31163": {
+      "name": "Prisoner's Repressive Straitjacket",
+      "set": "116",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/116_2.png"
+    },
+    "31164": {
+      "name": "Prisoner's Restrictive Fetters",
+      "set": "116",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/116_3.png"
+    },
+    "31171": {
+      "name": "Pioneer's Heatproof Shell",
+      "set": "117",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/117_0.png"
+    },
+    "31172": {
+      "name": "Pioneer's Lacuna Compass",
+      "set": "117",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/117_1.png"
+    },
+    "31173": {
+      "name": "Pioneer's Sealed Lead Apron",
+      "set": "117",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/117_2.png"
+    },
+    "31174": {
+      "name": "Pioneer's Starfaring Anchor",
+      "set": "117",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/117_3.png"
+    },
+    "31181": {
+      "name": "Watchmaker's Telescoping Lens",
+      "set": "118",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/118_0.png"
+    },
+    "31182": {
+      "name": "Watchmaker's Fortuitous Wristwatch",
+      "set": "118",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/118_1.png"
+    },
+    "31183": {
+      "name": "Watchmaker's Illusory Formal Suit",
+      "set": "118",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/118_2.png"
+    },
+    "31184": {
+      "name": "Watchmaker's Dream-Concealing Dress Shoes",
+      "set": "118",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/118_3.png"
+    },
+    "31191": {
+      "name": "Iron Cavalry's Homing Helm",
+      "set": "119",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/119_0.png"
+    },
+    "31192": {
+      "name": "Iron Cavalry's Crushing Wristguard",
+      "set": "119",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/119_1.png"
+    },
+    "31193": {
+      "name": "Iron Cavalry's Silvery Armor",
+      "set": "119",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/119_2.png"
+    },
+    "31194": {
+      "name": "Iron Cavalry's Skywalk Greaves",
+      "set": "119",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/119_3.png"
+    },
+    "31201": {
+      "name": "Valorous Mask of Northern Skies",
+      "set": "120",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/120_0.png"
+    },
+    "31202": {
+      "name": "Valorous Bracelet of Grappling Hooks",
+      "set": "120",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/120_1.png"
+    },
+    "31203": {
+      "name": "Valorous Plate of Soaring Flight",
+      "set": "120",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/120_2.png"
+    },
+    "31204": {
+      "name": "Valorous Greaves of Pursuing Hunt",
+      "set": "120",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/120_3.png"
+    },
+    "31211": {
+      "name": "Sacerdos' Melodic Earrings",
+      "set": "121",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/121_0.png"
+    },
+    "31212": {
+      "name": "Sacerdos' Welcoming Gloves",
+      "set": "121",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/121_1.png"
+    },
+    "31213": {
+      "name": "Sacerdos' Ceremonial Garb",
+      "set": "121",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/121_2.png"
+    },
+    "31214": {
+      "name": "Sacerdos' Arduous Boots",
+      "set": "121",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/121_3.png"
+    },
+    "31221": {
+      "name": "Scholar's Silver-Rimmed Monocle",
+      "set": "122",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/122_0.png"
+    },
+    "31222": {
+      "name": "Scholar's Auxiliary Knuckle",
+      "set": "122",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/122_1.png"
+    },
+    "31223": {
+      "name": "Scholar's Tweed Jacket",
+      "set": "122",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/122_2.png"
+    },
+    "31224": {
+      "name": "Scholar's Felt Snowboots",
+      "set": "122",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/122_3.png"
+    },
+    "31231": {
+      "name": "Hero's Wreath of Championship",
+      "set": "123",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/123_0.png"
+    },
+    "31232": {
+      "name": "Hero's Gilded Bracers",
+      "set": "123",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/123_1.png"
+    },
+    "31233": {
+      "name": "Hero's Gallant Golden Armor",
+      "set": "123",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/123_2.png"
+    },
+    "31234": {
+      "name": "Hero's Firechasing Shinguard",
+      "set": "123",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/123_3.png"
+    },
+    "31241": {
+      "name": "Poet's Dill Wreath",
+      "set": "124",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/124_0.png"
+    },
+    "31242": {
+      "name": "Poet's Gilded Bracelet",
+      "set": "124",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/124_1.png"
+    },
+    "31243": {
+      "name": "Poet's Star-Studded Skirt",
+      "set": "124",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/124_2.png"
+    },
+    "31244": {
+      "name": "Poet's Silver-Studded Shoes",
+      "set": "124",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/124_3.png"
+    },
+    "31251": {
+      "name": "Warrior Goddess's Winged Helm",
+      "set": "125",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/125_0.png"
+    },
+    "31252": {
+      "name": "Warrior Goddess's Cavalry Gauntlets",
+      "set": "125",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/125_1.png"
+    },
+    "31253": {
+      "name": "Warrior Goddess's Dawn Cape",
+      "set": "125",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/125_2.png"
+    },
+    "31254": {
+      "name": "Warrior Goddess's Honor Spurs",
+      "set": "125",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/125_3.png"
+    },
+    "31261": {
+      "name": "Captain's Navigator Hat",
+      "set": "126",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/126_0.png"
+    },
+    "31262": {
+      "name": "Captain's Lightcatcher Astrolabe",
+      "set": "126",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/126_1.png"
+    },
+    "31263": {
+      "name": "Captain's Wind Mantle",
+      "set": "126",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/126_2.png"
+    },
+    "31264": {
+      "name": "Captain's Tidal Boots",
+      "set": "126",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/126_3.png"
+    },
+    "31271": {
+      "name": "Deliverer's Hood",
+      "set": "127",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/127_0.png"
+    },
+    "31272": {
+      "name": "Deliverer's Sword Gauntlet",
+      "set": "127",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/127_1.png"
+    },
+    "31273": {
+      "name": "Deliverer's Robe of Legacy",
+      "set": "127",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/127_2.png"
+    },
+    "31274": {
+      "name": "Deliverer's Boots of Pioneering",
+      "set": "127",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/127_3.png"
+    },
+    "31281": {
+      "name": "Recluse's Wide-Brimmed Fedora",
+      "set": "128",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/128_0.png"
+    },
+    "31282": {
+      "name": "Recluse's Refined Timepiece",
+      "set": "128",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/128_1.png"
+    },
+    "31283": {
+      "name": "Recluse's Camel-Colored Coat",
+      "set": "128",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/128_2.png"
+    },
+    "31284": {
+      "name": "Recluse's Soft Suede Boots",
+      "set": "128",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/128_3.png"
+    },
+    "31291": {
+      "name": "Magical Girl's Shining Medal",
+      "set": "129",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/129_0.png"
+    },
+    "31292": {
+      "name": "Magical Girl's Protective Gloves",
+      "set": "129",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/129_1.png"
+    },
+    "31293": {
+      "name": "Magical Girl's Everdance Battle Skirt",
+      "set": "129",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/129_2.png"
+    },
+    "31294": {
+      "name": "Magical Girl's Contract Boots",
+      "set": "129",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/129_3.png"
+    },
+    "31301": {
+      "name": "Diviner's Extrapolation Jade Abacus",
+      "set": "130",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/130_0.png"
+    },
+    "31302": {
+      "name": "Diviner's Ingenium Prosthetic Hand",
+      "set": "130",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/130_1.png"
+    },
+    "31303": {
+      "name": "Diviner's Astral Robe",
+      "set": "130",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/130_2.png"
+    },
+    "31304": {
+      "name": "Diviner's Cloud-Soaring Boots",
+      "set": "130",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/130_3.png"
+    },
+    "31311": {
+      "name": "Navigator's Deep Space Mirror",
+      "set": "131",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/131_0.png"
+    },
+    "31312": {
+      "name": "Navigator's Game Die",
+      "set": "131",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/131_1.png"
+    },
+    "31313": {
+      "name": "Navigator's Astral Chart Uniform",
+      "set": "131",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/131_2.png"
+    },
+    "31314": {
+      "name": "Navigator's Everstride Boots",
+      "set": "131",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/131_3.png"
+    },
+    "31321": {
+      "name": "Smith's Fire Beast Mask",
+      "set": "132",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/132_0.png"
+    },
+    "31322": {
+      "name": "Smith's Damascus Steel Gauntlets",
+      "set": "132",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/132_1.png"
+    },
+    "31323": {
+      "name": "Smith's Fireproof Garment",
+      "set": "132",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/132_2.png"
+    },
+    "31324": {
+      "name": "Smith's Unbridled Boots",
+      "set": "132",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/132_3.png"
+    },
+    "31331": {
+      "name": "Actor's Weeping Masque",
+      "set": "133",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/133_0.png"
+    },
+    "31332": {
+      "name": "Actor's Vibrant Handfan",
+      "set": "133",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/133_1.png"
+    },
+    "31333": {
+      "name": "Actor's Jester Garb",
+      "set": "133",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/133_2.png"
+    },
+    "31334": {
+      "name": "Actor's Crescent Dance Boots",
+      "set": "133",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/133_3.png"
+    },
+    "31341": {
+      "name": "Heretic's Cranial Apparatus",
+      "set": "134",
+      "rarity": 2,
+      "type": "HEAD",
+      "icon": "icon/relic/134_0.png"
+    },
+    "31342": {
+      "name": "Heretic's Injection Gloves",
+      "set": "134",
+      "rarity": 2,
+      "type": "HAND",
+      "icon": "icon/relic/134_1.png"
+    },
+    "31343": {
+      "name": "Heretic's Straitjacket of Reason",
+      "set": "134",
+      "rarity": 2,
+      "type": "BODY",
+      "icon": "icon/relic/134_2.png"
+    },
+    "31344": {
+      "name": "Heretic's Ravenous Ankle-Boots",
+      "set": "134",
+      "rarity": 2,
+      "type": "FOOT",
+      "icon": "icon/relic/134_3.png"
+    },
+    "33015": {
+      "name": "Herta's Space Station",
+      "set": "301",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/301_0.png"
+    },
+    "33016": {
+      "name": "Herta's Wandering Trek",
+      "set": "301",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/301_1.png"
+    },
+    "33025": {
+      "name": "The Xianzhou Luofu's Celestial Ark",
+      "set": "302",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/302_0.png"
+    },
+    "33026": {
+      "name": "The Xianzhou Luofu's Ambrosial Arbor Vines",
+      "set": "302",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/302_1.png"
+    },
+    "33035": {
+      "name": "The IPC's Mega HQ",
+      "set": "303",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/303_0.png"
+    },
+    "33036": {
+      "name": "The IPC's Trade Route",
+      "set": "303",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/303_1.png"
+    },
+    "33045": {
+      "name": "Belobog's Fortress of Preservation",
+      "set": "304",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/304_0.png"
+    },
+    "33046": {
+      "name": "Belobog's Iron Defense",
+      "set": "304",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/304_1.png"
+    },
+    "33055": {
+      "name": "Planet Screwllum's Mechanical Sun",
+      "set": "305",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/305_0.png"
+    },
+    "33056": {
+      "name": "Planet Screwllum's Ring System",
+      "set": "305",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/305_1.png"
+    },
+    "33065": {
+      "name": "Salsotto's Moving City",
+      "set": "306",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/306_0.png"
+    },
+    "33066": {
+      "name": "Salsotto's Terminator Line",
+      "set": "306",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/306_1.png"
+    },
+    "33075": {
+      "name": "Talia's Nailscrap Town",
+      "set": "307",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/307_0.png"
+    },
+    "33076": {
+      "name": "Talia's Exposed Electric Wire",
+      "set": "307",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/307_1.png"
+    },
+    "33085": {
+      "name": "Vonwacq's Island of Birth",
+      "set": "308",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/308_0.png"
+    },
+    "33086": {
+      "name": "Vonwacq's Islandic Coast",
+      "set": "308",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/308_1.png"
+    },
+    "33095": {
+      "name": "Taikiyan Laser Stadium",
+      "set": "309",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/309_0.png"
+    },
+    "33096": {
+      "name": "Taikiyan's Arclight Race Track",
+      "set": "309",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/309_1.png"
+    },
+    "33105": {
+      "name": "Insumousu's Whalefall Ship",
+      "set": "310",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/310_0.png"
+    },
+    "33106": {
+      "name": "Insumousu's Frayed Hawser",
+      "set": "310",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/310_1.png"
+    },
+    "33115": {
+      "name": "Glamoth's Iron Cavalry Regiment",
+      "set": "311",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/311_0.png"
+    },
+    "33116": {
+      "name": "Glamoth's Silent Tombstone",
+      "set": "311",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/311_1.png"
+    },
+    "33125": {
+      "name": "Penacony's Grand Hotel",
+      "set": "312",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/312_0.png"
+    },
+    "33126": {
+      "name": "Penacony's Dream-Seeking Tracks",
+      "set": "312",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/312_1.png"
+    },
+    "33135": {
+      "name": "Sigonia's Gaiathra Berth",
+      "set": "313",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/313_0.png"
+    },
+    "33136": {
+      "name": "Sigonia's Knot of Cyclicality",
+      "set": "313",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/313_1.png"
+    },
+    "33145": {
+      "name": "Izumo's Magatsu no Morokami",
+      "set": "314",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/314_0.png"
+    },
+    "33146": {
+      "name": "Izumo's Blades of Origin and End",
+      "set": "314",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/314_1.png"
+    },
+    "33155": {
+      "name": "Duran's Tent of Golden Sky",
+      "set": "315",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/315_0.png"
+    },
+    "33156": {
+      "name": "Duran's Mechabeast Bridle",
+      "set": "315",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/315_1.png"
+    },
+    "33165": {
+      "name": "Forge's Lotus Lantern Wick",
+      "set": "316",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/316_0.png"
+    },
+    "33166": {
+      "name": "Forge's Heavenly Flamewheel Silk",
+      "set": "316",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/316_1.png"
+    },
+    "33175": {
+      "name": "Lushaka's Waterscape",
+      "set": "317",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/317_0.png"
+    },
+    "33176": {
+      "name": "Lushaka's Twinlanes",
+      "set": "317",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/317_1.png"
+    },
+    "33185": {
+      "name": "BananAmusement Park's BananAxis Plaza",
+      "set": "318",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/318_0.png"
+    },
+    "33186": {
+      "name": "BananAmusement Park's Memetic Cables",
+      "set": "318",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/318_1.png"
+    },
+    "33195": {
+      "name": "Aidonia's Deceased Gravestones",
+      "set": "319",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/319_0.png"
+    },
+    "33196": {
+      "name": "Aidonia's Deathward Bone Chains",
+      "set": "319",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/319_1.png"
+    },
+    "33205": {
+      "name": "Grove of Epiphany's Pondering Colossus",
+      "set": "320",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/320_0.png"
+    },
+    "33206": {
+      "name": "Grove of Epiphany's Interwoven Veins",
+      "set": "320",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/320_1.png"
+    },
+    "33215": {
+      "name": "Membrance Maze's Serene Treehouse",
+      "set": "321",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/321_0.png"
+    },
+    "33216": {
+      "name": "Membrance Maze's Wishing Whistle",
+      "set": "321",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/321_1.png"
+    },
+    "33225": {
+      "name": "Warbling Shores' Blazing Beacon",
+      "set": "322",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/322_0.png"
+    },
+    "33226": {
+      "name": "Warbling Shores' Cantillation Trail",
+      "set": "322",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/322_1.png"
+    },
+    "33235": {
+      "name": "Last West Wind of Amphoreus",
+      "set": "323",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/323_0.png"
+    },
+    "33236": {
+      "name": "Eternal Verses of Amphoreus",
+      "set": "323",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/323_1.png"
+    },
+    "33245": {
+      "name": "Livestream's Protean Vistas",
+      "set": "324",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/324_0.png"
+    },
+    "33246": {
+      "name": "Livestream's Chatter Banter",
+      "set": "324",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/324_1.png"
+    },
+    "33255": {
+      "name": "Punklorde's Rainbow City",
+      "set": "325",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/325_0.png"
+    },
+    "33256": {
+      "name": "Punklorde's Data Deluge",
+      "set": "325",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/325_1.png"
+    },
+    "33265": {
+      "name": "Astropolis Media Headquarters",
+      "set": "326",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/326_0.png"
+    },
+    "33266": {
+      "name": "Astropolis Employee Credentials",
+      "set": "326",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/326_1.png"
+    },
+    "33275": {
+      "name": "Stranded Express at the Anchorage",
+      "set": "327",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/327_0.png"
+    },
+    "33276": {
+      "name": "Silver Rails of the Anchorage",
+      "set": "327",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/327_1.png"
+    },
+    "33285": {
+      "name": "Central Synapse of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 2,
+      "type": "NECK",
+      "icon": "icon/relic/328_0.png"
+    },
+    "33286": {
+      "name": "Peripheral Conduits of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 2,
+      "type": "OBJECT",
+      "icon": "icon/relic/328_1.png"
+    },
+    "41011": {
+      "name": "Passerby's Rejuvenated Wooden Hairstick",
+      "set": "101",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/101_0.png"
+    },
+    "41012": {
+      "name": "Passerby's Roaming Dragon Bracer",
+      "set": "101",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/101_1.png"
+    },
+    "41013": {
+      "name": "Passerby's Ragged Embroidered Coat",
+      "set": "101",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/101_2.png"
+    },
+    "41014": {
+      "name": "Passerby's Stygian Hiking Boots",
+      "set": "101",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/101_3.png"
+    },
+    "41021": {
+      "name": "Musketeer's Wild Wheat Felt Hat",
+      "set": "102",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/102_0.png"
+    },
+    "41022": {
+      "name": "Musketeer's Coarse Leather Gloves",
+      "set": "102",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/102_1.png"
+    },
+    "41023": {
+      "name": "Musketeer's Wind-Hunting Shawl",
+      "set": "102",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/102_2.png"
+    },
+    "41024": {
+      "name": "Musketeer's Rivets Riding Boots",
+      "set": "102",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/102_3.png"
+    },
+    "41031": {
+      "name": "Knight's Forgiving Casque",
+      "set": "103",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/103_0.png"
+    },
+    "41032": {
+      "name": "Knight's Silent Oath Ring",
+      "set": "103",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/103_1.png"
+    },
+    "41033": {
+      "name": "Knight's Solemn Breastplate",
+      "set": "103",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/103_2.png"
+    },
+    "41034": {
+      "name": "Knight's Iron Boots of Order",
+      "set": "103",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/103_3.png"
+    },
+    "41041": {
+      "name": "Hunter's Artaius Hood",
+      "set": "104",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/104_0.png"
+    },
+    "41042": {
+      "name": "Hunter's Lizard Gloves",
+      "set": "104",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/104_1.png"
+    },
+    "41043": {
+      "name": "Hunter's Ice Dragon Cloak",
+      "set": "104",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/104_2.png"
+    },
+    "41044": {
+      "name": "Hunter's Soft Elkskin Boots",
+      "set": "104",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/104_3.png"
+    },
+    "41051": {
+      "name": "Champion's Headgear",
+      "set": "105",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/105_0.png"
+    },
+    "41052": {
+      "name": "Champion's Heavy Gloves",
+      "set": "105",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/105_1.png"
+    },
+    "41053": {
+      "name": "Champion's Chest Guard",
+      "set": "105",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/105_2.png"
+    },
+    "41054": {
+      "name": "Champion's Fleetfoot Boots",
+      "set": "105",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/105_3.png"
+    },
+    "41061": {
+      "name": "Guard's Cast Iron Helmet",
+      "set": "106",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/106_0.png"
+    },
+    "41062": {
+      "name": "Guard's Shining Gauntlets",
+      "set": "106",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/106_1.png"
+    },
+    "41063": {
+      "name": "Guard's Uniform of Old",
+      "set": "106",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/106_2.png"
+    },
+    "41064": {
+      "name": "Guard's Silver Greaves",
+      "set": "106",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/106_3.png"
+    },
+    "41071": {
+      "name": "Firesmith's Obsidian Goggles",
+      "set": "107",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/107_0.png"
+    },
+    "41072": {
+      "name": "Firesmith's Ring of Flame-Mastery",
+      "set": "107",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/107_1.png"
+    },
+    "41073": {
+      "name": "Firesmith's Fireproof Apron",
+      "set": "107",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/107_2.png"
+    },
+    "41074": {
+      "name": "Firesmith's Alloy Leg",
+      "set": "107",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/107_3.png"
+    },
+    "41081": {
+      "name": "Genius's Ultraremote Sensing Visor",
+      "set": "108",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/108_0.png"
+    },
+    "41082": {
+      "name": "Genius's Frequency Catcher",
+      "set": "108",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/108_1.png"
+    },
+    "41083": {
+      "name": "Genius's Metafield Suit",
+      "set": "108",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/108_2.png"
+    },
+    "41084": {
+      "name": "Genius's Gravity Walker",
+      "set": "108",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/108_3.png"
+    },
+    "41091": {
+      "name": "Band's Polarized Sunglasses",
+      "set": "109",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/109_0.png"
+    },
+    "41092": {
+      "name": "Band's Touring Bracelet",
+      "set": "109",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/109_1.png"
+    },
+    "41093": {
+      "name": "Band's Leather Jacket With Studs",
+      "set": "109",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/109_2.png"
+    },
+    "41094": {
+      "name": "Band's Ankle Boots With Rivets",
+      "set": "109",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/109_3.png"
+    },
+    "41101": {
+      "name": "Eagle's Beaked Helmet",
+      "set": "110",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/110_0.png"
+    },
+    "41102": {
+      "name": "Eagle's Soaring Ring",
+      "set": "110",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/110_1.png"
+    },
+    "41103": {
+      "name": "Eagle's Winged Suit Harness",
+      "set": "110",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/110_2.png"
+    },
+    "41104": {
+      "name": "Eagle's Quilted Puttees",
+      "set": "110",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/110_3.png"
+    },
+    "41111": {
+      "name": "Thief's Myriad-Faced Mask",
+      "set": "111",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/111_0.png"
+    },
+    "41112": {
+      "name": "Thief's Gloves With Prints",
+      "set": "111",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/111_1.png"
+    },
+    "41113": {
+      "name": "Thief's Steel Grappling Hook",
+      "set": "111",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/111_2.png"
+    },
+    "41114": {
+      "name": "Thief's Meteor Boots",
+      "set": "111",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/111_3.png"
+    },
+    "41121": {
+      "name": "Wastelander's Breathing Mask",
+      "set": "112",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/112_0.png"
+    },
+    "41122": {
+      "name": "Wastelander's Desert Terminal",
+      "set": "112",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/112_1.png"
+    },
+    "41123": {
+      "name": "Wastelander's Friar Robe",
+      "set": "112",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/112_2.png"
+    },
+    "41124": {
+      "name": "Wastelander's Powered Greaves",
+      "set": "112",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/112_3.png"
+    },
+    "41131": {
+      "name": "Disciple's Prosthetic Eye",
+      "set": "113",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/113_0.png"
+    },
+    "41132": {
+      "name": "Disciple's Ingenium Hand",
+      "set": "113",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/113_1.png"
+    },
+    "41133": {
+      "name": "Disciple's Dewy Feather Garb",
+      "set": "113",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/113_2.png"
+    },
+    "41134": {
+      "name": "Disciple's Celestial Silk Sandals",
+      "set": "113",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/113_3.png"
+    },
+    "41141": {
+      "name": "Messenger's Holovisor",
+      "set": "114",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/114_0.png"
+    },
+    "41142": {
+      "name": "Messenger's Transformative Arm",
+      "set": "114",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/114_1.png"
+    },
+    "41143": {
+      "name": "Messenger's Secret Satchel",
+      "set": "114",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/114_2.png"
+    },
+    "41144": {
+      "name": "Messenger's Par-kool Sneakers",
+      "set": "114",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/114_3.png"
+    },
+    "41151": {
+      "name": "Grand Duke's Crown of Netherflame",
+      "set": "115",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/115_0.png"
+    },
+    "41152": {
+      "name": "Grand Duke's Gloves of Fieryfur",
+      "set": "115",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/115_1.png"
+    },
+    "41153": {
+      "name": "Grand Duke's Robe of Grace",
+      "set": "115",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/115_2.png"
+    },
+    "41154": {
+      "name": "Grand Duke's Ceremonial Boots",
+      "set": "115",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/115_3.png"
+    },
+    "41161": {
+      "name": "Prisoner's Sealed Muzzle",
+      "set": "116",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/116_0.png"
+    },
+    "41162": {
+      "name": "Prisoner's Leadstone Shackles",
+      "set": "116",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/116_1.png"
+    },
+    "41163": {
+      "name": "Prisoner's Repressive Straitjacket",
+      "set": "116",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/116_2.png"
+    },
+    "41164": {
+      "name": "Prisoner's Restrictive Fetters",
+      "set": "116",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/116_3.png"
+    },
+    "41171": {
+      "name": "Pioneer's Heatproof Shell",
+      "set": "117",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/117_0.png"
+    },
+    "41172": {
+      "name": "Pioneer's Lacuna Compass",
+      "set": "117",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/117_1.png"
+    },
+    "41173": {
+      "name": "Pioneer's Sealed Lead Apron",
+      "set": "117",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/117_2.png"
+    },
+    "41174": {
+      "name": "Pioneer's Starfaring Anchor",
+      "set": "117",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/117_3.png"
+    },
+    "41181": {
+      "name": "Watchmaker's Telescoping Lens",
+      "set": "118",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/118_0.png"
+    },
+    "41182": {
+      "name": "Watchmaker's Fortuitous Wristwatch",
+      "set": "118",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/118_1.png"
+    },
+    "41183": {
+      "name": "Watchmaker's Illusory Formal Suit",
+      "set": "118",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/118_2.png"
+    },
+    "41184": {
+      "name": "Watchmaker's Dream-Concealing Dress Shoes",
+      "set": "118",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/118_3.png"
+    },
+    "41191": {
+      "name": "Iron Cavalry's Homing Helm",
+      "set": "119",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/119_0.png"
+    },
+    "41192": {
+      "name": "Iron Cavalry's Crushing Wristguard",
+      "set": "119",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/119_1.png"
+    },
+    "41193": {
+      "name": "Iron Cavalry's Silvery Armor",
+      "set": "119",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/119_2.png"
+    },
+    "41194": {
+      "name": "Iron Cavalry's Skywalk Greaves",
+      "set": "119",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/119_3.png"
+    },
+    "41201": {
+      "name": "Valorous Mask of Northern Skies",
+      "set": "120",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/120_0.png"
+    },
+    "41202": {
+      "name": "Valorous Bracelet of Grappling Hooks",
+      "set": "120",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/120_1.png"
+    },
+    "41203": {
+      "name": "Valorous Plate of Soaring Flight",
+      "set": "120",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/120_2.png"
+    },
+    "41204": {
+      "name": "Valorous Greaves of Pursuing Hunt",
+      "set": "120",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/120_3.png"
+    },
+    "41211": {
+      "name": "Sacerdos' Melodic Earrings",
+      "set": "121",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/121_0.png"
+    },
+    "41212": {
+      "name": "Sacerdos' Welcoming Gloves",
+      "set": "121",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/121_1.png"
+    },
+    "41213": {
+      "name": "Sacerdos' Ceremonial Garb",
+      "set": "121",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/121_2.png"
+    },
+    "41214": {
+      "name": "Sacerdos' Arduous Boots",
+      "set": "121",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/121_3.png"
+    },
+    "41221": {
+      "name": "Scholar's Silver-Rimmed Monocle",
+      "set": "122",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/122_0.png"
+    },
+    "41222": {
+      "name": "Scholar's Auxiliary Knuckle",
+      "set": "122",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/122_1.png"
+    },
+    "41223": {
+      "name": "Scholar's Tweed Jacket",
+      "set": "122",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/122_2.png"
+    },
+    "41224": {
+      "name": "Scholar's Felt Snowboots",
+      "set": "122",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/122_3.png"
+    },
+    "41231": {
+      "name": "Hero's Wreath of Championship",
+      "set": "123",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/123_0.png"
+    },
+    "41232": {
+      "name": "Hero's Gilded Bracers",
+      "set": "123",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/123_1.png"
+    },
+    "41233": {
+      "name": "Hero's Gallant Golden Armor",
+      "set": "123",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/123_2.png"
+    },
+    "41234": {
+      "name": "Hero's Firechasing Shinguard",
+      "set": "123",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/123_3.png"
+    },
+    "41241": {
+      "name": "Poet's Dill Wreath",
+      "set": "124",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/124_0.png"
+    },
+    "41242": {
+      "name": "Poet's Gilded Bracelet",
+      "set": "124",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/124_1.png"
+    },
+    "41243": {
+      "name": "Poet's Star-Studded Skirt",
+      "set": "124",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/124_2.png"
+    },
+    "41244": {
+      "name": "Poet's Silver-Studded Shoes",
+      "set": "124",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/124_3.png"
+    },
+    "41251": {
+      "name": "Warrior Goddess's Winged Helm",
+      "set": "125",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/125_0.png"
+    },
+    "41252": {
+      "name": "Warrior Goddess's Cavalry Gauntlets",
+      "set": "125",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/125_1.png"
+    },
+    "41253": {
+      "name": "Warrior Goddess's Dawn Cape",
+      "set": "125",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/125_2.png"
+    },
+    "41254": {
+      "name": "Warrior Goddess's Honor Spurs",
+      "set": "125",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/125_3.png"
+    },
+    "41261": {
+      "name": "Captain's Navigator Hat",
+      "set": "126",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/126_0.png"
+    },
+    "41262": {
+      "name": "Captain's Lightcatcher Astrolabe",
+      "set": "126",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/126_1.png"
+    },
+    "41263": {
+      "name": "Captain's Wind Mantle",
+      "set": "126",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/126_2.png"
+    },
+    "41264": {
+      "name": "Captain's Tidal Boots",
+      "set": "126",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/126_3.png"
+    },
+    "41271": {
+      "name": "Deliverer's Hood",
+      "set": "127",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/127_0.png"
+    },
+    "41272": {
+      "name": "Deliverer's Sword Gauntlet",
+      "set": "127",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/127_1.png"
+    },
+    "41273": {
+      "name": "Deliverer's Robe of Legacy",
+      "set": "127",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/127_2.png"
+    },
+    "41274": {
+      "name": "Deliverer's Boots of Pioneering",
+      "set": "127",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/127_3.png"
+    },
+    "41281": {
+      "name": "Recluse's Wide-Brimmed Fedora",
+      "set": "128",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/128_0.png"
+    },
+    "41282": {
+      "name": "Recluse's Refined Timepiece",
+      "set": "128",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/128_1.png"
+    },
+    "41283": {
+      "name": "Recluse's Camel-Colored Coat",
+      "set": "128",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/128_2.png"
+    },
+    "41284": {
+      "name": "Recluse's Soft Suede Boots",
+      "set": "128",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/128_3.png"
+    },
+    "41291": {
+      "name": "Magical Girl's Shining Medal",
+      "set": "129",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/129_0.png"
+    },
+    "41292": {
+      "name": "Magical Girl's Protective Gloves",
+      "set": "129",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/129_1.png"
+    },
+    "41293": {
+      "name": "Magical Girl's Everdance Battle Skirt",
+      "set": "129",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/129_2.png"
+    },
+    "41294": {
+      "name": "Magical Girl's Contract Boots",
+      "set": "129",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/129_3.png"
+    },
+    "41301": {
+      "name": "Diviner's Extrapolation Jade Abacus",
+      "set": "130",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/130_0.png"
+    },
+    "41302": {
+      "name": "Diviner's Ingenium Prosthetic Hand",
+      "set": "130",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/130_1.png"
+    },
+    "41303": {
+      "name": "Diviner's Astral Robe",
+      "set": "130",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/130_2.png"
+    },
+    "41304": {
+      "name": "Diviner's Cloud-Soaring Boots",
+      "set": "130",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/130_3.png"
+    },
+    "41311": {
+      "name": "Navigator's Deep Space Mirror",
+      "set": "131",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/131_0.png"
+    },
+    "41312": {
+      "name": "Navigator's Game Die",
+      "set": "131",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/131_1.png"
+    },
+    "41313": {
+      "name": "Navigator's Astral Chart Uniform",
+      "set": "131",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/131_2.png"
+    },
+    "41314": {
+      "name": "Navigator's Everstride Boots",
+      "set": "131",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/131_3.png"
+    },
+    "41321": {
+      "name": "Smith's Fire Beast Mask",
+      "set": "132",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/132_0.png"
+    },
+    "41322": {
+      "name": "Smith's Damascus Steel Gauntlets",
+      "set": "132",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/132_1.png"
+    },
+    "41323": {
+      "name": "Smith's Fireproof Garment",
+      "set": "132",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/132_2.png"
+    },
+    "41324": {
+      "name": "Smith's Unbridled Boots",
+      "set": "132",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/132_3.png"
+    },
+    "41331": {
+      "name": "Actor's Weeping Masque",
+      "set": "133",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/133_0.png"
+    },
+    "41332": {
+      "name": "Actor's Vibrant Handfan",
+      "set": "133",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/133_1.png"
+    },
+    "41333": {
+      "name": "Actor's Jester Garb",
+      "set": "133",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/133_2.png"
+    },
+    "41334": {
+      "name": "Actor's Crescent Dance Boots",
+      "set": "133",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/133_3.png"
+    },
+    "41341": {
+      "name": "Heretic's Cranial Apparatus",
+      "set": "134",
+      "rarity": 3,
+      "type": "HEAD",
+      "icon": "icon/relic/134_0.png"
+    },
+    "41342": {
+      "name": "Heretic's Injection Gloves",
+      "set": "134",
+      "rarity": 3,
+      "type": "HAND",
+      "icon": "icon/relic/134_1.png"
+    },
+    "41343": {
+      "name": "Heretic's Straitjacket of Reason",
+      "set": "134",
+      "rarity": 3,
+      "type": "BODY",
+      "icon": "icon/relic/134_2.png"
+    },
+    "41344": {
+      "name": "Heretic's Ravenous Ankle-Boots",
+      "set": "134",
+      "rarity": 3,
+      "type": "FOOT",
+      "icon": "icon/relic/134_3.png"
+    },
+    "43015": {
+      "name": "Herta's Space Station",
+      "set": "301",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/301_0.png"
+    },
+    "43016": {
+      "name": "Herta's Wandering Trek",
+      "set": "301",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/301_1.png"
+    },
+    "43025": {
+      "name": "The Xianzhou Luofu's Celestial Ark",
+      "set": "302",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/302_0.png"
+    },
+    "43026": {
+      "name": "The Xianzhou Luofu's Ambrosial Arbor Vines",
+      "set": "302",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/302_1.png"
+    },
+    "43035": {
+      "name": "The IPC's Mega HQ",
+      "set": "303",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/303_0.png"
+    },
+    "43036": {
+      "name": "The IPC's Trade Route",
+      "set": "303",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/303_1.png"
+    },
+    "43045": {
+      "name": "Belobog's Fortress of Preservation",
+      "set": "304",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/304_0.png"
+    },
+    "43046": {
+      "name": "Belobog's Iron Defense",
+      "set": "304",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/304_1.png"
+    },
+    "43055": {
+      "name": "Planet Screwllum's Mechanical Sun",
+      "set": "305",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/305_0.png"
+    },
+    "43056": {
+      "name": "Planet Screwllum's Ring System",
+      "set": "305",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/305_1.png"
+    },
+    "43065": {
+      "name": "Salsotto's Moving City",
+      "set": "306",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/306_0.png"
+    },
+    "43066": {
+      "name": "Salsotto's Terminator Line",
+      "set": "306",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/306_1.png"
+    },
+    "43075": {
+      "name": "Talia's Nailscrap Town",
+      "set": "307",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/307_0.png"
+    },
+    "43076": {
+      "name": "Talia's Exposed Electric Wire",
+      "set": "307",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/307_1.png"
+    },
+    "43085": {
+      "name": "Vonwacq's Island of Birth",
+      "set": "308",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/308_0.png"
+    },
+    "43086": {
+      "name": "Vonwacq's Islandic Coast",
+      "set": "308",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/308_1.png"
+    },
+    "43095": {
+      "name": "Taikiyan Laser Stadium",
+      "set": "309",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/309_0.png"
+    },
+    "43096": {
+      "name": "Taikiyan's Arclight Race Track",
+      "set": "309",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/309_1.png"
+    },
+    "43105": {
+      "name": "Insumousu's Whalefall Ship",
+      "set": "310",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/310_0.png"
+    },
+    "43106": {
+      "name": "Insumousu's Frayed Hawser",
+      "set": "310",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/310_1.png"
+    },
+    "43115": {
+      "name": "Glamoth's Iron Cavalry Regiment",
+      "set": "311",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/311_0.png"
+    },
+    "43116": {
+      "name": "Glamoth's Silent Tombstone",
+      "set": "311",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/311_1.png"
+    },
+    "43125": {
+      "name": "Penacony's Grand Hotel",
+      "set": "312",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/312_0.png"
+    },
+    "43126": {
+      "name": "Penacony's Dream-Seeking Tracks",
+      "set": "312",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/312_1.png"
+    },
+    "43135": {
+      "name": "Sigonia's Gaiathra Berth",
+      "set": "313",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/313_0.png"
+    },
+    "43136": {
+      "name": "Sigonia's Knot of Cyclicality",
+      "set": "313",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/313_1.png"
+    },
+    "43145": {
+      "name": "Izumo's Magatsu no Morokami",
+      "set": "314",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/314_0.png"
+    },
+    "43146": {
+      "name": "Izumo's Blades of Origin and End",
+      "set": "314",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/314_1.png"
+    },
+    "43155": {
+      "name": "Duran's Tent of Golden Sky",
+      "set": "315",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/315_0.png"
+    },
+    "43156": {
+      "name": "Duran's Mechabeast Bridle",
+      "set": "315",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/315_1.png"
+    },
+    "43165": {
+      "name": "Forge's Lotus Lantern Wick",
+      "set": "316",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/316_0.png"
+    },
+    "43166": {
+      "name": "Forge's Heavenly Flamewheel Silk",
+      "set": "316",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/316_1.png"
+    },
+    "43175": {
+      "name": "Lushaka's Waterscape",
+      "set": "317",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/317_0.png"
+    },
+    "43176": {
+      "name": "Lushaka's Twinlanes",
+      "set": "317",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/317_1.png"
+    },
+    "43185": {
+      "name": "BananAmusement Park's BananAxis Plaza",
+      "set": "318",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/318_0.png"
+    },
+    "43186": {
+      "name": "BananAmusement Park's Memetic Cables",
+      "set": "318",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/318_1.png"
+    },
+    "43195": {
+      "name": "Aidonia's Deceased Gravestones",
+      "set": "319",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/319_0.png"
+    },
+    "43196": {
+      "name": "Aidonia's Deathward Bone Chains",
+      "set": "319",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/319_1.png"
+    },
+    "43205": {
+      "name": "Grove of Epiphany's Pondering Colossus",
+      "set": "320",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/320_0.png"
+    },
+    "43206": {
+      "name": "Grove of Epiphany's Interwoven Veins",
+      "set": "320",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/320_1.png"
+    },
+    "43215": {
+      "name": "Membrance Maze's Serene Treehouse",
+      "set": "321",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/321_0.png"
+    },
+    "43216": {
+      "name": "Membrance Maze's Wishing Whistle",
+      "set": "321",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/321_1.png"
+    },
+    "43225": {
+      "name": "Warbling Shores' Blazing Beacon",
+      "set": "322",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/322_0.png"
+    },
+    "43226": {
+      "name": "Warbling Shores' Cantillation Trail",
+      "set": "322",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/322_1.png"
+    },
+    "43235": {
+      "name": "Last West Wind of Amphoreus",
+      "set": "323",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/323_0.png"
+    },
+    "43236": {
+      "name": "Eternal Verses of Amphoreus",
+      "set": "323",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/323_1.png"
+    },
+    "43245": {
+      "name": "Livestream's Protean Vistas",
+      "set": "324",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/324_0.png"
+    },
+    "43246": {
+      "name": "Livestream's Chatter Banter",
+      "set": "324",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/324_1.png"
+    },
+    "43255": {
+      "name": "Punklorde's Rainbow City",
+      "set": "325",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/325_0.png"
+    },
+    "43256": {
+      "name": "Punklorde's Data Deluge",
+      "set": "325",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/325_1.png"
+    },
+    "43265": {
+      "name": "Astropolis Media Headquarters",
+      "set": "326",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/326_0.png"
+    },
+    "43266": {
+      "name": "Astropolis Employee Credentials",
+      "set": "326",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/326_1.png"
+    },
+    "43275": {
+      "name": "Stranded Express at the Anchorage",
+      "set": "327",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/327_0.png"
+    },
+    "43276": {
+      "name": "Silver Rails of the Anchorage",
+      "set": "327",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/327_1.png"
+    },
+    "43285": {
+      "name": "Central Synapse of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 3,
+      "type": "NECK",
+      "icon": "icon/relic/328_0.png"
+    },
+    "43286": {
+      "name": "Peripheral Conduits of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 3,
+      "type": "OBJECT",
+      "icon": "icon/relic/328_1.png"
+    },
+    "51011": {
+      "name": "Passerby's Rejuvenated Wooden Hairstick",
+      "set": "101",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/101_0.png"
+    },
+    "51012": {
+      "name": "Passerby's Roaming Dragon Bracer",
+      "set": "101",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/101_1.png"
+    },
+    "51013": {
+      "name": "Passerby's Ragged Embroidered Coat",
+      "set": "101",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/101_2.png"
+    },
+    "51014": {
+      "name": "Passerby's Stygian Hiking Boots",
+      "set": "101",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/101_3.png"
+    },
+    "51021": {
+      "name": "Musketeer's Wild Wheat Felt Hat",
+      "set": "102",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/102_0.png"
+    },
+    "51022": {
+      "name": "Musketeer's Coarse Leather Gloves",
+      "set": "102",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/102_1.png"
+    },
+    "51023": {
+      "name": "Musketeer's Wind-Hunting Shawl",
+      "set": "102",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/102_2.png"
+    },
+    "51024": {
+      "name": "Musketeer's Rivets Riding Boots",
+      "set": "102",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/102_3.png"
+    },
+    "51031": {
+      "name": "Knight's Forgiving Casque",
+      "set": "103",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/103_0.png"
+    },
+    "51032": {
+      "name": "Knight's Silent Oath Ring",
+      "set": "103",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/103_1.png"
+    },
+    "51033": {
+      "name": "Knight's Solemn Breastplate",
+      "set": "103",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/103_2.png"
+    },
+    "51034": {
+      "name": "Knight's Iron Boots of Order",
+      "set": "103",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/103_3.png"
+    },
+    "51041": {
+      "name": "Hunter's Artaius Hood",
+      "set": "104",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/104_0.png"
+    },
+    "51042": {
+      "name": "Hunter's Lizard Gloves",
+      "set": "104",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/104_1.png"
+    },
+    "51043": {
+      "name": "Hunter's Ice Dragon Cloak",
+      "set": "104",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/104_2.png"
+    },
+    "51044": {
+      "name": "Hunter's Soft Elkskin Boots",
+      "set": "104",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/104_3.png"
+    },
+    "51051": {
+      "name": "Champion's Headgear",
+      "set": "105",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/105_0.png"
+    },
+    "51052": {
+      "name": "Champion's Heavy Gloves",
+      "set": "105",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/105_1.png"
+    },
+    "51053": {
+      "name": "Champion's Chest Guard",
+      "set": "105",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/105_2.png"
+    },
+    "51054": {
+      "name": "Champion's Fleetfoot Boots",
+      "set": "105",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/105_3.png"
+    },
+    "51061": {
+      "name": "Guard's Cast Iron Helmet",
+      "set": "106",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/106_0.png"
+    },
+    "51062": {
+      "name": "Guard's Shining Gauntlets",
+      "set": "106",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/106_1.png"
+    },
+    "51063": {
+      "name": "Guard's Uniform of Old",
+      "set": "106",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/106_2.png"
+    },
+    "51064": {
+      "name": "Guard's Silver Greaves",
+      "set": "106",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/106_3.png"
+    },
+    "51071": {
+      "name": "Firesmith's Obsidian Goggles",
+      "set": "107",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/107_0.png"
+    },
+    "51072": {
+      "name": "Firesmith's Ring of Flame-Mastery",
+      "set": "107",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/107_1.png"
+    },
+    "51073": {
+      "name": "Firesmith's Fireproof Apron",
+      "set": "107",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/107_2.png"
+    },
+    "51074": {
+      "name": "Firesmith's Alloy Leg",
+      "set": "107",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/107_3.png"
+    },
+    "51081": {
+      "name": "Genius's Ultraremote Sensing Visor",
+      "set": "108",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/108_0.png"
+    },
+    "51082": {
+      "name": "Genius's Frequency Catcher",
+      "set": "108",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/108_1.png"
+    },
+    "51083": {
+      "name": "Genius's Metafield Suit",
+      "set": "108",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/108_2.png"
+    },
+    "51084": {
+      "name": "Genius's Gravity Walker",
+      "set": "108",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/108_3.png"
+    },
+    "51091": {
+      "name": "Band's Polarized Sunglasses",
+      "set": "109",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/109_0.png"
+    },
+    "51092": {
+      "name": "Band's Touring Bracelet",
+      "set": "109",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/109_1.png"
+    },
+    "51093": {
+      "name": "Band's Leather Jacket With Studs",
+      "set": "109",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/109_2.png"
+    },
+    "51094": {
+      "name": "Band's Ankle Boots With Rivets",
+      "set": "109",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/109_3.png"
+    },
+    "51101": {
+      "name": "Eagle's Beaked Helmet",
+      "set": "110",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/110_0.png"
+    },
+    "51102": {
+      "name": "Eagle's Soaring Ring",
+      "set": "110",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/110_1.png"
+    },
+    "51103": {
+      "name": "Eagle's Winged Suit Harness",
+      "set": "110",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/110_2.png"
+    },
+    "51104": {
+      "name": "Eagle's Quilted Puttees",
+      "set": "110",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/110_3.png"
+    },
+    "51111": {
+      "name": "Thief's Myriad-Faced Mask",
+      "set": "111",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/111_0.png"
+    },
+    "51112": {
+      "name": "Thief's Gloves With Prints",
+      "set": "111",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/111_1.png"
+    },
+    "51113": {
+      "name": "Thief's Steel Grappling Hook",
+      "set": "111",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/111_2.png"
+    },
+    "51114": {
+      "name": "Thief's Meteor Boots",
+      "set": "111",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/111_3.png"
+    },
+    "51121": {
+      "name": "Wastelander's Breathing Mask",
+      "set": "112",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/112_0.png"
+    },
+    "51122": {
+      "name": "Wastelander's Desert Terminal",
+      "set": "112",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/112_1.png"
+    },
+    "51123": {
+      "name": "Wastelander's Friar Robe",
+      "set": "112",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/112_2.png"
+    },
+    "51124": {
+      "name": "Wastelander's Powered Greaves",
+      "set": "112",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/112_3.png"
+    },
+    "51131": {
+      "name": "Disciple's Prosthetic Eye",
+      "set": "113",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/113_0.png"
+    },
+    "51132": {
+      "name": "Disciple's Ingenium Hand",
+      "set": "113",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/113_1.png"
+    },
+    "51133": {
+      "name": "Disciple's Dewy Feather Garb",
+      "set": "113",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/113_2.png"
+    },
+    "51134": {
+      "name": "Disciple's Celestial Silk Sandals",
+      "set": "113",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/113_3.png"
+    },
+    "51141": {
+      "name": "Messenger's Holovisor",
+      "set": "114",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/114_0.png"
+    },
+    "51142": {
+      "name": "Messenger's Transformative Arm",
+      "set": "114",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/114_1.png"
+    },
+    "51143": {
+      "name": "Messenger's Secret Satchel",
+      "set": "114",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/114_2.png"
+    },
+    "51144": {
+      "name": "Messenger's Par-kool Sneakers",
+      "set": "114",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/114_3.png"
+    },
+    "51151": {
+      "name": "Grand Duke's Crown of Netherflame",
+      "set": "115",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/115_0.png"
+    },
+    "51152": {
+      "name": "Grand Duke's Gloves of Fieryfur",
+      "set": "115",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/115_1.png"
+    },
+    "51153": {
+      "name": "Grand Duke's Robe of Grace",
+      "set": "115",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/115_2.png"
+    },
+    "51154": {
+      "name": "Grand Duke's Ceremonial Boots",
+      "set": "115",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/115_3.png"
+    },
+    "51161": {
+      "name": "Prisoner's Sealed Muzzle",
+      "set": "116",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/116_0.png"
+    },
+    "51162": {
+      "name": "Prisoner's Leadstone Shackles",
+      "set": "116",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/116_1.png"
+    },
+    "51163": {
+      "name": "Prisoner's Repressive Straitjacket",
+      "set": "116",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/116_2.png"
+    },
+    "51164": {
+      "name": "Prisoner's Restrictive Fetters",
+      "set": "116",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/116_3.png"
+    },
+    "51171": {
+      "name": "Pioneer's Heatproof Shell",
+      "set": "117",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/117_0.png"
+    },
+    "51172": {
+      "name": "Pioneer's Lacuna Compass",
+      "set": "117",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/117_1.png"
+    },
+    "51173": {
+      "name": "Pioneer's Sealed Lead Apron",
+      "set": "117",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/117_2.png"
+    },
+    "51174": {
+      "name": "Pioneer's Starfaring Anchor",
+      "set": "117",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/117_3.png"
+    },
+    "51181": {
+      "name": "Watchmaker's Telescoping Lens",
+      "set": "118",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/118_0.png"
+    },
+    "51182": {
+      "name": "Watchmaker's Fortuitous Wristwatch",
+      "set": "118",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/118_1.png"
+    },
+    "51183": {
+      "name": "Watchmaker's Illusory Formal Suit",
+      "set": "118",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/118_2.png"
+    },
+    "51184": {
+      "name": "Watchmaker's Dream-Concealing Dress Shoes",
+      "set": "118",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/118_3.png"
+    },
+    "51191": {
+      "name": "Iron Cavalry's Homing Helm",
+      "set": "119",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/119_0.png"
+    },
+    "51192": {
+      "name": "Iron Cavalry's Crushing Wristguard",
+      "set": "119",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/119_1.png"
+    },
+    "51193": {
+      "name": "Iron Cavalry's Silvery Armor",
+      "set": "119",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/119_2.png"
+    },
+    "51194": {
+      "name": "Iron Cavalry's Skywalk Greaves",
+      "set": "119",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/119_3.png"
+    },
+    "51201": {
+      "name": "Valorous Mask of Northern Skies",
+      "set": "120",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/120_0.png"
+    },
+    "51202": {
+      "name": "Valorous Bracelet of Grappling Hooks",
+      "set": "120",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/120_1.png"
+    },
+    "51203": {
+      "name": "Valorous Plate of Soaring Flight",
+      "set": "120",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/120_2.png"
+    },
+    "51204": {
+      "name": "Valorous Greaves of Pursuing Hunt",
+      "set": "120",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/120_3.png"
+    },
+    "51211": {
+      "name": "Sacerdos' Melodic Earrings",
+      "set": "121",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/121_0.png"
+    },
+    "51212": {
+      "name": "Sacerdos' Welcoming Gloves",
+      "set": "121",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/121_1.png"
+    },
+    "51213": {
+      "name": "Sacerdos' Ceremonial Garb",
+      "set": "121",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/121_2.png"
+    },
+    "51214": {
+      "name": "Sacerdos' Arduous Boots",
+      "set": "121",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/121_3.png"
+    },
+    "51221": {
+      "name": "Scholar's Silver-Rimmed Monocle",
+      "set": "122",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/122_0.png"
+    },
+    "51222": {
+      "name": "Scholar's Auxiliary Knuckle",
+      "set": "122",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/122_1.png"
+    },
+    "51223": {
+      "name": "Scholar's Tweed Jacket",
+      "set": "122",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/122_2.png"
+    },
+    "51224": {
+      "name": "Scholar's Felt Snowboots",
+      "set": "122",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/122_3.png"
+    },
+    "51231": {
+      "name": "Hero's Wreath of Championship",
+      "set": "123",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/123_0.png"
+    },
+    "51232": {
+      "name": "Hero's Gilded Bracers",
+      "set": "123",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/123_1.png"
+    },
+    "51233": {
+      "name": "Hero's Gallant Golden Armor",
+      "set": "123",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/123_2.png"
+    },
+    "51234": {
+      "name": "Hero's Firechasing Shinguard",
+      "set": "123",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/123_3.png"
+    },
+    "51241": {
+      "name": "Poet's Dill Wreath",
+      "set": "124",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/124_0.png"
+    },
+    "51242": {
+      "name": "Poet's Gilded Bracelet",
+      "set": "124",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/124_1.png"
+    },
+    "51243": {
+      "name": "Poet's Star-Studded Skirt",
+      "set": "124",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/124_2.png"
+    },
+    "51244": {
+      "name": "Poet's Silver-Studded Shoes",
+      "set": "124",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/124_3.png"
+    },
+    "51251": {
+      "name": "Warrior Goddess's Winged Helm",
+      "set": "125",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/125_0.png"
+    },
+    "51252": {
+      "name": "Warrior Goddess's Cavalry Gauntlets",
+      "set": "125",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/125_1.png"
+    },
+    "51253": {
+      "name": "Warrior Goddess's Dawn Cape",
+      "set": "125",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/125_2.png"
+    },
+    "51254": {
+      "name": "Warrior Goddess's Honor Spurs",
+      "set": "125",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/125_3.png"
+    },
+    "51261": {
+      "name": "Captain's Navigator Hat",
+      "set": "126",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/126_0.png"
+    },
+    "51262": {
+      "name": "Captain's Lightcatcher Astrolabe",
+      "set": "126",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/126_1.png"
+    },
+    "51263": {
+      "name": "Captain's Wind Mantle",
+      "set": "126",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/126_2.png"
+    },
+    "51264": {
+      "name": "Captain's Tidal Boots",
+      "set": "126",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/126_3.png"
+    },
+    "51271": {
+      "name": "Deliverer's Hood",
+      "set": "127",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/127_0.png"
+    },
+    "51272": {
+      "name": "Deliverer's Sword Gauntlet",
+      "set": "127",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/127_1.png"
+    },
+    "51273": {
+      "name": "Deliverer's Robe of Legacy",
+      "set": "127",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/127_2.png"
+    },
+    "51274": {
+      "name": "Deliverer's Boots of Pioneering",
+      "set": "127",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/127_3.png"
+    },
+    "51281": {
+      "name": "Recluse's Wide-Brimmed Fedora",
+      "set": "128",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/128_0.png"
+    },
+    "51282": {
+      "name": "Recluse's Refined Timepiece",
+      "set": "128",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/128_1.png"
+    },
+    "51283": {
+      "name": "Recluse's Camel-Colored Coat",
+      "set": "128",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/128_2.png"
+    },
+    "51284": {
+      "name": "Recluse's Soft Suede Boots",
+      "set": "128",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/128_3.png"
+    },
+    "51291": {
+      "name": "Magical Girl's Shining Medal",
+      "set": "129",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/129_0.png"
+    },
+    "51292": {
+      "name": "Magical Girl's Protective Gloves",
+      "set": "129",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/129_1.png"
+    },
+    "51293": {
+      "name": "Magical Girl's Everdance Battle Skirt",
+      "set": "129",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/129_2.png"
+    },
+    "51294": {
+      "name": "Magical Girl's Contract Boots",
+      "set": "129",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/129_3.png"
+    },
+    "51301": {
+      "name": "Diviner's Extrapolation Jade Abacus",
+      "set": "130",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/130_0.png"
+    },
+    "51302": {
+      "name": "Diviner's Ingenium Prosthetic Hand",
+      "set": "130",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/130_1.png"
+    },
+    "51303": {
+      "name": "Diviner's Astral Robe",
+      "set": "130",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/130_2.png"
+    },
+    "51304": {
+      "name": "Diviner's Cloud-Soaring Boots",
+      "set": "130",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/130_3.png"
+    },
+    "51311": {
+      "name": "Navigator's Deep Space Mirror",
+      "set": "131",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/131_0.png"
+    },
+    "51312": {
+      "name": "Navigator's Game Die",
+      "set": "131",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/131_1.png"
+    },
+    "51313": {
+      "name": "Navigator's Astral Chart Uniform",
+      "set": "131",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/131_2.png"
+    },
+    "51314": {
+      "name": "Navigator's Everstride Boots",
+      "set": "131",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/131_3.png"
+    },
+    "51321": {
+      "name": "Smith's Fire Beast Mask",
+      "set": "132",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/132_0.png"
+    },
+    "51322": {
+      "name": "Smith's Damascus Steel Gauntlets",
+      "set": "132",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/132_1.png"
+    },
+    "51323": {
+      "name": "Smith's Fireproof Garment",
+      "set": "132",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/132_2.png"
+    },
+    "51324": {
+      "name": "Smith's Unbridled Boots",
+      "set": "132",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/132_3.png"
+    },
+    "51331": {
+      "name": "Actor's Weeping Masque",
+      "set": "133",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/133_0.png"
+    },
+    "51332": {
+      "name": "Actor's Vibrant Handfan",
+      "set": "133",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/133_1.png"
+    },
+    "51333": {
+      "name": "Actor's Jester Garb",
+      "set": "133",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/133_2.png"
+    },
+    "51334": {
+      "name": "Actor's Crescent Dance Boots",
+      "set": "133",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/133_3.png"
+    },
+    "51341": {
+      "name": "Heretic's Cranial Apparatus",
+      "set": "134",
+      "rarity": 4,
+      "type": "HEAD",
+      "icon": "icon/relic/134_0.png"
+    },
+    "51342": {
+      "name": "Heretic's Injection Gloves",
+      "set": "134",
+      "rarity": 4,
+      "type": "HAND",
+      "icon": "icon/relic/134_1.png"
+    },
+    "51343": {
+      "name": "Heretic's Straitjacket of Reason",
+      "set": "134",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/134_2.png"
+    },
+    "51344": {
+      "name": "Heretic's Ravenous Ankle-Boots",
+      "set": "134",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/134_3.png"
+    },
+    "53015": {
+      "name": "Herta's Space Station",
+      "set": "301",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/301_0.png"
+    },
+    "53016": {
+      "name": "Herta's Wandering Trek",
+      "set": "301",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/301_1.png"
+    },
+    "53025": {
+      "name": "The Xianzhou Luofu's Celestial Ark",
+      "set": "302",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/302_0.png"
+    },
+    "53026": {
+      "name": "The Xianzhou Luofu's Ambrosial Arbor Vines",
+      "set": "302",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/302_1.png"
+    },
+    "53035": {
+      "name": "The IPC's Mega HQ",
+      "set": "303",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/303_0.png"
+    },
+    "53036": {
+      "name": "The IPC's Trade Route",
+      "set": "303",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/303_1.png"
+    },
+    "53045": {
+      "name": "Belobog's Fortress of Preservation",
+      "set": "304",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/304_0.png"
+    },
+    "53046": {
+      "name": "Belobog's Iron Defense",
+      "set": "304",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/304_1.png"
+    },
+    "53055": {
+      "name": "Planet Screwllum's Mechanical Sun",
+      "set": "305",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/305_0.png"
+    },
+    "53056": {
+      "name": "Planet Screwllum's Ring System",
+      "set": "305",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/305_1.png"
+    },
+    "53065": {
+      "name": "Salsotto's Moving City",
+      "set": "306",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/306_0.png"
+    },
+    "53066": {
+      "name": "Salsotto's Terminator Line",
+      "set": "306",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/306_1.png"
+    },
+    "53075": {
+      "name": "Talia's Nailscrap Town",
+      "set": "307",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/307_0.png"
+    },
+    "53076": {
+      "name": "Talia's Exposed Electric Wire",
+      "set": "307",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/307_1.png"
+    },
+    "53085": {
+      "name": "Vonwacq's Island of Birth",
+      "set": "308",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/308_0.png"
+    },
+    "53086": {
+      "name": "Vonwacq's Islandic Coast",
+      "set": "308",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/308_1.png"
+    },
+    "53095": {
+      "name": "Taikiyan Laser Stadium",
+      "set": "309",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/309_0.png"
+    },
+    "53096": {
+      "name": "Taikiyan's Arclight Race Track",
+      "set": "309",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/309_1.png"
+    },
+    "53105": {
+      "name": "Insumousu's Whalefall Ship",
+      "set": "310",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/310_0.png"
+    },
+    "53106": {
+      "name": "Insumousu's Frayed Hawser",
+      "set": "310",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/310_1.png"
+    },
+    "53115": {
+      "name": "Glamoth's Iron Cavalry Regiment",
+      "set": "311",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/311_0.png"
+    },
+    "53116": {
+      "name": "Glamoth's Silent Tombstone",
+      "set": "311",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/311_1.png"
+    },
+    "53125": {
+      "name": "Penacony's Grand Hotel",
+      "set": "312",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/312_0.png"
+    },
+    "53126": {
+      "name": "Penacony's Dream-Seeking Tracks",
+      "set": "312",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/312_1.png"
+    },
+    "53135": {
+      "name": "Sigonia's Gaiathra Berth",
+      "set": "313",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/313_0.png"
+    },
+    "53136": {
+      "name": "Sigonia's Knot of Cyclicality",
+      "set": "313",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/313_1.png"
+    },
+    "53145": {
+      "name": "Izumo's Magatsu no Morokami",
+      "set": "314",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/314_0.png"
+    },
+    "53146": {
+      "name": "Izumo's Blades of Origin and End",
+      "set": "314",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/314_1.png"
+    },
+    "53155": {
+      "name": "Duran's Tent of Golden Sky",
+      "set": "315",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/315_0.png"
+    },
+    "53156": {
+      "name": "Duran's Mechabeast Bridle",
+      "set": "315",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/315_1.png"
+    },
+    "53165": {
+      "name": "Forge's Lotus Lantern Wick",
+      "set": "316",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/316_0.png"
+    },
+    "53166": {
+      "name": "Forge's Heavenly Flamewheel Silk",
+      "set": "316",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/316_1.png"
+    },
+    "53175": {
+      "name": "Lushaka's Waterscape",
+      "set": "317",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/317_0.png"
+    },
+    "53176": {
+      "name": "Lushaka's Twinlanes",
+      "set": "317",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/317_1.png"
+    },
+    "53185": {
+      "name": "BananAmusement Park's BananAxis Plaza",
+      "set": "318",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/318_0.png"
+    },
+    "53186": {
+      "name": "BananAmusement Park's Memetic Cables",
+      "set": "318",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/318_1.png"
+    },
+    "53195": {
+      "name": "Aidonia's Deceased Gravestones",
+      "set": "319",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/319_0.png"
+    },
+    "53196": {
+      "name": "Aidonia's Deathward Bone Chains",
+      "set": "319",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/319_1.png"
+    },
+    "53205": {
+      "name": "Grove of Epiphany's Pondering Colossus",
+      "set": "320",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/320_0.png"
+    },
+    "53206": {
+      "name": "Grove of Epiphany's Interwoven Veins",
+      "set": "320",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/320_1.png"
+    },
+    "53215": {
+      "name": "Membrance Maze's Serene Treehouse",
+      "set": "321",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/321_0.png"
+    },
+    "53216": {
+      "name": "Membrance Maze's Wishing Whistle",
+      "set": "321",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/321_1.png"
+    },
+    "53225": {
+      "name": "Warbling Shores' Blazing Beacon",
+      "set": "322",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/322_0.png"
+    },
+    "53226": {
+      "name": "Warbling Shores' Cantillation Trail",
+      "set": "322",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/322_1.png"
+    },
+    "53235": {
+      "name": "Last West Wind of Amphoreus",
+      "set": "323",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/323_0.png"
+    },
+    "53236": {
+      "name": "Eternal Verses of Amphoreus",
+      "set": "323",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/323_1.png"
+    },
+    "53245": {
+      "name": "Livestream's Protean Vistas",
+      "set": "324",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/324_0.png"
+    },
+    "53246": {
+      "name": "Livestream's Chatter Banter",
+      "set": "324",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/324_1.png"
+    },
+    "53255": {
+      "name": "Punklorde's Rainbow City",
+      "set": "325",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/325_0.png"
+    },
+    "53256": {
+      "name": "Punklorde's Data Deluge",
+      "set": "325",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/325_1.png"
+    },
+    "53265": {
+      "name": "Astropolis Media Headquarters",
+      "set": "326",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/326_0.png"
+    },
+    "53266": {
+      "name": "Astropolis Employee Credentials",
+      "set": "326",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/326_1.png"
+    },
+    "53275": {
+      "name": "Stranded Express at the Anchorage",
+      "set": "327",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/327_0.png"
+    },
+    "53276": {
+      "name": "Silver Rails of the Anchorage",
+      "set": "327",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/327_1.png"
+    },
+    "53285": {
+      "name": "Central Synapse of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 4,
+      "type": "NECK",
+      "icon": "icon/relic/328_0.png"
+    },
+    "53286": {
+      "name": "Peripheral Conduits of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 4,
+      "type": "OBJECT",
+      "icon": "icon/relic/328_1.png"
+    },
+    "55001": {
+      "name": "Passerby's Ragged Embroidered Coat",
+      "set": "101",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/101_2.png"
+    },
+    "55002": {
+      "name": "Passerby's Stygian Hiking Boots",
+      "set": "101",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/101_3.png"
+    },
+    "55003": {
+      "name": "Musketeer's Wind-Hunting Shawl",
+      "set": "102",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/102_2.png"
+    },
+    "55004": {
+      "name": "Knight's Solemn Breastplate",
+      "set": "103",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/103_2.png"
+    },
+    "55005": {
+      "name": "Knight's Iron Boots of Order",
+      "set": "103",
+      "rarity": 4,
+      "type": "FOOT",
+      "icon": "icon/relic/103_3.png"
+    },
+    "55006": {
+      "name": "Champion's Chest Guard",
+      "set": "105",
+      "rarity": 4,
+      "type": "BODY",
+      "icon": "icon/relic/105_2.png"
+    },
+    "61011": {
+      "name": "Passerby's Rejuvenated Wooden Hairstick",
+      "set": "101",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/101_0.png"
+    },
+    "61012": {
+      "name": "Passerby's Roaming Dragon Bracer",
+      "set": "101",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/101_1.png"
+    },
+    "61013": {
+      "name": "Passerby's Ragged Embroidered Coat",
+      "set": "101",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/101_2.png"
+    },
+    "61014": {
+      "name": "Passerby's Stygian Hiking Boots",
+      "set": "101",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/101_3.png"
+    },
+    "61021": {
+      "name": "Musketeer's Wild Wheat Felt Hat",
+      "set": "102",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/102_0.png"
+    },
+    "61022": {
+      "name": "Musketeer's Coarse Leather Gloves",
+      "set": "102",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/102_1.png"
+    },
+    "61023": {
+      "name": "Musketeer's Wind-Hunting Shawl",
+      "set": "102",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/102_2.png"
+    },
+    "61024": {
+      "name": "Musketeer's Rivets Riding Boots",
+      "set": "102",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/102_3.png"
+    },
+    "61031": {
+      "name": "Knight's Forgiving Casque",
+      "set": "103",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/103_0.png"
+    },
+    "61032": {
+      "name": "Knight's Silent Oath Ring",
+      "set": "103",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/103_1.png"
+    },
+    "61033": {
+      "name": "Knight's Solemn Breastplate",
+      "set": "103",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/103_2.png"
+    },
+    "61034": {
+      "name": "Knight's Iron Boots of Order",
+      "set": "103",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/103_3.png"
+    },
+    "61041": {
+      "name": "Hunter's Artaius Hood",
+      "set": "104",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/104_0.png"
+    },
+    "61042": {
+      "name": "Hunter's Lizard Gloves",
+      "set": "104",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/104_1.png"
+    },
+    "61043": {
+      "name": "Hunter's Ice Dragon Cloak",
+      "set": "104",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/104_2.png"
+    },
+    "61044": {
+      "name": "Hunter's Soft Elkskin Boots",
+      "set": "104",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/104_3.png"
+    },
+    "61051": {
+      "name": "Champion's Headgear",
+      "set": "105",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/105_0.png"
+    },
+    "61052": {
+      "name": "Champion's Heavy Gloves",
+      "set": "105",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/105_1.png"
+    },
+    "61053": {
+      "name": "Champion's Chest Guard",
+      "set": "105",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/105_2.png"
+    },
+    "61054": {
+      "name": "Champion's Fleetfoot Boots",
+      "set": "105",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/105_3.png"
+    },
+    "61061": {
+      "name": "Guard's Cast Iron Helmet",
+      "set": "106",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/106_0.png"
+    },
+    "61062": {
+      "name": "Guard's Shining Gauntlets",
+      "set": "106",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/106_1.png"
+    },
+    "61063": {
+      "name": "Guard's Uniform of Old",
+      "set": "106",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/106_2.png"
+    },
+    "61064": {
+      "name": "Guard's Silver Greaves",
+      "set": "106",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/106_3.png"
+    },
+    "61071": {
+      "name": "Firesmith's Obsidian Goggles",
+      "set": "107",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/107_0.png"
+    },
+    "61072": {
+      "name": "Firesmith's Ring of Flame-Mastery",
+      "set": "107",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/107_1.png"
+    },
+    "61073": {
+      "name": "Firesmith's Fireproof Apron",
+      "set": "107",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/107_2.png"
+    },
+    "61074": {
+      "name": "Firesmith's Alloy Leg",
+      "set": "107",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/107_3.png"
+    },
+    "61081": {
+      "name": "Genius's Ultraremote Sensing Visor",
+      "set": "108",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/108_0.png"
+    },
+    "61082": {
+      "name": "Genius's Frequency Catcher",
+      "set": "108",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/108_1.png"
+    },
+    "61083": {
+      "name": "Genius's Metafield Suit",
+      "set": "108",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/108_2.png"
+    },
+    "61084": {
+      "name": "Genius's Gravity Walker",
+      "set": "108",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/108_3.png"
+    },
+    "61091": {
+      "name": "Band's Polarized Sunglasses",
+      "set": "109",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/109_0.png"
+    },
+    "61092": {
+      "name": "Band's Touring Bracelet",
+      "set": "109",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/109_1.png"
+    },
+    "61093": {
+      "name": "Band's Leather Jacket With Studs",
+      "set": "109",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/109_2.png"
+    },
+    "61094": {
+      "name": "Band's Ankle Boots With Rivets",
+      "set": "109",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/109_3.png"
+    },
+    "61101": {
+      "name": "Eagle's Beaked Helmet",
+      "set": "110",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/110_0.png"
+    },
+    "61102": {
+      "name": "Eagle's Soaring Ring",
+      "set": "110",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/110_1.png"
+    },
+    "61103": {
+      "name": "Eagle's Winged Suit Harness",
+      "set": "110",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/110_2.png"
+    },
+    "61104": {
+      "name": "Eagle's Quilted Puttees",
+      "set": "110",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/110_3.png"
+    },
+    "61111": {
+      "name": "Thief's Myriad-Faced Mask",
+      "set": "111",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/111_0.png"
+    },
+    "61112": {
+      "name": "Thief's Gloves With Prints",
+      "set": "111",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/111_1.png"
+    },
+    "61113": {
+      "name": "Thief's Steel Grappling Hook",
+      "set": "111",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/111_2.png"
+    },
+    "61114": {
+      "name": "Thief's Meteor Boots",
+      "set": "111",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/111_3.png"
+    },
+    "61121": {
+      "name": "Wastelander's Breathing Mask",
+      "set": "112",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/112_0.png"
+    },
+    "61122": {
+      "name": "Wastelander's Desert Terminal",
+      "set": "112",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/112_1.png"
+    },
+    "61123": {
+      "name": "Wastelander's Friar Robe",
+      "set": "112",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/112_2.png"
+    },
+    "61124": {
+      "name": "Wastelander's Powered Greaves",
+      "set": "112",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/112_3.png"
+    },
+    "61131": {
+      "name": "Disciple's Prosthetic Eye",
+      "set": "113",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/113_0.png"
+    },
+    "61132": {
+      "name": "Disciple's Ingenium Hand",
+      "set": "113",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/113_1.png"
+    },
+    "61133": {
+      "name": "Disciple's Dewy Feather Garb",
+      "set": "113",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/113_2.png"
+    },
+    "61134": {
+      "name": "Disciple's Celestial Silk Sandals",
+      "set": "113",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/113_3.png"
+    },
+    "61141": {
+      "name": "Messenger's Holovisor",
+      "set": "114",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/114_0.png"
+    },
+    "61142": {
+      "name": "Messenger's Transformative Arm",
+      "set": "114",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/114_1.png"
+    },
+    "61143": {
+      "name": "Messenger's Secret Satchel",
+      "set": "114",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/114_2.png"
+    },
+    "61144": {
+      "name": "Messenger's Par-kool Sneakers",
+      "set": "114",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/114_3.png"
+    },
+    "61151": {
+      "name": "Grand Duke's Crown of Netherflame",
+      "set": "115",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/115_0.png"
+    },
+    "61152": {
+      "name": "Grand Duke's Gloves of Fieryfur",
+      "set": "115",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/115_1.png"
+    },
+    "61153": {
+      "name": "Grand Duke's Robe of Grace",
+      "set": "115",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/115_2.png"
+    },
+    "61154": {
+      "name": "Grand Duke's Ceremonial Boots",
+      "set": "115",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/115_3.png"
+    },
+    "61161": {
+      "name": "Prisoner's Sealed Muzzle",
+      "set": "116",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/116_0.png"
+    },
+    "61162": {
+      "name": "Prisoner's Leadstone Shackles",
+      "set": "116",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/116_1.png"
+    },
+    "61163": {
+      "name": "Prisoner's Repressive Straitjacket",
+      "set": "116",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/116_2.png"
+    },
+    "61164": {
+      "name": "Prisoner's Restrictive Fetters",
+      "set": "116",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/116_3.png"
+    },
+    "61171": {
+      "name": "Pioneer's Heatproof Shell",
+      "set": "117",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/117_0.png"
+    },
+    "61172": {
+      "name": "Pioneer's Lacuna Compass",
+      "set": "117",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/117_1.png"
+    },
+    "61173": {
+      "name": "Pioneer's Sealed Lead Apron",
+      "set": "117",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/117_2.png"
+    },
+    "61174": {
+      "name": "Pioneer's Starfaring Anchor",
+      "set": "117",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/117_3.png"
+    },
+    "61181": {
+      "name": "Watchmaker's Telescoping Lens",
+      "set": "118",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/118_0.png"
+    },
+    "61182": {
+      "name": "Watchmaker's Fortuitous Wristwatch",
+      "set": "118",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/118_1.png"
+    },
+    "61183": {
+      "name": "Watchmaker's Illusory Formal Suit",
+      "set": "118",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/118_2.png"
+    },
+    "61184": {
+      "name": "Watchmaker's Dream-Concealing Dress Shoes",
+      "set": "118",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/118_3.png"
+    },
+    "61191": {
+      "name": "Iron Cavalry's Homing Helm",
+      "set": "119",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/119_0.png"
+    },
+    "61192": {
+      "name": "Iron Cavalry's Crushing Wristguard",
+      "set": "119",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/119_1.png"
+    },
+    "61193": {
+      "name": "Iron Cavalry's Silvery Armor",
+      "set": "119",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/119_2.png"
+    },
+    "61194": {
+      "name": "Iron Cavalry's Skywalk Greaves",
+      "set": "119",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/119_3.png"
+    },
+    "61201": {
+      "name": "Valorous Mask of Northern Skies",
+      "set": "120",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/120_0.png"
+    },
+    "61202": {
+      "name": "Valorous Bracelet of Grappling Hooks",
+      "set": "120",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/120_1.png"
+    },
+    "61203": {
+      "name": "Valorous Plate of Soaring Flight",
+      "set": "120",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/120_2.png"
+    },
+    "61204": {
+      "name": "Valorous Greaves of Pursuing Hunt",
+      "set": "120",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/120_3.png"
+    },
+    "61211": {
+      "name": "Sacerdos' Melodic Earrings",
+      "set": "121",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/121_0.png"
+    },
+    "61212": {
+      "name": "Sacerdos' Welcoming Gloves",
+      "set": "121",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/121_1.png"
+    },
+    "61213": {
+      "name": "Sacerdos' Ceremonial Garb",
+      "set": "121",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/121_2.png"
+    },
+    "61214": {
+      "name": "Sacerdos' Arduous Boots",
+      "set": "121",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/121_3.png"
+    },
+    "61221": {
+      "name": "Scholar's Silver-Rimmed Monocle",
+      "set": "122",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/122_0.png"
+    },
+    "61222": {
+      "name": "Scholar's Auxiliary Knuckle",
+      "set": "122",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/122_1.png"
+    },
+    "61223": {
+      "name": "Scholar's Tweed Jacket",
+      "set": "122",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/122_2.png"
+    },
+    "61224": {
+      "name": "Scholar's Felt Snowboots",
+      "set": "122",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/122_3.png"
+    },
+    "61231": {
+      "name": "Hero's Wreath of Championship",
+      "set": "123",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/123_0.png"
+    },
+    "61232": {
+      "name": "Hero's Gilded Bracers",
+      "set": "123",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/123_1.png"
+    },
+    "61233": {
+      "name": "Hero's Gallant Golden Armor",
+      "set": "123",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/123_2.png"
+    },
+    "61234": {
+      "name": "Hero's Firechasing Shinguard",
+      "set": "123",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/123_3.png"
+    },
+    "61241": {
+      "name": "Poet's Dill Wreath",
+      "set": "124",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/124_0.png"
+    },
+    "61242": {
+      "name": "Poet's Gilded Bracelet",
+      "set": "124",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/124_1.png"
+    },
+    "61243": {
+      "name": "Poet's Star-Studded Skirt",
+      "set": "124",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/124_2.png"
+    },
+    "61244": {
+      "name": "Poet's Silver-Studded Shoes",
+      "set": "124",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/124_3.png"
+    },
+    "61251": {
+      "name": "Warrior Goddess's Winged Helm",
+      "set": "125",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/125_0.png"
+    },
+    "61252": {
+      "name": "Warrior Goddess's Cavalry Gauntlets",
+      "set": "125",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/125_1.png"
+    },
+    "61253": {
+      "name": "Warrior Goddess's Dawn Cape",
+      "set": "125",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/125_2.png"
+    },
+    "61254": {
+      "name": "Warrior Goddess's Honor Spurs",
+      "set": "125",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/125_3.png"
+    },
+    "61261": {
+      "name": "Captain's Navigator Hat",
+      "set": "126",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/126_0.png"
+    },
+    "61262": {
+      "name": "Captain's Lightcatcher Astrolabe",
+      "set": "126",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/126_1.png"
+    },
+    "61263": {
+      "name": "Captain's Wind Mantle",
+      "set": "126",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/126_2.png"
+    },
+    "61264": {
+      "name": "Captain's Tidal Boots",
+      "set": "126",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/126_3.png"
+    },
+    "61271": {
+      "name": "Deliverer's Hood",
+      "set": "127",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/127_0.png"
+    },
+    "61272": {
+      "name": "Deliverer's Sword Gauntlet",
+      "set": "127",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/127_1.png"
+    },
+    "61273": {
+      "name": "Deliverer's Robe of Legacy",
+      "set": "127",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/127_2.png"
+    },
+    "61274": {
+      "name": "Deliverer's Boots of Pioneering",
+      "set": "127",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/127_3.png"
+    },
+    "61281": {
+      "name": "Recluse's Wide-Brimmed Fedora",
+      "set": "128",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/128_0.png"
+    },
+    "61282": {
+      "name": "Recluse's Refined Timepiece",
+      "set": "128",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/128_1.png"
+    },
+    "61283": {
+      "name": "Recluse's Camel-Colored Coat",
+      "set": "128",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/128_2.png"
+    },
+    "61284": {
+      "name": "Recluse's Soft Suede Boots",
+      "set": "128",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/128_3.png"
+    },
+    "61291": {
+      "name": "Magical Girl's Shining Medal",
+      "set": "129",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/129_0.png"
+    },
+    "61292": {
+      "name": "Magical Girl's Protective Gloves",
+      "set": "129",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/129_1.png"
+    },
+    "61293": {
+      "name": "Magical Girl's Everdance Battle Skirt",
+      "set": "129",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/129_2.png"
+    },
+    "61294": {
+      "name": "Magical Girl's Contract Boots",
+      "set": "129",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/129_3.png"
+    },
+    "61301": {
+      "name": "Diviner's Extrapolation Jade Abacus",
+      "set": "130",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/130_0.png"
+    },
+    "61302": {
+      "name": "Diviner's Ingenium Prosthetic Hand",
+      "set": "130",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/130_1.png"
+    },
+    "61303": {
+      "name": "Diviner's Astral Robe",
+      "set": "130",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/130_2.png"
+    },
+    "61304": {
+      "name": "Diviner's Cloud-Soaring Boots",
+      "set": "130",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/130_3.png"
+    },
+    "61311": {
+      "name": "Navigator's Deep Space Mirror",
+      "set": "131",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/131_0.png"
+    },
+    "61312": {
+      "name": "Navigator's Game Die",
+      "set": "131",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/131_1.png"
+    },
+    "61313": {
+      "name": "Navigator's Astral Chart Uniform",
+      "set": "131",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/131_2.png"
+    },
+    "61314": {
+      "name": "Navigator's Everstride Boots",
+      "set": "131",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/131_3.png"
+    },
+    "61321": {
+      "name": "Smith's Fire Beast Mask",
+      "set": "132",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/132_0.png"
+    },
+    "61322": {
+      "name": "Smith's Damascus Steel Gauntlets",
+      "set": "132",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/132_1.png"
+    },
+    "61323": {
+      "name": "Smith's Fireproof Garment",
+      "set": "132",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/132_2.png"
+    },
+    "61324": {
+      "name": "Smith's Unbridled Boots",
+      "set": "132",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/132_3.png"
+    },
+    "61331": {
+      "name": "Actor's Weeping Masque",
+      "set": "133",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/133_0.png"
+    },
+    "61332": {
+      "name": "Actor's Vibrant Handfan",
+      "set": "133",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/133_1.png"
+    },
+    "61333": {
+      "name": "Actor's Jester Garb",
+      "set": "133",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/133_2.png"
+    },
+    "61334": {
+      "name": "Actor's Crescent Dance Boots",
+      "set": "133",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/133_3.png"
+    },
+    "61341": {
+      "name": "Heretic's Cranial Apparatus",
+      "set": "134",
+      "rarity": 5,
+      "type": "HEAD",
+      "icon": "icon/relic/134_0.png"
+    },
+    "61342": {
+      "name": "Heretic's Injection Gloves",
+      "set": "134",
+      "rarity": 5,
+      "type": "HAND",
+      "icon": "icon/relic/134_1.png"
+    },
+    "61343": {
+      "name": "Heretic's Straitjacket of Reason",
+      "set": "134",
+      "rarity": 5,
+      "type": "BODY",
+      "icon": "icon/relic/134_2.png"
+    },
+    "61344": {
+      "name": "Heretic's Ravenous Ankle-Boots",
+      "set": "134",
+      "rarity": 5,
+      "type": "FOOT",
+      "icon": "icon/relic/134_3.png"
+    },
+    "63015": {
+      "name": "Herta's Space Station",
+      "set": "301",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/301_0.png"
+    },
+    "63016": {
+      "name": "Herta's Wandering Trek",
+      "set": "301",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/301_1.png"
+    },
+    "63025": {
+      "name": "The Xianzhou Luofu's Celestial Ark",
+      "set": "302",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/302_0.png"
+    },
+    "63026": {
+      "name": "The Xianzhou Luofu's Ambrosial Arbor Vines",
+      "set": "302",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/302_1.png"
+    },
+    "63035": {
+      "name": "The IPC's Mega HQ",
+      "set": "303",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/303_0.png"
+    },
+    "63036": {
+      "name": "The IPC's Trade Route",
+      "set": "303",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/303_1.png"
+    },
+    "63045": {
+      "name": "Belobog's Fortress of Preservation",
+      "set": "304",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/304_0.png"
+    },
+    "63046": {
+      "name": "Belobog's Iron Defense",
+      "set": "304",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/304_1.png"
+    },
+    "63055": {
+      "name": "Planet Screwllum's Mechanical Sun",
+      "set": "305",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/305_0.png"
+    },
+    "63056": {
+      "name": "Planet Screwllum's Ring System",
+      "set": "305",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/305_1.png"
+    },
+    "63065": {
+      "name": "Salsotto's Moving City",
+      "set": "306",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/306_0.png"
+    },
+    "63066": {
+      "name": "Salsotto's Terminator Line",
+      "set": "306",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/306_1.png"
+    },
+    "63075": {
+      "name": "Talia's Nailscrap Town",
+      "set": "307",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/307_0.png"
+    },
+    "63076": {
+      "name": "Talia's Exposed Electric Wire",
+      "set": "307",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/307_1.png"
+    },
+    "63085": {
+      "name": "Vonwacq's Island of Birth",
+      "set": "308",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/308_0.png"
+    },
+    "63086": {
+      "name": "Vonwacq's Islandic Coast",
+      "set": "308",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/308_1.png"
+    },
+    "63095": {
+      "name": "Taikiyan Laser Stadium",
+      "set": "309",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/309_0.png"
+    },
+    "63096": {
+      "name": "Taikiyan's Arclight Race Track",
+      "set": "309",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/309_1.png"
+    },
+    "63105": {
+      "name": "Insumousu's Whalefall Ship",
+      "set": "310",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/310_0.png"
+    },
+    "63106": {
+      "name": "Insumousu's Frayed Hawser",
+      "set": "310",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/310_1.png"
+    },
+    "63115": {
+      "name": "Glamoth's Iron Cavalry Regiment",
+      "set": "311",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/311_0.png"
+    },
+    "63116": {
+      "name": "Glamoth's Silent Tombstone",
+      "set": "311",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/311_1.png"
+    },
+    "63125": {
+      "name": "Penacony's Grand Hotel",
+      "set": "312",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/312_0.png"
+    },
+    "63126": {
+      "name": "Penacony's Dream-Seeking Tracks",
+      "set": "312",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/312_1.png"
+    },
+    "63135": {
+      "name": "Sigonia's Gaiathra Berth",
+      "set": "313",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/313_0.png"
+    },
+    "63136": {
+      "name": "Sigonia's Knot of Cyclicality",
+      "set": "313",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/313_1.png"
+    },
+    "63145": {
+      "name": "Izumo's Magatsu no Morokami",
+      "set": "314",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/314_0.png"
+    },
+    "63146": {
+      "name": "Izumo's Blades of Origin and End",
+      "set": "314",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/314_1.png"
+    },
+    "63155": {
+      "name": "Duran's Tent of Golden Sky",
+      "set": "315",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/315_0.png"
+    },
+    "63156": {
+      "name": "Duran's Mechabeast Bridle",
+      "set": "315",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/315_1.png"
+    },
+    "63165": {
+      "name": "Forge's Lotus Lantern Wick",
+      "set": "316",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/316_0.png"
+    },
+    "63166": {
+      "name": "Forge's Heavenly Flamewheel Silk",
+      "set": "316",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/316_1.png"
+    },
+    "63175": {
+      "name": "Lushaka's Waterscape",
+      "set": "317",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/317_0.png"
+    },
+    "63176": {
+      "name": "Lushaka's Twinlanes",
+      "set": "317",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/317_1.png"
+    },
+    "63185": {
+      "name": "BananAmusement Park's BananAxis Plaza",
+      "set": "318",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/318_0.png"
+    },
+    "63186": {
+      "name": "BananAmusement Park's Memetic Cables",
+      "set": "318",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/318_1.png"
+    },
+    "63195": {
+      "name": "Aidonia's Deceased Gravestones",
+      "set": "319",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/319_0.png"
+    },
+    "63196": {
+      "name": "Aidonia's Deathward Bone Chains",
+      "set": "319",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/319_1.png"
+    },
+    "63205": {
+      "name": "Grove of Epiphany's Pondering Colossus",
+      "set": "320",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/320_0.png"
+    },
+    "63206": {
+      "name": "Grove of Epiphany's Interwoven Veins",
+      "set": "320",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/320_1.png"
+    },
+    "63215": {
+      "name": "Membrance Maze's Serene Treehouse",
+      "set": "321",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/321_0.png"
+    },
+    "63216": {
+      "name": "Membrance Maze's Wishing Whistle",
+      "set": "321",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/321_1.png"
+    },
+    "63225": {
+      "name": "Warbling Shores' Blazing Beacon",
+      "set": "322",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/322_0.png"
+    },
+    "63226": {
+      "name": "Warbling Shores' Cantillation Trail",
+      "set": "322",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/322_1.png"
+    },
+    "63235": {
+      "name": "Last West Wind of Amphoreus",
+      "set": "323",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/323_0.png"
+    },
+    "63236": {
+      "name": "Eternal Verses of Amphoreus",
+      "set": "323",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/323_1.png"
+    },
+    "63245": {
+      "name": "Livestream's Protean Vistas",
+      "set": "324",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/324_0.png"
+    },
+    "63246": {
+      "name": "Livestream's Chatter Banter",
+      "set": "324",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/324_1.png"
+    },
+    "63255": {
+      "name": "Punklorde's Rainbow City",
+      "set": "325",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/325_0.png"
+    },
+    "63256": {
+      "name": "Punklorde's Data Deluge",
+      "set": "325",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/325_1.png"
+    },
+    "63265": {
+      "name": "Astropolis Media Headquarters",
+      "set": "326",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/326_0.png"
+    },
+    "63266": {
+      "name": "Astropolis Employee Credentials",
+      "set": "326",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/326_1.png"
+    },
+    "63275": {
+      "name": "Stranded Express at the Anchorage",
+      "set": "327",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/327_0.png"
+    },
+    "63276": {
+      "name": "Silver Rails of the Anchorage",
+      "set": "327",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/327_1.png"
+    },
+    "63285": {
+      "name": "Central Synapse of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 5,
+      "type": "NECK",
+      "icon": "icon/relic/328_0.png"
+    },
+    "63286": {
+      "name": "Peripheral Conduits of the Life Sciences Institute",
+      "set": "328",
+      "rarity": 5,
+      "type": "OBJECT",
+      "icon": "icon/relic/328_1.png"
+    }
+  },
+  "relicSets": {
+    "101": {
+      "name": "Passerby of Wandering Cloud",
+      "icon": "icon/relic/101.png"
+    },
+    "102": {
+      "name": "Musketeer of Wild Wheat",
+      "icon": "icon/relic/102.png"
+    },
+    "103": {
+      "name": "Knight of Purity Palace",
+      "icon": "icon/relic/103.png"
+    },
+    "104": {
+      "name": "Hunter of Glacial Forest",
+      "icon": "icon/relic/104.png"
+    },
+    "105": {
+      "name": "Champion of Streetwise Boxing",
+      "icon": "icon/relic/105.png"
+    },
+    "106": {
+      "name": "Guard of Wuthering Snow",
+      "icon": "icon/relic/106.png"
+    },
+    "107": {
+      "name": "Firesmith of Lava-Forging",
+      "icon": "icon/relic/107.png"
+    },
+    "108": {
+      "name": "Genius of Brilliant Stars",
+      "icon": "icon/relic/108.png"
+    },
+    "109": {
+      "name": "Band of Sizzling Thunder",
+      "icon": "icon/relic/109.png"
+    },
+    "110": {
+      "name": "Eagle of Twilight Line",
+      "icon": "icon/relic/110.png"
+    },
+    "111": {
+      "name": "Thief of Shooting Meteor",
+      "icon": "icon/relic/111.png"
+    },
+    "112": {
+      "name": "Wastelander of Banditry Desert",
+      "icon": "icon/relic/112.png"
+    },
+    "113": {
+      "name": "Longevous Disciple",
+      "icon": "icon/relic/113.png"
+    },
+    "114": {
+      "name": "Messenger Traversing Hackerspace",
+      "icon": "icon/relic/114.png"
+    },
+    "115": {
+      "name": "The Ashblazing Grand Duke",
+      "icon": "icon/relic/115.png"
+    },
+    "116": {
+      "name": "Prisoner in Deep Confinement",
+      "icon": "icon/relic/116.png"
+    },
+    "117": {
+      "name": "Pioneer Diver of Dead Waters",
+      "icon": "icon/relic/117.png"
+    },
+    "118": {
+      "name": "Watchmaker, Master of Dream Machinations",
+      "icon": "icon/relic/118.png"
+    },
+    "119": {
+      "name": "Iron Cavalry Against the Scourge",
+      "icon": "icon/relic/119.png"
+    },
+    "120": {
+      "name": "The Wind-Soaring Valorous",
+      "icon": "icon/relic/120.png"
+    },
+    "121": {
+      "name": "Sacerdos' Relived Ordeal",
+      "icon": "icon/relic/121.png"
+    },
+    "122": {
+      "name": "Scholar Lost in Erudition",
+      "icon": "icon/relic/122.png"
+    },
+    "123": {
+      "name": "Hero of Triumphant Song",
+      "icon": "icon/relic/123.png"
+    },
+    "124": {
+      "name": "Poet of Mourning Collapse",
+      "icon": "icon/relic/124.png"
+    },
+    "125": {
+      "name": "Warrior Goddess of Sun and Thunder",
+      "icon": "icon/relic/125.png"
+    },
+    "126": {
+      "name": "Wavestrider Captain",
+      "icon": "icon/relic/126.png"
+    },
+    "127": {
+      "name": "World-Remaking Deliverer",
+      "icon": "icon/relic/127.png"
+    },
+    "128": {
+      "name": "Self-Enshrouded Recluse",
+      "icon": "icon/relic/128.png"
+    },
+    "129": {
+      "name": "Ever-Glorious Magical Girl",
+      "icon": "icon/relic/129.png"
+    },
+    "130": {
+      "name": "Diviner of Distant Reach",
+      "icon": "icon/relic/130.png"
+    },
+    "131": {
+      "name": "As Navigator Isee Sees It",
+      "icon": "icon/relic/131.png"
+    },
+    "132": {
+      "name": "Divine-Querying Master Smith",
+      "icon": "icon/relic/132.png"
+    },
+    "133": {
+      "name": "Dreamlit Actor",
+      "icon": "icon/relic/133.png"
+    },
+    "134": {
+      "name": "The Edacious Heretic",
+      "icon": "icon/relic/134.png"
+    },
+    "301": {
+      "name": "Space Sealing Station",
+      "icon": "icon/relic/301.png"
+    },
+    "302": {
+      "name": "Fleet of the Ageless",
+      "icon": "icon/relic/302.png"
+    },
+    "303": {
+      "name": "Pan-Cosmic Commercial Enterprise",
+      "icon": "icon/relic/303.png"
+    },
+    "304": {
+      "name": "Belobog of the Architects",
+      "icon": "icon/relic/304.png"
+    },
+    "305": {
+      "name": "Celestial Differentiator",
+      "icon": "icon/relic/305.png"
+    },
+    "306": {
+      "name": "Inert Salsotto",
+      "icon": "icon/relic/306.png"
+    },
+    "307": {
+      "name": "Talia: Kingdom of Banditry",
+      "icon": "icon/relic/307.png"
+    },
+    "308": {
+      "name": "Sprightly Vonwacq",
+      "icon": "icon/relic/308.png"
+    },
+    "309": {
+      "name": "Rutilant Arena",
+      "icon": "icon/relic/309.png"
+    },
+    "310": {
+      "name": "Broken Keel",
+      "icon": "icon/relic/310.png"
+    },
+    "311": {
+      "name": "Firmament Frontline: Glamoth",
+      "icon": "icon/relic/311.png"
+    },
+    "312": {
+      "name": "Penacony, Land of the Dreams",
+      "icon": "icon/relic/312.png"
+    },
+    "313": {
+      "name": "Sigonia, the Unclaimed Desolation",
+      "icon": "icon/relic/313.png"
+    },
+    "314": {
+      "name": "Izumo Gensei and Takama Divine Realm",
+      "icon": "icon/relic/314.png"
+    },
+    "315": {
+      "name": "Duran, Dynasty of Running Wolves",
+      "icon": "icon/relic/315.png"
+    },
+    "316": {
+      "name": "Forge of the Kalpagni Lantern",
+      "icon": "icon/relic/316.png"
+    },
+    "317": {
+      "name": "Lushaka, the Sunken Seas",
+      "icon": "icon/relic/317.png"
+    },
+    "318": {
+      "name": "The Wondrous BananAmusement Park",
+      "icon": "icon/relic/318.png"
+    },
+    "319": {
+      "name": "Bone Collection's Serene Demesne",
+      "icon": "icon/relic/319.png"
+    },
+    "320": {
+      "name": "Giant Tree of Rapt Brooding",
+      "icon": "icon/relic/320.png"
+    },
+    "321": {
+      "name": "Arcadia of Woven Dreams",
+      "icon": "icon/relic/321.png"
+    },
+    "322": {
+      "name": "Revelry by the Sea",
+      "icon": "icon/relic/322.png"
+    },
+    "323": {
+      "name": "Amphoreus, The Eternal Land",
+      "icon": "icon/relic/323.png"
+    },
+    "324": {
+      "name": "Tengoku@Livestream",
+      "icon": "icon/relic/324.png"
+    },
+    "325": {
+      "name": "Punklorde Stage Zero",
+      "icon": "icon/relic/325.png"
+    },
+    "326": {
+      "name": "City of Converging Stars",
+      "icon": "icon/relic/326.png"
+    },
+    "327": {
+      "name": "Fallen Star Anchorage",
+      "icon": "icon/relic/327.png"
+    },
+    "328": {
+      "name": "Cosmic Life Sciences Institute",
+      "icon": "icon/relic/328.png"
+    }
+  }
+}

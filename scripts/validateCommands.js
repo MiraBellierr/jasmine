@@ -6,14 +6,24 @@ function loadCommand(filePath) {
 	return require(filePath);
 }
 
-function getInteractionJson(command) {
-	if (!command.interaction || !command.interaction.data) {
+function normalizeInteraction(entry) {
+	if (!entry || !entry.data) {
 		return null;
 	}
 
-	return typeof command.interaction.data.toJSON === "function"
-		? command.interaction.data.toJSON()
-		: command.interaction.data;
+	return {
+		data:
+			typeof entry.data.toJSON === "function"
+				? entry.data.toJSON()
+				: entry.data,
+		run: entry.run,
+	};
+}
+
+function getInteractions(command) {
+	return [command.interaction, command.contextMenu]
+		.map(normalizeInteraction)
+		.filter(Boolean);
 }
 
 function validateCommands() {
@@ -30,16 +40,23 @@ function validateCommands() {
 
 			const relativePath = join("src", "commands", dir, file);
 			const command = loadCommand(join(process.cwd(), relativePath));
-			const interactionJson = getInteractionJson(command);
+			const entries = getInteractions(command);
+			const main = normalizeInteraction(command.interaction);
 
 			if (typeof command.run !== "function") {
 				missingPrefixRun.push(relativePath);
 			}
 
-			if (!interactionJson || typeof command.interaction.run !== "function") {
+			if (
+				!main ||
+				typeof main.run !== "function" ||
+				entries.some((entry) => typeof entry.run !== "function")
+			) {
 				missingInteraction.push(relativePath);
 			} else {
-				interactions.push({ file: relativePath, data: interactionJson });
+				for (const entry of entries) {
+					interactions.push({ file: relativePath, data: entry.data });
+				}
 			}
 		}
 	}
@@ -55,12 +72,12 @@ function validateCommands() {
 
 	if (missingInteraction.length) {
 		throw new Error(
-			`Commands missing slash interactions:\n${missingInteraction.join("\n")}`,
+			`Commands missing interactions:\n${missingInteraction.join("\n")}`,
 		);
 	}
 
 	if (duplicates.length) {
-		throw new Error(`Duplicate slash command names: ${duplicates.join(", ")}`);
+		throw new Error(`Duplicate interaction names: ${duplicates.join(", ")}`);
 	}
 
 	if (interactions.length > 100) {
@@ -69,7 +86,7 @@ function validateCommands() {
 		);
 	}
 
-	console.log(`Validated ${interactions.length} slash commands.`);
+	console.log(`Validated ${interactions.length} interactions.`);
 }
 
 if (require.main === module) {

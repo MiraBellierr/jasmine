@@ -1,9 +1,11 @@
+const { supportServer } = require("../../utils/constants");
+
 module.exports = {
   name: "support",
   description: "Jasmine bot support Discord server",
   category: "utility",
   run: async (client, message) => {
-    message.reply("Our support server:\nhttps://discord.gg/NcPeGuNEdc");
+    message.reply(`Our support server:\n${supportServer.url}`);
   },
   interaction: {
     data: {
@@ -12,7 +14,7 @@ module.exports = {
       description: "Jasmine bot support Discord server",
     },
     run: async (client, interaction) => {
-      interaction.reply("Our support server:\nhttps://discord.gg/NcPeGuNEdc");
+      interaction.reply(`Our support server:\n${supportServer.url}`);
     },
   },
 };

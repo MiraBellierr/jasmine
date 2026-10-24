@@ -8,7 +8,7 @@ module.exports = async (client) => {
   client.user.setPresence({
     activities: [
       {
-        name: "with you because you are fun to play with ^-^",
+        name: "with your server",
       },
     ],
     status: Discord.PresenceUpdateStatus.Idle,
