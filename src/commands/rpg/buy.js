@@ -1,232 +1,206 @@
+const { EmbedBuilder, inlineCode } = require("discord.js");
 const schemas = require("../../database/schemas");
-const equipments = require("../../database/json/equipments.json");
-const errors = require("../../utils/errors");
 const economies = require("../../utils/economies");
-const constants = require("../../utils/constants");
-const { runPrefixCommand, slashCommand, textOption } = require("../../utils/slashCommands");
-
-const searchItems = (equipments, playerClass, playerEquipments) => {
-  return Object.fromEntries(
-    Object.entries(equipments).filter(
-      ([name, equipment]) =>
-        equipment.classes.includes(playerClass) &&
-        !playerEquipments.inventory.includes(name),
-    ),
-  );
-};
+const {
+  runPrefixCommand,
+  slashCommand,
+  textOption,
+} = require("../../utils/slashCommands");
+const {
+  describeEquipment,
+  equipmentLabel,
+  findEquipment,
+  normalizeEquipments,
+} = require("../../utils/rpg/data");
+const {
+  SUCCESS_COLOR,
+  TITLE_CASE,
+  avatarFor,
+  commandHint,
+  displayName,
+  errorEmbed,
+  formatCoins,
+} = require("../../utils/rpg/ui");
 
 module.exports = {
   name: "buy",
   aliases: ["b"],
-  description: "buy an equipments",
+  description: "Buy a piece of equipment",
   category: "rpg",
-  usage: "<equipment>",
+  usage: "<item>",
   run: async (client, message, args) => {
     const character = await schemas
       .character()
       .findOne({ where: { userID: message.author.id } });
 
     if (!character) {
-      return message.reply(
-        "You are not registered yet. Please type `" +
-          client.prefixes.get(message.guild.id) +
-          "register <class>` to register",
-      );
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not registered",
+            `You are not registered. Register with ${commandHint(
+              client,
+              message,
+              "register",
+              "<class>",
+            )} to buy equipment.`,
+          ),
+        ],
+      });
     }
 
-    const coins = await economies.getCoins(message.author);
+    const query = args.join(" ").trim();
 
-    if (args.length < 1) {
-      return errors.argsError(module.exports, client, message);
+    if (!query) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Missing item",
+            `Use ${commandHint(
+              client,
+              message,
+              "buy",
+              "<item>",
+            )} with the name of the item you want. Browse the shop with ${commandHint(
+              client,
+              message,
+              "shop",
+            )}.`,
+          ),
+        ],
+      });
+    }
+
+    const found = findEquipment(query);
+
+    if (!found) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Item not found",
+            `No equipment is named ${inlineCode(
+              query.slice(0, 80),
+            )}. Browse the shop with ${commandHint(client, message, "shop")}.`,
+          ),
+        ],
+      });
     }
 
     const playerClass = character.get("class");
-    const playerEquipments = JSON.parse(character.get("equipments"));
+    const label = equipmentLabel(found.key);
+    const className = TITLE_CASE(playerClass);
 
-    const weapons = searchItems(
-      equipments.weapons,
-      playerClass,
-      playerEquipments.weapons,
-    );
-
-    const shields = searchItems(
-      equipments.shields,
-      playerClass,
-      playerEquipments.shields,
-    );
-
-    const helmet = searchItems(
-      equipments.helmet,
-      playerClass,
-      playerEquipments.helmet,
-    );
-
-    const armor = searchItems(
-      equipments.armor,
-      playerClass,
-      playerEquipments.armor,
-    );
-
-    const gloves = searchItems(
-      equipments.gloves,
-      playerClass,
-      playerEquipments.gloves,
-    );
-
-    const prompt = args.join("").toLowerCase();
-
-    const weapon =
-      weapons[
-        Object.keys(weapons).find((name) => name.toLowerCase() === prompt)
-      ];
-    const shield =
-      shields[
-        Object.keys(shields).find((name) => name.toLowerCase() === prompt)
-      ];
-    const helmett =
-      helmet[Object.keys(helmet).find((name) => name.toLowerCase() === prompt)];
-    const armort =
-      armor[Object.keys(armor).find((name) => name.toLowerCase() === prompt)];
-    const glove =
-      gloves[Object.keys(gloves).find((name) => name.toLowerCase() === prompt)];
-
-    if (!(weapon || shield || helmett || armort || glove)) {
-      return errors.argsError(module.exports, client, message);
+    if (!found.item.classes.includes(playerClass)) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Wrong class",
+            `${label} is not available to ${className} characters.`,
+          ),
+        ],
+      });
     }
 
-    if (weapon) {
-      if (coins.get("wallet") < weapon.cost) {
-        return message.reply("You don't have enough coins to buy this");
-      }
+    const playerEquipments = normalizeEquipments(character.get("equipments"));
 
-      await schemas.coins().update(
-        {
-          wallet: coins.get("wallet") - weapon.cost,
-        },
-        { where: { userID: message.author.id } },
-      );
-
-      const name = Object.keys(weapons).find(
-        (name) => name.toLowerCase() === prompt,
-      );
-
-      playerEquipments.weapons.inventory.push(name);
-
-      message.reply(
-        `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
-          constants.coins.emoji
-        } ${weapon.cost}!`,
-      );
-    } else if (shield) {
-      if (coins.get("wallet") < shield.cost) {
-        return message.reply("You don't have enough coins to buy this");
-      }
-
-      await schemas.coins().update(
-        {
-          wallet: coins.get("wallet") - shield.cost,
-        },
-        { where: { userID: message.author.id } },
-      );
-
-      const name = Object.keys(shields).find(
-        (name) => name.toLowerCase() === prompt,
-      );
-
-      playerEquipments.shields.inventory.push(name);
-
-      message.reply(
-        `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
-          constants.coins.emoji
-        } ${shield.cost}!`,
-      );
-    } else if (helmett) {
-      if (coins.get("wallet") < helmett.cost) {
-        return message.reply("You don't have enough coins to buy this");
-      }
-
-      await schemas.coins().update(
-        {
-          wallet: coins.get("wallet") - helmett.cost,
-        },
-        { where: { userID: message.author.id } },
-      );
-
-      const name = Object.keys(helmet).find(
-        (name) => name.toLowerCase() === prompt,
-      );
-
-      playerEquipments.helmet.inventory.push(name);
-
-      message.reply(
-        `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
-          constants.coins.emoji
-        } ${helmett.cost}!`,
-      );
-    } else if (armort) {
-      if (coins.get("wallet") < armort.cost) {
-        return message.reply("You don't have enough coins to buy this");
-      }
-
-      await schemas.coins().update(
-        {
-          wallet: coins.get("wallet") - armort.cost,
-        },
-        { where: { userID: message.author.id } },
-      );
-
-      const name = Object.keys(armor).find(
-        (name) => name.toLowerCase() === prompt,
-      );
-
-      playerEquipments.armor.inventory.push(name);
-
-      message.reply(
-        `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
-          constants.coins.emoji
-        } ${armort.cost}!`,
-      );
-    } else if (glove) {
-      if (coins.get("wallet") < glove.cost) {
-        return message.reply("You don't have enough coins to buy this");
-      }
-
-      await schemas.coins().update(
-        {
-          wallet: coins.get("wallet") - glove.cost,
-        },
-        { where: { userID: message.author.id } },
-      );
-
-      const name = Object.keys(gloves).find(
-        (name) => name.toLowerCase() === prompt,
-      );
-
-      playerEquipments.gloves.inventory.push(name);
-
-      message.reply(
-        `You bought ${name.replace(/([A-Z])/g, " $1").toLowerCase()} for ${
-          constants.coins.emoji
-        } ${glove.cost}!`,
-      );
+    if (playerEquipments[found.category].inventory.includes(found.key)) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Already owned",
+            `You already own ${label}. Equip it with ${commandHint(
+              client,
+              message,
+              "equip",
+              found.key,
+            )}.`,
+          ),
+        ],
+      });
     }
 
-    await schemas.character().update(
-      {
-        equipments: JSON.stringify(playerEquipments),
-      },
-      { where: { userID: message.author.id } },
-    );
+    const coins = await economies.getCoins(message.author);
+    const wallet = coins.get("wallet");
+
+    if (wallet < found.item.cost) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not enough coins",
+            `${label} costs ${formatCoins(
+              found.item.cost,
+            )}. You need ${formatCoins(found.item.cost - wallet)} more.`,
+          ),
+        ],
+      });
+    }
+
+    const balance = wallet - found.item.cost;
+
+    await schemas
+      .coins()
+      .update({ wallet: balance }, { where: { userID: message.author.id } });
+
+    playerEquipments[found.category].inventory.push(found.key);
+
+    await schemas
+      .character()
+      .update(
+        { equipments: JSON.stringify(playerEquipments) },
+        { where: { userID: message.author.id } },
+      );
+
+    return message.reply({
+      embeds: [
+        new EmbedBuilder()
+          .setAuthor({
+            name: displayName(message.author),
+            iconURL: avatarFor(message.author),
+          })
+          .setColor(SUCCESS_COLOR)
+          .setTitle("Purchase complete")
+          .setDescription(
+            `You bought ${label} for ${formatCoins(found.item.cost)}.`,
+          )
+          .addFields(
+            {
+              name: "Balance",
+              value: formatCoins(balance),
+              inline: true,
+            },
+            {
+              name: "Stats",
+              value: describeEquipment(found.item),
+            },
+          )
+          .setFooter({
+            text: `Equip it with ${commandHint(
+              client,
+              message,
+              "equip",
+              found.key,
+            )}.`,
+            iconURL: client.user.displayAvatarURL(),
+          })
+          .setTimestamp(),
+      ],
+    });
   },
   interaction: {
-    data: slashCommand("buy", "buy an equipments", (builder) =>
+    data: slashCommand("buy", "Buy a piece of equipment", (builder) =>
       builder.addStringOption((option) =>
-        textOption(option, "equipment", "Equipment to buy"),
+        textOption(option, "item", "Item to buy"),
       ),
     ),
     run: async (client, interaction) =>
       runPrefixCommand(client, interaction, module.exports, [
-        interaction.options.getString("equipment", true),
+        interaction.options.getString("item", true),
       ]),
   },
 };

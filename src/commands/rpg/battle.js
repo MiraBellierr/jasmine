@@ -1,54 +1,84 @@
 const Battle = require("../../utils/rpg");
 const { getMemberFromArguments } = require("../../utils/getters");
+const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
+const { errorEmbed } = require("../../utils/rpg/ui");
 
 module.exports = {
   name: "battle",
   aliases: ["bt"],
-  description: "Battle with another user",
+  description: "Battle a member or a random character",
   category: "rpg",
-  usage: "[member]",
+  usage: "[opponent]",
   run: async (client, message, args) => {
-    if (!args.length) {
-      new Battle(client, message, message.author).startRandom();
-    } else {
-      const target = await getMemberFromArguments(message, args.join(" "));
+    const argument = args.join(" ").trim();
 
-      if (!target) {
-        return message.reply("I didn't found the user with this name");
-      }
-
-      const opponent = target.user;
-
-      if (opponent.id === message.author.id) {
-        return message.reply("You can't battle yourself");
-      }
-
-      new Battle(client, message, message.author).startOpponent(opponent);
+    if (!argument) {
+      return new Battle(client, message, message.author).startRandom();
     }
+
+    if (!message.guild) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Server only",
+            "Battles against members only work in a server.",
+          ),
+        ],
+      });
+    }
+
+    const member = await getMemberFromArguments(message, argument);
+
+    if (!member) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Member not found",
+            "No member in this server matches that name. Mention them or use their ID.",
+          ),
+        ],
+      });
+    }
+
+    if (member.id === message.author.id) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Invalid opponent",
+            "You cannot battle yourself. Choose another member.",
+          ),
+        ],
+      });
+    }
+
+    return new Battle(client, message, message.author).startOpponent(
+      member.user,
+    );
   },
   interaction: {
-    data: {
-      name: "battle",
-      type: 1,
-      description: "Battle with another user",
-      options: [
-        {
-          name: "opponent",
-          description: "Battle with your friend",
-          type: 6,
-        },
-      ],
-    },
-    run: (client, interaction) => {
+    data: slashCommand(
+      "battle",
+      "Battle a member or a random character",
+      (builder) =>
+        builder.addUserOption((option) =>
+          option
+            .setName("opponent")
+            .setDescription("Member to battle")
+            .setRequired(false),
+        ),
+    ),
+    run: async (client, interaction) => {
       const opponent = interaction.options.getUser("opponent");
 
-      if (!opponent) {
-        new Battle(client, interaction, interaction.user).startRandom();
-      } else {
-        new Battle(client, interaction, interaction.user).startOpponent(
-          opponent,
-        );
-      }
+      return runPrefixCommand(
+        client,
+        interaction,
+        module.exports,
+        opponent ? [opponent.id] : [],
+      );
     },
   },
 };

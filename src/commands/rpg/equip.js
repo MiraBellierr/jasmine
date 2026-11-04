@@ -1,227 +1,231 @@
+const { EmbedBuilder, inlineCode } = require("discord.js");
 const schemas = require("../../database/schemas");
-const Discord = require("discord.js");
-const constants = require("../../utils/constants");
-const { camelCaseToNormal } = require("../../utils/utils");
-const characters = require("../../database/json/characters.json");
+const {
+  runPrefixCommand,
+  slashCommand,
+  textOption,
+} = require("../../utils/slashCommands");
+const {
+  CATEGORIES,
+  characterImage,
+  describeEquipment,
+  equipmentLabel,
+  findEquipment,
+  normalizeEquipments,
+} = require("../../utils/rpg/data");
+const {
+  BRAND_COLOR,
+  SUCCESS_COLOR,
+  avatarFor,
+  commandHint,
+  displayName,
+  errorEmbed,
+  formatStats,
+} = require("../../utils/rpg/ui");
+
+const equippedOverview = (client, message, character, equipments) => {
+  const lines = [];
+  const totals = {};
+
+  for (const category of CATEGORIES) {
+    const equipped = equipments[category.key].equipped;
+    const found = equipped ? findEquipment(equipped) : null;
+
+    lines.push(
+      `${category.emoji} **${category.fieldLabel}** ${
+        found ? equipmentLabel(found.key) : "None"
+      }`,
+    );
+
+    if (found) {
+      for (const [key, value] of Object.entries(found.item.attr)) {
+        totals[key] = (totals[key] || 0) + Number(value);
+      }
+    }
+  }
+
+  const embed = new EmbedBuilder()
+    .setAuthor({
+      name: displayName(message.author),
+      iconURL: avatarFor(message.author),
+    })
+    .setColor(BRAND_COLOR)
+    .setTitle("Equipped items")
+    .addFields(
+      { name: "Slots", value: lines.join("\n"), inline: true },
+      {
+        name: "Bonuses",
+        value: Object.keys(totals).length ? formatStats(totals) : "No bonuses.",
+        inline: true,
+      },
+    )
+    .setFooter({
+      text: `Equip an item with ${commandHint(
+        client,
+        message,
+        "equip",
+        "<item>",
+      )}.`,
+      iconURL: client.user.displayAvatarURL(),
+    })
+    .setTimestamp();
+
+  const portrait = characterImage(character.toJSON());
+
+  if (portrait) {
+    embed.setThumbnail(portrait);
+  }
+
+  return embed;
+};
 
 module.exports = {
   name: "equip",
-  description: "Equip an equipment",
+  description: "Equip an item you own",
   category: "rpg",
-  usage: "<equipment>",
+  usage: "[item]",
   run: async (client, message, args) => {
     const character = await schemas
       .character()
       .findOne({ where: { userID: message.author.id } });
 
     if (!character) {
-      return message.channel.send(
-        `You haven't registered yet! Use \`${client.prefixes.get(message.guild.id)}register\` to register.`,
-      );
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not registered",
+            `You are not registered. Register with ${commandHint(
+              client,
+              message,
+              "register",
+              "<class>",
+            )} to use equipment.`,
+          ),
+        ],
+      });
     }
 
-    const playerEquipments = JSON.parse(character.get("equipments"));
+    const playerEquipments = normalizeEquipments(character.get("equipments"));
+    const query = args.join(" ").trim();
 
-    if (!args.length) {
-      const embed = new Discord.EmbedBuilder()
-        .setAuthor({
-          name: message.author.username,
-          iconURL: message.author.displayAvatarURL(),
-        })
-        .setThumbnail(characters[character.get("img")].image)
-        .setColor("#0099ff")
-        .setTitle("Equipped Equipments")
-        .setDescription(
-          `**• ${constants.assets.weapon.emoji} Weapon:** ${
-            playerEquipments.weapons.equipped
-              ? camelCaseToNormal(playerEquipments.weapons.equipped)
-              : "None"
-          }\n**• ${constants.assets.shield.emoji} Shield:** ${
-            playerEquipments.shields.equipped
-              ? camelCaseToNormal(playerEquipments.shields.equipped)
-              : "None"
-          }\n**• ${constants.assets.helmet.emoji} Helmet:** ${
-            playerEquipments.helmet.equipped
-              ? camelCaseToNormal(playerEquipments.helmet.equipped)
-              : "None"
-          }\n**• ${constants.assets.armor.emoji} Armor:** ${
-            playerEquipments.armor.equipped
-              ? camelCaseToNormal(playerEquipments.armor.equipped)
-              : "None"
-          }\n**• ${constants.assets.gloves.emoji} Gloves:** ${
-            playerEquipments.gloves.equipped
-              ? camelCaseToNormal(playerEquipments.gloves.equipped)
-              : "None"
-          }`,
-        );
-
-      return message.reply({ embeds: [embed] });
+    if (!query) {
+      return message.reply({
+        embeds: [
+          equippedOverview(client, message, character, playerEquipments),
+        ],
+      });
     }
 
-    const prompt = args.join("").toLowerCase();
+    const found = findEquipment(query);
 
-    const weapon = playerEquipments.weapons.inventory.find(
-      (a) => a.toLowerCase() === prompt,
-    );
-    const shield = playerEquipments.shields.inventory.find(
-      (a) => a.toLowerCase() === prompt,
-    );
-    const helmet = playerEquipments.helmet.inventory.find(
-      (a) => a.toLowerCase() === prompt,
-    );
-    const armor = playerEquipments.armor.inventory.find(
-      (a) => a.toLowerCase() === prompt,
-    );
-    const gloves = playerEquipments.gloves.inventory.find(
-      (a) => a.toLowerCase() === prompt,
-    );
-
-    if (weapon) {
-      playerEquipments.weapons.equipped = weapon;
-
-      message.channel.send(
-        `You equipped **${weapon
-          .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your weapon.`,
-      );
-    } else if (shield) {
-      playerEquipments.shields.equipped = shield;
-
-      message.channel.send(
-        `You equipped **${shield
-          .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your shield.`,
-      );
-    } else if (helmet) {
-      playerEquipments.helmet.equipped = helmet;
-
-      message.channel.send(
-        `You equipped **${helmet
-          .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your helmet.`,
-      );
-    } else if (armor) {
-      playerEquipments.armor.equipped = armor;
-
-      message.channel.send(
-        `You equipped **${armor
-          .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your armor.`,
-      );
-    } else if (gloves) {
-      playerEquipments.gloves.equipped = gloves;
-
-      message.channel.send(
-        `You equipped **${gloves
-          .replace(/([A-Z])/g, " $1")
-          .toLowerCase()}** as your gloves.`,
-      );
-    } else {
-      return message.channel.send(`You don't have this equipment`);
+    if (!found) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Item not found",
+            `No equipment is named ${inlineCode(
+              query.slice(0, 80),
+            )}. Check your inventory with ${commandHint(
+              client,
+              message,
+              "inventory",
+            )}.`,
+          ),
+        ],
+      });
     }
 
-    await schemas.character().update(
-      {
-        equipments: JSON.stringify(playerEquipments),
-      },
-      { where: { userID: message.author.id } },
-    );
+    if (!playerEquipments[found.category].inventory.includes(found.key)) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not owned",
+            `You do not own ${equipmentLabel(
+              found.key,
+            )}. Buy it with ${commandHint(client, message, "buy", found.key)}.`,
+          ),
+        ],
+      });
+    }
+
+    const label = equipmentLabel(found.key);
+    const previous = playerEquipments[found.category].equipped;
+
+    if (previous === found.key) {
+      return message.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setAuthor({
+              name: displayName(message.author),
+              iconURL: avatarFor(message.author),
+            })
+            .setColor(BRAND_COLOR)
+            .setTitle("Already equipped")
+            .setDescription(
+              `${label} is already equipped in your ${found.categoryInfo.singular} slot.`,
+            )
+            .addFields({ name: "Stats", value: describeEquipment(found.item) })
+            .setTimestamp(),
+        ],
+      });
+    }
+
+    playerEquipments[found.category].equipped = found.key;
+
+    await schemas
+      .character()
+      .update(
+        { equipments: JSON.stringify(playerEquipments) },
+        { where: { userID: message.author.id } },
+      );
+
+    const replaced =
+      previous && previous !== found.key
+        ? ` It replaced ${equipmentLabel(previous)}.`
+        : "";
+
+    return message.reply({
+      embeds: [
+        new EmbedBuilder()
+          .setAuthor({
+            name: displayName(message.author),
+            iconURL: avatarFor(message.author),
+          })
+          .setColor(SUCCESS_COLOR)
+          .setTitle("Item equipped")
+          .setDescription(
+            `You equipped ${label} in your ${found.categoryInfo.singular} slot.${replaced}`,
+          )
+          .addFields({ name: "Stats", value: describeEquipment(found.item) })
+          .setFooter({
+            text: `View your loadout with ${commandHint(
+              client,
+              message,
+              "equip",
+            )}.`,
+            iconURL: client.user.displayAvatarURL(),
+          })
+          .setTimestamp(),
+      ],
+    });
   },
   interaction: {
-    data: {
-      name: "equip",
-      description: "Equip an equipment",
-      type: 1,
-      options: [
-        {
-          name: "equipment",
-          description: "The equipment to equip",
-          type: 3,
-          required: true,
-        },
-      ],
-    },
+    data: slashCommand("equip", "Equip an item you own", (builder) =>
+      builder.addStringOption((option) =>
+        textOption(option, "item", "Item to equip", false),
+      ),
+    ),
     run: async (client, interaction) => {
-      const character = await schemas
-        .character()
-        .findOne({ where: { userID: interaction.user.id } });
+      const item = interaction.options.getString("item");
 
-      if (!character) {
-        return interaction.reply("You haven't registered yet!");
-      }
-
-      const playerEquipments = JSON.parse(character.get("equipments"));
-
-      const prompt = interaction.options
-        .getString("equipment")
-        .replace(/ /g, "")
-        .toLowerCase();
-
-      const weapon = playerEquipments.weapons.inventory.find(
-        (a) => a.toLowerCase() === prompt,
-      );
-      const shield = playerEquipments.shields.inventory.find(
-        (a) => a.toLowerCase() === prompt,
-      );
-      const helmet = playerEquipments.helmet.inventory.find(
-        (a) => a.toLowerCase() === prompt,
-      );
-      const armor = playerEquipments.armor.inventory.find(
-        (a) => a.toLowerCase() === prompt,
-      );
-      const gloves = playerEquipments.gloves.inventory.find(
-        (a) => a.toLowerCase() === prompt,
-      );
-
-      if (weapon) {
-        playerEquipments.weapons.equipped = weapon;
-
-        interaction.reply(
-          `You equipped **${weapon
-            .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your weapon.`,
-        );
-      } else if (shield) {
-        playerEquipments.shields.equipped = shield;
-
-        interaction.reply(
-          `You equipped **${shield
-            .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your shield.`,
-        );
-      } else if (helmet) {
-        playerEquipments.helmet.equipped = helmet;
-
-        interaction.reply(
-          `You equipped **${helmet
-            .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your helmet.`,
-        );
-      } else if (armor) {
-        playerEquipments.armor.equipped = armor;
-
-        interaction.reply(
-          `You equipped **${armor
-            .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your armor.`,
-        );
-      } else if (gloves) {
-        playerEquipments.gloves.equipped = gloves;
-
-        interaction.reply(
-          `You equipped **${gloves
-            .replace(/([A-Z])/g, " $1")
-            .toLowerCase()}** as your gloves.`,
-        );
-      } else {
-        return interaction.reply(`You don't have this equipment`);
-      }
-
-      await schemas.character().update(
-        {
-          equipments: JSON.stringify(playerEquipments),
-        },
-        { where: { userID: interaction.user.id } },
+      return runPrefixCommand(
+        client,
+        interaction,
+        module.exports,
+        item ? [item] : [],
       );
     },
   },

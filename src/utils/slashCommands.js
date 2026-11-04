@@ -70,6 +70,7 @@ function createInteractionMessage(client, interaction, options = {}) {
     user: interaction.user,
     member: interaction.member,
     createdTimestamp: interaction.createdTimestamp,
+    isInteraction: true,
     reference: null,
     mentions: {
       size: 0,
@@ -88,7 +89,13 @@ function createInteractionMessage(client, interaction, options = {}) {
   };
 }
 
-function runPrefixCommand(client, interaction, command, args = [], options = {}) {
+function runPrefixCommand(
+  client,
+  interaction,
+  command,
+  args = [],
+  options = {},
+) {
   const message = createInteractionMessage(client, interaction, options);
 
   return command.run(client, message, args);
@@ -121,7 +128,8 @@ function applyDefaultPermission(builder, permission) {
 }
 
 function roleplayInteraction(name, description, options = {}) {
-  const hasTarget = options.target === "required" || options.target === "optional";
+  const hasTarget =
+    options.target === "required" || options.target === "optional";
 
   return {
     data: slashCommand(name, description, (builder) => {
@@ -129,12 +137,16 @@ function roleplayInteraction(name, description, options = {}) {
         builder.addUserOption((option) =>
           option
             .setName("user")
-            .setDescription("User to target")
+            .setDescription("Member to target")
             .setRequired(options.target === "required"),
         );
       }
     }),
     run: async (client, interaction) => {
+      if (!interaction.deferred && !interaction.replied) {
+        await interaction.deferReply().catch(() => null);
+      }
+
       const user = hasTarget ? interaction.options.getUser("user") : null;
       const args = user ? [user.id] : [];
 

@@ -26,7 +26,7 @@ module.exports = async (client, ban) => {
   let logChannel;
 
   if (logging.memberLogChannel) {
-    logChannel = await ban.guild.channels.fetch(logging.serverLogChannel);
+    logChannel = await ban.guild.channels.fetch(logging.memberLogChannel);
   } else {
     logChannel = await ban.guild.channels.fetch(logging.defaultLogChannel);
   }

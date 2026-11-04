@@ -41,12 +41,12 @@ const CATEGORY_META = {
   roleplay: {
     emoji: "🎭",
     color: "#A78BFA",
-    blurb: "Hug, kiss, slap and interact with other members.",
+    blurb: "Send a reaction GIF to a member, or react on your own.",
   },
   rpg: {
     emoji: "⚔️",
     color: "#34D399",
-    blurb: "Register, battle and manage your inventory.",
+    blurb: "Create a character, hunt, battle and manage equipment.",
   },
   utility: {
     emoji: "🧰",

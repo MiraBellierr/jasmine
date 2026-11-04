@@ -120,18 +120,26 @@ async function request(query, variables) {
 }
 
 const cleanDescription = (value) => {
-  const text = String(value || "")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/?[^>]+>/g, "")
+  let text = String(value || "").replace(/<br\s*\/?>/gi, "\n");
+
+  // Repeatedly remove complete HTML tags so constructed tag fragments cannot
+  // reappear after a single replacement pass.
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(/<\/?[^>]+>/g, "");
+  } while (text !== previous);
+
+  text = text
     .replace(/~!|!~/g, "")
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
     .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#0?39;/g, "'")
     .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
 

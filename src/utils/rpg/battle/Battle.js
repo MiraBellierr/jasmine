@@ -1,35 +1,54 @@
+const {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  escapeMarkdown,
+} = require("discord.js");
+const { setTimeout: delay } = require("timers/promises");
 const schemas = require("../../../database/schemas");
-const Discord = require("discord.js");
-const constants = require("../../constants");
-const set = new Set();
-const { setTimeout } = require("timers/promises");
 const equipments = require("../../../database/json/equipments.json");
-const economies = require("../../../utils/economies");
 const characters = require("../../../database/json/characters.json");
+const economies = require("../../economies");
+const { normalizeEquipments } = require("../data");
+const {
+  BATTLE_COLOR,
+  ERROR_COLOR,
+  GOLD_COLOR,
+  SUCCESS_COLOR,
+  commandHint,
+  displayName,
+  errorEmbed,
+  formatCoins,
+  formatStats,
+  progressBar,
+} = require("../ui");
+
+const activeBattles = new Set();
+const CHALLENGE_TIME = 180_000;
+
+const truncate = (text, max) =>
+  text.length > max ? `${text.slice(0, max - 3)}...` : text;
 
 class Battle {
   constructor(client, message, user) {
     this.client = client;
     this.user = user;
     this.message = message;
-    this.actions = ["battle started"];
+    this.actions = [];
     this.playerPassives = [];
     this.opponentPassives = [];
-    this.opponentUser;
+    this.opponentUser = null;
+    this.opponentUserId = null;
+    this.round = 0;
   }
 
   async getCharacter() {
     const character = await schemas.character().findOne({
-      where: {
-        userID: this.user.id,
-      },
+      where: { userID: this.user.id },
     });
 
-    if (!character) {
-      return null;
-    }
-
-    return character.toJSON();
+    return character ? character.toJSON() : null;
   }
 
   async getOpponentCharacter(user) {
@@ -37,310 +56,408 @@ class Battle {
       .character()
       .findOne({ where: { userID: user.id } });
 
-    if (!character) return null;
+    if (!character) {
+      return null;
+    }
 
-    this.opponentUser = await this.client.users.fetch(character.get("userID"));
+    this.opponentUserId = user.id;
+    this.opponentUser = await this.client.users
+      .fetch(user.id)
+      .catch(() => null);
 
     return character.toJSON();
   }
 
   async getRandomOpponent() {
-    const allCharacter = await schemas.character().findAll();
-    let randomCharacter =
-      allCharacter[Math.floor(Math.random() * allCharacter.length)];
-
-    if (allCharacter.length > 1) {
-      while (randomCharacter.get("userID") === this.user.id) {
-        randomCharacter =
-          allCharacter[Math.floor(Math.random() * allCharacter.length)];
-      }
-    } else {
-      randomCharacter = allCharacter[0];
-    }
-
-    this.opponentUser = await this.client.users.fetch(
-      randomCharacter.get("userID"),
+    const allCharacters = await schemas.character().findAll();
+    const available = allCharacters.filter(
+      (character) =>
+        character.get("userID") !== this.user.id &&
+        !activeBattles.has(character.get("userID")),
     );
 
-    return randomCharacter.toJSON();
+    if (!available.length) {
+      return null;
+    }
+
+    const character = available[Math.floor(Math.random() * available.length)];
+
+    this.opponentUserId = character.get("userID");
+    this.opponentUser = await this.client.users
+      .fetch(character.get("userID"))
+      .catch(() => null);
+
+    return character.toJSON();
+  }
+
+  sendError(title, description) {
+    return this.message.reply({
+      embeds: [errorEmbed(this.client, title, description)],
+    });
+  }
+
+  release() {
+    activeBattles.delete(this.user.id);
+
+    if (this.opponentUserId) {
+      activeBattles.delete(this.opponentUserId);
+    }
+  }
+
+  challengeRow(disabled = false) {
+    return new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("battle:accept")
+        .setLabel("Accept")
+        .setStyle(ButtonStyle.Primary)
+        .setDisabled(disabled),
+      new ButtonBuilder()
+        .setCustomId("battle:decline")
+        .setLabel("Decline")
+        .setStyle(ButtonStyle.Secondary)
+        .setDisabled(disabled),
+    );
   }
 
   async confirmBattle(opponent) {
-    const embed = new Discord.EmbedBuilder().setDescription(
-      `Hello ${opponent}, ${this.user} wants to challenge you! Do you accept?`,
-    );
-
-    const rejectedEmbed = new Discord.EmbedBuilder().setDescription(
-      `${this.user}, ${opponent} rejected your challenge!`,
-    );
-
-    const acceptedEmbed = new Discord.EmbedBuilder().setDescription(
-      `${this.user}, ${opponent} accepted your challenge!`,
-    );
-
-    const acceptButton = new Discord.ButtonBuilder()
-      .setCustomId("accept")
-      .setEmoji("✅")
-      .setLabel("Accept")
-      .setStyle(Discord.ButtonStyle.Primary);
-
-    const denyButton = new Discord.ButtonBuilder()
-      .setCustomId("deny")
-      .setEmoji("❎")
-      .setLabel("Deny")
-      .setStyle(Discord.ButtonStyle.Secondary);
-
-    const actionRow = new Discord.ActionRowBuilder().addComponents(
-      acceptButton,
-      denyButton,
-    );
+    const challengerName = displayName(this.user);
+    const opponentName = displayName(opponent);
+    const embed = new EmbedBuilder()
+      .setAuthor({
+        name: "Battle",
+        iconURL: this.client.user.displayAvatarURL(),
+      })
+      .setColor(BATTLE_COLOR)
+      .setTitle("Battle challenge")
+      .setDescription(
+        `${challengerName} wants to battle ${opponentName}. Accept to start. The challenge expires in 3 minutes.`,
+      )
+      .setTimestamp();
 
     const response = await this.message.channel.send({
       content: `${opponent}`,
       embeds: [embed],
-      components: [actionRow],
+      components: [this.challengeRow()],
     });
-
-    const collectorFilter = (i) => i.user.id === opponent.id;
 
     try {
       const confirmation = await response.awaitMessageComponent({
-        filter: collectorFilter,
-        time: 60_000,
+        filter: (interaction) => interaction.user.id === opponent.id,
+        time: CHALLENGE_TIME,
+      });
+      const accepted = confirmation.customId === "battle:accept";
+      const result = new EmbedBuilder()
+        .setAuthor({
+          name: "Battle",
+          iconURL: this.client.user.displayAvatarURL(),
+        })
+        .setColor(accepted ? SUCCESS_COLOR : ERROR_COLOR)
+        .setTitle(accepted ? "Challenge accepted" : "Challenge declined")
+        .setDescription(
+          accepted
+            ? `${opponentName} accepted ${challengerName}'s challenge.`
+            : `${opponentName} declined ${challengerName}'s challenge.`,
+        )
+        .setTimestamp();
+
+      await confirmation.update({
+        content: " ",
+        embeds: [result],
+        components: [this.challengeRow(true)],
       });
 
-      const actionRowDisabled = new Discord.ActionRowBuilder().addComponents(
-        acceptButton.setDisabled(true),
-        denyButton.setDisabled(true),
-      );
+      return accepted;
+    } catch {
+      await response
+        .edit({
+          content: `${opponent}`,
+          embeds: [
+            new EmbedBuilder()
+              .setAuthor({
+                name: "Battle",
+                iconURL: this.client.user.displayAvatarURL(),
+              })
+              .setColor(GOLD_COLOR)
+              .setTitle("Challenge expired")
+              .setDescription(`${opponentName} did not answer in time.`)
+              .setTimestamp(),
+          ],
+          components: [this.challengeRow(true)],
+        })
+        .catch(() => null);
 
-      if (confirmation.customId === "accept") {
-        confirmation.update({
-          content: " ",
-          embeds: [acceptedEmbed],
-          components: [actionRowDisabled],
-        });
-
-        return true;
-      } else {
-        confirmation.update({
-          content: " ",
-          embeds: [rejectedEmbed],
-          components: [actionRowDisabled],
-        });
-        return false;
-      }
-    } catch (e) {
-      const actionRowDisabled = new Discord.ActionRowBuilder().addComponents(
-        acceptButton.setDisabled(true),
-        denyButton.setDisabled(true),
-      );
-
-      response.edit({
-        content: `${opponent}`,
-        embeds: [rejectedEmbed],
-        components: [actionRowDisabled],
-      });
+      return false;
     }
+  }
+
+  async prepareBattle() {
+    this.character.maxHp = this.character.hp;
+    this.opponent.maxHp = this.opponent.hp;
+    this.character.crit = 0;
+    this.opponent.crit = 0;
+    this.character.weight = 0;
+    this.opponent.weight = 0;
+
+    await this.registerEquipments();
+
+    if (this.character.agl === this.opponent.agl) {
+      this.character.agl += Math.random();
+      this.opponent.agl += Math.random();
+    }
+
+    this.actions = [
+      `${escapeMarkdown(this.character.name)} faced ${escapeMarkdown(
+        this.opponent.name,
+      )}.`,
+    ];
+    this.battleMessage = await this.message.channel.send({
+      embeds: [this.battleEmbed()],
+    });
+
+    await delay(2000);
   }
 
   async startOpponent(opponent) {
     this.character = await this.getCharacter();
 
     if (!this.character) {
-      return this.message.channel.send("You haven't registered yet!");
+      return this.sendError(
+        "Not registered",
+        `You are not registered. Register with ${commandHint(
+          this.client,
+          this.message,
+          "register",
+          "<class>",
+        )} to battle.`,
+      );
     }
 
-    if (set.has(this.user.id)) {
-      return this.message.reply("You are already in a battle!");
+    if (activeBattles.has(this.user.id)) {
+      return this.sendError(
+        "Already in a battle",
+        "Finish your current battle before starting another.",
+      );
+    }
+
+    if (opponent.id === this.user.id) {
+      return this.sendError(
+        "Invalid opponent",
+        "You cannot battle yourself. Choose another member.",
+      );
+    }
+
+    if (activeBattles.has(opponent.id)) {
+      return this.sendError(
+        "Opponent is busy",
+        `${displayName(opponent)} is already in a battle.`,
+      );
     }
 
     this.opponent = await this.getOpponentCharacter(opponent);
 
     if (!this.opponent) {
-      return this.message.channel.send(
-        "The opponent doesn't have a character yet!",
+      return this.sendError(
+        "Opponent not registered",
+        `${displayName(opponent)} does not have a character yet.`,
       );
     }
 
-    const confirm = await this.confirmBattle(opponent);
+    const accepted = await this.confirmBattle(opponent);
 
-    if (!confirm) return;
-
-    set.add(this.user.id);
-
-    this.character.maxHp = this.character.hp;
-    this.opponent.maxHp = this.opponent.hp;
-
-    this.character.crit = 0;
-    this.opponent.crit = 0;
-
-    this.opponent.weight = 0;
-    this.character.weight = 0;
-
-    await this.registerEquipments();
-
-    if (this.character.agl === this.opponent.agl) {
-      this.character.agl += Math.random();
-      this.opponent.agl += Math.random();
+    if (!accepted) {
+      return;
     }
 
-    this.battleMessage = await this.message.channel.send({
-      embeds: [this.battleEmbed()],
-    });
+    if (activeBattles.has(this.user.id) || activeBattles.has(opponent.id)) {
+      return this.sendError(
+        "Battle unavailable",
+        "One of the players is already in a battle. Try again when it ends.",
+      );
+    }
 
-    setTimeout(2000);
+    activeBattles.add(this.user.id);
+    activeBattles.add(opponent.id);
 
-    this.battle(true);
+    try {
+      await this.prepareBattle();
+      await this.runBattle(true);
+    } catch (error) {
+      this.release();
+      throw error;
+    }
   }
 
   async startRandom() {
     this.character = await this.getCharacter();
 
     if (!this.character) {
-      return this.message.channel.send("You haven't registered yet!");
+      return this.sendError(
+        "Not registered",
+        `You are not registered. Register with ${commandHint(
+          this.client,
+          this.message,
+          "register",
+          "<class>",
+        )} to battle.`,
+      );
     }
 
-    if (set.has(this.user.id)) {
-      return this.message.reply("You are already in a battle!");
+    if (activeBattles.has(this.user.id)) {
+      return this.sendError(
+        "Already in a battle",
+        "Finish your current battle before starting another.",
+      );
     }
-
-    set.add(this.user.id);
 
     this.opponent = await this.getRandomOpponent();
 
-    this.character.maxHp = this.character.hp;
-    this.opponent.maxHp = this.opponent.hp;
-
-    this.character.crit = 0;
-    this.opponent.crit = 0;
-
-    this.opponent.weight = 0;
-    this.character.weight = 0;
-
-    await this.registerEquipments();
-
-    if (this.character.agl === this.opponent.agl) {
-      this.character.agl += Math.random();
-      this.opponent.agl += Math.random();
+    if (!this.opponent) {
+      return this.sendError(
+        "No opponents",
+        `No other registered characters are available. Challenge a member with ${commandHint(
+          this.client,
+          this.message,
+          "battle",
+          "<member>",
+        )}.`,
+      );
     }
 
-    this.battleMessage = await this.message.channel.send({
-      embeds: [this.battleEmbed()],
-    });
+    activeBattles.add(this.user.id);
 
-    setTimeout(2000);
+    if (this.opponentUserId) {
+      activeBattles.add(this.opponentUserId);
+    }
 
-    this.battle(false);
+    try {
+      await this.prepareBattle();
+      await this.runBattle(false);
+    } catch (error) {
+      this.release();
+      throw error;
+    }
   }
 
-  async battle(custom) {
-    // DMG = ATT * ATT / (ATT + DEF)
+  async runBattle(memberBattle) {
+    try {
+      await this.battle(memberBattle);
+    } finally {
+      this.release();
+    }
+  }
+
+  async battle(memberBattle) {
+    this.round += 1;
 
     if (this.character.agl > this.opponent.agl) {
       this.playerAttack();
-
-      await setTimeout(1500);
+      await delay(1500);
 
       if (this.opponent.hp < 1) {
-        return this.end(custom);
+        return this.end(memberBattle);
       }
 
-      this.battleMessage.edit({ embeds: [this.battleEmbed()] });
+      await this.updateBattle();
 
       this.opponentAttack();
-
-      await setTimeout(1500);
+      await delay(1500);
 
       if (this.character.hp < 1) {
-        return this.end();
+        return this.end(memberBattle);
       }
 
-      this.battleMessage.edit({ embeds: [this.battleEmbed()] });
+      await this.updateBattle();
     } else {
       this.opponentAttack();
-
-      await setTimeout(1500);
+      await delay(1500);
 
       if (this.character.hp < 1) {
-        return this.end(custom);
+        return this.end(memberBattle);
       }
 
-      this.battleMessage.edit({ embeds: [this.battleEmbed()] });
+      await this.updateBattle();
 
       this.playerAttack();
-
-      await setTimeout(1500);
+      await delay(1500);
 
       if (this.opponent.hp < 1) {
-        return this.end(custom);
+        return this.end(memberBattle);
       }
 
-      this.battleMessage.edit({ embeds: [this.battleEmbed()] });
+      await this.updateBattle();
     }
 
-    this.battle(custom);
+    return this.battle(memberBattle);
   }
 
-  async end(custom) {
-    let xpGain = 0;
-    let rewardGained = 0;
+  async updateBattle() {
+    await this.battleMessage
+      .edit({ embeds: [this.battleEmbed()] })
+      .catch(() => null);
+  }
 
-    if (this.character.hp < 1) {
-      set.delete(this.user.id);
+  async end(memberBattle) {
+    const won = this.character.hp >= 1;
 
-      this.character.hp = 0;
-
-      const battleEmbed = this.battleEmbed()
-        .setFooter({ text: "You lost!" })
-        .setDescription("```\nBattle ended!\n```");
-
-      this.battleMessage.edit({ embeds: [battleEmbed] });
-    } else {
-      set.delete(this.user.id);
-
+    if (won) {
       this.opponent.hp = 0;
-
-      const battleEmbed = this.battleEmbed();
-
-      if (!custom) {
-        xpGain = await this.registerXP();
-        rewardGained = await this.registerReward();
-      }
-
-      battleEmbed
-        .setFooter({
-          text: `You Win! You gained ${xpGain} XP and ${rewardGained.toLocaleString()} coins!`,
-        })
-        .setDescription("```\nBattle ended!\n```");
-
-      this.battleMessage.edit({ embeds: [battleEmbed] });
+    } else {
+      this.character.hp = 0;
     }
+
+    let xpGain = 0;
+    let reward = 0;
+
+    if (won && !memberBattle) {
+      xpGain = await this.registerXP();
+      reward = await this.registerReward();
+    }
+
+    const playerName = escapeMarkdown(this.character.name);
+    const opponentName = escapeMarkdown(this.opponent.name);
+    const result = won
+      ? memberBattle
+        ? "No rewards for member battles."
+        : `XP +${xpGain}\n${formatCoins(reward)}`
+      : "No rewards.";
+
+    const embed = this.battleEmbed()
+      .setColor(won ? SUCCESS_COLOR : ERROR_COLOR)
+      .setTitle(won ? "Victory" : "Defeat")
+      .setDescription(
+        won
+          ? `${playerName} defeated ${opponentName}.`
+          : `${opponentName} defeated ${playerName}.`,
+      )
+      .addFields({ name: "Result", value: result })
+      .setFooter({
+        text: "Battle ended",
+        iconURL: this.client.user.displayAvatarURL(),
+      });
+
+    await this.battleMessage.edit({ embeds: [embed] }).catch(() => null);
   }
 
   async registerXP() {
-    // formular: 1 * (5 * (O - P) / P + 4 + O)
-
     // eslint-disable-next-line no-unused-vars
     let { id, userID, createdAt, updatedAt, ...character } =
       await this.getCharacter();
 
-    let xpGain = Math.ceil(
-      1 *
-        ((5 * (this.opponent.level - this.character.level)) /
+    const xpGain = Math.max(
+      1,
+      Math.ceil(
+        (5 * (this.opponent.level - this.character.level)) /
           this.character.level +
           4 +
-          this.opponent.level),
+          this.opponent.level,
+      ),
     );
 
     character.xp += xpGain;
 
-    await schemas.character().update(
-      {
-        xp: character.xp,
-      },
-      { where: { userID: this.user.id } },
-    );
+    await schemas
+      .character()
+      .update({ xp: character.xp }, { where: { userID: this.user.id } });
 
     // eslint-disable-next-line no-unused-vars
     let { xp, ...attr } = character;
@@ -348,7 +465,6 @@ class Battle {
     let hpGain = 0;
     let strGain = 0;
     let aglGain = 0;
-    let attGain = 0;
     let staGain = 0;
 
     while (character.xp >= attr.xpNeeded) {
@@ -361,11 +477,6 @@ class Battle {
       staGain += Math.floor(Math.random() * 2) + 1;
 
       attr.att = attr.str / 2;
-
-      if (this.character.att !== attr.att) {
-        // eslint-disable-next-line no-unused-vars
-        attGain = attr.att - this.character.att;
-      }
     }
 
     if (this.character.level !== attr.level) {
@@ -374,21 +485,41 @@ class Battle {
       attr.agl += aglGain;
       attr.sta += staGain;
 
-      await schemas.character().update(attr, { where: { userID: this.user.id } });
+      await schemas
+        .character()
+        .update(attr, { where: { userID: this.user.id } });
 
-      const embed = new Discord.EmbedBuilder()
+      const portrait = characters[this.character.img]?.image;
+      const embed = new EmbedBuilder()
         .setAuthor({
-          name: this.user.username,
+          name: displayName(this.user),
           iconURL: this.user.displayAvatarURL(),
         })
-        .setColor("#DDA0DD")
-        .setTitle("Level Up!")
-        .setThumbnail(characters[this.character.img].image)
+        .setColor(SUCCESS_COLOR)
+        .setTitle("Level up")
         .setDescription(
-          `Your character has leveled up to **level ${attr.level}**!\n\n**• HP:** +${hpGain}\n**• STR:** +${strGain}\n**• AGL:** +${aglGain}\n**• STA:** +${staGain}`,
-        );
+          `${escapeMarkdown(this.character.name)} reached level ${attr.level}.`,
+        )
+        .addFields({
+          name: "Stat gains",
+          value: formatStats({
+            hp: hpGain,
+            str: strGain,
+            agl: aglGain,
+            sta: staGain,
+          }),
+        })
+        .setFooter({
+          text: "Jasmine RPG",
+          iconURL: this.client.user.displayAvatarURL(),
+        })
+        .setTimestamp();
 
-      this.message.channel.send({ embeds: [embed] });
+      if (portrait) {
+        embed.setThumbnail(portrait);
+      }
+
+      await this.message.channel.send({ embeds: [embed] });
     }
 
     return xpGain;
@@ -396,253 +527,222 @@ class Battle {
 
   async registerEquipments() {
     const register = (player, opponent, type) => {
-      const playerEquip = JSON.parse(player.equipments);
-      const opponentEquip = JSON.parse(opponent.equipments);
+      const playerEquipments = normalizeEquipments(player.equipments);
+      const opponentEquipments = normalizeEquipments(opponent.equipments);
+      const playerItem = equipments[type]?.[playerEquipments[type]?.equipped];
+      const opponentItem =
+        equipments[type]?.[opponentEquipments[type]?.equipped];
 
-      if (playerEquip[type].equipped) {
-        const attr = equipments[type][playerEquip[type].equipped].attr;
-        const passive = equipments[type][playerEquip[type].equipped].passive;
-
-        if (passive) {
-          this.playerPassives.push(passive);
+      if (playerItem) {
+        if (playerItem.passive) {
+          this.playerPassives.push(playerItem.passive);
         }
 
-        Object.keys(attr).forEach((key) => {
-          player[key] += attr[key];
-        });
+        for (const [key, value] of Object.entries(playerItem.attr)) {
+          player[key] += value;
+        }
 
-        if (equipments[type][playerEquip[type].equipped].weight) {
-          player.weight += equipments[type][playerEquip[type].equipped].weight;
+        if (playerItem.weight) {
+          player.weight += playerItem.weight;
         }
       }
 
-      if (opponentEquip[type].equipped) {
-        const attr = equipments[type][opponentEquip[type].equipped].attr;
-        const passive = equipments[type][opponentEquip[type].equipped].passive;
-
-        if (passive) {
-          this.opponentPassives.push(passive);
+      if (opponentItem) {
+        if (opponentItem.passive) {
+          this.opponentPassives.push(opponentItem.passive);
         }
 
-        Object.keys(attr).forEach((key) => {
-          opponent[key] += attr[key];
-        });
+        for (const [key, value] of Object.entries(opponentItem.attr)) {
+          opponent[key] += value;
+        }
 
-        if (equipments[type][opponentEquip[type].equipped].weight) {
-          opponent.weight +=
-            equipments[type][opponentEquip[type].equipped].weight;
+        if (opponentItem.weight) {
+          opponent.weight += opponentItem.weight;
         }
       }
     };
 
-    register(this.character, this.opponent, "weapons");
-    register(this.character, this.opponent, "shields");
-    register(this.character, this.opponent, "helmet");
-    register(this.character, this.opponent, "armor");
-    register(this.character, this.opponent, "gloves");
+    for (const type of ["weapons", "shields", "helmet", "armor", "gloves"]) {
+      register(this.character, this.opponent, type);
+    }
   }
 
   async registerReward() {
     const wallet = await economies.getCoins(this.user);
-
     const reward =
       Math.ceil(Math.random() * 10) *
       Math.max(1, this.opponent.level - this.character.level);
 
-    await schemas.coins().update(
-      {
-        wallet: wallet.get("wallet") + reward,
-      },
-      {
-        where: { userID: this.user.id },
-      },
-    );
+    await schemas
+      .coins()
+      .update(
+        { wallet: wallet.get("wallet") + reward },
+        { where: { userID: this.user.id } },
+      );
 
     return reward;
   }
 
+  runPassives(passives, attacker, defender) {
+    for (const passive of passives) {
+      if (Math.random() >= passive.rate / 100) {
+        continue;
+      }
+
+      for (const [key, value] of Object.entries(passive)) {
+        if (["action", "rate", "description"].includes(key)) {
+          continue;
+        }
+
+        if (passive.action === "deduce") {
+          defender[key] -= value;
+        } else if (passive.action === "add") {
+          attacker[key] += value;
+        }
+      }
+    }
+  }
+
   playerAttack() {
-    const acc = Math.floor(
+    const accuracy = Math.floor(
       (this.character.acc / 100) *
         Math.floor(
           (this.character.att * this.character.att) /
             (this.character.att + this.opponent.def),
         ),
     );
-
-    const dmg = Math.floor(
+    const damage = Math.floor(
       (this.character.att * this.character.att) /
         (this.character.att + this.opponent.def),
     );
-
-    let playerDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc) + 1;
-
-    const opponentSuccess =
+    const rolled =
+      Math.floor(Math.random() * (damage - accuracy + 1) + accuracy) + 1;
+    const landed =
       Math.random() < (this.opponent.eva - this.opponent.weight) / 100;
 
-    if (opponentSuccess) {
-      const crit = (this.character.crit + 1) / 201 / 100;
-      const passives = this.playerPassives;
-
-      if (passives) {
-        for (const passive of passives) {
-          const success = Math.random() < passive.rate / 100;
-
-          if (success) {
-            if (passive.action === "deduce") {
-              for (const key in passive) {
-                if (
-                  key !== "action" &&
-                  key !== "rate" &&
-                  key !== "description"
-                ) {
-                  this.opponent[key] -= passive[key];
-                }
-              }
-            }
-
-            if (passive.action === "add") {
-              for (const key in passive) {
-                if (
-                  key !== "action" &&
-                  key !== "rate" &&
-                  key !== "description"
-                ) {
-                  this.character[key] += passive[key];
-                }
-              }
-            }
-          }
-        }
-      }
-
-      if (this.character.crit > 0 && Math.random() < crit) {
-        this.opponent.hp -= playerDmg + playerDmg;
-        this.actions.push(
-          `${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage. Its a critical hit!`,
-        );
-      } else {
-        this.opponent.hp -= playerDmg;
-        this.actions.push(
-          `${this.character.name} attacked ${this.opponent.name} and did ${playerDmg} damage!`,
-        );
-      }
-    } else {
-      this.actions.push(`${this.opponent.name} avoided the attack!`);
+    if (!landed) {
+      this.actions.push(
+        `${escapeMarkdown(this.opponent.name)} avoided ${escapeMarkdown(
+          this.character.name,
+        )}'s attack.`,
+      );
+      return;
     }
+
+    this.runPassives(this.playerPassives, this.character, this.opponent);
+
+    const crit = (this.character.crit + 1) / 201 / 100;
+    const critical = this.character.crit > 0 && Math.random() < crit;
+    const dealt = critical ? rolled * 2 : rolled;
+
+    this.opponent.hp -= dealt;
+    this.actions.push(
+      `${escapeMarkdown(this.character.name)} hit ${escapeMarkdown(
+        this.opponent.name,
+      )} for ${dealt} damage.${critical ? " Critical hit." : ""}`,
+    );
   }
 
   opponentAttack() {
-    const acc = Math.floor(
+    const accuracy = Math.floor(
       (this.opponent.acc / 100) *
         Math.floor(
           (this.opponent.att * this.opponent.att) /
             (this.opponent.att + this.opponent.def),
         ),
     );
-
-    const dmg = Math.floor(
+    const damage = Math.floor(
       (this.opponent.att * this.opponent.att) /
         (this.opponent.att + this.character.def),
     );
-
-    const opponentDmg = Math.floor(Math.random() * (dmg - acc + 1) + acc) + 1;
-
-    const playerSuccess =
+    const rolled =
+      Math.floor(Math.random() * (damage - accuracy + 1) + accuracy) + 1;
+    const landed =
       Math.random() < (this.character.eva - this.character.weight) / 100;
 
-    if (playerSuccess) {
-      const crit = (this.opponent.crit + 1) / 201 / 100;
-      const passives = this.opponentPassives;
-
-      if (passives) {
-        for (const passive of passives) {
-          const success = Math.random() < passive.rate / 100;
-
-          if (success) {
-            if (passive.action === "deduce") {
-              for (const key in passive) {
-                if (
-                  key !== "action" &&
-                  key !== "rate" &&
-                  key !== "description"
-                ) {
-                  this.character[key] -= passive[key];
-                }
-              }
-            }
-
-            if (passive.action === "add") {
-              for (const key in passive) {
-                if (
-                  key !== "action" &&
-                  key !== "rate" &&
-                  key !== "description"
-                ) {
-                  this.opponent[key] += passive[key];
-                }
-              }
-            }
-          }
-        }
-      }
-
-      if (this.opponent.crit > 0 && Math.random() < crit) {
-        this.character.hp -= opponentDmg + opponentDmg;
-        this.actions.push(
-          `${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage. Its a critical hit!`,
-        );
-      } else {
-        this.character.hp -= opponentDmg;
-        this.actions.push(
-          `${this.opponent.name} attacked ${this.character.name} and did ${opponentDmg} damage!`,
-        );
-      }
-    } else {
-      this.actions.push(`${this.character.name} avoided the attack!`);
+    if (!landed) {
+      this.actions.push(
+        `${escapeMarkdown(this.character.name)} avoided ${escapeMarkdown(
+          this.opponent.name,
+        )}'s attack.`,
+      );
+      return;
     }
+
+    this.runPassives(this.opponentPassives, this.opponent, this.character);
+
+    const crit = (this.opponent.crit + 1) / 201 / 100;
+    const critical = this.opponent.crit > 0 && Math.random() < crit;
+    const dealt = critical ? rolled * 2 : rolled;
+
+    this.character.hp -= dealt;
+    this.actions.push(
+      `${escapeMarkdown(this.opponent.name)} hit ${escapeMarkdown(
+        this.character.name,
+      )} for ${dealt} damage.${critical ? " Critical hit." : ""}`,
+    );
   }
 
   battleEmbed() {
-    let actionShow = `${this.actions.length} - ${
-      this.actions[this.actions.length - 1]
-    }`;
+    const playerName = truncate(escapeMarkdown(this.character.name), 80);
+    const opponentName = truncate(escapeMarkdown(this.opponent.name), 80);
+    const playerHeading = truncate(
+      `${playerName} (${displayName(this.user)})`,
+      256,
+    );
+    const opponentHeading = this.opponentUser
+      ? truncate(`${opponentName} (${displayName(this.opponentUser)})`, 256)
+      : opponentName;
+    const recent = this.actions
+      .slice(-4)
+      .map((action) => `• ${truncate(action, 200)}`)
+      .join("\n");
+    const playerPortrait = characters[this.character.img]?.image;
+    const opponentPortrait = characters[this.opponent.img]?.image;
 
-    // TODO: Get assets for every weapons
-    // TODO: Display weapon icons on the embed
-
-    // const playerEquipments = JSON.parse(this.character.equipments);
-    // const opponentEquipments = JSON.parse(this.opponent.equipments);
-
-    // let playerEquipped = [];
-    // let opponentEquipped = [];
-
-    // ["weapon", "shields", "helmet", "armor", "gloves"].forEach((e) => {
-    //   playerEquipped.push(playerEquipments[e].equipped);
-    //   opponentEquipped.push(opponentEquipments[e].equipped);
-    // });
-
-    return new Discord.EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setAuthor({
-        name: this.user.username,
-        iconURL: this.user.displayAvatarURL(),
+        name: "Battle",
+        iconURL: this.client.user.displayAvatarURL(),
       })
-      .setImage(characters[this.opponent.img].image)
-      .setThumbnail(characters[this.character.img].image)
-      .setColor("#DDA0DD")
-      .setDescription(`\`\`\`\n${actionShow}\n\`\`\``)
-      .addFields([
+      .setColor(BATTLE_COLOR)
+      .setTitle(truncate(`${playerName} vs ${opponentName}`, 256))
+      .addFields(
         {
-          name: `${this.character.name} (${this.user.username})`,
-          value: `**• ${constants.assets.xp.emoji} Level:** ${this.character.level}\n**• ${constants.assets.hp.emoji} HP:** ${this.character.hp}`,
+          name: playerHeading,
+          value: `Level ${this.character.level}\n${progressBar(
+            Math.max(0, this.character.hp),
+            this.character.maxHp,
+          )}`,
           inline: true,
         },
         {
-          name: `${this.opponent.name} (${this.opponentUser.username})`,
-          value: `**• ${constants.assets.xp.emoji} Level:** ${this.opponent.level}\n**• ${constants.assets.hp.emoji} HP:** ${this.opponent.hp}`,
+          name: opponentHeading,
+          value: `Level ${this.opponent.level}\n${progressBar(
+            Math.max(0, this.opponent.hp),
+            this.opponent.maxHp,
+          )}`,
           inline: true,
         },
-      ]);
+        {
+          name: "Recent actions",
+          value: recent || "No actions yet.",
+        },
+      )
+      .setFooter({
+        text: `Round ${Math.max(1, this.round)}`,
+        iconURL: this.client.user.displayAvatarURL(),
+      });
+
+    if (playerPortrait) {
+      embed.setThumbnail(playerPortrait);
+    }
+
+    if (opponentPortrait) {
+      embed.setImage(opponentPortrait);
+    }
+
+    return embed;
   }
 }
 

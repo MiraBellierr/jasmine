@@ -1,229 +1,168 @@
+const { EmbedBuilder, escapeMarkdown } = require("discord.js");
 const schemas = require("../../database/schemas");
-const Discord = require("discord.js");
-const { getMemberFromArguments } = require("../../utils/getters");
-const constants = require("../../utils/constants");
-const characters = require("../../database/json/characters.json");
+const {
+  getUserFromArguments,
+  getMemberFromArguments,
+} = require("../../utils/getters");
+const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
+const {
+  CATEGORIES,
+  characterImage,
+  equipmentLabel,
+  normalizeEquipments,
+} = require("../../utils/rpg/data");
+const {
+  BRAND_COLOR,
+  STAT_EMOJI,
+  TITLE_CASE,
+  avatarFor,
+  commandHint,
+  displayName,
+  errorEmbed,
+  memberName,
+  progressBar,
+} = require("../../utils/rpg/ui");
+
+const statBlock = (character) => {
+  const stat = (key, label) =>
+    `${STAT_EMOJI[key] || ""} **${label}** ${character.get(key)}`;
+
+  return [
+    [stat("hp", "HP"), stat("sta", "Stamina")].join(" · "),
+    [stat("str", "Strength"), stat("agl", "Agility")].join(" · "),
+    [stat("att", "Attack"), stat("def", "Defense")].join(" · "),
+    [stat("acc", "Accuracy"), stat("eva", "Evasion")].join(" · "),
+  ].join("\n");
+};
+
+const equipmentBlock = (equipments) =>
+  CATEGORIES.map((category) => {
+    const equipped = equipments[category.key].equipped;
+
+    return `${category.emoji} **${category.fieldLabel}** ${
+      equipped ? equipmentLabel(equipped) : "None"
+    }`;
+  }).join("\n");
 
 module.exports = {
   name: "profile",
   aliases: ["pf"],
-  description: "Shows RPG profile",
+  description: "View a character profile",
   category: "rpg",
-  usage: "<member>",
+  usage: "[user]",
   run: async (client, message, args) => {
-    const member =
-      (await getMemberFromArguments(message, args.join(" "))) || message.member;
+    const argument = args.join(" ").trim();
+    let member = message.member;
+    let user = message.author;
 
-    if (!member) {
-      return message.reply("I didn't found that member in this server.");
+    if (argument) {
+      member = message.guild
+        ? await getMemberFromArguments(message, argument)
+        : null;
+
+      if (member) {
+        user = member.user;
+      } else {
+        user = await getUserFromArguments(message, argument);
+      }
+
+      if (!user) {
+        return message.reply({
+          embeds: [
+            errorEmbed(
+              client,
+              "User not found",
+              "No user matches that name. Mention the user or use their ID.",
+            ),
+          ],
+        });
+      }
     }
 
     const character = await schemas
       .character()
-      .findOne({ where: { userID: member.id } });
+      .findOne({ where: { userID: user.id } });
+    const isSelf = user.id === message.author.id;
+    const name = member ? memberName(member) : displayName(user);
 
     if (!character) {
-      return message.reply(
-        `A user with a username ${
-          member.user.username
-        } is not register yet. Please type \`${client.prefixes.get(
-          message.guild.id,
-        )}register <class>\` to register`,
-      );
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not registered",
+            `${
+              isSelf ? "You are" : `${name} is`
+            } not registered. Register with ${commandHint(
+              client,
+              message,
+              "register",
+              "<class>",
+            )}.`,
+          ),
+        ],
+      });
     }
 
-    const equipments = JSON.parse(character.get("equipments"));
+    const level = character.get("level");
+    const equipments = normalizeEquipments(character.get("equipments"));
+    const portrait = characterImage(character.toJSON());
 
-    const embed = new Discord.EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setAuthor({
-        name: `${member.user.username}'s profile`,
-        iconURL: member.user.displayAvatarURL(),
+        name,
+        iconURL: avatarFor(user),
       })
-      .setColor("#CD1C6C")
-      .setTitle(`Level ${character.get("level")} ${character.get("name")}`)
-      .addFields([
+      .setColor(BRAND_COLOR)
+      .setTitle(escapeMarkdown(character.get("name")))
+      .setDescription(
+        [
+          `Level ${level} ${TITLE_CASE(character.get("class"))}`,
+          `XP ${progressBar(character.get("xp"), character.get("xpNeeded"))}`,
+        ].join("\n"),
+      )
+      .addFields(
         {
-          name: "__Stats__",
-          value: `**• ${constants.assets.class.emoji} Class:** ${
-            character.get("class").charAt(0).toUpperCase() +
-            character.get("class").slice(1)
-          }\n**• ${constants.assets.xp.emoji} XP:** ${character.get(
-            "xp",
-          )}/${character.get("xpNeeded")}\n**• ${
-            constants.assets.hp.emoji
-          } HP:** ${character.get("hp")}\n**• ${
-            constants.assets.str.emoji
-          } STR:** ${character.get("str")}\n**• ${
-            constants.assets.agl.emoji
-          } AGL:** ${character.get("agl")}\n**• ${
-            constants.assets.sta.emoji
-          } STA:** ${character.get("sta")}\n**• ${
-            constants.assets.acc.emoji
-          } ACC:** ${character.get("acc")}\n**• ${
-            constants.assets.eva.emoji
-          } EVA:** ${character.get("eva")}\n**• ${
-            constants.assets.att.emoji
-          } ATT:** ${Math.floor(character.get("att"))}\n**• ${
-            constants.assets.def.emoji
-          } DEF:** ${character.get("def")}`,
+          name: "Stats",
+          value: statBlock(character),
           inline: true,
         },
         {
-          name: "__Equipments__",
-          value: `**• ${constants.assets.weapon.emoji} Weapon:** ${
-            equipments.weapons.equipped
-              ? equipments.weapons.equipped
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/\b\w/g, (e) => e.toUpperCase())
-              : "None"
-          }\n**• ${constants.assets.shield.emoji} Shield:** ${
-            equipments.shields.equipped
-              ? equipments.shields.equipped
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/\b\w/g, (e) => e.toUpperCase())
-              : "None"
-          }\n**• ${constants.assets.helmet.emoji} Helmet:** ${
-            equipments.helmet.equipped
-              ? equipments.helmet.equipped
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/\b\w/g, (e) => e.toUpperCase())
-              : "None"
-          }\n**• ${constants.assets.armor.emoji} Armor:** ${
-            equipments.armor.equipped
-              ? equipments.armor.equipped
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/\b\w/g, (e) => e.toUpperCase())
-              : "None"
-          }\n**• ${constants.assets.gloves.emoji} Gloves:** ${
-            equipments.gloves.equipped
-              ? equipments.gloves.equipped
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/\b\w/g, (e) => e.toUpperCase())
-              : "None"
-          }`,
+          name: "Equipment",
+          value: equipmentBlock(equipments),
           inline: true,
         },
-      ])
-      .setImage(characters[character.get("img")].image)
-      .setTimestamp()
+      )
       .setFooter({
-        text: "https://patreon.com/jasminebot",
+        text: "Jasmine RPG",
         iconURL: client.user.displayAvatarURL(),
-      });
+      })
+      .setTimestamp();
 
-    message.reply({ embeds: [embed] });
+    if (portrait) {
+      embed.setImage(portrait);
+    }
+
+    return message.reply({ embeds: [embed] });
   },
   interaction: {
-    data: {
-      name: "profile",
-      description: "View your profile.",
-      type: 1,
-      options: [
-        {
-          name: "member",
-          description: "The member to view the profile of.",
-          type: 6,
-        },
-      ],
-    },
+    data: slashCommand("profile", "View a character profile", (builder) =>
+      builder.addUserOption((option) =>
+        option
+          .setName("user")
+          .setDescription("Member to view")
+          .setRequired(false),
+      ),
+    ),
     run: async (client, interaction) => {
-      const member =
-        interaction.options.getMember("member") || interaction.member;
+      const user = interaction.options.getUser("user");
 
-      if (!member) {
-        return interaction.reply("I didn't found that member in this server.");
-      }
-
-      const character = await schemas
-        .character()
-        .findOne({ where: { userID: member.id } });
-
-      if (!character) {
-        return interaction.reply(
-          `A user with a username ${member.user.username} is not register yet.`,
-        );
-      }
-
-      const equipments = JSON.parse(character.get("equipments"));
-
-      const embed = new Discord.EmbedBuilder()
-        .setAuthor({
-          name: `${member.user.username}'s profile`,
-          iconURL: member.user.displayAvatarURL(),
-        })
-        .setColor("#CD1C6C")
-        .setTitle(`Level ${character.get("level")} ${character.get("name")}`)
-        .addFields([
-          {
-            name: "__Stats__",
-            value: `**• ${constants.assets.class.emoji} Class:** ${
-              character.get("class").charAt(0).toUpperCase() +
-              character.get("class").slice(1)
-            }\n**• ${constants.assets.xp.emoji} XP:** ${character.get(
-              "xp",
-            )}/${character.get("xpNeeded")}\n**• ${
-              constants.assets.hp.emoji
-            } HP:** ${character.get("hp")}\n**• ${
-              constants.assets.str.emoji
-            } STR:** ${character.get("str")}\n**• ${
-              constants.assets.agl.emoji
-            } AGL:** ${character.get("agl")}\n**• ${
-              constants.assets.sta.emoji
-            } STA:** ${character.get("sta")}\n**• ${
-              constants.assets.acc.emoji
-            } ACC:** ${character.get("acc")}\n**• ${
-              constants.assets.eva.emoji
-            } EVA:** ${character.get("eva")}\n**• ${
-              constants.assets.att.emoji
-            } ATT:** ${Math.floor(character.get("att"))}\n**• ${
-              constants.assets.def.emoji
-            } DEF:** ${character.get("def")}`,
-            inline: true,
-          },
-          {
-            name: "__Equipments__",
-            value: `**• ${constants.assets.weapon.emoji} Weapon:** ${
-              equipments.weapons.equipped
-                ? equipments.weapons.equipped
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/\b\w/g, (e) => e.toUpperCase())
-                : "None"
-            }\n**• ${constants.assets.shield.emoji} Shield:** ${
-              equipments.shields.equipped
-                ? equipments.shields.equipped
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/\b\w/g, (e) => e.toUpperCase())
-                : "None"
-            }\n**• ${constants.assets.helmet.emoji} Helmet:** ${
-              equipments.helmet.equipped
-                ? equipments.helmet.equipped
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/\b\w/g, (e) => e.toUpperCase())
-                : "None"
-            }\n**• ${constants.assets.armor.emoji} Armor:** ${
-              equipments.armor.equipped
-                ? equipments.armor.equipped
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/\b\w/g, (e) => e.toUpperCase())
-                : "None"
-            }\n**• ${constants.assets.gloves.emoji} Gloves:** ${
-              equipments.gloves.equipped
-                ? equipments.gloves.equipped
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/\b\w/g, (e) => e.toUpperCase())
-                : "None"
-            }`,
-            inline: true,
-          },
-        ])
-        .setImage(characters[character.get("img")].image)
-        .setTimestamp()
-        .setFooter({
-          text: "https://patreon.com/jasminebot",
-          iconURL: client.user.displayAvatarURL(),
-        });
-
-      interaction.reply({ embeds: [embed] });
+      return runPrefixCommand(
+        client,
+        interaction,
+        module.exports,
+        user ? [user.id] : [],
+      );
     },
   },
 };

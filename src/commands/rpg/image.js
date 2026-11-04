@@ -1,111 +1,184 @@
+const { EmbedBuilder, escapeMarkdown, inlineCode } = require("discord.js");
 const schemas = require("../../database/schemas");
 const characters = require("../../database/json/characters.json");
-const Discord = require("discord.js");
-const { Paginate } = require("../../utils/pagination");
 const {
   runPrefixCommand,
   slashCommand,
   textOption,
 } = require("../../utils/slashCommands");
+const { parseImages } = require("../../utils/rpg/data");
+const {
+  BRAND_COLOR,
+  SUCCESS_COLOR,
+  avatarFor,
+  commandHint,
+  countLabel,
+  displayName,
+  errorEmbed,
+  paginateEmbeds,
+} = require("../../utils/rpg/ui");
+
+const PAGE_SIZE = 10;
+
+const collectionPages = (client, message, images) => {
+  const lines = images.map(
+    (id) =>
+      `• [${escapeMarkdown(characters[id].name)}](${characters[id].image})`,
+  );
+  const pages = [];
+  const totalPages = Math.ceil(lines.length / PAGE_SIZE);
+
+  for (let index = 0; index < lines.length; index += PAGE_SIZE) {
+    pages.push(
+      new EmbedBuilder()
+        .setAuthor({
+          name: displayName(message.author),
+          iconURL: avatarFor(message.author),
+        })
+        .setColor(BRAND_COLOR)
+        .setTitle("Character collection")
+        .setDescription(lines.slice(index, index + PAGE_SIZE).join("\n"))
+        .setFooter({
+          text: `Page ${pages.length + 1} of ${totalPages} · ${countLabel(
+            images.length,
+            "character",
+          )}`,
+          iconURL: client.user.displayAvatarURL(),
+        }),
+    );
+  }
+
+  return pages;
+};
 
 module.exports = {
   name: "image",
-  description: "display your hunted images",
+  description: "View or change your character",
   category: "rpg",
+  usage: "[character]",
   run: async (client, message, args) => {
     const userCharacter = await schemas
       .character()
       .findOne({ where: { userID: message.author.id } });
 
     if (!userCharacter) {
-      return message.channel.send(
-        `You haven't registered yet! Use \`${client.prefixes.get(message.guild.id)}register\` to register.`,
-      );
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not registered",
+            `You are not registered. Register with ${commandHint(
+              client,
+              message,
+              "register",
+              "<class>",
+            )} to start collecting characters.`,
+          ),
+        ],
+      });
     }
 
-    if (!args.length) {
-      const images = JSON.parse(userCharacter.get("images"));
+    const images = parseImages(userCharacter.get("images"));
+    const query = args.join(" ").trim();
 
-      const list = images.map(
-        (ch) => `• [${characters[ch].name}](${characters[ch].image})`,
-      );
-
-      const chunkBreakforEmbed = (array, size) => {
-        const result = [];
-        for (let i = 0; i < array.length; i += size) {
-          result.push(
-            new Discord.EmbedBuilder()
-              .setAuthor({
-                name: message.author.username,
-                iconURL: message.author.displayAvatarURL(),
-              })
-              .setDescription(array.slice(i, i + size).join("\n")),
-          );
-        }
-
-        return result;
-      };
-
-      const imagesByChunk = chunkBreakforEmbed(list, 10);
-
-      new Paginate(client, message, imagesByChunk).init();
-    } else {
-      const name = args.join(" ");
-      const images = JSON.parse(userCharacter.get("images"));
-
-      const searchCharacterByName = (searchname) => {
-        return Object.entries(characters)
-          .filter(([, { name }]) =>
-            name.toLowerCase().includes(searchname.toLowerCase()),
-          )
-          .map(([id]) => id);
-      };
-
-      const results = searchCharacterByName(name);
-
-      if (results.length < 1) {
-        return message.channel.send(
-          "I didn't find that character in my database.",
-        );
+    if (!query) {
+      if (!images.length) {
+        return message.reply({
+          embeds: [
+            errorEmbed(
+              client,
+              "No characters yet",
+              `You have not found any characters. Use ${commandHint(
+                client,
+                message,
+                "hunt",
+              )} to find one.`,
+            ),
+          ],
+        });
       }
 
-      const findFirstCommonElement = (array1, array2) => {
-        return array1.find((id) => array2.includes(id));
-      };
+      return paginateEmbeds(message, collectionPages(client, message, images), {
+        time: 180_000,
+      });
+    }
 
-      const result = findFirstCommonElement(results, images);
+    const matches = Object.entries(characters)
+      .filter(([, character]) =>
+        character.name.toLowerCase().includes(query.toLowerCase()),
+      )
+      .sort((a, b) => {
+        const aExact = a[1].name.toLowerCase() === query.toLowerCase();
+        const bExact = b[1].name.toLowerCase() === query.toLowerCase();
 
-      if (!result) {
-        message.channel.send("I didn't find that character in your inventory.");
-      } else {
-        const img = result;
+        return Number(bExact) - Number(aExact);
+      });
 
-        await schemas.character().update(
-          {
-            img,
-            name: characters[img].name,
-          },
-          { where: { userID: message.author.id } },
-        );
+    if (!matches.length) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Character not found",
+            `No character in the database matches ${inlineCode(
+              query.slice(0, 80),
+            )}.`,
+          ),
+        ],
+      });
+    }
 
-        const embed = new Discord.EmbedBuilder()
+    const owned = new Set(images);
+    const match = matches.find(([id]) => owned.has(id));
+
+    if (!match) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not in your collection",
+            `You do not own a character matching ${inlineCode(
+              query.slice(0, 80),
+            )}. Use ${commandHint(
+              client,
+              message,
+              "hunt",
+            )} to find more characters.`,
+          ),
+        ],
+      });
+    }
+
+    const [characterKey, character] = match;
+
+    await schemas
+      .character()
+      .update(
+        { img: characterKey, name: character.name },
+        { where: { userID: message.author.id } },
+      );
+
+    return message.reply({
+      embeds: [
+        new EmbedBuilder()
           .setAuthor({
-            name: message.author.username,
-            iconURL: message.author.displayAvatarURL(),
+            name: displayName(message.author),
+            iconURL: avatarFor(message.author),
           })
+          .setColor(SUCCESS_COLOR)
+          .setTitle("Character changed")
           .setDescription(
-            `You have changed your character to ${characters[img].name}!`,
+            `Your character is now ${escapeMarkdown(character.name)}.`,
           )
-          .setImage(characters[img].image);
-
-        message.channel.send({ embeds: [embed] });
-      }
-    }
+          .setImage(character.image)
+          .setTimestamp(),
+      ],
+    });
   },
   interaction: {
-    data: slashCommand("image", "display your hunted images", (builder) =>
+    data: slashCommand("image", "View or change your character", (builder) =>
       builder.addStringOption((option) =>
-        textOption(option, "character", "Character to display", false),
+        textOption(option, "character", "Character to use", false),
       ),
     ),
     run: async (client, interaction) => {

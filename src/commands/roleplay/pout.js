@@ -1,23 +1,8 @@
-const Discord = require("discord.js");
-const utils = require("../../utils/utils");
-const { roleplayInteraction } = require("../../utils/slashCommands");
+const { createRoleplayCommand } = require("../../utils/roleplay");
 
-module.exports = {
-  name: "pouting",
-  description: "Im pouting",
-  category: "roleplay",
-  run: async (client, message) => {
-    const url = await utils.nekoapi(module.exports.name);
-
-    const embed = new Discord.EmbedBuilder()
-      .setAuthor({
-        name: `${message.author.username} is ${module.exports.name}ing!`,
-        iconURL: message.author.displayAvatarURL(),
-      })
-      .setImage(url)
-      .setColor("#CD1C6C");
-
-    message.reply({ embeds: [embed] });
-  },
-  interaction: roleplayInteraction("pouting", "Im pouting", { command: () => module.exports }),
-};
+module.exports = createRoleplayCommand({
+  name: "pout",
+  aliases: ["pouting"],
+  description: "Pout",
+  soloLine: "pouts",
+});

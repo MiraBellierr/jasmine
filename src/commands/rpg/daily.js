@@ -1,109 +1,120 @@
+const { EmbedBuilder } = require("discord.js");
 const schemas = require("../../database/schemas");
-const economies = require("../../utils/economies");
 const constants = require("../../utils/constants");
+const economies = require("../../utils/economies");
+const { runPrefixCommand, slashCommand } = require("../../utils/slashCommands");
+const {
+  GOLD_COLOR,
+  avatarFor,
+  commandHint,
+  displayName,
+  errorEmbed,
+  formatCoins,
+  formatDuration,
+} = require("../../utils/rpg/ui");
 
 module.exports = {
   name: "daily",
-  description: "Daily to earn coins",
+  description: "Claim a daily coin reward",
   category: "rpg",
   run: async (client, message) => {
-    const coins = await economies.getCoins(message.author);
+    const character = await schemas
+      .character()
+      .findOne({ where: { userID: message.author.id } });
 
-    if (!coins) {
-      return message.reply(
-        `You haven't registered yet! Please use \`${client.prefixes.get(message.guild.id)}register <class>\` to register.`,
-      );
+    if (!character) {
+      return message.reply({
+        embeds: [
+          errorEmbed(
+            client,
+            "Not registered",
+            `You are not registered. Register with ${commandHint(
+              client,
+              message,
+              "register",
+              "<class>",
+            )} to start playing.`,
+          ),
+        ],
+      });
     }
 
-    const timer = await economies.getCooldown(message.author, "daily", 864e5);
-
-    if (timer) {
-      return message.reply(
-        `**${message.author.username}**, Please wait **${timer.hours}h ${timer.seconds}s** before you can claim your daily again.`,
-      );
-    }
-
-    await schemas.timer().update(
-      {
-        daily: Date.now(),
-      },
-      { where: { userID: message.author.id } },
+    const cooldown = await economies.getCooldown(
+      message.author,
+      "daily",
+      864e5,
     );
 
-    const guild = await client.guilds.fetch(constants.supportServer.id);
-    const member = await guild.members.fetch(message.author.id);
+    if (cooldown) {
+      return message.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setAuthor({
+              name: displayName(message.author),
+              iconURL: avatarFor(message.author),
+            })
+            .setColor(GOLD_COLOR)
+            .setTitle("Daily already claimed")
+            .setDescription(
+              `You can claim again in ${formatDuration(cooldown)}.`,
+            )
+            .setTimestamp(),
+        ],
+      });
+    }
+
+    await schemas
+      .timer()
+      .update({ daily: Date.now() }, { where: { userID: message.author.id } });
 
     let reward = 100;
+    let patreonBonus = false;
 
-    if (member && member.roles.cache.get(constants.patreon.id)) {
-      reward = 200;
+    try {
+      const guild = await client.guilds.fetch(constants.supportServer.id);
+      const member = await guild.members.fetch(message.author.id);
+
+      if (member?.roles.cache.has(constants.patreon.id)) {
+        reward = 200;
+        patreonBonus = true;
+      }
+    } catch {
+      // The reward still works when the support server is unavailable.
     }
 
-    await schemas.coins().update(
-      {
-        wallet: coins.get("wallet") + reward,
-      },
-      { where: { userID: message.author.id } },
-    );
+    const coins = await economies.getCoins(message.author);
+    const balance = coins.get("wallet") + reward;
 
-    const amount = `${constants.coins.emoji} ${reward}`;
+    await schemas
+      .coins()
+      .update({ wallet: balance }, { where: { userID: message.author.id } });
 
-    return message.reply(`You claimed your daily and got ${amount}!`);
+    const embed = new EmbedBuilder()
+      .setAuthor({
+        name: displayName(message.author),
+        iconURL: avatarFor(message.author),
+      })
+      .setColor(GOLD_COLOR)
+      .setTitle("Daily reward")
+      .setDescription(`You claimed ${formatCoins(reward)}.`)
+      .addFields({
+        name: "Wallet",
+        value: formatCoins(balance),
+        inline: true,
+      })
+      .setFooter({
+        text: patreonBonus
+          ? "Patreon bonus applied. Claim again in 24 hours."
+          : "Claim again in 24 hours.",
+        iconURL: client.user.displayAvatarURL(),
+      })
+      .setTimestamp();
+
+    return message.reply({ embeds: [embed] });
   },
   interaction: {
-    data: {
-      name: "daily",
-      type: 1,
-      description: "Daily to earn coins",
-    },
-    run: async (client, interaction) => {
-      const coins = await economies.getCoins(interaction.user);
-
-      if (!coins) {
-        return interaction.reply(
-          `You haven't registered yet! Please use \`${constants.prefix}register <class>\` to register.`,
-        );
-      }
-
-      const timer = await economies.getCooldown(
-        interaction.user,
-        "daily",
-        864e5,
-      );
-
-      if (timer) {
-        return interaction.reply(
-          `**${interaction.user.username}**, Please wait **${timer.hours}h ${timer.seconds}s** before you can claim your daily again.`,
-        );
-      }
-
-      await schemas.timer().update(
-        {
-          daily: Date.now(),
-        },
-        { where: { userID: interaction.user.id } },
-      );
-
-      const guild = await client.guilds.fetch(constants.supportServer.id);
-
-      const member = await guild.members.fetch(interaction.user.id);
-
-      let reward = 100;
-
-      if (member && member.roles.cache.get(constants.patreon.id)) {
-        reward = 200;
-      }
-
-      await schemas.coins().update(
-        {
-          wallet: coins.get("wallet") + reward,
-        },
-        { where: { userID: interaction.user.id } },
-      );
-
-      const amount = `${constants.coins.emoji} ${reward}`;
-
-      return interaction.reply(`You claimed your daily and got ${amount}!`);
-    },
+    data: slashCommand("daily", "Claim a daily coin reward"),
+    run: async (client, interaction) =>
+      runPrefixCommand(client, interaction, module.exports),
   },
 };
