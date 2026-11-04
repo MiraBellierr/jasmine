@@ -18,7 +18,7 @@
     "@napi-rs/canvas": "^1.0.13",
     "ascii-table": "^0.0.9",
     "axios": "^1.20.0",
-    "better-sqlite3": "^12.10.0",
+    "better-sqlite3": "^13.0.3",
     "color": "^4.2.3",
     "colors": "^1.4.0",
     "common-tags": "^1.8.2",
